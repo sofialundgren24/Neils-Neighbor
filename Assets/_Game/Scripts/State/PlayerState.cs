@@ -43,7 +43,15 @@ namespace NG.State
         public int renovationPhase;          // 0 = förfallen, 1..N = klar fas
         public TimerState activeRenovation;  // null om ingen pågår
         public string paintSchemeId;
-        public float decay = 1f;             // 1 = grå/sliten, 0 = full färg
+
+        /// <summary>
+        /// Sant när sista renoveringsfasen är klar. Då har tomten och allt på den full färg för resten av spelet,
+        /// och decay läses inte längre.
+        /// </summary>
+        public bool renovationComplete;
+
+        /// <summary>Bara meningsfull medan renovationComplete är falskt: 1 = grå/sliten, 0 = full färg.</summary>
+        public float decay = 1f;
         public int stars;
         public List<PlacedObjectState> objects = new List<PlacedObjectState>();
     }

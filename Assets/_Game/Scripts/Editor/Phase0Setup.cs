@@ -95,7 +95,7 @@ namespace NG.EditorTools
             cam.clearFlags = CameraClearFlags.SolidColor;
             cam.backgroundColor = NGEditorPaths.Hex("#BFE6FF");
             camGo.transform.rotation = Quaternion.Euler(30f, 45f, 0f);
-            camGo.transform.position = new Vector3(6f, 0f, 0f) - camGo.transform.forward * 80f;
+            camGo.transform.position = new Vector3(0f, 0f, 0f) - camGo.transform.forward * 80f;
             var camData = camGo.AddComponent<UniversalAdditionalCameraData>();
             camData.renderPostProcessing = true;
             camGo.AddComponent<IsoCameraController>();
@@ -170,7 +170,12 @@ namespace NG.EditorTools
             return profile;
         }
 
-        /// <summary>Ställer upp alla importerade prefabs: hus på rad bakom gången, växter i rabatter framför husen.</summary>
+        const int StreetHouseCount = 5;
+
+        /// <summary>
+        /// Bygger den nedgångna startgatan: fem hus på rad bakom gången, en liten rabatt framför varje hus
+        /// (räknas som husets trädgård) och gatuträd mellan husen. Finns flera hustyper roteras de.
+        /// </summary>
         static void PlaceTestPrefabs()
         {
             var guids = AssetDatabase.FindAssets("t:Prefab", new[] { NGEditorPaths.Prefabs });
@@ -178,35 +183,44 @@ namespace NG.EditorTools
                 .Where(p => p != null && p.GetComponent<PlaceableView>() != null)
                 .OrderBy(p => p.name)
                 .ToList();
-
-            var parent = new GameObject("Placeables").transform;
-            float houseX = -8f;
-            float plantX = -9f;
-            float treeX = -12f;
-            foreach (var prefab in prefabs)
+            var houses = prefabs.Where(p => p.name.StartsWith("PF_House")).ToList();
+            var trees = prefabs.Where(p => p.name.StartsWith("PF_Tree")).ToList();
+            var plants = prefabs.Except(houses).Except(trees).ToList();
+            if (houses.Count == 0)
             {
-                var go = (GameObject)PrefabUtility.InstantiatePrefab(prefab, parent);
-                var size = go.TryGetComponent<BoxCollider>(out var box) ? box.size : Vector3.one;
-                if (prefab.name.StartsWith("PF_House"))
+                Debug.LogWarning("[NG Setup] Inga hus-prefabs hittades. Lägg ett SM_House_*.fbx i Art/Incoming först.");
+                return;
+            }
+
+            var parent = new GameObject("Street").transform;
+            const float lotWidth = 8f;
+            float startX = -lotWidth * (StreetHouseCount - 1) * 0.5f;
+
+            for (int i = 0; i < StreetHouseCount; i++)
+            {
+                float x = startX + i * lotWidth;
+                var lot = new GameObject($"Lot_{i + 1}").transform;
+                lot.SetParent(parent, false);
+
+                var house = (GameObject)PrefabUtility.InstantiatePrefab(houses[i % houses.Count], lot);
+                house.transform.position = new Vector3(x, 0f, 2f);
+
+                // Rabatt framför huset: tre rader, en växtart per rad.
+                for (int row = 0; row < plants.Count && row < 3; row++)
                 {
-                    go.transform.position = new Vector3(houseX + size.x * 0.5f, 0f, 2f);
-                    houseX += size.x + 3f;
-                }
-                else if (prefab.name.StartsWith("PF_Tree"))
-                {
-                    go.transform.position = new Vector3(treeX, 0f, 6f);
-                    treeX += 4f;
-                }
-                else
-                {
-                    // Små växter: en liten rabatt (3 x 4) per art framför husen.
-                    for (int i = 0; i < 12; i++)
+                    for (int c = 0; c < 6; c++)
                     {
-                        var copy = i == 0 ? go : (GameObject)PrefabUtility.InstantiatePrefab(prefab, parent);
-                        copy.transform.position = new Vector3(plantX + (i % 3) * 0.5f, 0f, -2.2f + (i / 3) * 0.5f);
-                        copy.transform.rotation = Quaternion.Euler(0f, (i * 73) % 360, 0f);
+                        var plant = (GameObject)PrefabUtility.InstantiatePrefab(plants[(row + i) % plants.Count], lot);
+                        plant.transform.position = new Vector3(x - 1.25f + c * 0.5f, 0f, -2.4f + row * 0.5f);
+                        plant.transform.rotation = Quaternion.Euler(0f, (c * 73 + row * 31) % 360, 0f);
                     }
-                    plantX += 2.5f;
+                }
+
+                // Gatuträd mellan husen, bakom gången. Hör inte till något enskilt hus.
+                if (trees.Count > 0 && i < StreetHouseCount - 1)
+                {
+                    var tree = (GameObject)PrefabUtility.InstantiatePrefab(trees[i % trees.Count], parent);
+                    tree.transform.position = new Vector3(x + lotWidth * 0.5f, 0f, -3.0f);
                 }
             }
         }

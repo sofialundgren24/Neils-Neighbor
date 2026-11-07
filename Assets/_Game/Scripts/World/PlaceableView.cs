@@ -20,6 +20,8 @@ namespace NG.World
         [Tooltip("Id på PlaceableDefinition som skapade objektet. Fylls av importeraren.")]
         public string definitionId;
 
+        [Tooltip("1 = grå och sliten. Används bara för objekt som tillhör den nedgångna startgatan och ännu inte är renoverade. " +
+                 "Allt som placeras senare i spelet har 0 och full färg.")]
         [Range(0f, 1f)] [SerializeField] float decay;
         [SerializeField] Color paint = new Color(1, 1, 1, 0);
         [SerializeField] float transformSeconds = 1.2f;
@@ -27,8 +29,15 @@ namespace NG.World
         Renderer[] _renderers;
         MaterialPropertyBlock _mpb;
         readonly List<Transform> _variants = new List<Transform>();
+        bool _colorLocked;
 
         public float Decay => decay;
+
+        /// <summary>
+        /// Sant när objektet är färdigrenoverat. Då är förfallet borta för gott: alla försök att sätta decay ignoreras.
+        /// Motsvarar PlotState.renovationComplete i sparfilen.
+        /// </summary>
+        public bool IsColorLocked => _colorLocked;
 
         void Awake()
         {
@@ -95,20 +104,56 @@ namespace NG.World
             Apply();
         }
 
+        /// <summary>Sätter förfallet direkt. Ignoreras om objektet redan är färdigrenoverat.</summary>
         public void SetDecayImmediate(float value)
         {
+            if (_colorLocked) return;
             decay = Mathf.Clamp01(value);
             Apply();
         }
 
-        /// <summary>Grå -> färg-vågen. Använder unscaled time så att den spelas även i pausade menyer.</summary>
+        /// <summary>
+        /// Grå -> färg under en pågående renovering (till exempel delvis färg efter varje fas).
+        /// Ignoreras om objektet redan är färdigrenoverat. Använder unscaled time så att den spelas även i pausade menyer.
+        /// </summary>
         public Coroutine AnimateDecay(float target)
         {
+            if (_colorLocked) return null;
             StopAllCoroutines();
-            return StartCoroutine(AnimateDecayRoutine(Mathf.Clamp01(target)));
+            return StartCoroutine(AnimateDecayRoutine(Mathf.Clamp01(target), false));
         }
 
-        IEnumerator AnimateDecayRoutine(float target)
+        /// <summary>
+        /// Avslutar renoveringen: spelar färgvågen till full färg och låser sedan färgen permanent.
+        /// Anropas en gång när sista fasen är klar, och direkt (animate = false) när en sparfil med
+        /// renovationComplete laddas.
+        /// </summary>
+        public void CompleteRenovation(bool animate = true)
+        {
+            if (_colorLocked) return;
+            StopAllCoroutines();
+            if (animate && isActiveAndEnabled)
+            {
+                StartCoroutine(AnimateDecayRoutine(0f, true));
+            }
+            else
+            {
+                decay = 0f;
+                _colorLocked = true;
+                Apply();
+            }
+        }
+
+        /// <summary>Bara för utveckling och tester: gör objektet grått och olåst igen.</summary>
+        public void ResetToDecayedForDebug(float value = 1f)
+        {
+            StopAllCoroutines();
+            _colorLocked = false;
+            decay = Mathf.Clamp01(value);
+            Apply();
+        }
+
+        IEnumerator AnimateDecayRoutine(float target, bool lockWhenDone)
         {
             float start = decay;
             float t = 0f;
@@ -119,6 +164,12 @@ namespace NG.World
                 decay = Mathf.Lerp(start, target, eased);
                 Apply();
                 yield return null;
+            }
+            if (lockWhenDone)
+            {
+                decay = 0f;
+                _colorLocked = true;
+                Apply();
             }
         }
 
