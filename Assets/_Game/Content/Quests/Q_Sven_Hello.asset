@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74b12aeef9328e140bcfdfe54d8c8579, type: 3}
+  m_Name: Q_Sven_Hello
+  m_EditorClassIdentifier: Assembly-CSharp::NG.Data.QuestDefinition
+  id: sven_hello
+  fallbackName: Svens timmerstuga
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  icon: {fileID: 0}
+  neighbor: {fileID: 11400000, guid: ef7bd16a4465d6e4fbac0d0fcd12ed37, type: 2}
+  order: 50
+  unlockLevel: 15
+  requiresQuest: berg_hello
+  intro: "...Hej. Sven. Stugan beh\xF6ver arbete. Du verkar kunna s\xE5nt."
+  outro: ...Bra gjort. Riktigt bra.
+  objectives:
+  - type: 0
+    targetId: house_cabin
+    amount: 3
+  rewardCoins: 1200
+  rewardGems: 15
+  rewardXp: 300
+  focus: house_cabin
+  references:
+    version: 2
+    RefIds: []

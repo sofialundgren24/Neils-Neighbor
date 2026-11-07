@@ -21,6 +21,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0171a269fda02264894278bf5f0ffa77
+    m_Address: quest/greta_paint
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0542e5978b1c1fa42a32c775de818c3e
     m_Address: def/house_cottage
     m_ReadOnly: 0
@@ -29,6 +35,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0683c284a618d8148af50a0f01d875a8
     m_Address: res/bread
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0bd69cb029497174db571156969867b5
+    m_Address: quest/greta_finish
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -87,6 +99,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2b707176e981b374ba88ffddf192c12b
+    m_Address: quest/omar_store
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2e6b757b41f32fc41ab9b6ef399369bf
     m_Address: config/game
     m_ReadOnly: 0
@@ -101,6 +119,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 31d04027a5766c341a9b4dd619a3a203
     m_Address: def/path_stepping
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 31da3b731b08c43478170f07b88ad273
+    m_Address: quest/greta_seeds
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -147,8 +171,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4343d945ef39b2f40b0a2630ea5d7c4a
+    m_Address: neighbor/lina
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 45128c7ccd6b0b148bd84847704bfaf9
     m_Address: res/wheat
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4805758ea2580d345bcc1da4f4d837c8
+    m_Address: quest/greta_flowers
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -179,6 +215,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4de2bcbe79a00764aa332c50d78a5e12
     m_Address: recipe/salad
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 514c4f67b92a60d4aa39f4549ded9d4b
+    m_Address: quest/sven_hello
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -221,6 +263,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 65d82190a93f798489018993ce00656f
     m_Address: def/crop_wheat
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 66098931cff4884428b001a81ff73f62
+    m_Address: quest/lina_hello
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -321,6 +369,24 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 880bbcd903a977b4db68f44943c6de67
+    m_Address: quest/gata_orders
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 88f2d960a66ca3643ae1fc0d7cbda40c
+    m_Address: quest/omar_house
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8d1f66177dfa01c4dbc0ee601eba9546
+    m_Address: quest/berg_play
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8ddeca9238b305149a432ecaa2224a3f
     m_Address: def/tree_apple
     m_ReadOnly: 0
@@ -353,6 +419,18 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 99dcbd2c447284648b4fa016ed0f33c8
     m_Address: def/path_wood
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9aef3dd3ab81bba4d94817c2c9558250
+    m_Address: quest/berg_hello
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d3adad866e1d2543a73579fd6bf7de5
+    m_Address: quest/lina_garden
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -393,6 +471,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aa54c4824bded644fa0e126e9d412451
+    m_Address: quest/omar_carrots
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: aeaa0837686c73c429388e4d9ad7bcf6
     m_Address: recipe/popcorn
     m_ReadOnly: 0
@@ -429,6 +513,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b7cbb8dabcd72994aa90120e0acab086
+    m_Address: quest/greta_harvest
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b80669efc218abe4d8d2357c58972f01
     m_Address: res/strawberry
     m_ReadOnly: 0
@@ -441,8 +531,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b94793f295f3a7746ba434e5e762a6a1
+    m_Address: quest/street_complete
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ba2430ef3fb57d241bf8c50b9b9923ae
     m_Address: def/decor_rose_arch
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: befc20b5250e08d43b3c628dcbb71523
+    m_Address: neighbor/familjen_berg
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -477,6 +579,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ca60f1a0d8c70c34ba9411efb5f51ebe
+    m_Address: quest/greta_order
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf6735ff9de0f2d42826b54d67c6a334
+    m_Address: quest/greta_welcome
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d45af95d658758143aca8a62dd40c618
     m_Address: def/path_gravel
     m_ReadOnly: 0
@@ -491,6 +605,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d7fdfa31fcf2f474585d375727a44412
     m_Address: res/popcorn
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da8cad96dec5e8749a6c9c4e3ebe9f15
+    m_Address: neighbor/greta
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -543,6 +663,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ebd9af3aa3ecfe44c96c6323d31bf7b8
+    m_Address: quest/lina_house
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ef7bd16a4465d6e4fbac0d0fcd12ed37
+    m_Address: neighbor/sven
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f2745664aa61821478ffb9c57420ea40
     m_Address: res/jam
     m_ReadOnly: 0
@@ -551,6 +683,18 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f3f64d483c046c74891dbd13a3915ad1
     m_Address: recipe/fertilizer
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f71882abf762ccb4996dd0553071c987
+    m_Address: quest/omar_bread
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f997a5f9da509f342bf4ef02370f01d3
+    m_Address: neighbor/omar
     m_ReadOnly: 0
     m_SerializedLabels:
     - content

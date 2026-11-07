@@ -116,8 +116,20 @@ namespace NG.EditorTools
                 m.SetFloat("_AOStrength", 0f);
                 m.SetFloat("_RimStrength", 0f);
             });
+            // Markfärgen uppdateras varje gång (mjukare grön än första versionen).
+            var ground = AssetDatabase.LoadAssetAtPath<Material>(GroundMaterial);
+            if (ground != null)
+            {
+                ground.SetColor("_BaseColor", Hex(GroundColor));
+                EditorUtility.SetDirty(ground);
+            }
             AssetDatabase.SaveAssets();
         }
+
+        /// <summary>Gräsets färg. Samma färg används som kamerans bakgrund så att kartan inte "flyter" i luften.</summary>
+        public const string GroundColor = "#7CC456";
+        /// <summary>Låsta områden: dovare gräs, så att de syns men inte tar över bilden.</summary>
+        public const string LockedGroundColor = "#93AE7E";
 
         static void CreateMaterial(string path, Shader shader, System.Action<Material> setup)
         {

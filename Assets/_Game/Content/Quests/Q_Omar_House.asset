@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74b12aeef9328e140bcfdfe54d8c8579, type: 3}
+  m_Name: Q_Omar_House
+  m_EditorClassIdentifier: Assembly-CSharp::NG.Data.QuestDefinition
+  id: omar_house
+  fallbackName: Omars radhus
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  icon: {fileID: 0}
+  neighbor: {fileID: 11400000, guid: f997a5f9da509f342bf4ef02370f01d3, type: 2}
+  order: 13
+  unlockLevel: 3
+  requiresQuest: omar_bread
+  intro: "Mitt radhus \xE4r i s\xE4mre skick \xE4n Gretas stuga... Hj\xE4lper du mig med det ocks\xE5?"
+  outro: "Jag k\xE4nner inte igen det! Tack, granne."
+  objectives:
+  - type: 0
+    targetId: house_townhouse
+    amount: 3
+  rewardCoins: 200
+  rewardGems: 5
+  rewardXp: 60
+  focus: house_townhouse
+  references:
+    version: 2
+    RefIds: []

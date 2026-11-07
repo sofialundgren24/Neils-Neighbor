@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74b12aeef9328e140bcfdfe54d8c8579, type: 3}
+  m_Name: Q_Berg_Hello
+  m_EditorClassIdentifier: Assembly-CSharp::NG.Data.QuestDefinition
+  id: berg_hello
+  fallbackName: Familjen Bergs villa
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  icon: {fileID: 0}
+  neighbor: {fileID: 11400000, guid: befc20b5250e08d43b3c628dcbb71523, type: 2}
+  order: 40
+  unlockLevel: 10
+  requiresQuest: lina_house
+  intro: "Hej hej! Vi har tre barn och ett hus som faller is\xE4r. Kan du hj\xE4lpa oss?"
+  outro: "Barnen springer runt och skriker av gl\xE4dje. Tack!"
+  objectives:
+  - type: 0
+    targetId: house_villa
+    amount: 3
+  rewardCoins: 600
+  rewardGems: 10
+  rewardXp: 150
+  focus: house_villa
+  references:
+    version: 2
+    RefIds: []

@@ -396,6 +396,9 @@ MonoBehaviour:
   orderRefillSec: 30
   orderRewardMultiplier: 1.5
   sellRefund: 0.25
+  maxActiveQuests: 3
+  dailyCoins: 320000004b0000006400000096000000c8000000fa0000002c010000i
+  dailyGems: 0000000000000000010000000000000002000000000000000a000000i
   references:
     version: 2
     RefIds: []

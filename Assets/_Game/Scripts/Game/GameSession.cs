@@ -22,6 +22,7 @@ namespace NG.Game
     ///   Daily        daglig belöning
     ///
     /// Ren C# utan MonoBehaviour, så logiken kan testas utan scen. GameBootstrap skapar den och anropar Tick().
+    /// Varje tjänst ligger i en egen fil i samma mapp (t.ex. QuestService.cs, DailyRewardService.cs).
     /// </summary>
     public sealed class GameSession : System.IDisposable
     {

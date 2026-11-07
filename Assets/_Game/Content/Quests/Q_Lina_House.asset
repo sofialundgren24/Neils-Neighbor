@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74b12aeef9328e140bcfdfe54d8c8579, type: 3}
+  m_Name: Q_Lina_House
+  m_EditorClassIdentifier: Assembly-CSharp::NG.Data.QuestDefinition
+  id: lina_house
+  fallbackName: Linas bungalow
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  icon: {fileID: 0}
+  neighbor: {fileID: 11400000, guid: 4343d945ef39b2f40b0a2630ea5d7c4a, type: 2}
+  order: 31
+  unlockLevel: 6
+  requiresQuest: lina_hello
+  intro: "Min bungalow \xE4r helt gr\xE5. Den f\xF6rtj\xE4nar gult, solgult!"
+  outro: "Den lyser ju! Precis som jag dr\xF6mde."
+  objectives:
+  - type: 0
+    targetId: house_bungalow
+    amount: 3
+  rewardCoins: 350
+  rewardGems: 8
+  rewardXp: 90
+  focus: house_bungalow
+  references:
+    version: 2
+    RefIds: []

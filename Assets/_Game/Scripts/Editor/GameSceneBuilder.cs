@@ -91,15 +91,19 @@ namespace NG.EditorTools
             var camGo = new GameObject("Main Camera") { tag = "MainCamera" };
             var cam = camGo.AddComponent<Camera>();
             cam.orthographic = true;
-            cam.orthographicSize = 10f;
+            cam.orthographicSize = 7f;
             cam.nearClipPlane = 0.3f;
             cam.farClipPlane = 300f;
             cam.clearFlags = CameraClearFlags.SolidColor;
-            cam.backgroundColor = NGEditorPaths.Hex("#BFE6FF");
+            cam.backgroundColor = NGEditorPaths.Hex(NGEditorPaths.GroundColor);
             camGo.transform.rotation = Quaternion.Euler(30f, 45f, 0f);
             camGo.transform.position = -camGo.transform.forward * 80f;
             camGo.AddComponent<UniversalAdditionalCameraData>().renderPostProcessing = true;
             var camController = camGo.AddComponent<IsoCameraController>();
+            var camSo = new SerializedObject(camController);
+            camSo.FindProperty("minSize").floatValue = 4f;   // närmare inzoomning
+            camSo.FindProperty("maxSize").floatValue = 13f;  // inte så långt ut att allt blir pyttesmått
+            camSo.ApplyModifiedPropertiesWithoutUndo();
             camGo.AddComponent<AudioListener>();
 
             var volume = new GameObject("Global Volume").AddComponent<Volume>();
@@ -110,7 +114,7 @@ namespace NG.EditorTools
             var ground = GameObject.CreatePrimitive(PrimitiveType.Plane);
             ground.name = "Ground";
             ground.transform.localScale = new Vector3(
-                config.mapSize.x * GameConfig.CellSize / 10f, 1f, config.mapSize.y * GameConfig.CellSize / 10f);
+                config.mapSize.x * GameConfig.CellSize * 3f / 10f, 1f, config.mapSize.y * GameConfig.CellSize * 3f / 10f);
             ground.GetComponent<Renderer>().sharedMaterial = AssetDatabase.LoadAssetAtPath<Material>(NGEditorPaths.GroundMaterial);
             Object.DestroyImmediate(ground.GetComponent<Collider>()); // marken träffas med matematik, inte fysik
 
@@ -129,7 +133,7 @@ namespace NG.EditorTools
             var uiSo = new SerializedObject(ui);
             uiSo.FindProperty("styleSheet").objectReferenceValue = AssetDatabase.LoadAssetAtPath<StyleSheet>(UiFolder + "/NG.uss");
             uiSo.ApplyModifiedPropertiesWithoutUndo();
-            world.lockedAreaMaterial = PlaceholderBuilder.MaterialFor(NGEditorPaths.Hex("#9AA894"));
+            world.lockedAreaMaterial = PlaceholderBuilder.MaterialFor(NGEditorPaths.Hex(NGEditorPaths.LockedGroundColor));
             interaction.indicatorMaterial = PlaceholderBuilder.MaterialFor(Color.white);
 
             var so = new SerializedObject(bootstrap);

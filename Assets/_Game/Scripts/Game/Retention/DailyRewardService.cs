@@ -5,7 +5,7 @@ namespace NG.Game
 {
     /// <summary>
     /// Daglig belöning: en gåva per UTC-dygn. Dagar i rad ger större gåvor (dag 7 är störst), en missad dag börjar om.
-    /// Beloppen står i GameConfig (dailyCoins / dailyGems).
+    /// Beloppen står i GameConfig (dailyCoins / dailyGems) och kan ändras i inspektorn.
     /// </summary>
     public sealed class DailyRewardService
     {

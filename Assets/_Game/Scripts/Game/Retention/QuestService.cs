@@ -12,6 +12,7 @@ namespace NG.Game
     /// max GameConfig.maxActiveQuests åt gången. Mål läses antingen av från spelets tillstånd
     /// (renovering, ägda objekt, nivå, lager) eller räknas med händelser (skörd, produktion, leveranser).
     /// De första uppdragen är tutorialen: deras focus säger vad UI:t ska peka på.
+    /// Uppdragen skrivs i Assets/_Game/Data/quests.csv.
     /// </summary>
     public sealed class QuestService : IDisposable
     {

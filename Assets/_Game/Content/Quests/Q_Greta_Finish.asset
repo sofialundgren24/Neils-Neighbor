@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74b12aeef9328e140bcfdfe54d8c8579, type: 3}
+  m_Name: Q_Greta_Finish
+  m_EditorClassIdentifier: Assembly-CSharp::NG.Data.QuestDefinition
+  id: greta_finish
+  fallbackName: Stugan blir klar
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  icon: {fileID: 0}
+  neighbor: {fileID: 11400000, guid: da8cad96dec5e8749a6c9c4e3ebe9f15, type: 2}
+  order: 6
+  unlockLevel: 1
+  requiresQuest: greta_order
+  intro: "Det sista: bloml\xE5dor och lite dekor. D\xE5 \xE4r mitt hus som nytt!"
+  outro: "K\xE4ra n\xE5n, s\xE5 vackert! F\xE4rgen har kommit tillbaka. Tack!"
+  objectives:
+  - type: 0
+    targetId: house_cottage
+    amount: 3
+  rewardCoins: 100
+  rewardGems: 5
+  rewardXp: 30
+  focus: house_cottage
+  references:
+    version: 2
+    RefIds: []
