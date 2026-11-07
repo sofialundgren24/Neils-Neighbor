@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: DEF_Flower_Lavender_Purple
   m_EditorClassIdentifier: Assembly-CSharp::NG.Data.PlantDefinition
   id: flower_lavender_purple
+  fallbackName: Lavendel
   displayName:
     m_TableReference:
       m_TableCollectionName: 
@@ -31,15 +32,22 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   footprint: {x: 1, y: 1}
-  unlockLevel: 1
-  cost: []
+  unlockLevel: 2
+  cost:
+  - currency: 0
+    amount: 12
   materials: []
   buildTimeSec: 0
-  xpReward: 5
-  beautyScore: 1
+  xpReward: 1
+  inShop: 1
+  maxCount: 0
+  beautyScore: 3
   styleTags: 0
   premium: 0
-  growthStageSec: 3c0000002c01000084030000i
+  growTimeSec: 60
+  harvest:
+    resource: {fileID: 11400000, guid: 9ef6a08567d45f144b9daf474687a68c, type: 2}
+    amount: 1
   seasons: 15
   references:
     version: 2

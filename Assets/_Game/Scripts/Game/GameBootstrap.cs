@@ -110,6 +110,7 @@ namespace NG.Game
         void OnDestroy()
         {
             Save();
+            Session?.Dispose();
             Session = null;
             _content?.Release();
         }
@@ -126,6 +127,7 @@ namespace NG.Game
         {
             _skipSave = true;
             SaveService.Delete();
+            Session?.Dispose();
             Session = null;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }

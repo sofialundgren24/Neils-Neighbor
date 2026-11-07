@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: DEF_Flower_Rose_Pink
   m_EditorClassIdentifier: Assembly-CSharp::NG.Data.PlantDefinition
   id: flower_rose_pink
+  fallbackName: Rosa ros
   displayName:
     m_TableReference:
       m_TableCollectionName: 
@@ -32,14 +33,21 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   footprint: {x: 1, y: 1}
   unlockLevel: 1
-  cost: []
+  cost:
+  - currency: 0
+    amount: 10
   materials: []
   buildTimeSec: 0
-  xpReward: 5
-  beautyScore: 1
+  xpReward: 1
+  inShop: 1
+  maxCount: 0
+  beautyScore: 3
   styleTags: 0
   premium: 0
-  growthStageSec: 3c0000002c01000084030000i
+  growTimeSec: 60
+  harvest:
+    resource: {fileID: 11400000, guid: 9ef6a08567d45f144b9daf474687a68c, type: 2}
+    amount: 1
   seasons: 15
   references:
     version: 2

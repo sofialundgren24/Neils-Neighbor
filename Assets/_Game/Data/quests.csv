@@ -1,0 +1,30 @@
+# Uppdrag. Text med kommatecken ska stå inom "citattecken".
+# objectives: mål separerade med |. Format: typ:id:antal
+#   renovate:house_cottage:2  = huset har minst 2 klara faser
+#   own:crop_wheat:3          = 3 färdigbyggda av sorten står på kartan
+#   harvest:wheat:6           = skörda 6 vete (harvest:*:6 = vad som helst)
+#   produce:bread:3           = hämta 3 bröd från en butik
+#   deliver:2                 = leverera 2 beställningar
+#   level:5                   = nå nivå 5
+#   collect:apple:5           = ha 5 äpplen i lagret
+# focus (tutorial): id att peka på i världen, eller ui:build / ui:orders / ui:storage. Tomt = ingen pekare.
+id,neighbor,order,unlock,requires,title,intro,outro,objectives,coins,gems,xp,focus
+greta_welcome,greta,1,1,,Välkommen till Lindgatan,"Åh, hej! Du måste vara den nya. Gatan har sett bättre dagar... Mitt tak läcker. Kan du hjälpa mig laga huset?","Tack! Det är första gången på år som det inte droppar in.",renovate:house_cottage:1,50,0,10,house_cottage
+greta_seeds,greta,2,1,greta_welcome,Ett första frö,"Förr växte det vete längs hela gatan. Tryck på Bygg och så tre vetefält, så kommer vi igång!","Så fint! Snart växer det.",own:crop_wheat:3,40,0,10,ui:build
+greta_harvest,greta,3,1,greta_seeds,Skördetid,"Vetet växer fort. Skörda när det är moget, tryck på bubblan ovanför fältet.","Gyllene! Det luktar sommar.",harvest:wheat:6,50,0,15,crop_wheat
+greta_paint,greta,4,1,greta_harvest,Lite färg,"Nu när taket är lagat vill jag ha färg på väggarna igen. Ljusblått, som förr!","Titta, det blir ju hus av det här!",renovate:house_cottage:2,60,0,15,house_cottage
+greta_order,greta,5,1,greta_paint,Grannar hjälper grannar,"Folk på gatan behöver saker. Öppna Beställningar och leverera en, det ger mynt.","Bra jobbat. Ryktet sprider sig!",deliver:1,50,0,15,ui:orders
+greta_finish,greta,6,1,greta_order,Stugan blir klar,"Det sista: blomlådor och lite dekor. Då är mitt hus som nytt!","Kära nån, så vackert! Färgen har kommit tillbaka. Tack!",renovate:house_cottage:3,100,5,30,house_cottage
+greta_flowers,greta,7,2,greta_finish,Blommor till alla,"En trädgård utan blommor är ingen trädgård. Plantera några tulpaner!","Underbart. Bina kommer tillbaka!",own:flower_tulip_yellow:4|harvest:flowers:4,60,0,20,
+omar_store,omar,10,2,greta_finish,Gatans affär,"Hej granne! Jag är Omar. Om vi bygger en affär kan jag baka bröd åt hela gatan.","Affären är öppen! Doften av bröd är tillbaka.",own:production_store:1,80,0,20,ui:build
+omar_bread,omar,11,2,omar_store,Nybakat,"Ge mig vete så bakar jag. Tryck på affären och välj Bröd.","Mmm. Det här ska alla få smaka!",produce:bread:3,90,0,25,production_store
+omar_carrots,omar,12,2,omar_bread,Morötter,"Mina kunder frågar efter grönsaker. Kan du odla morötter?","Krispiga! Perfekt.",own:crop_carrot:4|harvest:carrot:8,90,0,25,
+omar_house,omar,13,3,omar_bread,Omars radhus,"Mitt radhus är i sämre skick än Gretas stuga... Hjälper du mig med det också?","Jag känner inte igen det! Tack, granne.",renovate:house_townhouse:3,200,5,60,house_townhouse
+gata_orders,greta,20,3,greta_order,Populär granne,"Alla pratar om dig! Fortsätt leverera beställningar.","Du är gatans hjälte.",deliver:5,150,2,40,
+lina_hello,lina,30,5,omar_house,Blomsterbutiken,"Hej! Lina heter jag. Jag vill göra buketter av gatans blommor. Bygg en trädgårdsbutik?","Äntligen! Nu kan vi göra något vackert.",own:production_garden_center:1|produce:bouquet:2,150,0,40,ui:build
+lina_house,lina,31,6,lina_hello,Linas bungalow,"Min bungalow är helt grå. Den förtjänar gult, solgult!","Den lyser ju! Precis som jag drömde.",renovate:house_bungalow:3,350,8,90,house_bungalow
+lina_garden,lina,32,6,lina_house,En riktig trädgård,"Hjälp mig göra trädgården fin: lite häck och några solrosor.","Nu är det en trädgård värd namnet.",own:hedge_box:2|own:flower_sunflower:4,200,0,50,
+berg_hello,familjen_berg,40,10,lina_house,Familjen Bergs villa,"Hej hej! Vi har tre barn och ett hus som faller isär. Kan du hjälpa oss?","Barnen springer runt och skriker av glädje. Tack!",renovate:house_villa:3,600,10,150,house_villa
+berg_play,familjen_berg,41,10,berg_hello,Lek i trädgården,"Barnen vill ha en gunga och ett picknickbord!","Bästa sommaren någonsin!",own:decor_swing:1|own:decor_picnic_table:1,300,0,80,
+sven_hello,sven,50,15,berg_hello,Svens timmerstuga,"...Hej. Sven. Stugan behöver arbete. Du verkar kunna sånt.","...Bra gjort. Riktigt bra.",renovate:house_cabin:3,1200,15,300,house_cabin
+street_complete,greta,60,15,sven_hello,Lindgatan är tillbaka,"Alla fem husen! Ser du vad du har gjort med vår gata?","Gatan är levande igen. Det här är ditt verk.",level:16,1500,25,200,

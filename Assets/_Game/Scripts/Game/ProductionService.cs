@@ -72,6 +72,7 @@ namespace NG.Game
                 var r = Recipe(id);
                 if (r == null || r.output.resource == null) continue;
                 _s.Inventory.Add(r.output.resource.Id, r.output.amount);
+                EventBus.Publish(new ItemsProduced(r.output.resource.Id, r.output.amount));
                 _s.Progression.AddXp(r.xpReward);
             }
             o.production.ready.Clear();

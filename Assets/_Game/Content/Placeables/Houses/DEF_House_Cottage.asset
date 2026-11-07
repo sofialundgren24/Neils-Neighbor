@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: DEF_House_Cottage
   m_EditorClassIdentifier: Assembly-CSharp::NG.Data.RenovatableDefinition
   id: house_cottage
+  fallbackName: Stugan
   displayName:
     m_TableReference:
       m_TableCollectionName: 
@@ -35,33 +36,35 @@ MonoBehaviour:
   cost: []
   materials: []
   buildTimeSec: 0
-  xpReward: 5
-  beautyScore: 1
+  xpReward: 0
+  inShop: 0
+  maxCount: 0
+  beautyScore: 10
   styleTags: 0
   premium: 0
   decayedVariant: Phase0_Decayed
   phases:
   - variantName: Phase1_Repaired
-    durationSec: 120
+    durationSec: 30
     cost:
       currency: 0
-      amount: 0
+      amount: 50
     materials: []
-    xpReward: 10
+    xpReward: 15
   - variantName: Phase2_Painted
     durationSec: 120
     cost:
       currency: 0
-      amount: 0
+      amount: 120
     materials: []
-    xpReward: 10
+    xpReward: 25
   - variantName: Phase3_Decorated
-    durationSec: 120
+    durationSec: 300
     cost:
       currency: 0
-      amount: 0
+      amount: 250
     materials: []
-    xpReward: 10
+    xpReward: 50
   paintSchemes: []
   references:
     version: 2

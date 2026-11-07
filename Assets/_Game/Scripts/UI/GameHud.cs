@@ -50,8 +50,12 @@ namespace NG.UI
         readonly List<(string text, float until)> _toasts = new List<(string, float)>();
         readonly Queue<int> _levelUps = new Queue<int>();
 
+        bool _showDaily;
+        Vector2 _questScroll;
+        Rect _buildRect, _ordersRect, _storageRect;
+
         float _scale = 1f;
-        GUIStyle _box, _label, _small, _title, _button, _bigButton, _bubble;
+        GUIStyle _box, _label, _small, _title, _button, _bigButton, _bubble, _portrait;
         Texture2D _white;
 
         public void Bind(GameSession session, WorldInteraction interaction, WorldView world)
@@ -105,7 +109,8 @@ namespace NG.UI
                 return;
             }
 
-            InputGate.ModalOpen = _levelUps.Count > 0;
+            var intro = _levelUps.Count == 0 ? _s.Quests.NextUnseenIntro() : null;
+            InputGate.ModalOpen = _levelUps.Count > 0 || intro != null || _showDaily;
 
             DrawBubbles();
             DrawTopBar(w);
@@ -114,8 +119,10 @@ namespace NG.UI
             else
             {
                 DrawBottomButtons(h);
+                if (_window == Window.None) DrawQuests(h);
                 if (_interaction.SelectedId != null) DrawSelection(w);
                 else if (_interaction.SelectedExpansion != null) DrawExpansion(w, _interaction.SelectedExpansion);
+                DrawFocusPointer();
             }
 
             switch (_window)
@@ -128,6 +135,8 @@ namespace NG.UI
 
             DrawToasts(w);
             if (_levelUps.Count > 0) DrawLevelUp(w, h);
+            else if (intro != null) DrawIntro(w, h, intro);
+            else if (_showDaily) DrawDaily(w, h);
 
             if (repaint) InputGate.EndUiFrame();
         }
@@ -160,8 +169,147 @@ namespace NG.UI
 
             float x = w - 16;
             x -= 90; if (GUI.Button(new Rect(x, 14, 82, 40), "Debug", _button)) Toggle(Window.Debug);
-            x -= 150; if (GUI.Button(new Rect(x, 14, 142, 40), $"Beställningar ({_s.Orders.Orders.Count})", _button)) Toggle(Window.Orders);
-            x -= 90; if (GUI.Button(new Rect(x, 14, 82, 40), "Lager", _button)) Toggle(Window.Storage);
+            x -= 150; _ordersRect = new Rect(x, 14, 142, 40);
+            if (GUI.Button(_ordersRect, $"Beställningar ({_s.Orders.Orders.Count})", _button)) Toggle(Window.Orders);
+            x -= 90; _storageRect = new Rect(x, 14, 82, 40);
+            if (GUI.Button(_storageRect, "Lager", _button)) Toggle(Window.Storage);
+            if (_s.Daily.CanClaim)
+            {
+                x -= 110;
+                GUI.backgroundColor = new Color(1f, 0.85f, 0.3f);
+                if (GUI.Button(new Rect(x, 14, 102, 40), "Dagens gåva", _button)) _showDaily = true;
+                GUI.backgroundColor = Color.white;
+            }
+        }
+
+        // ---------- Uppdrag och tutorial ----------
+
+        void DrawQuests(float h)
+        {
+            var quests = _s.Quests.Active;
+            if (quests.Count == 0) return;
+            float height = Mathf.Min(h - 180, 24 + quests.Count * 132);
+            var r = new Rect(12, 70, 300, height);
+            Panel(r);
+            GUILayout.BeginArea(new Rect(r.x + 8, r.y + 6, r.width - 16, r.height - 12));
+            _questScroll = GUILayout.BeginScrollView(_questScroll);
+            foreach (var q in quests.ToList())
+            {
+                var def = _s.Quests.Def(q);
+                if (def == null) continue;
+                GUILayout.BeginVertical(_box);
+                var nb = def.neighbor;
+                if (nb != null)
+                {
+                    GUI.color = nb.color;
+                    GUILayout.Label(nb.DisplayName, _small);
+                    GUI.color = Color.white;
+                }
+                GUILayout.Label($"<b>{def.DisplayName}</b>", _label);
+                for (int i = 0; i < def.objectives.Length; i++)
+                    GUILayout.Label("• " + _s.Quests.Describe(q, i), _small);
+                if (_s.Quests.IsComplete(q))
+                {
+                    string reward = $"{def.rewardCoins} mynt" + (def.rewardGems > 0 ? $", {def.rewardGems} diamanter" : "") + $", {def.rewardXp} XP";
+                    GUI.backgroundColor = new Color(0.6f, 1f, 0.6f);
+                    if (GUILayout.Button($"Hämta belöning ({reward})", _button)) Report(_s.Quests.Claim(q));
+                    GUI.backgroundColor = Color.white;
+                }
+                GUILayout.EndVertical();
+            }
+            GUILayout.EndScrollView();
+            GUILayout.EndArea();
+        }
+
+        /// <summary>Tutorial: en pulserande "Här!"-bubbla på det som det första uppdraget handlar om.</summary>
+        void DrawFocusPointer()
+        {
+            var q = _s.Quests.CurrentFocus();
+            string focus = _s.Quests.Def(q)?.focus;
+            if (string.IsNullOrEmpty(focus) || _window != Window.None) return;
+
+            float pulse = 1f + Mathf.Sin(Time.unscaledTime * 6f) * 0.08f;
+            Rect target;
+            if (focus == "ui:build") target = _buildRect;
+            else if (focus == "ui:orders") target = _ordersRect;
+            else if (focus == "ui:storage") target = _storageRect;
+            else
+            {
+                var o = _s.World.Objects.FirstOrDefault(x => x.definitionId == focus);
+                if (o == null || _interaction.SelectedId == o.instanceId || _cam == null) return;
+                if (!_world.TryGetTop(o.instanceId, out var top)) return;
+                var sp = _cam.WorldToScreenPoint(top + Vector3.up * 1.2f);
+                if (sp.z < 0) return;
+                target = new Rect(sp.x / _scale - 40, (Screen.height - sp.y) / _scale - 40, 80, 40);
+            }
+            if (target.width <= 0) return;
+            var size = new Vector2(90, 36) * pulse;
+            var r = new Rect(target.center.x - size.x * 0.5f, target.y - size.y - 6, size.x, size.y);
+            if (r.y < 4) r.y = target.yMax + 6; // knappar i toppfältet: peka underifrån
+            GUI.backgroundColor = new Color(1f, 0.85f, 0.3f);
+            GUI.Label(r, "Här!", _bubble);
+            GUI.backgroundColor = Color.white;
+        }
+
+        void DrawIntro(float w, float h, QuestProgress q)
+        {
+            var def = _s.Quests.Def(q);
+            var dim = new Rect(0, 0, w, h);
+            GUI.color = new Color(0, 0, 0, 0.35f);
+            GUI.DrawTexture(dim, _white);
+            GUI.color = Color.white;
+            Block(dim);
+
+            var r = new Rect(w * 0.5f - 300, h - 300, 600, 260);
+            GUI.Box(r, GUIContent.none, _box);
+            var nb = def.neighbor;
+            // Platshållarporträtt: färgad ruta med initial.
+            var portrait = new Rect(r.x + 16, r.y + 16, 110, 130);
+            GUI.color = nb != null ? nb.color : Color.gray;
+            GUI.DrawTexture(portrait, _white);
+            GUI.color = Color.white;
+            GUI.Label(portrait, nb != null && nb.DisplayName.Length > 0 ? nb.DisplayName.Substring(0, 1) : "?", _portrait);
+
+            GUILayout.BeginArea(new Rect(r.x + 140, r.y + 14, r.width - 156, r.height - 28));
+            GUILayout.Label(nb != null ? nb.DisplayName : "Granne", _title);
+            GUILayout.Label($"<b>{def.DisplayName}</b>", _label);
+            GUILayout.Label(def.intro, _label);
+            GUILayout.FlexibleSpace();
+            if (GUILayout.Button("Okej!", _bigButton, GUILayout.Height(48))) _s.Quests.MarkIntroSeen(q);
+            GUILayout.EndArea();
+        }
+
+        void DrawDaily(float w, float h)
+        {
+            var dim = new Rect(0, 0, w, h);
+            GUI.color = new Color(0, 0, 0, 0.45f);
+            GUI.DrawTexture(dim, _white);
+            GUI.color = Color.white;
+            Block(dim);
+
+            var r = CenterRect(w, h, 620, 300);
+            GUI.Box(r, GUIContent.none, _box);
+            GUILayout.BeginArea(new Rect(r.x + 16, r.y + 12, r.width - 32, r.height - 24));
+            GUILayout.Label("Dagens gåva", _title);
+            int today = _s.Daily.NextDay;
+            GUILayout.BeginHorizontal();
+            for (int day = 1; day <= 7; day++)
+            {
+                GUI.color = day == today ? new Color(1f, 0.85f, 0.3f) : day < today ? new Color(0.6f, 0.6f, 0.6f) : Color.white;
+                string gems = _s.Daily.GemsFor(day) > 0 ? $"\n+{_s.Daily.GemsFor(day)} dia" : "";
+                GUILayout.Box($"Dag {day}\n{_s.Daily.CoinsFor(day)} mynt{gems}", _button, GUILayout.Width(76), GUILayout.Height(90));
+            }
+            GUI.color = Color.white;
+            GUILayout.EndHorizontal();
+            GUILayout.Label("Kom tillbaka varje dag för större gåvor. Missar du en dag börjar det om.", _small);
+            GUILayout.FlexibleSpace();
+            GUILayout.BeginHorizontal();
+            GUI.enabled = _s.Daily.CanClaim;
+            if (GUILayout.Button("Hämta", _bigButton, GUILayout.Height(48))) { Report(_s.Daily.Claim()); _showDaily = false; }
+            GUI.enabled = true;
+            if (GUILayout.Button("Senare", _button, GUILayout.Width(120), GUILayout.Height(48))) _showDaily = false;
+            GUILayout.EndHorizontal();
+            GUILayout.EndArea();
         }
 
         void Toggle(Window win) => _window = _window == win ? Window.None : win;
@@ -169,6 +317,7 @@ namespace NG.UI
         void DrawBottomButtons(float h)
         {
             var r = new Rect(12, h - 84, 150, 72);
+            _buildRect = r;
             Block(r);
             if (GUI.Button(r, "Bygg", _bigButton)) Toggle(Window.Shop);
         }
@@ -577,6 +726,7 @@ namespace NG.UI
             _small = new GUIStyle(_label) { fontSize = 14 };
             _small.normal.textColor = new Color(0.85f, 0.9f, 0.95f);
             _title = new GUIStyle(_label) { fontSize = 24, fontStyle = FontStyle.Bold, wordWrap = false };
+            _portrait = new GUIStyle(_title) { fontSize = 64, alignment = TextAnchor.MiddleCenter };
             _button = new GUIStyle(GUI.skin.button) { fontSize = 15, richText = true, wordWrap = true };
             _bigButton = new GUIStyle(_button) { fontSize = 22, fontStyle = FontStyle.Bold };
 

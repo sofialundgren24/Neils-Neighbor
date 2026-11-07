@@ -40,6 +40,7 @@ namespace NG.Game
             if (!CanHarvest(o)) return Result.Fail("Inte redo att skördas än.");
             var def = Def(o);
             _s.Inventory.Add(def.harvest.resource.Id, def.harvest.amount);
+            EventBus.Publish(new ItemsHarvested(def.harvest.resource.Id, def.harvest.amount));
             _s.Progression.AddXp(def.harvest.amount);
             o.growth = Timers.StartNow(def.growTimeSec);
             _lastStage[o.instanceId] = 0;

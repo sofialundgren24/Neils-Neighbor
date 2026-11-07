@@ -1,0 +1,7 @@
+# Grannarna på gatan. house = id på huset de bor i (content.csv). color = porträttfärg tills riktiga porträtt finns.
+id,name,house,color,bio
+greta,Greta,house_cottage,#9FD3F5,"Pensionerad trädgårdsmästare. Har bott på gatan i femtio år och minns hur fin den var."
+omar,Omar,house_townhouse,#F5B7A5,"Bagare som drömmer om att öppna gatans första affär igen."
+lina,Lina,house_bungalow,#FFE27A,"Konstnär och blomsterälskare. Vill måla hela gatan i pastell."
+familjen_berg,Familjen Berg,house_villa,#B9F0B0,"En stökig och glad barnfamilj som behöver en riktig trädgård att leka i."
+sven,Sven,house_cabin,#D7A6FF,"Tystlåten snickare som bygger allt själv. Bor längst bort på gatan."

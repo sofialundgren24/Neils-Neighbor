@@ -74,6 +74,26 @@ namespace NG.Core
         public ExpansionUnlocked(string expansionId) { ExpansionId = expansionId; }
     }
 
+    /// <summary>Spelaren skördade en växt.</summary>
+    public readonly struct ItemsHarvested
+    {
+        public readonly string ResourceId;
+        public readonly int Amount;
+        public ItemsHarvested(string resourceId, int amount) { ResourceId = resourceId; Amount = amount; }
+    }
+
+    /// <summary>Spelaren hämtade färdiga varor från en produktionsbyggnad.</summary>
+    public readonly struct ItemsProduced
+    {
+        public readonly string ResourceId;
+        public readonly int Amount;
+        public ItemsProduced(string resourceId, int amount) { ResourceId = resourceId; Amount = amount; }
+    }
+
+    public readonly struct OrderDelivered { }
+
+    public readonly struct QuestsChanged { }
+
     /// <summary>Kort meddelande till spelaren, t.ex. "Inte tillräckligt med mynt".</summary>
     public readonly struct GameMessage
     {

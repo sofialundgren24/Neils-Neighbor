@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75b9aeb768288ff4d8a25fa7813af048, type: 3}
+  m_Name: DEF_Tree_Birch
+  m_EditorClassIdentifier: Assembly-CSharp::NG.Data.PlantDefinition
+  id: tree_birch
+  fallbackName: "Bj\xF6rk"
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  icon: {fileID: 0}
+  category: 2
+  prefab:
+    m_AssetGUID: c10c4f356002b714b80a49f479878ff0
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  footprint: {x: 4, y: 4}
+  unlockLevel: 9
+  cost:
+  - currency: 0
+    amount: 120
+  materials: []
+  buildTimeSec: 0
+  xpReward: 6
+  inShop: 1
+  maxCount: 0
+  beautyScore: 7
+  styleTags: 0
+  premium: 0
+  growTimeSec: 300
+  harvest:
+    resource: {fileID: 0}
+    amount: 0
+  seasons: 15
+  references:
+    version: 2
+    RefIds: []

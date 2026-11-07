@@ -18,10 +18,12 @@ namespace NG.Game
     ///   Growth       växter, tillväxt och skörd
     ///   Production   affär och trädgårdsbutik: köer av recept
     ///   Orders       beställningstavlan
+    ///   Quests       grannarnas uppdrag (och tutorialen)
+    ///   Daily        daglig belöning
     ///
     /// Ren C# utan MonoBehaviour, så logiken kan testas utan scen. GameBootstrap skapar den och anropar Tick().
     /// </summary>
-    public sealed class GameSession
+    public sealed class GameSession : System.IDisposable
     {
         public ContentDatabase Content { get; }
         public GameConfig Config { get; }
@@ -36,6 +38,8 @@ namespace NG.Game
         public GrowthService Growth { get; }
         public ProductionService Production { get; }
         public OrderService Orders { get; }
+        public QuestService Quests { get; }
+        public DailyRewardService Daily { get; }
 
         public GameSession(ContentDatabase content, GameConfig config, PlayerState state)
         {
@@ -51,7 +55,12 @@ namespace NG.Game
             Growth = new GrowthService(this);
             Production = new ProductionService(this);
             Orders = new OrderService(this);
+            Quests = new QuestService(this);
+            Daily = new DailyRewardService(this);
         }
+
+        /// <summary>Släpper prenumerationer på EventBus. Anropas när spelscenen stängs.</summary>
+        public void Dispose() => Quests.Dispose();
 
         /// <summary>Första start: plånbok, startområde och den nedgångna gatan från GameConfig.</summary>
         public void StartNewGameIfNeeded()
@@ -82,6 +91,7 @@ namespace NG.Game
             Growth.Tick();
             Production.Tick();
             Orders.Tick();
+            Quests.Tick();
         }
 
         public static void Message(string text) => EventBus.Publish(new GameMessage(text));

@@ -33,8 +33,93 @@ namespace NG.EditorTools
             var recipes = ImportRecipes(resources);
             LinkRecipes(placeables, recipes);
             ImportGameConfig(placeables);
+            var neighbors = ImportNeighbors(placeables);
+            int quests = ImportQuests(neighbors, placeables, resources);
             AssetDatabase.SaveAssets();
-            Debug.Log($"[NG Content] Klart: {resources.Count} varor, {placeables.Count} objekt, {recipes.Count} recept.");
+            Debug.Log($"[NG Content] Klart: {resources.Count} varor, {placeables.Count} objekt, {recipes.Count} recept, " +
+                      $"{neighbors.Count} grannar, {quests} uppdrag.");
+        }
+
+        // ---------- Grannar och uppdrag ----------
+
+        static Dictionary<string, NeighborDefinition> ImportNeighbors(Dictionary<string, PlaceableDefinition> placeables)
+        {
+            var result = new Dictionary<string, NeighborDefinition>();
+            foreach (var row in ReadCsv("neighbors.csv"))
+            {
+                string id = row["id"];
+                var def = LoadOrCreate<NeighborDefinition>($"{NGEditorPaths.GameRoot}/Content/Neighbors/NB_{Title(id)}.asset", typeof(NeighborDefinition));
+                def.EditorSetId(id);
+                def.fallbackName = row["name"];
+                def.house = placeables.TryGetValue(row["house"], out var h) ? h as RenovatableDefinition : null;
+                if (def.house == null) Debug.LogWarning($"[NG Content] neighbors.csv: {id} bor i okänt hus '{row["house"]}'.");
+                def.color = NGEditorPaths.Hex(row["color"]);
+                def.bio = row["bio"];
+                Register(def, $"neighbor/{id}");
+                result[id] = def;
+            }
+            return result;
+        }
+
+        static int ImportQuests(Dictionary<string, NeighborDefinition> neighbors,
+            Dictionary<string, PlaceableDefinition> placeables, Dictionary<string, ResourceDefinition> resources)
+        {
+            var ids = new HashSet<string>();
+            var rows = ReadCsv("quests.csv");
+            foreach (var row in rows) ids.Add(row["id"]);
+            foreach (var row in rows)
+            {
+                string id = row["id"];
+                var def = LoadOrCreate<QuestDefinition>($"{NGEditorPaths.GameRoot}/Content/Quests/Q_{Title(id)}.asset", typeof(QuestDefinition));
+                def.EditorSetId(id);
+                def.fallbackName = row["title"];
+                def.neighbor = neighbors.TryGetValue(row["neighbor"], out var nb) ? nb : null;
+                def.order = Int(row, "order", 0);
+                def.unlockLevel = Int(row, "unlock", 1);
+                def.requiresQuest = row["requires"];
+                if (!string.IsNullOrEmpty(def.requiresQuest) && !ids.Contains(def.requiresQuest))
+                    Debug.LogWarning($"[NG Content] quests.csv: {id} kräver okänt uppdrag '{def.requiresQuest}'.");
+                def.intro = row["intro"];
+                def.outro = row["outro"];
+                def.rewardCoins = Int(row, "coins", 0);
+                def.rewardGems = Int(row, "gems", 0);
+                def.rewardXp = Int(row, "xp", 0);
+                def.focus = row["focus"];
+                def.objectives = row["objectives"].Split('|').Where(s => s.Trim().Length > 0)
+                    .Select(s => Objective(s, id, placeables, resources)).ToArray();
+                Register(def, $"quest/{id}");
+            }
+            return rows.Count;
+        }
+
+        /// <summary>"harvest:wheat:6" -> skörda 6 vete. Typer: renovate, own, harvest, produce, deliver, level, collect.</summary>
+        static QuestObjective Objective(string text, string questId,
+            Dictionary<string, PlaceableDefinition> placeables, Dictionary<string, ResourceDefinition> resources)
+        {
+            var p = text.Trim().Split(':');
+            var o = new QuestObjective();
+            switch (p[0].ToLowerInvariant())
+            {
+                case "renovate": o.type = ObjectiveType.Renovate; break;
+                case "own": o.type = ObjectiveType.Own; break;
+                case "harvest": o.type = ObjectiveType.Harvest; break;
+                case "produce": o.type = ObjectiveType.Produce; break;
+                case "deliver": o.type = ObjectiveType.Deliver; break;
+                case "level": o.type = ObjectiveType.ReachLevel; break;
+                case "collect": o.type = ObjectiveType.Collect; break;
+                default: Debug.LogWarning($"[NG Content] quests.csv: {questId} har okänd måltyp '{p[0]}'."); break;
+            }
+            if (o.type == ObjectiveType.Deliver || o.type == ObjectiveType.ReachLevel)
+            {
+                o.amount = p.Length > 1 ? int.Parse(p[p.Length - 1], CultureInfo.InvariantCulture) : 1;
+                return o;
+            }
+            o.targetId = p.Length > 1 ? p[1] : "*";
+            o.amount = p.Length > 2 ? int.Parse(p[2], CultureInfo.InvariantCulture) : 1;
+            bool known = o.targetId == "*" ||
+                         (o.type == ObjectiveType.Renovate || o.type == ObjectiveType.Own ? placeables.ContainsKey(o.targetId) : resources.ContainsKey(o.targetId));
+            if (!known) Debug.LogWarning($"[NG Content] quests.csv: {questId} pekar på okänt id '{o.targetId}'.");
+            return o;
         }
 
         // ---------- Varor ----------
@@ -329,7 +414,10 @@ namespace NG.EditorTools
         static float Float(Dictionary<string, string> row, string key, float fallback) =>
             row.TryGetValue(key, out var v) && float.TryParse(v, NumberStyles.Float, CultureInfo.InvariantCulture, out var f) ? f : fallback;
 
-        /// <summary>Enkel CSV: kommatecken mellan kolumner, inga kommatecken i värdena. Rader som börjar med # hoppas över.</summary>
+        /// <summary>
+        /// CSV som Excel/Sheets sparar den: kommatecken mellan kolumner, text med kommatecken inom "citattecken"
+        /// ("" = ett citattecken). Rader som börjar med # hoppas över.
+        /// </summary>
         static List<Dictionary<string, string>> ReadCsv(string fileName)
         {
             var rows = new List<Dictionary<string, string>>();
@@ -344,16 +432,38 @@ namespace NG.EditorTools
                 .Where(l => l.Length > 0 && !l.StartsWith("#"))
                 .ToList();
             if (lines.Count == 0) return rows;
-            var header = lines[0].Split(',').Select(h => h.Trim().ToLowerInvariant()).ToArray();
+            var header = SplitCsvLine(lines[0]).Select(h => h.Trim().ToLowerInvariant()).ToArray();
             for (int i = 1; i < lines.Count; i++)
             {
-                var cols = lines[i].Split(',');
+                var cols = SplitCsvLine(lines[i]);
                 var row = new Dictionary<string, string>();
                 for (int c = 0; c < header.Length; c++)
-                    row[header[c]] = c < cols.Length ? cols[c].Trim() : "";
+                    row[header[c]] = c < cols.Count ? cols[c].Trim() : "";
                 rows.Add(row);
             }
             return rows;
+        }
+
+        static List<string> SplitCsvLine(string line)
+        {
+            var result = new List<string>();
+            var sb = new System.Text.StringBuilder();
+            bool quoted = false;
+            for (int i = 0; i < line.Length; i++)
+            {
+                char ch = line[i];
+                if (quoted)
+                {
+                    if (ch == '"' && i + 1 < line.Length && line[i + 1] == '"') { sb.Append('"'); i++; }
+                    else if (ch == '"') quoted = false;
+                    else sb.Append(ch);
+                }
+                else if (ch == '"') quoted = true;
+                else if (ch == ',') { result.Add(sb.ToString()); sb.Clear(); }
+                else sb.Append(ch);
+            }
+            result.Add(sb.ToString());
+            return result;
         }
     }
 }

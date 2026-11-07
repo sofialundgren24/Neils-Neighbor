@@ -1,0 +1,401 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a517c47f7e3620a4e8e14f083f87fbc1, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: Assembly-CSharp::NG.Data.GameConfig
+  id: game_config
+  fallbackName: "Spelinst\xE4llningar"
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  icon: {fileID: 0}
+  levelTable: {fileID: 11400000, guid: 6d18a4d9bdbdb544992d87f870877e09, type: 2}
+  startCoins: 500
+  startGems: 20
+  mapSize: {x: 96, y: 96}
+  startLayout:
+  - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
+    cell: {x: 16, y: 36}
+    rotation: 0
+    decayed: 0
+  - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
+    cell: {x: 20, y: 36}
+    rotation: 0
+    decayed: 0
+  - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
+    cell: {x: 24, y: 36}
+    rotation: 0
+    decayed: 0
+  - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
+    cell: {x: 28, y: 36}
+    rotation: 0
+    decayed: 0
+  - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
+    cell: {x: 32, y: 36}
+    rotation: 0
+    decayed: 0
+  - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
+    cell: {x: 36, y: 36}
+    rotation: 0
+    decayed: 0
+  - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
+    cell: {x: 40, y: 36}
+    rotation: 0
+    decayed: 0
+  - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
+    cell: {x: 44, y: 36}
+    rotation: 0
+    decayed: 0
+  - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
+    cell: {x: 48, y: 36}
+    rotation: 0
+    decayed: 0
+  - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
+    cell: {x: 52, y: 36}
+    rotation: 0
+    decayed: 0
+  - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
+    cell: {x: 56, y: 36}
+    rotation: 0
+    decayed: 0
+  - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
+    cell: {x: 60, y: 36}
+    rotation: 0
+    decayed: 0
+  - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
+    cell: {x: 64, y: 36}
+    rotation: 0
+    decayed: 0
+  - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
+    cell: {x: 68, y: 36}
+    rotation: 0
+    decayed: 0
+  - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
+    cell: {x: 72, y: 36}
+    rotation: 0
+    decayed: 0
+  - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
+    cell: {x: 76, y: 36}
+    rotation: 0
+    decayed: 0
+  - definition: {fileID: 11400000, guid: 0542e5978b1c1fa42a32c775de818c3e, type: 2}
+    cell: {x: 18, y: 44}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
+    cell: {x: 18, y: 40}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
+    cell: {x: 26, y: 40}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: da9a991dfce60bb40afe877d7ddcad8d, type: 2}
+    cell: {x: 22, y: 40}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: da9a991dfce60bb40afe877d7ddcad8d, type: 2}
+    cell: {x: 22, y: 42}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 3ce813b3a3fd5e7498725fd547239e8f, type: 2}
+    cell: {x: 25, y: 41}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 10bbf151e0590b84394e47b117e8ab99, type: 2}
+    cell: {x: 18, y: 43}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 10bbf151e0590b84394e47b117e8ab99, type: 2}
+    cell: {x: 24, y: 43}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 700b64d92e3acda4bbeb4a43adff33ff, type: 2}
+    cell: {x: 20, y: 41}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 700b64d92e3acda4bbeb4a43adff33ff, type: 2}
+    cell: {x: 21, y: 41}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 6e0797be4dd82044695521202d335434, type: 2}
+    cell: {x: 21, y: 56}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 68b1369e1ad803a44a3e26875f08817b, type: 2}
+    cell: {x: 31, y: 44}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
+    cell: {x: 31, y: 40}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
+    cell: {x: 39, y: 40}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: da9a991dfce60bb40afe877d7ddcad8d, type: 2}
+    cell: {x: 35, y: 40}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: da9a991dfce60bb40afe877d7ddcad8d, type: 2}
+    cell: {x: 35, y: 42}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 3ce813b3a3fd5e7498725fd547239e8f, type: 2}
+    cell: {x: 38, y: 41}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 10bbf151e0590b84394e47b117e8ab99, type: 2}
+    cell: {x: 31, y: 43}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 10bbf151e0590b84394e47b117e8ab99, type: 2}
+    cell: {x: 37, y: 43}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 700b64d92e3acda4bbeb4a43adff33ff, type: 2}
+    cell: {x: 33, y: 41}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 700b64d92e3acda4bbeb4a43adff33ff, type: 2}
+    cell: {x: 34, y: 41}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: c889840c8539d584481a98977af64de3, type: 2}
+    cell: {x: 29, y: 41}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
+    cell: {x: 28, y: 46}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 4a8f2489b74d9784e880d89c081a9a87, type: 2}
+    cell: {x: 34, y: 56}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 49c7eb2f9cbf8dd46a04a96936f0db20, type: 2}
+    cell: {x: 44, y: 44}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
+    cell: {x: 44, y: 40}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
+    cell: {x: 52, y: 40}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: da9a991dfce60bb40afe877d7ddcad8d, type: 2}
+    cell: {x: 48, y: 40}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: da9a991dfce60bb40afe877d7ddcad8d, type: 2}
+    cell: {x: 48, y: 42}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 3ce813b3a3fd5e7498725fd547239e8f, type: 2}
+    cell: {x: 51, y: 41}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 10bbf151e0590b84394e47b117e8ab99, type: 2}
+    cell: {x: 44, y: 43}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 10bbf151e0590b84394e47b117e8ab99, type: 2}
+    cell: {x: 50, y: 43}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 700b64d92e3acda4bbeb4a43adff33ff, type: 2}
+    cell: {x: 46, y: 41}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 700b64d92e3acda4bbeb4a43adff33ff, type: 2}
+    cell: {x: 47, y: 41}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: c889840c8539d584481a98977af64de3, type: 2}
+    cell: {x: 42, y: 41}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
+    cell: {x: 41, y: 46}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 6e0797be4dd82044695521202d335434, type: 2}
+    cell: {x: 47, y: 56}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 6ccf57f8d81b67346bea538d741e68cf, type: 2}
+    cell: {x: 57, y: 44}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
+    cell: {x: 57, y: 40}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
+    cell: {x: 65, y: 40}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: da9a991dfce60bb40afe877d7ddcad8d, type: 2}
+    cell: {x: 61, y: 40}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: da9a991dfce60bb40afe877d7ddcad8d, type: 2}
+    cell: {x: 61, y: 42}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 3ce813b3a3fd5e7498725fd547239e8f, type: 2}
+    cell: {x: 64, y: 41}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 10bbf151e0590b84394e47b117e8ab99, type: 2}
+    cell: {x: 57, y: 43}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 10bbf151e0590b84394e47b117e8ab99, type: 2}
+    cell: {x: 63, y: 43}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 700b64d92e3acda4bbeb4a43adff33ff, type: 2}
+    cell: {x: 59, y: 41}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 700b64d92e3acda4bbeb4a43adff33ff, type: 2}
+    cell: {x: 60, y: 41}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: c889840c8539d584481a98977af64de3, type: 2}
+    cell: {x: 55, y: 41}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
+    cell: {x: 54, y: 46}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 4a8f2489b74d9784e880d89c081a9a87, type: 2}
+    cell: {x: 60, y: 56}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 25141a3b736df7b45a8ce548b974a678, type: 2}
+    cell: {x: 70, y: 44}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
+    cell: {x: 70, y: 40}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
+    cell: {x: 78, y: 40}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: da9a991dfce60bb40afe877d7ddcad8d, type: 2}
+    cell: {x: 74, y: 40}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: da9a991dfce60bb40afe877d7ddcad8d, type: 2}
+    cell: {x: 74, y: 42}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 3ce813b3a3fd5e7498725fd547239e8f, type: 2}
+    cell: {x: 77, y: 41}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 10bbf151e0590b84394e47b117e8ab99, type: 2}
+    cell: {x: 70, y: 43}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 10bbf151e0590b84394e47b117e8ab99, type: 2}
+    cell: {x: 76, y: 43}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 700b64d92e3acda4bbeb4a43adff33ff, type: 2}
+    cell: {x: 72, y: 41}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 700b64d92e3acda4bbeb4a43adff33ff, type: 2}
+    cell: {x: 73, y: 41}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: c889840c8539d584481a98977af64de3, type: 2}
+    cell: {x: 68, y: 41}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
+    cell: {x: 67, y: 46}
+    rotation: 0
+    decayed: 1
+  - definition: {fileID: 11400000, guid: 6e0797be4dd82044695521202d335434, type: 2}
+    cell: {x: 73, y: 56}
+    rotation: 0
+    decayed: 1
+  expansions:
+  - id: start
+    name: Startgatan
+    area:
+      x: 16
+      y: 20
+      width: 64
+      height: 48
+    requiredLevel: 1
+    coinCost: 0
+  - id: north
+    name: "Bakg\xE5rdarna"
+    area:
+      x: 16
+      y: 68
+      width: 64
+      height: 28
+    requiredLevel: 4
+    coinCost: 500
+  - id: south
+    name: "\xC4ngen"
+    area:
+      x: 16
+      y: 0
+      width: 64
+      height: 20
+    requiredLevel: 8
+    coinCost: 1500
+  - id: west
+    name: Skogsbrynet
+    area:
+      x: 0
+      y: 0
+      width: 16
+      height: 96
+    requiredLevel: 12
+    coinCost: 4000
+  - id: east
+    name: "Strandv\xE4gen"
+    area:
+      x: 80
+      y: 0
+      width: 16
+      height: 96
+    requiredLevel: 16
+    coinCost: 8000
+  restoreRadius: 7
+  orderSlots: 3
+  orderRefillSec: 30
+  orderRewardMultiplier: 1.5
+  sellRefund: 0.25
+  references:
+    version: 2
+    RefIds: []

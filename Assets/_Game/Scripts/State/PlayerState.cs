@@ -35,6 +35,31 @@ namespace NG.State
 
         public List<OrderState> orders = new List<OrderState>();
         public long nextOrderUnix;
+
+        /// <summary>Pågående uppdrag.</summary>
+        public List<QuestProgress> quests = new List<QuestProgress>();
+        public List<string> completedQuests = new List<string>();
+
+        public DailyRewardState daily = new DailyRewardState();
+    }
+
+    [Serializable]
+    public class QuestProgress
+    {
+        public string questId;
+        /// <summary>Räknare per mål (bara för mål som räknas med händelser: skörd, produktion, leveranser).</summary>
+        public List<int> counters = new List<int>();
+        /// <summary>Sant när spelaren har sett grannens introduktion.</summary>
+        public bool introSeen;
+    }
+
+    [Serializable]
+    public class DailyRewardState
+    {
+        /// <summary>Antal dagar i rad (1..7, börjar om efter 7).</summary>
+        public int streak;
+        /// <summary>UTC-dagnummer (Unix-sekunder / 86400) då belöningen senast hämtades.</summary>
+        public long lastClaimDay = -1;
     }
 
     [Serializable]

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: DEF_Tree_Blossom_Pink
   m_EditorClassIdentifier: Assembly-CSharp::NG.Data.PlantDefinition
   id: tree_blossom_pink
+  fallbackName: "K\xF6rsb\xE4rstr\xE4d"
   displayName:
     m_TableReference:
       m_TableCollectionName: 
@@ -31,15 +32,22 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   footprint: {x: 5, y: 4}
-  unlockLevel: 1
-  cost: []
+  unlockLevel: 3
+  cost:
+  - currency: 0
+    amount: 60
   materials: []
   buildTimeSec: 0
   xpReward: 5
-  beautyScore: 1
+  inShop: 1
+  maxCount: 0
+  beautyScore: 6
   styleTags: 0
   premium: 0
-  growthStageSec: 3c0000002c01000084030000i
+  growTimeSec: 120
+  harvest:
+    resource: {fileID: 0}
+    amount: 0
   seasons: 15
   references:
     version: 2

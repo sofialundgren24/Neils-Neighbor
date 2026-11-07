@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef541b0b22a4ace488b0fcabb82d4665, type: 3}
+  m_Name: LevelTable
+  m_EditorClassIdentifier: Assembly-CSharp::NG.Data.LevelTable
+  rows:
+  - level: 1
+    xpToNext: 75
+    coinReward: 80
+    gemReward: 2
+    unlockIds: []
+  - level: 2
+    xpToNext: 196
+    coinReward: 110
+    gemReward: 2
+    unlockIds: []
+  - level: 3
+    xpToNext: 349
+    coinReward: 140
+    gemReward: 2
+    unlockIds: []
+  - level: 4
+    xpToNext: 529
+    coinReward: 170
+    gemReward: 2
+    unlockIds: []
+  - level: 5
+    xpToNext: 731
+    coinReward: 200
+    gemReward: 5
+    unlockIds: []
+  - level: 6
+    xpToNext: 954
+    coinReward: 230
+    gemReward: 2
+    unlockIds: []
+  - level: 7
+    xpToNext: 1196
+    coinReward: 260
+    gemReward: 2
+    unlockIds: []
+  - level: 8
+    xpToNext: 1455
+    coinReward: 290
+    gemReward: 2
+    unlockIds: []
+  - level: 9
+    xpToNext: 1732
+    coinReward: 320
+    gemReward: 2
+    unlockIds: []
+  - level: 10
+    xpToNext: 2024
+    coinReward: 350
+    gemReward: 5
+    unlockIds: []
+  - level: 11
+    xpToNext: 2331
+    coinReward: 380
+    gemReward: 2
+    unlockIds: []
+  - level: 12
+    xpToNext: 2653
+    coinReward: 410
+    gemReward: 2
+    unlockIds: []
+  - level: 13
+    xpToNext: 2989
+    coinReward: 440
+    gemReward: 2
+    unlockIds: []
+  - level: 14
+    xpToNext: 3339
+    coinReward: 470
+    gemReward: 2
+    unlockIds: []
+  - level: 15
+    xpToNext: 3701
+    coinReward: 500
+    gemReward: 5
+    unlockIds: []
+  - level: 16
+    xpToNext: 4076
+    coinReward: 530
+    gemReward: 2
+    unlockIds: []
+  - level: 17
+    xpToNext: 4463
+    coinReward: 560
+    gemReward: 2
+    unlockIds: []
+  - level: 18
+    xpToNext: 4862
+    coinReward: 590
+    gemReward: 2
+    unlockIds: []
+  - level: 19
+    xpToNext: 5273
+    coinReward: 620
+    gemReward: 2
+    unlockIds: []
+  - level: 20
+    xpToNext: 5695
+    coinReward: 650
+    gemReward: 5
+    unlockIds: []
+  - level: 21
+    xpToNext: 6128
+    coinReward: 680
+    gemReward: 2
+    unlockIds: []
+  - level: 22
+    xpToNext: 6572
+    coinReward: 710
+    gemReward: 2
+    unlockIds: []
+  - level: 23
+    xpToNext: 7026
+    coinReward: 740
+    gemReward: 2
+    unlockIds: []
+  - level: 24
+    xpToNext: 7491
+    coinReward: 770
+    gemReward: 2
+    unlockIds: []
+  - level: 25
+    xpToNext: 7966
+    coinReward: 800
+    gemReward: 5
+    unlockIds: []
+  - level: 26
+    xpToNext: 8452
+    coinReward: 830
+    gemReward: 2
+    unlockIds: []
+  - level: 27
+    xpToNext: 8946
+    coinReward: 860
+    gemReward: 2
+    unlockIds: []
+  - level: 28
+    xpToNext: 9451
+    coinReward: 890
+    gemReward: 2
+    unlockIds: []
+  - level: 29
+    xpToNext: 9965
+    coinReward: 920
+    gemReward: 2
+    unlockIds: []
+  - level: 30
+    xpToNext: 10489
+    coinReward: 950
+    gemReward: 5
+    unlockIds: []

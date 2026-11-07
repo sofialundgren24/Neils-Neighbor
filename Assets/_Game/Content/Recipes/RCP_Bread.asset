@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 850e8c3988142804aa9fc03fa450e207, type: 3}
+  m_Name: RCP_Bread
+  m_EditorClassIdentifier: Assembly-CSharp::NG.Data.RecipeDefinition
+  id: bread
+  fallbackName: "Br\xF6d"
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  icon: {fileID: 0}
+  inputs:
+  - resource: {fileID: 11400000, guid: 45128c7ccd6b0b148bd84847704bfaf9, type: 2}
+    amount: 3
+  output:
+    resource: {fileID: 11400000, guid: 0683c284a618d8148af50a0f01d875a8, type: 2}
+    amount: 1
+  durationSec: 60
+  xpReward: 4
+  unlockLevel: 2
+  references:
+    version: 2
+    RefIds: []

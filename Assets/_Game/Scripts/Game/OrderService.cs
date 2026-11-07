@@ -31,6 +31,7 @@ namespace NG.Game
             _s.Wallet.Add(CurrencyType.Coins, order.coins);
             _s.Progression.AddXp(order.xp);
             Remove(order);
+            EventBus.Publish(new OrderDelivered());
             return Result.Success;
         }
 

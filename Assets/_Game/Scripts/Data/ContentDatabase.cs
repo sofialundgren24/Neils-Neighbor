@@ -49,6 +49,13 @@ namespace NG.Data
             return null;
         }
 
+        /// <summary>Som Get, men utan varning om id:t saknas.</summary>
+        public bool TryGet<T>(string id, out T def) where T : DefinitionBase
+        {
+            def = id != null && _byId.TryGetValue(id, out var d) ? d as T : null;
+            return def != null;
+        }
+
         public IEnumerable<T> AllOf<T>() where T : DefinitionBase
         {
             foreach (var def in _byId.Values)

@@ -37,6 +37,13 @@ namespace NG.Data
         [Header("Försäljning")]
         [Range(0f, 1f)] public float sellRefund = 0.25f;
 
+        [Header("Uppdrag")]
+        [Min(1)] public int maxActiveQuests = 3;
+
+        [Header("Daglig belöning (dag 1-7 i rad)")]
+        public int[] dailyCoins = { 50, 75, 100, 150, 200, 250, 300 };
+        public int[] dailyGems = { 0, 0, 1, 0, 2, 0, 10 };
+
         /// <summary>Världsposition för cell (0, 0):s hörn.</summary>
         public Vector3 MapOriginWorld => new Vector3(-mapSize.x * CellSize * 0.5f, 0f, -mapSize.y * CellSize * 0.5f);
     }
