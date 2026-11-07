@@ -1,0 +1,11 @@
+# Recept. building = id på produktionsbyggnaden i content.csv. inputs: vara:antal separerade med /.
+id,name,building,unlock,inputs,output,sec,xp
+bread,Bröd,production_store,2,wheat:3,bread:1,60,4
+salad,Sallad,production_store,4,carrot:2/tomato:2,salad:1,150,8
+popcorn,Popcorn,production_store,6,corn:3,popcorn:1,90,6
+juice,Äppeljuice,production_store,7,apple:3,juice:1,120,7
+jam,Sylt,production_store,8,strawberry:3,jam:1,180,9
+pie,Paj,production_store,12,pumpkin:1/apple:2/wheat:2,pie:1,300,20
+bouquet,Bukett,production_garden_center,5,flowers:3,bouquet:1,90,4
+fertilizer,Gödsel,production_garden_center,5,carrot:2/wheat:2,fertilizer:1,180,7
+wreath,Blomsterkrans,production_garden_center,9,flowers:4/wheat:2,wreath:1,240,10

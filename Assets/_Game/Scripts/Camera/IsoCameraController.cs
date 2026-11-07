@@ -1,3 +1,4 @@
+using NG.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
@@ -9,6 +10,7 @@ namespace NG.CameraControl
     /// Ortografisk isometrisk kamera (X 30°, Y 45°) med samma beteende för touch och mus/tangentbord:
     /// en-finger-drag / vänster-drag panorerar, nyp / scrollhjul zoomar, WASD/pilar panorerar, +/- zoomar.
     /// Panorering räknas mot markplanet så att marken "följer fingret" exakt.
+    /// Tryck som börjar på UI:t (InputGate) eller drag av ett objekt i byggläget panorerar inte.
     /// </summary>
     [RequireComponent(typeof(Camera))]
     public class IsoCameraController : MonoBehaviour
@@ -28,6 +30,23 @@ namespace NG.CameraControl
         Plane _ground = new Plane(Vector3.up, Vector3.zero);
         Vector2 _lastMouse;
         bool _mouseDragging;
+        bool _dragAllowed;
+        bool _touchAllowed;
+
+        /// <summary>Sätter vilket område (i världens x/z) kameran får titta på.</summary>
+        public void SetBounds(Vector2 min, Vector2 max)
+        {
+            boundsMin = min;
+            boundsMax = max;
+        }
+
+        /// <summary>Flyttar kameran så att den tittar på en punkt på marken.</summary>
+        public void LookAt(Vector3 groundPoint)
+        {
+            if (_cam == null) _cam = GetComponent<Camera>();
+            if (TryGround(new Vector2(Screen.width * 0.5f, Screen.height * 0.5f), out var focus))
+                transform.position += new Vector3(groundPoint.x, 0f, groundPoint.z) - focus;
+        }
         float _lastPinchDistance;
 
         void Awake()
@@ -49,6 +68,9 @@ namespace NG.CameraControl
         void HandleTouch()
         {
             var touches = Touch.activeTouches;
+            if (touches[0].phase == UnityEngine.InputSystem.TouchPhase.Began)
+                _touchAllowed = !InputGate.IsOverUi(touches[0].screenPosition);
+            if (!_touchAllowed || InputGate.WorldDragCaptured) { _lastPinchDistance = 0f; return; }
             if (touches.Count == 1)
             {
                 var t = touches[0];
@@ -77,12 +99,14 @@ namespace NG.CameraControl
             {
                 Vector2 pos = mouse.position.ReadValue();
                 bool dragButton = mouse.leftButton.isPressed || mouse.middleButton.isPressed;
-                if (dragButton && _mouseDragging) PanScreen(_lastMouse, pos);
+                if (mouse.leftButton.wasPressedThisFrame || mouse.middleButton.wasPressedThisFrame)
+                    _dragAllowed = !InputGate.IsOverUi(pos);
+                if (dragButton && _mouseDragging && _dragAllowed && !InputGate.WorldDragCaptured) PanScreen(_lastMouse, pos);
                 _mouseDragging = dragButton;
                 _lastMouse = pos;
 
                 float scroll = mouse.scroll.ReadValue().y;
-                if (Mathf.Abs(scroll) > 0.01f)
+                if (Mathf.Abs(scroll) > 0.01f && !InputGate.IsOverUi(pos))
                 {
                     float factor = scroll > 0 ? 1f / scrollZoomStep : scrollZoomStep;
                     ZoomAround(pos, _cam.orthographicSize * factor);

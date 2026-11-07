@@ -2,7 +2,8 @@
 
 XP till nästa nivå = round(50 * L^1.55 + 25 * L)
 Belöningar: mynt = 50 + 30*L, diamanter = 2 (+3 var 5:e nivå).
-Upplåsningar skrivs här tills balanskalkylarket tar över (kolumn unlock_ids, ';'-separerad).
+Upplåsningar styrs INTE här utan av kolumnen unlock i Assets/_Game/Data/content.csv och recipes.csv.
+Kolumnen unlock_ids finns kvar för specialfall (t.ex. händelser) och är tom som standard.
 
 Körs:  python Tools/balance/generate_levels.py [antal_nivåer]
 """
@@ -13,11 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "Assets" / "_Game" / "Data" / "levels.csv"
 
-UNLOCKS = {
-    1: ["house_cottage", "flower_rose_pink", "flower_tulip_yellow"],
-    2: ["flower_lavender_purple"],
-    3: ["tree_blossom_pink"],
-}
+UNLOCKS = {}
 
 
 def xp_to_next(level: int) -> int:

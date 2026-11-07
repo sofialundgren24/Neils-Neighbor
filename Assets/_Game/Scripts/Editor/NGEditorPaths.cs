@@ -15,8 +15,16 @@ namespace NG.EditorTools
         public const string Materials = ArtRoot + "/Materials";
         public const string Shaders = ArtRoot + "/Shaders";
         public const string PaletteTexture = ArtRoot + "/Textures/T_Palette_256.png";
+        public const string ModelTextures = ArtRoot + "/Textures/Models";
+        public const string ModelMaterials = ArtRoot + "/Materials/Models";
         public const string Prefabs = GameRoot + "/Prefabs";
         public const string Placeables = GameRoot + "/Content/Placeables";
+        public const string Goods = GameRoot + "/Content/Goods";
+        public const string Recipes = GameRoot + "/Content/Recipes";
+        public const string GameConfigPath = GameRoot + "/Content/GameConfig.asset";
+        public const string LevelTablePath = GameRoot + "/Content/Progression/LevelTable.asset";
+        public const string DataFolder = GameRoot + "/Data";
+        public const string PlaceholderMaterials = GameRoot + "/Art/Materials/Placeholder";
         public const string Settings = GameRoot + "/Settings";
         public const string Scenes = GameRoot + "/Scenes";
 
@@ -33,6 +41,8 @@ namespace NG.EditorTools
             PlaceableCategory.Hedge => "Plants",
             PlaceableCategory.Fence => "Fences",
             PlaceableCategory.Water => "Water",
+            PlaceableCategory.Production => "Buildings",
+            PlaceableCategory.Path => "Ground",
             _ => "Decor"
         };
 
@@ -42,13 +52,14 @@ namespace NG.EditorTools
         /// <summary>"House" -> House, "Flower" -> Plant osv. Okänt blir Decor.</summary>
         public static PlaceableCategory ParseCategory(string token) => token.ToLowerInvariant() switch
         {
-            "house" or "building" or "shed" => PlaceableCategory.House,
-            "plant" or "flower" => PlaceableCategory.Plant,
+            "house" or "shed" => PlaceableCategory.House,
+            "production" or "shop" or "store" or "building" => PlaceableCategory.Production,
+            "plant" or "flower" or "crop" => PlaceableCategory.Plant,
             "tree" => PlaceableCategory.Tree,
             "hedge" or "bush" => PlaceableCategory.Hedge,
             "fence" => PlaceableCategory.Fence,
             "water" or "pool" or "pond" => PlaceableCategory.Water,
-            "path" or "tile" => PlaceableCategory.Path,
+            "path" or "tile" or "road" or "ground" or "patio" => PlaceableCategory.Path,
             _ => PlaceableCategory.Decor
         };
 
@@ -56,6 +67,7 @@ namespace NG.EditorTools
         public static int TriangleBudget(PlaceableCategory c) => c switch
         {
             PlaceableCategory.House => 6000,
+            PlaceableCategory.Production => 6000,
             PlaceableCategory.Tree => 1500,
             PlaceableCategory.Hedge => 500,
             PlaceableCategory.Plant => 200,
@@ -113,6 +125,18 @@ namespace NG.EditorTools
             var mat = new Material(shader) { enableInstancing = true };
             setup(mat);
             AssetDatabase.CreateAsset(mat, path);
+        }
+
+        /// <summary>Lägger en asset i en Addressables-grupp med adress och etikett.</summary>
+        public static void RegisterAddressable(string assetPath, string groupName, string address, string label)
+        {
+            var settings = UnityEditor.AddressableAssets.AddressableAssetSettingsDefaultObject.GetSettings(true);
+            var group = settings.FindGroup(groupName) ?? settings.CreateGroup(groupName, false, false, true, null,
+                typeof(UnityEditor.AddressableAssets.Settings.GroupSchemas.BundledAssetGroupSchema),
+                typeof(UnityEditor.AddressableAssets.Settings.GroupSchemas.ContentUpdateGroupSchema));
+            var entry = settings.CreateOrMoveEntry(AssetDatabase.AssetPathToGUID(assetPath), group);
+            entry.address = address;
+            entry.SetLabel(label, true, true);
         }
 
         public static Color Hex(string hex) => ColorUtility.TryParseHtmlString(hex, out var c) ? c : Color.magenta;

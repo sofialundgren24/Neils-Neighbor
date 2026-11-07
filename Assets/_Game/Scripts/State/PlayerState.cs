@@ -7,53 +7,34 @@ namespace NG.State
     /// <summary>
     /// Spelarens hela tillstånd som ren data (inga Unity-objekt) så att det kan serialiseras,
     /// testas och synkas till molnet. Referenser till innehåll sker alltid via stabila id:n.
+    /// Reglerna som ändrar datan finns i Scripts/Game (GameSession och dess tjänster).
     /// </summary>
     [Serializable]
     public class PlayerState
     {
-        public const int CurrentSchemaVersion = 1;
+        public const int CurrentSchemaVersion = 2;
 
         public int schemaVersion = CurrentSchemaVersion;
         public long savedAtUnix;
 
+        /// <summary>Falskt tills startgatan har lagts ut första gången.</summary>
+        public bool initialized;
+
         public int level = 1;
         public long xp;
 
-        public Dictionary<CurrencyType, long> wallet = new Dictionary<CurrencyType, long>
-        {
-            { CurrencyType.Coins, 500 },
-            { CurrencyType.Gems, 20 }
-        };
+        public Dictionary<CurrencyType, long> wallet = new Dictionary<CurrencyType, long>();
 
-        /// <summary>Resurs-id -> antal.</summary>
+        /// <summary>Resurs-id -> antal i lagret.</summary>
         public Dictionary<string, int> storage = new Dictionary<string, int>();
 
-        public List<string> unlockedDistricts = new List<string>();
-
-        /// <summary>Tomt-id -> tomtens tillstånd.</summary>
-        public Dictionary<string, PlotState> plots = new Dictionary<string, PlotState>();
-
-        public List<ProductionSlotState> production = new List<ProductionSlotState>();
-    }
-
-    [Serializable]
-    public class PlotState
-    {
-        public string plotId;
-        public int renovationPhase;          // 0 = förfallen, 1..N = klar fas
-        public TimerState activeRenovation;  // null om ingen pågår
-        public string paintSchemeId;
-
-        /// <summary>
-        /// Sant när sista renoveringsfasen är klar. Då har tomten och allt på den full färg för resten av spelet,
-        /// och decay läses inte längre.
-        /// </summary>
-        public bool renovationComplete;
-
-        /// <summary>Bara meningsfull medan renovationComplete är falskt: 1 = grå/sliten, 0 = full färg.</summary>
-        public float decay = 1f;
-        public int stars;
+        /// <summary>Allt som står på kartan.</summary>
         public List<PlacedObjectState> objects = new List<PlacedObjectState>();
+
+        public List<string> unlockedExpansions = new List<string>();
+
+        public List<OrderState> orders = new List<OrderState>();
+        public long nextOrderUnix;
     }
 
     [Serializable]
@@ -63,21 +44,67 @@ namespace NG.State
         public string definitionId;
         public int x;
         public int y;
-        public int rotation;                 // 0..3 (x 90°)
-        public string colorVariant;
-        public TimerState growth;            // växter: tillväxttimer
-        public int growthStage;              // 0 Sprout, 1 Growing, 2 Bloom
+        public int rotation;                  // 0..3 (x 90°)
+
+        /// <summary>Byggtimer. Null när objektet är färdigbyggt.</summary>
+        public TimerState build;
+
+        /// <summary>Grå och sliten (bara objekt på startgatan). Försvinner för gott när närmaste hus är renoverat.</summary>
+        public bool decayed;
+
+        /// <summary>Bara hus (RenovatableDefinition).</summary>
+        public RenovationState renovation;
+
+        /// <summary>Bara växter: tillväxttimer sedan sådd eller senaste skörd. Null = fullvuxen.</summary>
+        public TimerState growth;
+
+        /// <summary>Bara produktionsbyggnader.</summary>
+        public ProductionState production;
     }
 
     [Serializable]
-    public class ProductionSlotState
+    public class RenovationState
     {
-        public string buildingId;
-        public List<string> queue = new List<string>();   // recept-id
-        public TimerState current;
+        /// <summary>0 = förfallet, 1..N = antal klara faser.</summary>
+        public int phase;
+        /// <summary>Pågående fas. Null om ingen pågår.</summary>
+        public TimerState active;
+        /// <summary>Sant när sista fasen är klar. Då har huset full färg resten av spelet.</summary>
+        public bool complete;
+        /// <summary>Spelarens målarfärg som hex ("RRGGBB"). Tom = originalfärg.</summary>
+        public string paintHex;
     }
 
-    /// <summary>Timer som absolut UTC-start + längd – aldrig en nedräkning.</summary>
+    [Serializable]
+    public class ProductionState
+    {
+        /// <summary>Recept-id i kö. Det första är på gång och startade vid currentStartUnix.</summary>
+        public List<string> queue = new List<string>();
+        public long currentStartUnix;
+        /// <summary>Färdiga recept som väntar på att hämtas.</summary>
+        public List<string> ready = new List<string>();
+    }
+
+    [Serializable]
+    public class OrderState
+    {
+        public string orderId = Guid.NewGuid().ToString("N");
+        public List<ResourceStack> items = new List<ResourceStack>();
+        public int coins;
+        public int xp;
+    }
+
+    [Serializable]
+    public class ResourceStack
+    {
+        public string resourceId;
+        public int amount;
+
+        public ResourceStack() { }
+        public ResourceStack(string resourceId, int amount) { this.resourceId = resourceId; this.amount = amount; }
+    }
+
+    /// <summary>Timer som absolut UTC-start + längd – aldrig en nedräkning. Fortsätter när appen är stängd.</summary>
     [Serializable]
     public class TimerState
     {

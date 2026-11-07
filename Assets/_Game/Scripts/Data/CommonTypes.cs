@@ -12,7 +12,8 @@ namespace NG.Data
         Fence,
         Decor,
         Water,
-        Path
+        Path,
+        Production
     }
 
     public enum CurrencyType
@@ -78,13 +79,5 @@ namespace NG.Data
         public string id = "classic";
         public Color color = Color.white;
         [Min(1)] public int unlockLevel = 1;
-    }
-
-    [Serializable]
-    public class BloomMilestone
-    {
-        [Range(0f, 1f)] public float threshold = 0.25f;
-        public PlaceableDefinition[] unlocks = Array.Empty<PlaceableDefinition>();
-        public CurrencyCost reward;
     }
 }

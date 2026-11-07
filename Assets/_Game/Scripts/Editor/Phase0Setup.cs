@@ -33,33 +33,53 @@ namespace NG.EditorTools
         {
             NGEditorPaths.EnsureFolder(NGEditorPaths.Settings);
             string rendererPath = NGEditorPaths.Settings + "/URP_Renderer.asset";
-            string assetPath = NGEditorPaths.Settings + "/URP_Desktop.asset";
-
-            var urp = AssetDatabase.LoadAssetAtPath<UniversalRenderPipelineAsset>(assetPath);
-            if (urp == null)
+            var renderer = AssetDatabase.LoadAssetAtPath<UniversalRendererData>(rendererPath);
+            if (renderer == null)
             {
-                var renderer = ScriptableObject.CreateInstance<UniversalRendererData>();
+                renderer = ScriptableObject.CreateInstance<UniversalRendererData>();
                 AssetDatabase.CreateAsset(renderer, rendererPath);
-                urp = UniversalRenderPipelineAsset.Create(renderer);
-                AssetDatabase.CreateAsset(urp, assetPath);
             }
 
-            urp.supportsHDR = true;
-            urp.msaaSampleCount = 4;
-            urp.shadowDistance = 40f;
-            urp.shadowCascadeCount = 2;
-            EditorUtility.SetDirty(urp);
+            // Tre nivåer så att spelet flyter även på svaga telefoner (se DeviceTier.cs).
+            var low = CreateUrpAsset("URP_Mobile_Low", renderer, hdr: false, msaa: 1, renderScale: 0.85f,
+                shadowDistance: 25f, cascades: 1, shadowRes: 1024);
+            var high = CreateUrpAsset("URP_Mobile_High", renderer, hdr: false, msaa: 2, renderScale: 1f,
+                shadowDistance: 35f, cascades: 1, shadowRes: 2048);
+            var desktop = CreateUrpAsset("URP_Desktop", renderer, hdr: true, msaa: 4, renderScale: 1f,
+                shadowDistance: 40f, cascades: 2, shadowRes: 2048);
 
-            GraphicsSettings.defaultRenderPipeline = urp;
+            GraphicsSettings.defaultRenderPipeline = desktop;
             int current = QualitySettings.GetQualityLevel();
-            for (int i = 0; i < QualitySettings.names.Length; i++)
+            int levels = QualitySettings.names.Length;
+            for (int i = 0; i < levels; i++)
             {
                 QualitySettings.SetQualityLevel(i, false);
-                QualitySettings.renderPipeline = urp;
+                // Nivå 0-1 = svaga mobiler, 2-3 = vanliga mobiler, resten = dator/surfplatta.
+                QualitySettings.renderPipeline = i <= 1 ? low : i <= 3 ? high : desktop;
             }
             QualitySettings.SetQualityLevel(current, false);
             AssetDatabase.SaveAssets();
-            Debug.Log("[NG Setup] URP aktiverat. Skapa senare separata Mobile Low/High-assets med lägre skugg- och MSAA-värden.");
+            Debug.Log($"[NG Setup] URP aktiverat med tre nivåer: Mobile Low, Mobile High och Desktop ({levels} kvalitetsnivåer).");
+        }
+
+        static UniversalRenderPipelineAsset CreateUrpAsset(string name, UniversalRendererData renderer, bool hdr, int msaa,
+            float renderScale, float shadowDistance, int cascades, int shadowRes)
+        {
+            string path = $"{NGEditorPaths.Settings}/{name}.asset";
+            var urp = AssetDatabase.LoadAssetAtPath<UniversalRenderPipelineAsset>(path);
+            if (urp == null)
+            {
+                urp = UniversalRenderPipelineAsset.Create(renderer);
+                AssetDatabase.CreateAsset(urp, path);
+            }
+            urp.supportsHDR = hdr;
+            urp.msaaSampleCount = msaa;
+            urp.renderScale = renderScale;
+            urp.shadowDistance = shadowDistance;
+            urp.shadowCascadeCount = cascades;
+            urp.mainLightShadowmapResolution = shadowRes;
+            EditorUtility.SetDirty(urp);
+            return urp;
         }
 
         [MenuItem("NG/Setup/2. Build Style Test Scene")]
@@ -134,7 +154,7 @@ namespace NG.EditorTools
             Debug.Log($"[NG Setup] Stiltestscen sparad: {ScenePath}. Tryck Play.");
         }
 
-        static VolumeProfile CreateVolumeProfile()
+        internal static VolumeProfile CreateVolumeProfile()
         {
             NGEditorPaths.EnsureFolder(NGEditorPaths.Settings);
             string profilePath = NGEditorPaths.Settings + "/VP_Stylized.asset";

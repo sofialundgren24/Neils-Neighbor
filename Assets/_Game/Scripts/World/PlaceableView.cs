@@ -35,7 +35,7 @@ namespace NG.World
 
         /// <summary>
         /// Sant när objektet är färdigrenoverat. Då är förfallet borta för gott: alla försök att sätta decay ignoreras.
-        /// Motsvarar PlotState.renovationComplete i sparfilen.
+        /// Motsvarar RenovationState.complete i sparfilen.
         /// </summary>
         public bool IsColorLocked => _colorLocked;
 

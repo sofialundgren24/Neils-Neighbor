@@ -1,7 +1,7 @@
 level,xp_to_next,coin_reward,gem_reward,unlock_ids
-1,75,80,2,house_cottage;flower_rose_pink;flower_tulip_yellow
-2,196,110,2,flower_lavender_purple
-3,349,140,2,tree_blossom_pink
+1,75,80,2,
+2,196,110,2,
+3,349,140,2,
 4,529,170,2,
 5,731,200,5,
 6,954,230,2,
@@ -19,3 +19,13 @@ level,xp_to_next,coin_reward,gem_reward,unlock_ids
 18,4862,590,2,
 19,5273,620,2,
 20,5695,650,5,
+21,6128,680,2,
+22,6572,710,2,
+23,7026,740,2,
+24,7491,770,2,
+25,7966,800,5,
+26,8452,830,2,
+27,8946,860,2,
+28,9451,890,2,
+29,9965,920,2,
+30,10489,950,5,

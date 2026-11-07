@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.Localization;
 
 namespace NG.Data
@@ -11,10 +9,17 @@ namespace NG.Data
     public abstract class DefinitionBase : ScriptableObject
     {
         [SerializeField] string id;
+
+        [Tooltip("Namn som visas tills översättningar finns. Fylls från CSV-filerna i Assets/_Game/Data.")]
+        public string fallbackName;
+
         public LocalizedString displayName;
         public Sprite icon;
 
         public string Id => id;
+
+        /// <summary>Namn att visa i UI. Byts mot displayName när lokaliseringen kopplas in.</summary>
+        public string DisplayName => string.IsNullOrEmpty(fallbackName) ? name : fallbackName;
 
 #if UNITY_EDITOR
         public void EditorSetId(string newId) => id = newId;

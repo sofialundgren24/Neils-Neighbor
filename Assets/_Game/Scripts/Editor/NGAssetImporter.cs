@@ -13,7 +13,8 @@ using UnityEngine.AddressableAssets;
 namespace NG.EditorTools
 {
     /// <summary>
-    /// Automatisk 3D-pipeline. Släpp en FBX/GLB med namnet SM_&lt;Kategori&gt;_&lt;Namn&gt; i Art/Incoming så:
+    /// Automatisk 3D-pipeline. Släpp en FBX/GLB med namnet SM_&lt;Kategori&gt;_&lt;Namn&gt; i Art/Incoming
+    /// (och gärna dess målade textur T_&lt;Kategori&gt;_&lt;Namn&gt;.png bredvid) så:
     ///  1. sätts importinställningar (skala 1, ingen materialimport, inga kameror/ljus),
     ///  2. får meshar utan vertexfärg en neutral standard (AO = 1, ingen vind, ingen målarmask),
     ///  3. flyttas modellen till Art/Models/&lt;Kategori&gt;/,
@@ -26,6 +27,7 @@ namespace NG.EditorTools
     {
         static readonly string[] ModelExtensions = { ".fbx", ".glb", ".gltf", ".obj" };
         static readonly HashSet<string> Pending = new HashSet<string>();
+        static readonly HashSet<string> PendingTextures = new HashSet<string>();
 
         // ---------- Importinställningar ----------
 
@@ -54,6 +56,19 @@ namespace NG.EditorTools
 
         void OnPreprocessTexture()
         {
+            if (IsModelTexturePath(assetPath))
+            {
+                // Målade texturer från Blender: max 1024 px och komprimerade, så de räcker även för svaga telefoner.
+                var mt = (TextureImporter)assetImporter;
+                if (!mt.importSettingsMissing) return;
+                mt.sRGBTexture = true;
+                mt.mipmapEnabled = true;
+                mt.maxTextureSize = 1024;
+                mt.textureCompression = TextureImporterCompression.Compressed;
+                mt.wrapMode = TextureWrapMode.Clamp;
+                mt.filterMode = FilterMode.Bilinear;
+                return;
+            }
             if (!assetPath.Contains("/T_Palette")) return;
             var ti = (TextureImporter)assetImporter;
             ti.sRGBTexture = true;
@@ -83,14 +98,23 @@ namespace NG.EditorTools
             foreach (var path in imported)
             {
                 if (!path.StartsWith(NGEditorPaths.Incoming + "/")) continue;
+                if (IsModelTexturePath(path)) { PendingTextures.Add(path); continue; }
                 if (!ModelExtensions.Contains(Path.GetExtension(path).ToLowerInvariant())) continue;
                 Pending.Add(path);
             }
-            if (Pending.Count > 0)
+            if (Pending.Count > 0 || PendingTextures.Count > 0)
             {
                 EditorApplication.delayCall -= ProcessPending;
                 EditorApplication.delayCall += ProcessPending;
             }
+        }
+
+        static bool IsModelTexturePath(string path)
+        {
+            string file = Path.GetFileName(path);
+            string ext = Path.GetExtension(path).ToLowerInvariant();
+            return file.StartsWith("T_") && !file.StartsWith("T_Palette") && (ext == ".png" || ext == ".tga" || ext == ".jpg")
+                   && (path.StartsWith(NGEditorPaths.Incoming + "/") || path.StartsWith(NGEditorPaths.ModelTextures + "/"));
         }
 
         static void ProcessPending()
@@ -98,6 +122,23 @@ namespace NG.EditorTools
             var paths = Pending.ToList();
             Pending.Clear();
             NGEditorPaths.EnsureMaterials();
+
+            // Texturer först, så att modellen som importeras samtidigt får sitt material direkt.
+            var textures = PendingTextures.ToList();
+            PendingTextures.Clear();
+            foreach (var tex in textures)
+            {
+                string baseName = MoveTexture(tex);
+                if (baseName == null) continue;
+                // Ny textur till en modell som redan finns? Bygg om dess prefab.
+                string modelName = "SM_" + baseName;
+                if (paths.Any(p => Path.GetFileNameWithoutExtension(p) == modelName)) continue;
+                var existingModel = AssetDatabase.FindAssets(modelName + " t:Model", new[] { NGEditorPaths.Models })
+                    .Select(AssetDatabase.GUIDToAssetPath)
+                    .FirstOrDefault(p => Path.GetFileNameWithoutExtension(p) == modelName);
+                if (existingModel != null) BuildPlaceable(existingModel);
+            }
+
             foreach (var path in paths)
             {
                 var moved = MoveToModels(path);
@@ -137,6 +178,59 @@ namespace NG.EditorTools
             category = NGEditorPaths.ParseCategory(parts[1]);
             displayName = string.Join("_", parts.Skip(1));
             return true;
+        }
+
+        /// <summary>Flyttar T_Namn.png från Incoming till Art/Textures/Models. Returnerar "Namn".</summary>
+        static string MoveTexture(string path)
+        {
+            string file = Path.GetFileNameWithoutExtension(path);
+            string baseName = file.Substring(2);
+            if (!path.StartsWith(NGEditorPaths.Incoming + "/")) return baseName;
+            NGEditorPaths.EnsureFolder(NGEditorPaths.ModelTextures);
+            string target = NGEditorPaths.ModelTextures + "/" + Path.GetFileName(path);
+            if (AssetDatabase.LoadAssetAtPath<Object>(target) != null)
+            {
+                File.Copy(path, target, true);
+                AssetDatabase.DeleteAsset(path);
+                AssetDatabase.ImportAsset(target, ImportAssetOptions.ForceUpdate);
+                return baseName;
+            }
+            var error = AssetDatabase.MoveAsset(path, target);
+            if (!string.IsNullOrEmpty(error))
+            {
+                Debug.LogError("[NG Import] Kunde inte flytta " + path + ": " + error);
+                return null;
+            }
+            return baseName;
+        }
+
+        /// <summary>
+        /// Material för en modell med egen målad textur: kopia av basmaterialet med texturen som _BaseMap.
+        /// Utan textur delar alla modeller palettmaterialet (bäst för prestanda).
+        /// </summary>
+        static Material MaterialFor(string baseName, Material baseMaterial)
+        {
+            if (baseMaterial == null) return null;
+            Texture2D tex = null;
+            foreach (var ext in new[] { ".png", ".tga", ".jpg" })
+            {
+                tex = AssetDatabase.LoadAssetAtPath<Texture2D>(NGEditorPaths.ModelTextures + "/T_" + baseName + ext);
+                if (tex != null) break;
+            }
+            if (tex == null) return baseMaterial;
+
+            NGEditorPaths.EnsureFolder(NGEditorPaths.ModelMaterials);
+            string suffix = baseMaterial.name.Contains("Foliage") ? "_Foliage" : "";
+            string path = NGEditorPaths.ModelMaterials + "/M_" + baseName + suffix + ".mat";
+            var mat = AssetDatabase.LoadAssetAtPath<Material>(path);
+            if (mat == null)
+            {
+                mat = new Material(baseMaterial);
+                AssetDatabase.CreateAsset(mat, path);
+            }
+            mat.SetTexture("_BaseMap", tex);
+            EditorUtility.SetDirty(mat);
+            return mat;
         }
 
         static string MoveToModels(string path)
@@ -189,9 +283,9 @@ namespace NG.EditorTools
             var instance = (GameObject)PrefabUtility.InstantiatePrefab(model);
             instance.transform.SetParent(root.transform, false);
 
-            var material = AssetDatabase.LoadAssetAtPath<Material>(
-                NGEditorPaths.IsFoliage(category) ? NGEditorPaths.FoliageMaterial : NGEditorPaths.StylizedMaterial);
-            var foliage = AssetDatabase.LoadAssetAtPath<Material>(NGEditorPaths.FoliageMaterial);
+            var material = MaterialFor(baseName, AssetDatabase.LoadAssetAtPath<Material>(
+                NGEditorPaths.IsFoliage(category) ? NGEditorPaths.FoliageMaterial : NGEditorPaths.StylizedMaterial));
+            var foliage = MaterialFor(baseName, AssetDatabase.LoadAssetAtPath<Material>(NGEditorPaths.FoliageMaterial));
 
             var renderers = instance.GetComponentsInChildren<Renderer>(true);
             var bounds = new Bounds();
@@ -264,11 +358,12 @@ namespace NG.EditorTools
         {
             bool hasStages = PlaceableView.FindVariants(instance.transform).Any(t => t.name.StartsWith("Stage"));
             if (category == PlaceableCategory.House) return ScriptableObject.CreateInstance<RenovatableDefinition>();
+            if (category == PlaceableCategory.Production) return ScriptableObject.CreateInstance<ProductionDefinition>();
             if (hasStages || NGEditorPaths.IsFoliage(category)) return ScriptableObject.CreateInstance<PlantDefinition>();
             return ScriptableObject.CreateInstance<PlaceableDefinition>();
         }
 
-        static void SetInitialVariant(Transform modelRoot, string prefix, string visible)
+        internal static void SetInitialVariant(Transform modelRoot, string prefix, string visible)
         {
             var variants = PlaceableView.FindVariants(modelRoot)
                 .Where(t => t.name.StartsWith(prefix)).ToList();

@@ -4,14 +4,14 @@ using UnityEngine;
 namespace NG.World
 {
     /// <summary>
-    /// Rutnät för en tomt (cellstorlek 0,5 m). Håller reda på vilka celler som är upptagna
-    /// och kontrollerar att ett fotavtryck (med rotation) får plats.
+    /// Kartans rutnät (cellstorlek 0,5 m). Varje cell vet vilket objekt (instance-id) som står där,
+    /// så att ett objekt kan flyttas utan att krocka med sig självt.
     /// </summary>
     public sealed class PlotGrid
     {
         public const float CellSize = 0.5f;
 
-        readonly bool[,] _occupied;
+        readonly string[,] _occupant;
         public int Width { get; }
         public int Height { get; }
 
@@ -20,35 +20,43 @@ namespace NG.World
             if (width <= 0 || height <= 0) throw new ArgumentOutOfRangeException();
             Width = width;
             Height = height;
-            _occupied = new bool[width, height];
+            _occupant = new string[width, height];
         }
 
         /// <summary>Fotavtryck efter rotation (0..3 steg om 90°).</summary>
         public static Vector2Int Rotated(Vector2Int footprint, int rotation) =>
             (rotation & 1) == 0 ? footprint : new Vector2Int(footprint.y, footprint.x);
 
-        public bool CanPlace(int x, int y, Vector2Int footprint, int rotation)
+        public bool InBounds(int x, int y) => x >= 0 && y >= 0 && x < Width && y < Height;
+
+        public string OccupantAt(int x, int y) => InBounds(x, y) ? _occupant[x, y] : null;
+
+        /// <summary>Sant om alla celler är inom kartan och lediga (eller upptagna av ignoreId).</summary>
+        public bool IsFree(int x, int y, Vector2Int footprint, int rotation, string ignoreId = null)
         {
             var size = Rotated(footprint, rotation);
             if (x < 0 || y < 0 || x + size.x > Width || y + size.y > Height) return false;
             for (int i = x; i < x + size.x; i++)
                 for (int j = y; j < y + size.y; j++)
-                    if (_occupied[i, j]) return false;
+                {
+                    var o = _occupant[i, j];
+                    if (o != null && o != ignoreId) return false;
+                }
             return true;
         }
 
-        public void Occupy(int x, int y, Vector2Int footprint, int rotation) => Set(x, y, footprint, rotation, true);
-        public void Free(int x, int y, Vector2Int footprint, int rotation) => Set(x, y, footprint, rotation, false);
+        public void Occupy(string id, int x, int y, Vector2Int footprint, int rotation) => Set(x, y, footprint, rotation, id);
+        public void Free(int x, int y, Vector2Int footprint, int rotation) => Set(x, y, footprint, rotation, null);
 
-        void Set(int x, int y, Vector2Int footprint, int rotation, bool value)
+        void Set(int x, int y, Vector2Int footprint, int rotation, string value)
         {
             var size = Rotated(footprint, rotation);
-            for (int i = x; i < x + size.x; i++)
-                for (int j = y; j < y + size.y; j++)
-                    _occupied[i, j] = value;
+            for (int i = Mathf.Max(0, x); i < Mathf.Min(Width, x + size.x); i++)
+                for (int j = Mathf.Max(0, y); j < Mathf.Min(Height, y + size.y); j++)
+                    _occupant[i, j] = value;
         }
 
-        /// <summary>Lokal position (tomtens origo nere till vänster) för objektets pivot = fotavtryckets mitt.</summary>
+        /// <summary>Lokal position (kartans hörn = origo) för objektets pivot = fotavtryckets mitt.</summary>
         public static Vector3 CellToLocal(int x, int y, Vector2Int footprint, int rotation)
         {
             var size = Rotated(footprint, rotation);

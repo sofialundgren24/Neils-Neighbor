@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -45,7 +45,7 @@ namespace NG.World
 
         void Start()
         {
-            var all = FindObjectsByType<PlaceableView>(FindObjectsSortMode.None).ToList();
+            var all = FindObjectsByType<PlaceableView>().ToList();
             foreach (var v in all.Where(v => v.Variants.Any(t => t.name.StartsWith("Phase")))
                                  .OrderBy(v => v.transform.position.x))
                 _houses.Add(new House { view = v });

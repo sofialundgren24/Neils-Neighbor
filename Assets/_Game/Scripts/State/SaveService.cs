@@ -53,10 +53,22 @@ namespace NG.State
         static PlayerState Migrate(PlayerState state)
         {
             // Lägg till ett steg per schemaversion, t.ex.:
-            // if (state.schemaVersion < 2) { ...; state.schemaVersion = 2; }
+            // if (state.schemaVersion < 3) { ...; state.schemaVersion = 3; }
+            if (state.schemaVersion < 2)
+            {
+                // Schema 1 fanns bara i prototypen (tomter i stället för en karta). Börja om.
+                Debug.LogWarning("[SaveService] Sparfil från prototypen (schema 1). Startar nytt spel.");
+                return new PlayerState();
+            }
             if (state.schemaVersion > PlayerState.CurrentSchemaVersion)
                 Debug.LogWarning("[SaveService] Sparfilen är nyare än klienten.");
             return state;
+        }
+
+        /// <summary>Raderar sparfilen (debug: "Ny sparfil").</summary>
+        public static void Delete()
+        {
+            if (File.Exists(PathOnDisk)) File.Delete(PathOnDisk);
         }
 
         static void TryBackupCorrupt()

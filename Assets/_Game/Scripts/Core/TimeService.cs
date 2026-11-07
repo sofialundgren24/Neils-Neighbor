@@ -16,7 +16,12 @@ namespace NG.Core
             _serverOffset = serverUtc - DateTime.UtcNow;
         }
 
-        public static DateTime UtcNow => DateTime.UtcNow + _serverOffset;
+        static TimeSpan _debugOffset = TimeSpan.Zero;
+
+        public static DateTime UtcNow => DateTime.UtcNow + _serverOffset + _debugOffset;
+
+        /// <summary>Bara för utveckling: spola fram tiden. Nollställs när spelet startas om.</summary>
+        public static void DebugSkip(TimeSpan amount) => _debugOffset += amount;
 
         public static long UnixNow => new DateTimeOffset(UtcNow).ToUnixTimeSeconds();
 
