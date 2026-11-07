@@ -1,30 +1,42 @@
-# Uppdrag. Text med kommatecken ska stå inom "citattecken".
+# Uppdrag. Text med kommatecken ska stå inom "citattecken". {namn} byts mot spelarens namn (Neil eller Sofia).
 # objectives: mål separerade med |. Format: typ:id:antal
-#   renovate:house_cottage:2  = huset har minst 2 klara faser
-#   own:crop_wheat:3          = 3 färdigbyggda av sorten står på kartan
-#   harvest:wheat:6           = skörda 6 vete (harvest:*:6 = vad som helst)
-#   produce:bread:3           = hämta 3 bröd från en butik
-#   deliver:2                 = leverera 2 beställningar
-#   level:5                   = nå nivå 5
-#   collect:apple:5           = ha 5 äpplen i lagret
+#   clear:clutter_weed:6      = rensa 6 ogräs (clear:*:12 = städa 12 av vad som helst)
+#   renovate:house_cottage:3  = huset har minst 3 klara faser
+#   own:shop_flower:1         = 1 färdigbyggd av sorten står på kartan
+#   harvest:tulip:3           = skörda 3 tulpaner
+#   produce:bouquet_tulip:1   = hämta 1 tulpanbukett från en affär
+#   deliver:1                 = leverera 1 beställning på Grannskapstavlan
+#   level:6                   = nå nivå 6
 # focus (tutorial): id att peka på i världen, eller ui:build / ui:orders / ui:storage. Tomt = ingen pekare.
 id,neighbor,order,unlock,requires,title,intro,outro,objectives,coins,gems,xp,focus
-greta_welcome,greta,1,1,,Välkommen till Lindgatan,"Åh, hej! Du måste vara den nya. Gatan har sett bättre dagar... Mitt tak läcker. Kan du hjälpa mig laga huset?","Tack! Det är första gången på år som det inte droppar in.",renovate:house_cottage:1,50,0,10,house_cottage
-greta_seeds,greta,2,1,greta_welcome,Ett första frö,"Förr växte det vete längs hela gatan. Tryck på Bygg och så tre vetefält, så kommer vi igång!","Så fint! Snart växer det.",own:crop_wheat:3,40,0,10,ui:build
-greta_harvest,greta,3,1,greta_seeds,Skördetid,"Vetet växer fort. Skörda när det är moget, tryck på bubblan ovanför fältet.","Gyllene! Det luktar sommar.",harvest:wheat:6,50,0,15,crop_wheat
-greta_paint,greta,4,1,greta_harvest,Lite färg,"Nu när taket är lagat vill jag ha färg på väggarna igen. Ljusblått, som förr!","Titta, det blir ju hus av det här!",renovate:house_cottage:2,60,0,15,house_cottage
-greta_order,greta,5,1,greta_paint,Grannar hjälper grannar,"Folk på gatan behöver saker. Öppna Beställningar och leverera en, det ger mynt.","Bra jobbat. Ryktet sprider sig!",deliver:1,50,0,15,ui:orders
-greta_finish,greta,6,1,greta_order,Stugan blir klar,"Det sista: blomlådor och lite dekor. Då är mitt hus som nytt!","Kära nån, så vackert! Färgen har kommit tillbaka. Tack!",renovate:house_cottage:3,100,5,30,house_cottage
-greta_flowers,greta,7,2,greta_finish,Blommor till alla,"En trädgård utan blommor är ingen trädgård. Plantera några tulpaner!","Underbart. Bina kommer tillbaka!",own:flower_tulip_yellow:4|harvest:flowers:4,60,0,20,
-omar_store,omar,10,2,greta_finish,Gatans affär,"Hej granne! Jag är Omar. Om vi bygger en affär kan jag baka bröd åt hela gatan.","Affären är öppen! Doften av bröd är tillbaka.",own:production_store:1,80,0,20,ui:build
-omar_bread,omar,11,2,omar_store,Nybakat,"Ge mig vete så bakar jag. Tryck på affären och välj Bröd.","Mmm. Det här ska alla få smaka!",produce:bread:3,90,0,25,production_store
-omar_carrots,omar,12,2,omar_bread,Morötter,"Mina kunder frågar efter grönsaker. Kan du odla morötter?","Krispiga! Perfekt.",own:crop_carrot:4|harvest:carrot:8,90,0,25,
-omar_house,omar,13,3,omar_bread,Omars radhus,"Mitt radhus är i sämre skick än Gretas stuga... Hjälper du mig med det också?","Jag känner inte igen det! Tack, granne.",renovate:house_townhouse:3,200,5,60,house_townhouse
-gata_orders,greta,20,3,greta_order,Populär granne,"Alla pratar om dig! Fortsätt leverera beställningar.","Du är gatans hjälte.",deliver:5,150,2,40,
-lina_hello,lina,30,5,omar_house,Blomsterbutiken,"Hej! Lina heter jag. Jag vill göra buketter av gatans blommor. Bygg en trädgårdsbutik?","Äntligen! Nu kan vi göra något vackert.",own:production_garden_center:1|produce:bouquet:2,150,0,40,ui:build
-lina_house,lina,31,6,lina_hello,Linas bungalow,"Min bungalow är helt grå. Den förtjänar gult, solgult!","Den lyser ju! Precis som jag drömde.",renovate:house_bungalow:3,350,8,90,house_bungalow
-lina_garden,lina,32,6,lina_house,En riktig trädgård,"Hjälp mig göra trädgården fin: lite häck och några solrosor.","Nu är det en trädgård värd namnet.",own:hedge_box:2|own:flower_sunflower:4,200,0,50,
-berg_hello,familjen_berg,40,10,lina_house,Familjen Bergs villa,"Hej hej! Vi har tre barn och ett hus som faller isär. Kan du hjälpa oss?","Barnen springer runt och skriker av glädje. Tack!",renovate:house_villa:3,600,10,150,house_villa
-berg_play,familjen_berg,41,10,berg_hello,Lek i trädgården,"Barnen vill ha en gunga och ett picknickbord!","Bästa sommaren någonsin!",own:decor_swing:1|own:decor_picnic_table:1,300,0,80,
-sven_hello,sven,50,15,berg_hello,Svens timmerstuga,"...Hej. Sven. Stugan behöver arbete. Du verkar kunna sånt.","...Bra gjort. Riktigt bra.",renovate:house_cabin:3,1200,15,300,house_cabin
-street_complete,greta,60,15,sven_hello,Lindgatan är tillbaka,"Alla fem husen! Ser du vad du har gjort med vår gata?","Gatan är levande igen. Det här är ditt verk.",level:16,1500,25,200,
+# ---------- Nivå 0: tutorialen ----------
+arrive,nora,1,0,,Välkommen till Lindgatan,"Hej och välkommen, {namn}! Jag heter Nora och bor i Lilla villan. Gatan har varit bortglömd i åratal... Börja med att rensa ogräset. Dra fingret över det!","Vad snabbt det gick! Det syns redan skillnad.",clear:clutter_weed:6,20,0,6,clutter_weed
+water,nora,2,0,arrive,Törstigt gräs,"Gräset är torrt som fnöske. Dra vattenkannan över de bruna plättarna så blir de gröna igen.","Ahh, det doftar sommar!",clear:clutter_dry_grass:6,20,0,6,clutter_dry_grass
+tidy,nora,3,0,water,Städdag på tomterna,"Fortsätt städa tomterna, både ogräs och torrt gräs. Snart känns det som hemma!","Nu kan vi börja bygga på riktigt. Bra jobbat, {namn}!",clear:*:12,30,0,8,clutter_weed
+# ---------- Nivå 1: Trädgårdsdrömmar ----------
+flowershop,nora,10,1,tidy,Blomsteraffären,"Förr fanns en blomsteraffär på gatan. Bygg upp den igen! Tryck på Bygg och välj Kvarter.","Blomsteraffären är öppen igen. Jag får tårar i ögonen.",own:shop_flower:1,40,0,10,ui:build
+tulips,nora,11,1,flowershop,Tulpaner i rabatten,"En blomsteraffär behöver blommor. Plantera tre tulpanrabatter och skörda dem när de blommar.","Så röda och fina!",own:flower_tulip_yellow:3|harvest:tulip:3,30,0,8,ui:build
+bouquet,nora,12,1,tulips,Gatans första bukett,"Tryck på Blomsteraffären och gör en tulpanbukett!","Den ska stå på mitt köksbord.",produce:bouquet_tulip:1,40,0,10,shop_flower
+villa,nora,13,1,bouquet,Lilla villan får liv,"Nu är det dags. Hjälper du mig att renovera Lilla villan? Laga, måla och dekorera!","Titta! Färgen kommer tillbaka och mitt hus lever igen. Tack, {namn}!",renovate:house_cottage:3,80,5,20,house_cottage
+board,nora,14,1,villa,Grannskapstavlan,"Grannarna har hört talas om dig. Öppna Grannskapstavlan och hjälp någon med en beställning!","Ryktet sprider sig. Alla pratar om den nya grannen!",deliver:1,40,0,10,ui:orders
+garden1,nora,15,1,villa,Fika i trädgården,"En trädgård behöver en plats att sitta. Ställ ut ett cafébord och en bänk.","Kom över på kaffe när du vill!",own:decor_cafe_table:1|own:decor_bench_wood:1,60,0,15,
+# ---------- Nivå 2: Ljus & blomstertid ----------
+berg_hello,familjen_berg,20,2,villa,Familjen Berg,"Hej granne! Vi är familjen Berg i Klassiska förortshuset. Vårt hus behöver verkligen kärlek... Hjälper du oss?","Barnen springer runt och skriker av glädje. Tack!",renovate:house_classic:3,150,5,40,house_classic
+berg_lights,familjen_berg,21,2,berg_hello,Ljus på gatan,"Det är så mörkt på kvällarna. Kan du sätta upp två lyktstolpar?","Nu vågar barnen gå ut efter middagen.",own:decor_lamp_classic:2,60,0,15,ui:build
+rose_circle,nora,22,2,villa,Rosencirkeln,"Rosor och lavendel tillsammans... Prova Rosencirkel-buketten i Blomsteraffären!","Den vackraste buketten på hela gatan.",produce:bouquet_rose_circle:2,80,0,20,shop_flower
+apples,familjen_berg,23,2,berg_hello,Äpplen till barnen,"Barnen älskar äpplen. Plantera ett äppelträd och skörda!","Knapriga och söta. Perfekt mellanmål.",own:tree_apple:1|harvest:apple:3,60,0,15,
+# ---------- Nivå 3: Grannskapets gångar ----------
+omar_hello,omar,30,3,berg_hello,Kvartersaffären,"Hej {namn}! Omar här. Gatan behöver en affär. Hjälper du mig att bygga Kvartersaffären?","En riktig kvartersbutik! Precis som när jag var liten.",own:shop_general:1,100,0,25,ui:build
+omar_juice,omar,31,3,omar_hello,Hemgjord must,"Äppelmust! Ingen kan motstå hemgjord must.","Slut på en timme. Folk älskar det!",produce:apple_juice:2,80,0,20,shop_general
+omar_house,omar,32,3,omar_hello,Tvåvåningshuset,"Och mitt Tvåvåningshus... det är grått från källare till vind.","Två våningar i full färg. Jag är mållös.",renovate:house_twostory:3,250,8,60,house_twostory
+omar_paths,omar,33,3,omar_house,Stegstenar,"Lägg stegstenar i gräset så slipper man trampa i rabatterna.","Mycket bättre. Rabatterna tackar dig.",own:path_stepping:4,50,0,15,
+# ---------- Nivå 4: Lek & gemenskap ----------
+lina_hello,lina,40,4,omar_house,Kvarterets lekpark,"Hej! Lina från Hörnhuset. Barnen på gatan har ingenstans att leka. Kan vi bygga en lekpark?","Hör du skratten? Det är ljudet av en levande gata.",own:play_swing_set:1|own:play_sandbox:1,150,0,40,ui:build
+lina_house,lina,41,4,lina_hello,Hörnhuset,"Mitt Hörnhus drömmer om vita New England-paneler. Hjälper du mig?","Det är som ett vykort från Maine!",renovate:house_corner:3,350,10,80,house_corner
+lina_pond,lina,42,4,lina_hello,Näckrosdammen,"En damm med näckrosor skulle göra trädgården magisk.","Fiskarna har redan flyttat in.",own:water_pond:1,120,0,30,
+summer,nora,43,4,lina_hello,Midsommarfest,"Gatan ska ha midsommarfest! Gör två sommararrangemang i Blomsteraffären.","Den bästa midsommaren på trettio år.",produce:arrangement_summer:2,150,0,35,shop_flower
+# ---------- Nivå 5: Wisteria Lane-elegans ----------
+sven_hello,sven,50,5,lina_house,Bungalowen,"...Sven. Bungalowen. Den behöver fixas. Du verkar kunna sånt.","...Bra gjort. Riktigt bra.",renovate:house_bungalow:3,500,15,120,house_bungalow
+school,sven,51,5,sven_hello,Kvarterets skola,"Barnen behöver en skola i kvarteret. Det är dags att bygga en.","Skolklockan ringer på Lindgatan igen.",own:community_school:1,400,10,100,ui:build
+wisteria,nora,52,5,sven_hello,Blåregnets båge,"En wisteria-båge vid grinden och en springbrunn... precis som jag alltid drömt om.","Nu är det Wisteria Lane på riktigt.",own:decor_wisteria_arch:1|own:water_fountain:1,300,0,60,
+street,nora,53,5,sven_hello,Lindgatan är tillbaka,"Alla fem husen! Ser du vad du har gjort med vår gata, {namn}?","Gatan lever igen. Det här är ditt verk.",level:6,500,20,0,

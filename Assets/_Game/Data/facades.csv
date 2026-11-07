@@ -1,0 +1,11 @@
+# Fasader/färgvarianter för husen. Låses upp på nivån i unlock och väljs när huset är färdigrenoverat.
+# Med platshållare syns de som en färgton. Med riktiga modeller kan de bli egna texturer.
+id,house,name,unlock,color,coins
+house1_light_blue,house_cottage,Målade träpaneler (ljusblå),1,#8FD0FF,0
+house1_yellow,house_cottage,Målade träpaneler (gul),1,#FFE27A,0
+house2_brick_red,house_classic,Tegelfasad (röd),2,#C9694A,0
+house2_brick_grey,house_classic,Tegelfasad (grå),2,#A8A4A0,0
+house3_modern_dark,house_twostory,Modernt trä (mörkt),3,#6A5A50,0
+house3_modern_light,house_twostory,Modernt trä (ljust),3,#E8D6B8,0
+house4_new_england,house_corner,New England-stil,4,#F7F5EE,0
+house5_manor,house_bungalow,Klassisk herrgårdstouch,5,#F2E6D0,0

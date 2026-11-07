@@ -50,9 +50,10 @@ namespace NG.EditorTools
                         ? cols[4].Split(';').Select(s => s.Trim()).Where(s => s.Length > 0).ToList()
                         : new System.Collections.Generic.List<string>()
                 };
-                if (row.level != table.rows.Count + 1)
+                int expected = table.rows.Count == 0 ? row.level : table.rows[table.rows.Count - 1].level + 1;
+                if (row.level != expected)
                 {
-                    Debug.LogError($"[NG Balance] Rad {i + 1}: nivå {row.level} kommer i fel ordning (väntade {table.rows.Count + 1}). Avbryter.");
+                    Debug.LogError($"[NG Balance] Rad {i + 1}: nivå {row.level} kommer i fel ordning (väntade {expected}). Avbryter.");
                     return;
                 }
                 table.rows.Add(row);

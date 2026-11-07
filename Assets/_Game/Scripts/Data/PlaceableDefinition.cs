@@ -16,7 +16,7 @@ namespace NG.Data
 
         [Header("Ekonomi")]
         [Tooltip("Nivå som krävs för att köpa (eller, för hus, för att renovera).")]
-        [Min(1)] public int unlockLevel = 1;
+        [Min(0)] public int unlockLevel = 1;
         public CurrencyCost[] cost = Array.Empty<CurrencyCost>();
         public ResourceAmount[] materials = Array.Empty<ResourceAmount>();
         [Min(0)] public int buildTimeSec;

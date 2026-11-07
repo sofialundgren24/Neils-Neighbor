@@ -147,7 +147,11 @@ namespace NG.Game
 
             var o = CreateState(def, x, y, rotation, decayed: false);
             if (def.buildTimeSec > 0) o.build = Timers.StartNow(def.buildTimeSec);
-            else _s.Progression.AddXp(def.xpReward);
+            else
+            {
+                _s.Progression.AddXp(def.xpReward);
+                _s.Community.StartIncome(o);
+            }
             Add(o, def);
             return Result.Success;
         }
@@ -159,6 +163,7 @@ namespace NG.Game
             if (!_grid.IsFree(p.cell.x, p.cell.y, p.definition.footprint, p.rotation))
                 Debug.LogWarning($"[World] Startlayout: {p.definition.Id} på {p.cell} överlappar.");
             var o = CreateState(p.definition, p.cell.x, p.cell.y, p.rotation, p.decayed);
+            o.restoreWithStreet = p.decayed && p.restoreWithStreet;
             Add(o, p.definition);
         }
 
@@ -237,6 +242,45 @@ namespace NG.Game
             return Result.Success;
         }
 
+        // ---------- Skräp (ogräs, torrt gräs) ----------
+
+        public bool IsClutter(PlacedObjectState o) => Def(o) is ClutterDefinition;
+
+        /// <summary>Rensar ogräs eller vattnar torrt gräs: objektet försvinner för gott och ger XP.</summary>
+        public Result ClearClutter(PlacedObjectState o)
+        {
+            if (o == null || !(Def(o) is ClutterDefinition def)) return Result.Fail("Inget att rensa här.");
+            _grid.Free(o.x, o.y, def.footprint, o.rotation);
+            _s.State.objects.Remove(o);
+            _byId.Remove(o.instanceId);
+            EventBus.Publish(new ObjectRemoved(o.instanceId));
+            if (def.clearCoins > 0) _s.Wallet.Add(CurrencyType.Coins, def.clearCoins);
+            _s.Progression.AddXp(def.clearXp);
+            EventBus.Publish(new ClutterCleared(def.Id));
+            return Result.Success;
+        }
+
+        public int ClutterLeft => Objects.Count(o => Def(o) is ClutterDefinition);
+
+        // ---------- Charm ----------
+
+        /// <summary>Grannskapets charm: summan av skönhetspoäng för allt som är byggt och inte grått.</summary>
+        public int Charm
+        {
+            get
+            {
+                int sum = 0;
+                foreach (var o in Objects)
+                {
+                    if (o.decayed || o.build != null) continue;
+                    if (o.renovation != null && !o.renovation.complete) continue;
+                    var def = Def(o);
+                    if (def != null) sum += def.beautyScore;
+                }
+                return sum;
+            }
+        }
+
         // ---------- Byggtid ----------
 
         public bool IsBuilding(PlacedObjectState o) => o.build != null;
@@ -259,6 +303,7 @@ namespace NG.Game
                 o.build = null;
                 var def = Def(o);
                 if (def is PlantDefinition plant) o.growth = Timers.StartNow(plant.growTimeSec);
+                _s.Community.StartIncome(o);
                 _s.Progression.AddXp(def != null ? def.xpReward : 0);
                 EventBus.Publish(new ObjectChanged(o.instanceId, true));
             }

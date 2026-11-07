@@ -1,70 +1,78 @@
-# Allt som kan stå på kartan. En rad = en modell att skapa (SM_<Id i TitleCase>.fbx, t.ex. house_cottage -> SM_House_Cottage.fbx).
-# type: house, production, crop, flower, tree, bush, fence, decor, ground, water
-# unlock = nivå. coins/gems = pris. build_sec = byggtid. w/h = fotavtryck i celler (0,5 m). height = platshållarens höjd i meter.
+# Allt som kan stå på kartan i Neil's Neighbor. En rad = en modell att skapa (SM_<Id i TitleCase>.fbx, t.ex. house_classic -> SM_House_Classic.fbx).
+# type: house, production, community, clutter, flower, tree, bush, fence, decor, ground, water
+# unlock = nivå (0 = finns från start). coins/gems = pris. build_sec = byggtid. w/h = fotavtryck i celler (0,5 m). height = platshållarens höjd i meter.
 # shop = 1 om den finns i byggmenyn. color = platshållarens färg.
 # params: house: phases=sek/sek/sek;phase_coins=..;phase_xp=..   växter: grow=sek;yield=vara:antal   produktion: queue=antal;max=antal
+#         community: income=mynt/xp/sekunder   clutter: action=clear|water;xp=antal
 id,type,name,unlock,coins,gems,build_sec,xp,beauty,w,h,height,color,shop,params
-house_cottage,house,Stugan,1,0,0,0,0,10,10,11,4.2,#9FD3F5,0,phases=30/120/300;phase_coins=50/120/250;phase_xp=15/25/50
-house_townhouse,house,Radhuset,3,0,0,0,0,10,10,10,5.0,#F5B7A5,0,phases=60/300/900;phase_coins=150/300/600;phase_xp=30/50/90
-house_bungalow,house,Bungalowen,6,0,0,0,0,10,10,10,3.8,#FFE27A,0,phases=120/600/1800;phase_coins=400/800/1500;phase_xp=50/90/160
-house_villa,house,Villan,10,0,0,0,0,10,10,10,5.5,#B9F0B0,0,phases=300/1200/3600;phase_coins=1000/2000/4000;phase_xp=90/160/300
-house_cabin,house,Timmerstugan,15,0,0,0,0,10,10,10,4.5,#D7A6FF,0,phases=600/2400/7200;phase_coins=2500/5000/9000;phase_xp=150/300/600
-production_store,production,Affären,2,300,0,60,30,5,10,8,4.0,#FF9F6E,1,queue=3;max=1
-production_garden_center,production,Trädgårdsbutiken,5,800,0,180,60,5,10,8,4.0,#7FD38B,1,queue=3;max=1
-crop_wheat,crop,Vete,1,5,0,0,1,0,2,2,0.6,#F2CF5B,1,grow=30;yield=wheat:2
-crop_carrot,crop,Morötter,2,10,0,0,1,0,2,2,0.4,#FF8A3D,1,grow=60;yield=carrot:2
-crop_tomato,crop,Tomater,4,15,0,0,1,0,2,2,0.7,#FF5A4E,1,grow=120;yield=tomato:2
-crop_corn,crop,Majs,6,20,0,0,2,0,2,2,1.0,#FFE15A,1,grow=180;yield=corn:2
-crop_strawberry,crop,Jordgubbar,8,25,0,0,2,0,2,2,0.4,#FF4F7B,1,grow=240;yield=strawberry:2
-crop_pumpkin,crop,Pumpor,12,40,0,0,3,0,2,2,0.6,#FF9A1F,1,grow=600;yield=pumpkin:1
-flower_tulip_yellow,flower,Gul tulpan,1,8,0,0,1,2,1,1,0.4,#FFE34D,1,grow=45;yield=flowers:1
-flower_rose_pink,flower,Rosa ros,1,10,0,0,1,3,1,1,0.5,#FF7FB0,1,grow=60;yield=flowers:1
-flower_lavender_purple,flower,Lavendel,2,12,0,0,1,3,1,1,0.5,#A77BFF,1,grow=60;yield=flowers:1
-flower_sunflower,flower,Solros,5,15,0,0,1,3,1,1,0.9,#FFC93C,1,grow=90;yield=flowers:1
-flower_daisy,flower,Prästkrage,7,15,0,0,1,3,1,1,0.4,#FFFFFF,1,grow=90;yield=flowers:1
-flower_peony,flower,Pion,11,25,0,0,2,4,1,1,0.5,#FF8FB8,1,grow=150;yield=flowers:2
-tree_blossom_pink,tree,Körsbärsträd,3,60,0,0,5,6,5,4,3.5,#FFB7D5,1,grow=120
-tree_oak,tree,Ek,4,80,0,0,5,6,4,4,4.0,#5DBB4A,1,grow=300
-tree_apple,tree,Äppelträd,7,150,0,0,8,6,4,4,3.5,#4FAF45,1,grow=600;yield=apple:3
-tree_birch,tree,Björk,9,120,0,0,6,7,4,4,4.5,#8ED36B,1,grow=300
-tree_pine,tree,Tall,13,180,0,0,8,7,4,4,5.0,#2F8A4A,1,grow=300
-bush_round,bush,Rund buske,1,20,0,0,1,2,2,2,0.8,#4CB04A,1,grow=60
-hedge_box,bush,Buxbomshäck,6,40,0,0,2,3,4,1,0.8,#3E9E45,1,grow=90
-bush_hydrangea,bush,Hortensia,18,90,0,0,4,6,2,2,0.9,#8FB8FF,1,grow=120
-fence_white_picket,fence,Vitt staket,1,10,0,0,1,1,4,1,0.7,#FFFFFF,1,
-fence_wood,fence,Trästaket,2,12,0,0,1,1,4,1,0.8,#B7814F,1,
-fence_stone_low,fence,Låg stenmur,9,30,0,0,2,2,4,1,0.6,#B9B4A8,1,
-decor_mailbox,decor,Brevlåda,1,15,0,0,1,1,1,1,1.1,#3E7BFF,1,
-decor_pot,decor,Terrakottakruka,1,10,0,0,1,1,1,1,0.4,#D9783F,1,
-decor_bench,decor,Parkbänk,2,40,0,0,2,3,4,2,0.8,#8B5A3C,1,
-decor_planter,decor,Blomlåda,2,25,0,0,1,2,2,1,0.4,#C46A3C,1,
-decor_sign,decor,Träskylt,2,15,0,0,1,1,1,1,1.2,#B7814F,1,
-decor_gate,decor,Grind,3,30,0,0,1,1,2,1,0.9,#FFFFFF,1,
-decor_lamp,decor,Gatlykta,3,50,0,0,2,2,1,1,2.6,#FFD36B,1,
-decor_birdbath,decor,Fågelbad,4,60,0,0,2,3,2,2,0.9,#DDE6EE,1,
-decor_gnome,decor,Trädgårdstomte,4,35,0,0,1,2,1,1,0.5,#FF4040,1,
-decor_lamp_garden,decor,Trädgårdslykta,5,30,0,0,1,2,1,1,0.6,#FFE9A8,1,
-decor_wheelbarrow,decor,Skottkärra,5,45,0,0,2,2,2,2,0.6,#4F9E5A,1,
-decor_picnic_table,decor,Picknickbord,6,80,0,0,3,3,3,3,0.8,#A86B3E,1,
-decor_birdhouse,decor,Fågelholk,6,40,0,0,2,2,1,1,1.6,#6FB6FF,1,
-decor_well,decor,Brunn,7,150,0,30,5,5,3,3,1.6,#A0A0A8,1,
-decor_swing,decor,Gunga,8,140,0,0,4,5,4,2,2.0,#E05A5A,1,
-decor_barrel_flowers,decor,Blomtunna,8,50,0,0,2,3,2,2,0.7,#8B5A3C,1,
-decor_parasol,decor,Parasoll,9,90,0,0,3,4,2,2,2.0,#FF6FA5,1,
-decor_rose_arch,decor,Rosbåge,11,160,0,0,5,6,3,1,2.4,#FF8FB8,1,
-decor_pergola,decor,Pergola,14,400,0,120,10,9,6,6,2.6,#E8D9C0,1,
-decor_fountain,decor,Fontän,16,600,0,180,15,12,4,4,1.8,#9FD8FF,1,
-decor_statue,decor,Staty,17,500,0,0,15,10,2,2,2.2,#E6E6E6,1,
-decor_gazebo,decor,Lusthus,20,1200,0,300,25,15,6,6,3.2,#FFFFFF,1,
-path_stone,ground,Stenplattor,1,2,0,0,0,1,2,2,0.04,#CFC6B6,1,
-path_gravel,ground,Grusgång,1,1,0,0,0,1,2,2,0.03,#E8D6A8,1,
-ground_soil,ground,Jordplätt,1,1,0,0,0,0,2,2,0.03,#8A6040,1,
-road_asphalt,ground,Gata,1,5,0,0,0,0,4,4,0.03,#8C8C94,1,
-road_curb,ground,Kantsten,2,3,0,0,0,0,4,1,0.12,#B0B0B5,1,
-path_stepping,ground,Trampstenar,3,3,0,0,0,1,2,2,0.05,#A9A49A,1,
-ground_sand,ground,Sandplätt,4,2,0,0,0,1,2,2,0.03,#F2DFA7,1,
-path_brick,ground,Tegelgång,5,4,0,0,0,2,2,2,0.05,#C9694A,1,
-ground_flowerbed,ground,Rabattjord,6,4,0,0,0,1,2,2,0.06,#6B4430,1,
-path_wood,ground,Trätrall,8,5,0,0,0,2,2,2,0.08,#B98952,1,
-pond_small,water,Liten damm,10,250,0,60,8,10,6,4,0.15,#4FC3F7,1,
-path_cobble,ground,Kullersten,19,6,0,0,0,2,2,2,0.05,#9E9890,1,
+# ---------- De fem husen på Lindgatan ----------
+house_cottage,house,Lilla villan,0,0,0,0,0,10,10,11,4.2,#9FD3F5,0,phases=20/45/90;phase_coins=20/40/60;phase_xp=8/12/20
+house_classic,house,Klassiska förortshuset,2,0,0,0,0,10,10,10,4.8,#F5B7A5,0,phases=60/180/420;phase_coins=120/240/400;phase_xp=20/35/60
+house_twostory,house,Tvåvåningshuset,3,0,0,0,0,12,10,10,6.0,#C9B8F0,0,phases=120/360/900;phase_coins=250/450/700;phase_xp=35/60/100
+house_corner,house,Hörnhuset,4,0,0,0,0,12,10,10,5.0,#B9F0B0,0,phases=180/600/1500;phase_coins=400/700/1100;phase_xp=50/90/150
+house_bungalow,house,Bungalowen,5,0,0,0,0,14,10,10,3.8,#FFE27A,0,phases=300/900/2400;phase_coins=600/1000/1600;phase_xp=80/140/220
+# ---------- Nivå 0: skräp, gatan och startsortimentet ----------
+clutter_weed,clutter,Ogräs,0,0,0,0,0,0,1,1,0.35,#6E8B3D,0,action=clear;xp=2
+clutter_dry_grass,clutter,Torr gräsplätt,0,0,0,0,0,0,2,2,0.04,#B59A62,0,action=water;xp=2
+road_asphalt,ground,Gata,0,5,0,0,0,0,4,4,0.03,#8C8C94,1,
+sidewalk,ground,Trottoar,0,3,0,0,0,0,4,1,0.06,#D6D2C8,1,
+tree_birch,tree,Björk,0,40,0,0,4,5,4,4,4.5,#9ED36B,1,grow=120
+tree_maple,tree,Lönn,0,45,0,0,4,5,4,4,4.2,#E07B39,1,grow=120
+tree_oak,tree,Ek,0,50,0,0,5,6,4,4,4.8,#4FA845,1,grow=150
+bush_round,bush,Rund formklippt buske,0,15,0,0,1,2,2,2,0.9,#4CB04A,1,grow=60
+hedge_wild,bush,Vild häck,0,20,0,0,1,2,4,1,1.0,#5E9E3E,1,grow=60
+fence_white,fence,Vitt trästaket,0,8,0,0,1,1,4,1,0.8,#FFFFFF,1,
+fence_chainlink,fence,Klassiskt nätstaket,0,6,0,0,1,1,4,1,1.0,#A9B0B8,1,
+stone_round,decor,Rund trädgårdssten,0,5,0,0,1,1,1,1,0.35,#B9B4A8,1,
+path_curb,ground,Platt kantsten,0,3,0,0,0,1,2,1,0.1,#C8C2B6,1,
+flower_rose_pink,flower,Vildros,0,6,0,0,1,2,1,1,0.5,#FF7FB0,1,grow=40;yield=rose:1
+flower_dandelion,flower,Maskros,0,3,0,0,1,1,1,1,0.3,#FFE04D,1,grow=25;yield=wildflower:1
+# ---------- Nivå 1: Trädgårdsdrömmar ----------
+flower_tulip_yellow,flower,Tulpanrabatt,1,10,0,0,1,3,1,1,0.45,#FF4D4D,1,grow=60;yield=tulip:1
+flower_sunflower,flower,Solros,1,12,0,0,1,3,1,1,1.1,#FFC93C,1,grow=90;yield=sunflower:1
+tree_blossom_pink,tree,Körsbärsträd (rosa),1,80,0,0,6,8,5,4,3.5,#FFB7D5,1,grow=180
+bush_lilac,bush,Syrenbuske,1,30,0,0,2,4,2,2,1.3,#B58CE0,1,grow=120;yield=lilac:1
+fence_low_gate,fence,Lågt trästaket med grind,1,15,0,0,1,2,4,1,0.7,#F3EDE2,1,
+path_gravel,ground,Grusgång,1,2,0,0,0,1,2,2,0.03,#E8D6A8,1,
+decor_bench_wood,decor,Trädgårdsbänk i trä,1,40,0,0,3,4,4,2,0.9,#8B5A3C,1,
+decor_cafe_table,decor,Cafébord med 2 stolar,1,55,0,0,3,5,3,3,0.9,#F3EDE2,1,
+shop_flower,production,Blomsteraffären,1,150,0,30,20,8,10,8,4.0,#FF9FC4,1,queue=3;max=1
+# ---------- Nivå 2: Ljus & blomstertid ----------
+flower_lavender_purple,flower,Lavendelrabatt,2,14,0,0,1,3,1,1,0.5,#A77BFF,1,grow=90;yield=lavender:1
+decor_hanging_pot,decor,Hängande blomkruka,2,25,0,0,1,3,1,1,1.6,#FF8FB8,1,
+tree_apple,tree,Äppelträd,2,120,0,0,8,6,4,4,3.5,#4FAF45,1,grow=300;yield=apple:3
+bush_boxwood,bush,Buxbom (klotformad),2,35,0,0,2,3,2,2,0.8,#3E9E45,1,grow=90
+fence_iron,fence,Gjutjärnsstaket (svart),2,30,0,0,2,3,4,1,1.1,#2E2E36,1,
+path_pattern,ground,Mönstrad stenplatta,2,5,0,0,0,2,2,2,0.05,#CFC6B6,1,
+decor_lamp_classic,decor,Klassisk lyktstolpe,2,60,0,0,3,4,1,1,2.8,#FFD36B,1,
+decor_birdbath,decor,Fågelbad i sten,2,50,0,0,3,5,2,2,0.9,#DDE6EE,1,
+# ---------- Nivå 3: Grannskapets gångar ----------
+flower_hydrangea,flower,Hortensia (blå),3,20,0,0,2,4,2,2,0.9,#7FA8FF,1,grow=150;yield=hydrangea:1
+flower_climbing_rose,flower,Klätterros,3,22,0,0,2,4,1,1,1.8,#FF5C8A,1,grow=150;yield=rose:2
+tree_willow,tree,Hängpil,3,150,0,0,8,9,5,5,4.5,#8FC66A,1,grow=300
+hedge_berry,bush,Häck med röda bär,3,45,0,0,2,3,4,1,1.0,#3E8E3E,1,grow=150
+fence_rustic,fence,Lantligt trästaket,3,18,0,0,1,2,4,1,0.9,#B7814F,1,
+path_stepping,ground,Stegstenar i gräset,3,4,0,0,0,2,2,2,0.05,#A9A49A,1,
+decor_solar_light,decor,Solcellslykta,3,15,0,0,1,2,1,1,0.4,#FFE9A8,1,
+decor_swing_tree,decor,Trädgårdsgunga i trä,3,90,0,0,5,7,3,2,2.0,#A86B3E,1,
+shop_general,production,Kvartersaffären,3,400,0,120,40,8,10,8,4.2,#7FC2E8,1,queue=3;max=1
+# ---------- Nivå 4: Lek & gemenskap ----------
+flower_dahlia,flower,Dahlia,4,20,0,0,2,4,1,1,0.8,#FF9A1F,1,grow=180;yield=dahlia:1
+decor_pampas,decor,Pampasgräs i kruka,4,40,0,0,2,4,1,1,1.4,#F2DFA7,1,
+tree_plum,tree,Plommonträd,4,160,0,0,8,6,4,4,3.5,#5E8F45,1,grow=420;yield=plum:3
+bush_currant,bush,Vinbärsbuske,4,40,0,0,2,3,2,2,1.0,#4CA040,1,grow=240;yield=currant:2
+path_cobble,ground,Kullersten,4,6,0,0,0,2,2,2,0.05,#9E9890,1,
+water_pond,water,Liten trädgårdsdamm,4,250,0,60,15,10,6,4,0.15,#4FC3F7,1,
+play_swing_set,community,Gungställning,4,300,0,90,30,8,6,4,2.2,#FF6F6F,1,income=25/6/240
+play_sandbox,community,Sandlåda med leksaker,4,200,0,60,20,6,4,4,0.4,#FFD36B,1,income=15/4/180
+decor_mailbox_post,decor,Postlåda på stolpe,4,25,0,0,1,2,1,1,1.2,#3E7BFF,1,
+# ---------- Nivå 5: Wisteria Lane-elegans ----------
+decor_wisteria_arch,decor,Wisteria-båge (blåregn),5,220,0,0,10,14,3,1,2.6,#B57BFF,1,
+flower_peony,flower,Pionrabatt,5,28,0,0,2,5,1,1,0.6,#FFB3C8,1,grow=240;yield=peony:1
+tree_magnolia,tree,Magnoliaträd,5,240,0,0,10,12,4,4,4.0,#F5D6E8,1,grow=300
+hedge_topiary,bush,Formklippt häck (labyrint),5,60,0,0,3,5,4,1,1.1,#2F8A4A,1,grow=150
+fence_stone_iron,fence,Stenmur med gjutjärn,5,60,0,0,3,5,4,1,1.4,#9A9AA2,1,
+water_fountain,water,Klassisk springbrunn,5,800,0,180,40,20,4,4,2.4,#9FD8FF,1,
+play_slide,community,Rutschkana & klätterställning,5,500,0,150,40,12,6,6,2.6,#6FB6FF,1,income=35/8/300
+decor_bbq,decor,Grill & utekök,5,350,0,60,15,10,4,2,1.2,#5A5A64,1,
+community_school,community,Skolan,5,2000,0,600,150,25,16,12,6.0,#E8C27A,1,income=150/40/900;max=1

@@ -53,8 +53,11 @@ namespace NG.Game
                 yield return p is RenovatableDefinition ? $"Renovera: {p.DisplayName}" : p.DisplayName;
             foreach (var r in _s.Content.AllOf<RecipeDefinition>().Where(r => r.unlockLevel == level))
                 yield return $"Recept: {r.DisplayName}";
-            foreach (var e in _s.Config.expansions.Where(e => e.requiredLevel == level && e.requiredLevel > 1))
+            foreach (var f in _s.Content.AllOf<FacadeDefinition>().Where(f => f.unlockLevel == level))
+                yield return $"{f.house?.DisplayName}: {f.DisplayName}";
+            foreach (var e in _s.Config.expansions.Where(e => e.requiredLevel == level && e.requiredLevel > 0))
                 yield return $"Nytt område: {e.name}";
+            if (level == _s.Config.ordersUnlockLevel) yield return "Grannskapstavlan";
         }
     }
 }

@@ -10,6 +10,7 @@ namespace NG.World
 {
     /// <summary>
     /// Allt spelaren gör med fingret/musen i världen:
+    ///  - Tryck eller DRA över ogräs/torrt gräs -> rensa/vattna allt fingret passerar (som att skörda i Hay Day).
     ///  - Tryck på ett objekt -> markera det (UI:t visar vad man kan göra).
     ///  - Tryck på ett låst område -> markera området (UI:t visar priset).
     ///  - Byggläge: ett "spöke" av objektet följer rutnätet. Dra spöket för att flytta det, dra någon
@@ -53,6 +54,7 @@ namespace NG.World
         MaterialPropertyBlock _mpb;
 
         // Pekare
+        bool _toolDrag;
         bool _pressing;
         bool _draggingGhost;
         Vector2 _pressPos;
@@ -196,7 +198,15 @@ namespace NG.World
                     _draggingGhost = true;
                     InputGate.WorldDragCaptured = true;
                 }
+                else if (_pressing && CurrentMode == Mode.Idle && TryClutterAt(pos))
+                {
+                    // Verktygsläge: så länge fingret är nere rensas allt skräp det passerar.
+                    _toolDrag = true;
+                    InputGate.WorldDragCaptured = true;
+                }
             }
+
+            if (_pressing && _toolDrag) TryClutterAt(pos);
 
             if (_pressing && _draggingGhost && TryGround(pos, out var world))
                 _cell = _s.World.CenteredCell(PlacingDef, _rotation, world);
@@ -205,7 +215,12 @@ namespace NG.World
             {
                 _pressing = false;
                 bool tap = (pos - _pressPos).magnitude <= tapSlopPixels && Time.unscaledTime - _pressTime <= tapMaxSeconds;
-                if (_draggingGhost)
+                if (_toolDrag)
+                {
+                    _toolDrag = false;
+                    InputGate.WorldDragCaptured = false;
+                }
+                else if (_draggingGhost)
                 {
                     _draggingGhost = false;
                     InputGate.WorldDragCaptured = false;
@@ -215,6 +230,20 @@ namespace NG.World
                     OnTap(pos);
                 }
             }
+        }
+
+        /// <summary>Rensar/vattnar skräpet under pekaren, om det finns något. Sant om något träffades.</summary>
+        bool TryClutterAt(Vector2 screenPos)
+        {
+            if (_cam == null) return false;
+            var ray = _cam.ScreenPointToRay(screenPos);
+            if (!Physics.Raycast(ray, out var hit, 1000f)) return false;
+            var wo = hit.collider.GetComponentInParent<WorldObject>();
+            if (wo == null) return false;
+            var o = _s.World.Get(wo.InstanceId);
+            if (o == null || !_s.World.IsClutter(o)) return false;
+            _s.World.ClearClutter(o);
+            return true;
         }
 
         void OnTap(Vector2 screenPos)

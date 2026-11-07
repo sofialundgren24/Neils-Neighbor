@@ -12,7 +12,7 @@ namespace NG.State
     [Serializable]
     public class PlayerState
     {
-        public const int CurrentSchemaVersion = 2;
+        public const int CurrentSchemaVersion = 3;
 
         public int schemaVersion = CurrentSchemaVersion;
         public long savedAtUnix;
@@ -20,7 +20,13 @@ namespace NG.State
         /// <summary>Falskt tills startgatan har lagts ut första gången.</summary>
         public bool initialized;
 
-        public int level = 1;
+        /// <summary>Vilken version av villkoren spelaren har godkänt (0 = inte godkänt än).</summary>
+        public int termsAcceptedVersion;
+        /// <summary>Spelarens karaktär: "neil" eller "sofia". Tomt = inte valt än.</summary>
+        public string character;
+
+        /// <summary>Nivå 0 = tutorialen (rensa ogräs, vattna gräs).</summary>
+        public int level;
         public long xp;
 
         public Dictionary<CurrencyType, long> wallet = new Dictionary<CurrencyType, long>();
@@ -76,6 +82,11 @@ namespace NG.State
 
         /// <summary>Grå och sliten (bara objekt på startgatan). Försvinner för gott när närmaste hus är renoverat.</summary>
         public bool decayed;
+        /// <summary>Grå tills ALLA hus är renoverade (gatan, trottoarer, lyktor, stora träd).</summary>
+        public bool restoreWithStreet;
+
+        /// <summary>Kvartersbyggnader (lekpark, skola): tid tills nästa intäkt kan hämtas.</summary>
+        public TimerState income;
 
         /// <summary>Bara hus (RenovatableDefinition).</summary>
         public RenovationState renovation;
@@ -98,6 +109,8 @@ namespace NG.State
         public bool complete;
         /// <summary>Spelarens målarfärg som hex ("RRGGBB"). Tom = originalfärg.</summary>
         public string paintHex;
+        /// <summary>Vald fasad (FacadeDefinition-id). Tom = originalfasaden.</summary>
+        public string facadeId;
     }
 
     [Serializable]
@@ -114,6 +127,8 @@ namespace NG.State
     public class OrderState
     {
         public string orderId = Guid.NewGuid().ToString("N");
+        /// <summary>Grannen som vill ha varorna (NeighborDefinition-id).</summary>
+        public string neighborId;
         public List<ResourceStack> items = new List<ResourceStack>();
         public int coins;
         public int xp;

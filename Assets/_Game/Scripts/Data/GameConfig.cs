@@ -29,13 +29,21 @@ namespace NG.Data
         [Tooltip("När ett hus är färdigrenoverat får allt grått inom denna radie (meter) tillbaka färgen.")]
         [Min(0)] public float restoreRadius = 7f;
 
-        [Header("Beställningar")]
+        [Header("Beställningar (Grannskapstavlan)")]
+        [Tooltip("Tavlan öppnas på denna nivå (efter tutorialen).")]
+        [Min(0)] public int ordersUnlockLevel = 1;
         [Min(1)] public int orderSlots = 3;
         [Min(1)] public int orderRefillSec = 30;
         [Min(0)] public float orderRewardMultiplier = 1.5f;
 
         [Header("Försäljning")]
         [Range(0f, 1f)] public float sellRefund = 0.25f;
+
+        [Header("Villkor (första start)")]
+        [Tooltip("Höj när villkoren ändras, så får spelaren godkänna igen.")]
+        [Min(1)] public int termsVersion = 1;
+        public string termsUrl = "https://example.com/terms";
+        public string privacyUrl = "https://example.com/privacy";
 
         [Header("Uppdrag")]
         [Min(1)] public int maxActiveQuests = 3;
@@ -56,6 +64,8 @@ namespace NG.Data
         [Range(0, 3)] public int rotation;
         [Tooltip("Grå och sliten från start. Hus börjar då orenoverade.")]
         public bool decayed;
+        [Tooltip("Får färg först när ALLA hus på gatan är renoverade (gatan, trottoarer, lyktor, stora träd).")]
+        public bool restoreWithStreet;
     }
 
     [Serializable]
@@ -65,7 +75,7 @@ namespace NG.Data
         public string name;
         [Tooltip("Område i celler: x, y, bredd, höjd.")]
         public RectInt area;
-        [Min(1)] public int requiredLevel = 1;
+        [Min(0)] public int requiredLevel = 1;
         [Min(0)] public int coinCost;
     }
 }

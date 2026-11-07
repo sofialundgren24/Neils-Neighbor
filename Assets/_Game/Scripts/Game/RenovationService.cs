@@ -91,6 +91,65 @@ namespace NG.Game
             return Result.Success;
         }
 
+        public bool AllHousesComplete()
+        {
+            bool any = false;
+            foreach (var o in _s.World.Objects)
+            {
+                if (o.renovation == null) continue;
+                any = true;
+                if (!o.renovation.complete) return false;
+            }
+            return any;
+        }
+
+        /// <summary>Alla hus klara: gatan, trottoarerna, lyktorna och de stora träden får färg för gott.</summary>
+        void RestoreStreet()
+        {
+            bool any = false;
+            foreach (var o in _s.World.Objects)
+            {
+                if (!o.decayed) continue;
+                o.decayed = false;
+                o.restoreWithStreet = false;
+                if (_s.World.Def(o) is PlantDefinition plant && o.growth == null)
+                    o.growth = Timers.StartNow(plant.growTimeSec);
+                EventBus.Publish(new ObjectChanged(o.instanceId, true));
+                any = true;
+            }
+            if (any) GameSession.Message("Hela gatan lyser i färg! Lindgatan är tillbaka.");
+        }
+
+        // ---------- Fasader ----------
+
+        /// <summary>Alla fasader för huset, upplåsta först.</summary>
+        public System.Collections.Generic.IEnumerable<FacadeDefinition> Facades(PlacedObjectState o)
+        {
+            foreach (var f in _s.Content.AllOf<FacadeDefinition>())
+                if (f.house != null && f.house.Id == o.definitionId) yield return f;
+        }
+
+        public bool IsFacadeUnlocked(FacadeDefinition f) => f != null && f.unlockLevel <= _s.Progression.Level;
+
+        public Result SetFacade(PlacedObjectState o, FacadeDefinition f)
+        {
+            if (!IsComplete(o) || o.renovation == null) return Result.Fail("Renovera klart huset först.");
+            if (f == null)
+            {
+                o.renovation.facadeId = null;
+                o.renovation.paintHex = null;
+                EventBus.Publish(new ObjectChanged(o.instanceId, false));
+                return Result.Success;
+            }
+            if (!IsFacadeUnlocked(f)) return Result.Fail($"Låses upp på nivå {f.unlockLevel}.");
+            if (o.renovation.facadeId == f.Id) return Result.Success;
+            if (!_s.Wallet.TrySpend(CurrencyType.Coins, f.coinCost)) return Result.Fail("Inte tillräckligt med mynt.");
+            o.renovation.facadeId = f.Id;
+            o.renovation.paintHex = ColorUtility.ToHtmlStringRGB(f.color);
+            EventBus.Publish(new ObjectChanged(o.instanceId, true));
+            return Result.Success;
+        }
+
         /// <summary>Målarfärg på ett färdigt hus. Null = originalfärgen.</summary>
         public Result SetPaint(PlacedObjectState o, Color? color)
         {
@@ -122,6 +181,7 @@ namespace NG.Game
                 o.renovation.complete = true;
                 o.decayed = false;
                 RestoreAround(o);
+                if (AllHousesComplete()) RestoreStreet();
                 EventBus.Publish(new ObjectChanged(o.instanceId, true));
                 EventBus.Publish(new RenovationCompleted(o.instanceId));
                 GameSession.Message($"{def?.DisplayName ?? "Huset"} är färdigrenoverat!");
@@ -139,7 +199,7 @@ namespace NG.Game
             float r2 = _s.Config.restoreRadius * _s.Config.restoreRadius;
             foreach (var o in _s.World.Objects)
             {
-                if (!o.decayed || o == house) continue;
+                if (!o.decayed || o == house || o.restoreWithStreet) continue;
                 var pos = _s.World.CellToWorld(_s.World.Def(o), o.x, o.y, o.rotation);
                 if ((pos - center).sqrMagnitude > r2) continue;
                 o.decayed = false;

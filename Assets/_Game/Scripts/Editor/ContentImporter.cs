@@ -35,9 +35,68 @@ namespace NG.EditorTools
             ImportGameConfig(placeables);
             var neighbors = ImportNeighbors(placeables);
             int quests = ImportQuests(neighbors, placeables, resources);
+            int facades = ImportFacades(placeables);
+            Prune();
             AssetDatabase.SaveAssets();
             Debug.Log($"[NG Content] Klart: {resources.Count} varor, {placeables.Count} objekt, {recipes.Count} recept, " +
-                      $"{neighbors.Count} grannar, {quests} uppdrag.");
+                      $"{neighbors.Count} grannar, {quests} uppdrag, {facades} fasader.");
+        }
+
+        // ---------- Fasader ----------
+
+        static int ImportFacades(Dictionary<string, PlaceableDefinition> placeables)
+        {
+            var rows = ReadCsv("facades.csv");
+            foreach (var row in rows)
+            {
+                string id = row["id"];
+                var def = LoadOrCreate<FacadeDefinition>($"{NGEditorPaths.GameRoot}/Content/Facades/FAC_{Title(id)}.asset", typeof(FacadeDefinition));
+                def.EditorSetId(id);
+                def.fallbackName = row["name"];
+                def.house = placeables.TryGetValue(row["house"], out var h) ? h as RenovatableDefinition : null;
+                if (def.house == null) Debug.LogWarning($"[NG Content] facades.csv: {id} pekar på okänt hus '{row["house"]}'.");
+                def.unlockLevel = Int(row, "unlock", 1);
+                def.color = NGEditorPaths.Hex(row["color"]);
+                def.coinCost = Int(row, "coins", 0);
+                Register(def, $"facade/{id}");
+            }
+            return rows.Count;
+        }
+
+        // ---------- Städning ----------
+
+        /// <summary>
+        /// Tar bort innehåll som inte längre finns i CSV-filerna (t.ex. det gamla bondgårdsinnehållet), så att det
+        /// inte dyker upp i butiken. Definitioner med en riktig modell rörs inte, bara loggas.
+        /// </summary>
+        static void Prune()
+        {
+            var wanted = new HashSet<string>();
+            foreach (var file in new[] { "content.csv", "resources.csv", "recipes.csv", "neighbors.csv", "quests.csv", "facades.csv" })
+                foreach (var row in ReadCsv(file)) wanted.Add(row["id"]);
+            wanted.Add("game_config");
+
+            int removed = 0;
+            foreach (var guid in AssetDatabase.FindAssets("t:DefinitionBase", new[] { NGEditorPaths.GameRoot + "/Content" }))
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                var def = AssetDatabase.LoadAssetAtPath<DefinitionBase>(path);
+                if (def == null || wanted.Contains(def.Id)) continue;
+                if (def is PlaceableDefinition pd)
+                {
+                    string prefabPath = pd.prefab != null && pd.prefab.RuntimeKeyIsValid() ? AssetDatabase.GUIDToAssetPath(pd.prefab.AssetGUID) : null;
+                    var prefab = prefabPath != null ? AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath) : null;
+                    if (prefab != null && prefab.GetComponent<PlaceholderMarker>() == null)
+                    {
+                        Debug.LogWarning($"[NG Content] {def.Id} finns inte i content.csv men har en riktig modell. Lägg till en rad eller ta bort modellen.", def);
+                        continue;
+                    }
+                    if (prefabPath != null) AssetDatabase.DeleteAsset(prefabPath);
+                }
+                AssetDatabase.DeleteAsset(path);
+                removed++;
+            }
+            if (removed > 0) Debug.Log($"[NG Content] Tog bort {removed} gamla definitioner som inte längre finns i CSV-filerna.");
         }
 
         // ---------- Grannar och uppdrag ----------
@@ -107,6 +166,7 @@ namespace NG.EditorTools
                 case "deliver": o.type = ObjectiveType.Deliver; break;
                 case "level": o.type = ObjectiveType.ReachLevel; break;
                 case "collect": o.type = ObjectiveType.Collect; break;
+                case "clear": o.type = ObjectiveType.Clear; break;
                 default: Debug.LogWarning($"[NG Content] quests.csv: {questId} har okänd måltyp '{p[0]}'."); break;
             }
             if (o.type == ObjectiveType.Deliver || o.type == ObjectiveType.ReachLevel)
@@ -117,7 +177,8 @@ namespace NG.EditorTools
             o.targetId = p.Length > 1 ? p[1] : "*";
             o.amount = p.Length > 2 ? int.Parse(p[2], CultureInfo.InvariantCulture) : 1;
             bool known = o.targetId == "*" ||
-                         (o.type == ObjectiveType.Renovate || o.type == ObjectiveType.Own ? placeables.ContainsKey(o.targetId) : resources.ContainsKey(o.targetId));
+                         (o.type == ObjectiveType.Renovate || o.type == ObjectiveType.Own || o.type == ObjectiveType.Clear
+                             ? placeables.ContainsKey(o.targetId) : resources.ContainsKey(o.targetId));
             if (!known) Debug.LogWarning($"[NG Content] quests.csv: {questId} pekar på okänt id '{o.targetId}'.");
             return o;
         }
@@ -181,6 +242,18 @@ namespace NG.EditorTools
                         break;
                     case ProductionDefinition prod:
                         prod.queueSize = p.TryGetValue("queue", out var q) ? int.Parse(q, CultureInfo.InvariantCulture) : 3;
+                        break;
+                    case CommunityDefinition community:
+                        // income=mynt/xp/sekunder
+                        var inc = IntList(p, "income", new[] { 20, 5, 300 });
+                        community.incomeCoins = inc[0];
+                        community.incomeXp = inc.Length > 1 ? inc[1] : 0;
+                        community.incomeIntervalSec = inc.Length > 2 ? inc[2] : 300;
+                        break;
+                    case ClutterDefinition clutter:
+                        clutter.action = p.TryGetValue("action", out var act) && act == "water" ? ClutterAction.Water : ClutterAction.Clear;
+                        clutter.clearXp = p.TryGetValue("xp", out var cx) ? int.Parse(cx, CultureInfo.InvariantCulture) : 2;
+                        clutter.clearCoins = p.TryGetValue("coins", out var cc) ? int.Parse(cc, CultureInfo.InvariantCulture) : 0;
                         break;
                 }
 
@@ -291,7 +364,9 @@ namespace NG.EditorTools
                     definition = def,
                     cell = new Vector2Int(Int(row, "x", 0), Int(row, "y", 0)),
                     rotation = Int(row, "rot", 0),
-                    decayed = Int(row, "decayed", 0) != 0
+                    // decayed: 0 = färg, 1 = grått tills närmaste hus är renoverat, 2 = grått tills hela gatan är klar
+                    decayed = Int(row, "decayed", 0) != 0,
+                    restoreWithStreet = Int(row, "decayed", 0) == 2
                 });
             }
 
@@ -328,6 +403,8 @@ namespace NG.EditorTools
         {
             "house" => PlaceableCategory.House,
             "production" => PlaceableCategory.Production,
+            "community" => PlaceableCategory.Community,
+            "clutter" => PlaceableCategory.Clutter,
             "crop" or "flower" => PlaceableCategory.Plant,
             "tree" => PlaceableCategory.Tree,
             "bush" => PlaceableCategory.Hedge,
@@ -341,6 +418,8 @@ namespace NG.EditorTools
         {
             "house" => typeof(RenovatableDefinition),
             "production" => typeof(ProductionDefinition),
+            "community" => typeof(CommunityDefinition),
+            "clutter" => typeof(ClutterDefinition),
             "crop" or "flower" or "tree" or "bush" => typeof(PlantDefinition),
             _ => typeof(PlaceableDefinition)
         };

@@ -1,19 +1,27 @@
-# Varor i lagret. unlock = nivå då varan kan dyka upp i beställningar. price = grundvärde (styr beställningarnas belöning).
+# Varor i lagret. unlock = nivå då varan kan dyka upp på Grannskapstavlan. price = grundvärde (styr belöningen).
 id,name,unlock,price,color
-wheat,Vete,1,2,#F2CF5B
-flowers,Blommor,1,3,#FF8FB8
-carrot,Morot,2,4,#FF8A3D
-bread,Bröd,2,12,#D9A05B
-tomato,Tomat,4,6,#FF5A4E
-salad,Sallad,4,30,#7FD35B
-bouquet,Bukett,5,14,#FF6FA5
-fertilizer,Gödsel,5,30,#8B6B4A
-corn,Majs,6,7,#FFE15A
-popcorn,Popcorn,6,25,#FFF4C2
-apple,Äpple,7,8,#E8423A
-juice,Äppeljuice,7,30,#FFB347
-strawberry,Jordgubbe,8,9,#FF4F7B
-jam,Sylt,8,32,#C2185B
-wreath,Blomsterkrans,9,40,#E58FD0
-pumpkin,Pumpa,12,18,#FF9A1F
-pie,Paj,12,80,#E0A060
+# Skörd från trädgårdarna
+rose,Ros,0,3,#FF7FB0
+wildflower,Ängsblomma,0,2,#FFE04D
+tulip,Tulpan,1,4,#FF4D4D
+sunflower,Solros,1,5,#FFC93C
+lilac,Syren,1,6,#B58CE0
+lavender,Lavendel,2,6,#A77BFF
+apple,Äpple,2,5,#E8423A
+hydrangea,Hortensia,3,8,#7FA8FF
+dahlia,Dahlia,4,9,#FF9A1F
+plum,Plommon,4,8,#7A4A9E
+currant,Vinbär,4,7,#D0283C
+peony,Pion,5,12,#FFB3C8
+# Blomsteraffären
+bouquet_wild,Ängsbukett,1,12,#FFF0A0
+bouquet_tulip,Tulpanbukett,1,18,#FF7070
+bouquet_rose_circle,Rosencirkel-bukett,2,30,#FF9FC4
+wreath_lilac,Syrenkrans,3,40,#C9A6F0
+arrangement_summer,Sommararrangemang,4,70,#FFB347
+bouquet_peony,Pionbukett,5,80,#FFC4D6
+# Kvartersaffären
+apple_juice,Äppelmust,3,25,#F7C04A
+currant_cordial,Vinbärssaft,4,32,#C2185B
+plum_jam,Plommonsylt,4,36,#6A2C7A
+picnic_basket,Picknickkorg,5,120,#C89B5E

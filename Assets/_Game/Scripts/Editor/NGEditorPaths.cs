@@ -42,6 +42,8 @@ namespace NG.EditorTools
             PlaceableCategory.Fence => "Fences",
             PlaceableCategory.Water => "Water",
             PlaceableCategory.Production => "Buildings",
+            PlaceableCategory.Community => "Buildings",
+            PlaceableCategory.Clutter => "Clutter",
             PlaceableCategory.Path => "Ground",
             _ => "Decor"
         };
@@ -54,12 +56,14 @@ namespace NG.EditorTools
         {
             "house" or "shed" => PlaceableCategory.House,
             "production" or "shop" or "store" or "building" => PlaceableCategory.Production,
+            "community" or "play" => PlaceableCategory.Community,
+            "clutter" or "weed" => PlaceableCategory.Clutter,
             "plant" or "flower" or "crop" => PlaceableCategory.Plant,
             "tree" => PlaceableCategory.Tree,
             "hedge" or "bush" => PlaceableCategory.Hedge,
             "fence" => PlaceableCategory.Fence,
             "water" or "pool" or "pond" => PlaceableCategory.Water,
-            "path" or "tile" or "road" or "ground" or "patio" => PlaceableCategory.Path,
+            "path" or "tile" or "road" or "ground" or "patio" or "sidewalk" => PlaceableCategory.Path,
             _ => PlaceableCategory.Decor
         };
 
@@ -68,6 +72,8 @@ namespace NG.EditorTools
         {
             PlaceableCategory.House => 6000,
             PlaceableCategory.Production => 6000,
+            PlaceableCategory.Community => 4000,
+            PlaceableCategory.Clutter => 200,
             PlaceableCategory.Tree => 1500,
             PlaceableCategory.Hedge => 500,
             PlaceableCategory.Plant => 200,

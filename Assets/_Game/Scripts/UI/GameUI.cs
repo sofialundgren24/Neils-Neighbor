@@ -28,12 +28,12 @@ namespace NG.UI
 
         static readonly (string label, PlaceableCategory[] cats)[] ShopTabs =
         {
-            ("Byggnader", new[] { PlaceableCategory.Production, PlaceableCategory.House }),
-            ("Växter", new[] { PlaceableCategory.Plant }),
-            ("Träd", new[] { PlaceableCategory.Tree, PlaceableCategory.Hedge }),
+            ("Kvarter", new[] { PlaceableCategory.Production, PlaceableCategory.Community, PlaceableCategory.House }),
+            ("Blommor", new[] { PlaceableCategory.Plant }),
+            ("Träd & buskar", new[] { PlaceableCategory.Tree, PlaceableCategory.Hedge }),
             ("Dekor", new[] { PlaceableCategory.Decor, PlaceableCategory.Water }),
             ("Staket", new[] { PlaceableCategory.Fence }),
-            ("Mark", new[] { PlaceableCategory.Path })
+            ("Mark & sten", new[] { PlaceableCategory.Path })
         };
 
         static readonly Color[] PaintColors =
@@ -205,6 +205,19 @@ namespace NG.UI
             bar.AddToClassList("topbar");
             _root.Add(bar);
 
+            var profileChip = Chip(bar);
+            var avatar = new Label();
+            avatar.AddToClassList("avatar");
+            profileChip.Add(avatar);
+            var playerName = Text("", "chip-label");
+            profileChip.Add(playerName);
+            _topBinder.Add(() =>
+            {
+                avatar.text = _s.PlayerName.Substring(0, 1);
+                avatar.EnableInClassList("avatar-sofia", _s.State.character == "sofia");
+                playerName.text = _s.PlayerName;
+            });
+
             var levelChip = Chip(bar);
             var badge = new Label();
             badge.AddToClassList("level-badge");
@@ -229,10 +242,15 @@ namespace NG.UI
             gemChip.Add(Dot("gem-dot"));
             var gems = Text("", "chip-label");
             gemChip.Add(gems);
+            var charmChip = Chip(bar);
+            charmChip.Add(Dot("charm-dot"));
+            var charm = Text("", "chip-label");
+            charmChip.Add(charm);
             _topBinder.Add(() =>
             {
                 coins.text = _s.Wallet.Get(CurrencyType.Coins).ToString("N0");
                 gems.text = _s.Wallet.Get(CurrencyType.Gems).ToString("N0");
+                charm.text = $"Charm {_s.World.Charm}";
             });
 
             bar.Add(new VisualElement { pickingMode = PickingMode.Ignore, name = "spacer" });
@@ -244,9 +262,13 @@ namespace NG.UI
 
             _storageButton = Btn("Lager", () => Toggle(Window.Storage), "btn");
             bar.Add(_storageButton);
-            _ordersButton = Btn("Beställningar", () => Toggle(Window.Orders), "btn");
+            _ordersButton = Btn("Grannskapstavlan", () => Toggle(Window.Orders), "btn");
             bar.Add(_ordersButton);
-            _topBinder.Add(() => _ordersButton.text = $"Beställningar ({_s.Orders.Orders.Count})");
+            _topBinder.Add(() =>
+            {
+                _ordersButton.text = $"Grannskapstavlan ({_s.Orders.Orders.Count})";
+                _ordersButton.style.display = _s.Orders.IsUnlocked ? DisplayStyle.Flex : DisplayStyle.None;
+            });
             bar.Add(Btn("Debug", () => Toggle(Window.Debug), "btn"));
         }
 
@@ -329,6 +351,7 @@ namespace NG.UI
             else if (_s.Renovation.IsRenovatable(o)) BuildHousePanel(o);
             else if (def is PlantDefinition plant) BuildPlantPanel(o, plant);
             else if (def is ProductionDefinition prod) BuildProductionPanel(o, prod);
+            else if (def is CommunityDefinition community) BuildCommunityPanel(o, community);
             else if (o.decayed) p.Add(Text("Grått och slitet. Renovera huset intill så får det tillbaka färgen.", "small"));
             else p.Add(Text($"Skönhet +{def.beautyScore}", "small"));
 
@@ -350,19 +373,27 @@ namespace NG.UI
             if (reno.IsComplete(o))
             {
                 p.Add(Text("Färdigrenoverat!", "subtitle"));
-                p.Add(Text("Målarfärg", "small"));
-                var swatches = new VisualElement();
-                swatches.AddToClassList("wrap");
-                foreach (var c in PaintColors)
+                p.Add(Text("Fasad", "small"));
+                var original = Btn("Original", () => Report(reno.SetFacade(o, null)), "btn");
+                if (string.IsNullOrEmpty(o.renovation.facadeId)) original.AddToClassList("tab-active");
+                p.Add(original);
+                foreach (var f in reno.Facades(o).OrderBy(f => f.unlockLevel))
                 {
-                    var color = c;
-                    var sw = new Button(() => Report(reno.SetPaint(o, color)));
+                    var facade = f;
+                    bool unlocked = reno.IsFacadeUnlocked(facade);
+                    string facadeCost = facade.coinCost > 0 ? $" · {facade.coinCost} mynt" : "";
+                    var row = Row();
+                    var sw = new VisualElement();
                     sw.AddToClassList("swatch");
-                    sw.style.backgroundColor = color;
-                    swatches.Add(sw);
+                    sw.style.backgroundColor = facade.color;
+                    row.Add(sw);
+                    var btn = Btn(unlocked ? facade.DisplayName + facadeCost : $"{facade.DisplayName} – nivå {facade.unlockLevel}",
+                        () => Report(reno.SetFacade(o, facade)), "btn", "grow");
+                    if (o.renovation.facadeId == facade.Id) btn.AddToClassList("tab-active");
+                    btn.SetEnabled(unlocked);
+                    row.Add(btn);
+                    p.Add(row);
                 }
-                p.Add(swatches);
-                p.Add(Btn("Originalfärg", () => Report(reno.SetPaint(o, null)), "btn"));
                 return;
             }
 
@@ -473,6 +504,25 @@ namespace NG.UI
                 scroll.Add(btn);
                 b.Add(() => btn.SetEnabled(prod.CanEnqueue(o, recipe, out _)));
             }
+        }
+
+        void BuildCommunityPanel(PlacedObjectState o, CommunityDefinition def)
+        {
+            var p = _selectionPanel;
+            var b = _selectionBinder;
+            var c = _s.Community;
+            p.Add(Text($"Ger {def.incomeCoins} mynt och {def.incomeXp} XP var {Fmt.Duration(def.incomeIntervalSec)}", "small"));
+            var status = Text("", "text");
+            p.Add(status);
+            p.Add(ProgressBar(() => o.income != null ? Timers.Progress(o.income) : 0f, b));
+            var collect = Btn("Hämta", () => Report(c.Collect(o)), "btn", "btn-primary", "btn-big");
+            p.Add(collect);
+            b.Add(() =>
+            {
+                bool ready = c.CanCollect(o);
+                status.text = ready ? "Redo att hämta!" : $"Nästa om {Fmt.Duration(c.Remaining(o))}";
+                collect.SetEnabled(ready);
+            });
         }
 
         void BuildExpansionPanel(MapExpansion e)
@@ -610,7 +660,7 @@ namespace NG.UI
 
         void BuildOrders(VisualElement w)
         {
-            WindowHeader(w, "Beställningar");
+            WindowHeader(w, "Grannskapstavlan");
             var b = _windowBinder;
             if (_s.Orders.Orders.Count == 0)
             {
@@ -625,6 +675,13 @@ namespace NG.UI
             {
                 var o = order;
                 var card = Card();
+                var nb = _s.Orders.Neighbor(o);
+                if (nb != null)
+                {
+                    var who = Text($"{nb.DisplayName} vill ha:", "subtitle");
+                    who.style.color = Color.Lerp(nb.color, Color.black, 0.4f);
+                    card.Add(who);
+                }
                 foreach (var item in o.items)
                 {
                     var it = item;
@@ -676,6 +733,8 @@ namespace NG.UI
 
         string CurrentModalKey()
         {
+            if (_s.NeedsTerms) return "terms";
+            if (_s.NeedsCharacter) return "character";
             if (_levelUps.Count > 0) return "level:" + _levelUps.Peek();
             var intro = _s.Quests.NextUnseenIntro();
             if (intro != null) return "intro:" + intro.questId;
@@ -689,7 +748,9 @@ namespace NG.UI
             _modalBinder.Clear();
             _modalLayer.Clear();
             if (key == null) return;
-            if (key.StartsWith("level:")) BuildLevelUp(_levelUps.Peek());
+            if (key == "terms") BuildTerms();
+            else if (key == "character") BuildCharacterSelect();
+            else if (key.StartsWith("level:")) BuildLevelUp(_levelUps.Peek());
             else if (key.StartsWith("intro:")) BuildIntro(_s.Quests.NextUnseenIntro());
             else if (key == "daily") BuildDaily();
         }
@@ -700,6 +761,66 @@ namespace NG.UI
             dim.AddToClassList("dim");
             _modalLayer.Add(dim);
             return dim;
+        }
+
+        /// <summary>Första start: villkor och integritetspolicy måste godkännas (krav för App Store och Google Play).</summary>
+        void BuildTerms()
+        {
+            var dim = Dim();
+            dim.AddToClassList("dim-soft");
+            var m = Panel("modal", dim);
+            m.Add(Text("Välkommen till Neil's Neighbor!", "title"));
+            m.Add(Text("Innan vi startar renoveringen av grannskapet behöver du godkänna våra användarvillkor och vår integritetspolicy.", "text"));
+            var links = Row();
+            links.Add(Btn("Läs villkoren", () => Application.OpenURL(_s.Config.termsUrl), "btn", "grow"));
+            links.Add(Btn("Integritetspolicy", () => Application.OpenURL(_s.Config.privacyUrl), "btn", "grow"));
+            m.Add(links);
+            var accept = new Toggle("Jag är över 13 år och godkänner användarvillkoren.");
+            accept.AddToClassList("check");
+            m.Add(accept);
+            var start = Btn("Börja spela!", () =>
+            {
+                if (!accept.value) return;
+                _s.AcceptTerms();
+                _boot?.Save();
+                _dirtyModal = true;
+            }, "btn", "btn-primary", "btn-big");
+            m.Add(start);
+            _modalBinder.Add(() => start.SetEnabled(accept.value));
+        }
+
+        void BuildCharacterSelect()
+        {
+            var dim = Dim();
+            dim.AddToClassList("dim-soft");
+            var m = Panel("modal", dim);
+            m.Add(Text("Vem flyttar in på Lindgatan?", "title"));
+            m.Add(Text("Välj din karaktär. Du kan inte byta senare.", "small"));
+            var row = Row();
+            row.Add(CharacterCard("neil", "Neil", "Händig och nyfiken. Har drömt om ett eget hus med veranda.", new Color(0.43f, 0.71f, 1f)));
+            row.Add(CharacterCard("sofia", "Sofia", "Kreativ och full av idéer. Ser skönheten i varje grått hus.", new Color(1f, 0.56f, 0.72f)));
+            m.Add(row);
+        }
+
+        VisualElement CharacterCard(string id, string name, string bio, Color color)
+        {
+            var card = Card();
+            card.AddToClassList("grow");
+            card.AddToClassList("character-card");
+            var portrait = new Label(name.Substring(0, 1));
+            portrait.AddToClassList("portrait");
+            portrait.style.backgroundColor = color;
+            card.Add(portrait);
+            card.Add(Text(name, "title"));
+            card.Add(Text(bio, "small"));
+            card.Add(Btn($"Spela som {name}", () =>
+            {
+                _s.ChooseCharacter(id);
+                _boot?.Save();
+                _dirtyModal = true;
+                _dirtyQuests = true;
+            }, "btn", "btn-primary"));
+            return card;
         }
 
         void BuildLevelUp(int level)
@@ -733,7 +854,7 @@ namespace NG.UI
             col.AddToClassList("grow");
             col.Add(Text(nb != null ? nb.DisplayName : "Granne", "title"));
             col.Add(Text(def.DisplayName, "subtitle"));
-            col.Add(Text(def.intro, "text"));
+            col.Add(Text(_s.Personalize(def.intro), "text"));
             col.Add(Btn("Okej!", () => { _s.Quests.MarkIntroSeen(q); _dirtyModal = true; }, "btn", "btn-primary", "btn-big"));
             box.Add(col);
         }
@@ -783,6 +904,7 @@ namespace NG.UI
                     else if (o.renovation?.active != null) text = $"Renoverar {Fmt.Duration(Timers.Remaining(o.renovation.active))}";
                     else if (_s.Production.ReadyCount(o) > 0) { text = $"Hämta ({_s.Production.ReadyCount(o)})"; action = () => Report(_s.Production.Collect(obj)); }
                     else if (_s.Growth.CanHarvest(o)) { text = "Skörda"; action = () => Report(_s.Growth.Harvest(obj)); }
+                    else if (_s.Community.CanCollect(o)) { text = "Hämta"; action = () => Report(_s.Community.Collect(obj)); }
                     else if (_s.Production.IsWorking(o)) text = Fmt.Duration(_s.Production.CurrentRemaining(o));
                     else if (_s.Renovation.CanStartNext(o, out _)) { text = "Renovera!"; action = () => _ia.Select(obj.instanceId); }
                     if (text == null || !_world.TryGetTop(o.instanceId, out var top)) continue;

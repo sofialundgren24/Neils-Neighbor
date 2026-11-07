@@ -13,7 +13,11 @@ namespace NG.Data
         Decor,
         Water,
         Path,
-        Production
+        Production,
+        /// <summary>Kvartersbyggnader som ger mynt/XP med jämna mellanrum: lekpark, skola.</summary>
+        Community,
+        /// <summary>Skräp på startgatan: ogräs att rensa, torrt gräs att vattna.</summary>
+        Clutter
     }
 
     public enum CurrencyType
@@ -78,6 +82,6 @@ namespace NG.Data
     {
         public string id = "classic";
         public Color color = Color.white;
-        [Min(1)] public int unlockLevel = 1;
+        [Min(0)] public int unlockLevel = 1;
     }
 }

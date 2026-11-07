@@ -359,6 +359,8 @@ namespace NG.EditorTools
             bool hasStages = PlaceableView.FindVariants(instance.transform).Any(t => t.name.StartsWith("Stage"));
             if (category == PlaceableCategory.House) return ScriptableObject.CreateInstance<RenovatableDefinition>();
             if (category == PlaceableCategory.Production) return ScriptableObject.CreateInstance<ProductionDefinition>();
+            if (category == PlaceableCategory.Community) return ScriptableObject.CreateInstance<CommunityDefinition>();
+            if (category == PlaceableCategory.Clutter) return ScriptableObject.CreateInstance<ClutterDefinition>();
             if (hasStages || NGEditorPaths.IsFoliage(category)) return ScriptableObject.CreateInstance<PlantDefinition>();
             return ScriptableObject.CreateInstance<PlaceableDefinition>();
         }

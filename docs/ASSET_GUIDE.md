@@ -17,10 +17,10 @@ Id i `content.csv` → filnamn i TitleCase:
 
 | id i content.csv | Modell | Textur |
 | --- | --- | --- |
-| `house_townhouse` | `SM_House_Townhouse.fbx` | `T_House_Townhouse.png` |
-| `production_store` | `SM_Production_Store.fbx` | `T_Production_Store.png` |
-| `crop_wheat` | `SM_Crop_Wheat.fbx` | `T_Crop_Wheat.png` |
-| `decor_bench` | `SM_Decor_Bench.fbx` | `T_Decor_Bench.png` |
+| `house_classic` | `SM_House_Classic.fbx` | `T_House_Classic.png` |
+| `shop_flower` | `SM_Shop_Flower.fbx` | `T_Shop_Flower.png` |
+| `play_swing_set` | `SM_Play_Swing_Set.fbx` | `T_Play_Swing_Set.png` |
+| `decor_bench_wood` | `SM_Decor_Bench_Wood.fbx` | `T_Decor_Bench_Wood.png` |
 
 Stämmer namnet hamnar modellen på samma prefab som platshållaren, och allt i spelet (butiken, startgatan,
 sparfiler) pekar automatiskt på den nya modellen.
@@ -32,8 +32,8 @@ Varje variant är ett eget objekt på toppnivå i Blender-filen, med exakt detta
 | Typ | Varianter |
 | --- | --- |
 | Hus (`house_*`) | `Phase0_Decayed`, `Phase1_Repaired`, `Phase2_Painted`, `Phase3_Decorated`, `Scaffold` |
-| Butiker (`production_*`) | själva byggnaden + `Scaffold` |
-| Växter, träd, buskar | `Stage0_Sprout`, `Stage1_Growing`, `Stage2_Bloom` |
+| Affärer och kvartersbyggnader (`shop_*`, `community_*`, `play_*`) | själva byggnaden + `Scaffold` |
+| Blommor, träd, buskar | `Stage0_Sprout`, `Stage1_Growing`, `Stage2_Bloom` |
 | Allt annat | inga varianter behövs |
 
 `Scaffold` (byggnadsställning) visas medan något byggs eller renoveras. Spelet visar en variant i taget.
@@ -106,6 +106,8 @@ spara som CSV och kör **NG → Content → Import All** i Unity.
 | Fil | Innehåll |
 | --- | --- |
 | `content.csv` | Allt som kan placeras: pris, byggtid, XP, nivå, fotavtryck, växttid, skörd |
+| `facades.csv` | Husens fasader/färgvarianter per nivå |
+| `neighbors.csv`, `quests.csv` | Grannarna och deras uppdrag (tutorialen är de första) |
 | `resources.csv` | Varor: pris och från vilken nivå de dyker upp i beställningar |
 | `recipes.csv` | Recept i affären och trädgårdsbutiken |
 | `levels.csv` | XP per nivå och belöningar (`python Tools/balance/generate_levels.py 30`) |

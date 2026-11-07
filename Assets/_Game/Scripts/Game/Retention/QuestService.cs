@@ -26,6 +26,7 @@ namespace NG.Game
             EventBus.Subscribe<ItemsHarvested>(OnHarvested);
             EventBus.Subscribe<ItemsProduced>(OnProduced);
             EventBus.Subscribe<OrderDelivered>(OnDelivered);
+            EventBus.Subscribe<ClutterCleared>(OnCleared);
         }
 
         public void Dispose()
@@ -33,6 +34,7 @@ namespace NG.Game
             EventBus.Unsubscribe<ItemsHarvested>(OnHarvested);
             EventBus.Unsubscribe<ItemsProduced>(OnProduced);
             EventBus.Unsubscribe<OrderDelivered>(OnDelivered);
+            EventBus.Unsubscribe<ClutterCleared>(OnCleared);
         }
 
         public IReadOnlyList<QuestProgress> Active => _s.State.quests;
@@ -105,6 +107,7 @@ namespace NG.Game
                 ObjectiveType.Deliver => "Leverera beställningar",
                 ObjectiveType.ReachLevel => $"Nå nivå {o.amount}",
                 ObjectiveType.Collect => $"Samla {target}",
+                ObjectiveType.Clear => o.targetId == "*" ? "Städa tomterna" : ClearVerb(o.targetId) + " " + target.ToLowerInvariant(),
                 _ => o.type.ToString()
             };
             return o.type == ObjectiveType.ReachLevel || o.type == ObjectiveType.Renovate
@@ -133,7 +136,7 @@ namespace NG.Game
             _s.Progression.AddXp(def.rewardXp);
             EventBus.Publish(new QuestsChanged());
             if (!string.IsNullOrEmpty(def.outro))
-                GameSession.Message($"{def.neighbor?.DisplayName ?? "Grannen"}: {def.outro}");
+                GameSession.Message($"{def.neighbor?.DisplayName ?? "Grannen"}: {_s.Personalize(def.outro)}");
             Activate();
             return Result.Success;
         }
@@ -185,5 +188,9 @@ namespace NG.Game
         void OnHarvested(ItemsHarvested e) => Count(ObjectiveType.Harvest, e.ResourceId, e.Amount);
         void OnProduced(ItemsProduced e) => Count(ObjectiveType.Produce, e.ResourceId, e.Amount);
         void OnDelivered(OrderDelivered e) => Count(ObjectiveType.Deliver, null, 1);
+        void OnCleared(ClutterCleared e) => Count(ObjectiveType.Clear, e.DefinitionId, 1);
+
+        string ClearVerb(string defId) =>
+            _s.Content.TryGet<ClutterDefinition>(defId, out var c) && c.action == ClutterAction.Water ? "Vattna" : "Rensa";
     }
 }

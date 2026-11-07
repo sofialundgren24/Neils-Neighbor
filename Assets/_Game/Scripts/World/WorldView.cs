@@ -99,8 +99,25 @@ namespace NG.World
             if (_views.TryGetValue(e.InstanceId, out var v))
             {
                 _views.Remove(e.InstanceId);
-                if (v != null && !Addressables.ReleaseInstance(v.gameObject)) Destroy(v.gameObject);
+                if (v != null) StartCoroutine(Poof(v.gameObject));
             }
+        }
+
+        /// <summary>Krymper och snurrar bort ett objekt (ogräs som rensas, något som säljs) i stället för att det bara försvinner.</summary>
+        System.Collections.IEnumerator Poof(GameObject go)
+        {
+            foreach (var c in go.GetComponentsInChildren<Collider>()) c.enabled = false;
+            var start = go.transform.localScale;
+            float t = 0f;
+            while (t < 1f && go != null)
+            {
+                t += Time.unscaledDeltaTime / 0.25f;
+                float k = 1f - Mathf.Clamp01(t);
+                go.transform.localScale = start * (k * (1f + 0.3f * Mathf.Sin(k * Mathf.PI)));
+                go.transform.Rotate(0f, 720f * Time.unscaledDeltaTime, 0f);
+                yield return null;
+            }
+            if (go != null && !Addressables.ReleaseInstance(go)) Destroy(go);
         }
 
         void OnExpansionUnlocked(ExpansionUnlocked e)

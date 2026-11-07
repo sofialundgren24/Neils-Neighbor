@@ -1,7 +1,7 @@
-# Grannarna på gatan. house = id på huset de bor i (content.csv). color = porträttfärg tills riktiga porträtt finns.
+# Grannarna på Lindgatan. house = id på huset de bor i (content.csv). color = porträttfärg tills riktiga porträtt finns.
 id,name,house,color,bio
-greta,Greta,house_cottage,#9FD3F5,"Pensionerad trädgårdsmästare. Har bott på gatan i femtio år och minns hur fin den var."
-omar,Omar,house_townhouse,#F5B7A5,"Bagare som drömmer om att öppna gatans första affär igen."
-lina,Lina,house_bungalow,#FFE27A,"Konstnär och blomsterälskare. Vill måla hela gatan i pastell."
-familjen_berg,Familjen Berg,house_villa,#B9F0B0,"En stökig och glad barnfamilj som behöver en riktig trädgård att leka i."
-sven,Sven,house_cabin,#D7A6FF,"Tystlåten snickare som bygger allt själv. Bor längst bort på gatan."
+nora,Nora,house_cottage,#9FD3F5,"Bor i Lilla villan sedan femtio år. Minns hur vacker gatan var och vet allt om blommor."
+familjen_berg,Familjen Berg,house_classic,#F5B7A5,"En glad och stökig barnfamilj i Klassiska förortshuset. Barnen vill ha något att leka med."
+omar,Omar,house_twostory,#C9B8F0,"Driftig granne i Tvåvåningshuset som drömmer om att gatan ska få en egen affär igen."
+lina,Lina,house_corner,#B9F0B0,"Konstnär i Hörnhuset. Vill ha vatten, ljus och stilfulla New England-detaljer."
+sven,Sven,house_bungalow,#FFE27A,"Tystlåten snickare längst bort på gatan. Säger inte mycket, men ser allt."

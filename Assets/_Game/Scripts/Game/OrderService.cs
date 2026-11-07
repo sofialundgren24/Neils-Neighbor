@@ -44,8 +44,15 @@ namespace NG.Game
             EventBus.Publish(new OrdersChanged());
         }
 
+        /// <summary>Grannskapstavlan öppnas efter tutorialen.</summary>
+        public bool IsUnlocked => _s.Progression.Level >= _s.Config.ordersUnlockLevel;
+
+        public NeighborDefinition Neighbor(OrderState order) =>
+            order.neighborId != null && _s.Content.TryGet<NeighborDefinition>(order.neighborId, out var n) ? n : null;
+
         public void Tick()
         {
+            if (!IsUnlocked) return;
             if (Orders.Count >= _s.Config.orderSlots || TimeService.UnixNow < _s.State.nextOrderUnix) return;
             var order = Generate();
             _s.State.nextOrderUnix = TimeService.UnixNow + _s.Config.orderRefillSec;
@@ -69,6 +76,8 @@ namespace NG.Game
                 order.items.Add(new ResourceStack(res.Id, amount));
                 value += res.sellPrice * amount;
             }
+            var neighbors = _s.Content.AllOf<NeighborDefinition>().ToList();
+            if (neighbors.Count > 0) order.neighborId = neighbors[_rng.Next(neighbors.Count)].Id;
             order.coins = Mathf.Max(1, Mathf.RoundToInt(value * _s.Config.orderRewardMultiplier));
             order.xp = Mathf.Max(1, Mathf.CeilToInt(value * 0.5f));
             return order;

@@ -92,6 +92,13 @@ namespace NG.Core
 
     public readonly struct OrderDelivered { }
 
+    /// <summary>Spelaren rensade ogräs eller vattnade torrt gräs.</summary>
+    public readonly struct ClutterCleared
+    {
+        public readonly string DefinitionId;
+        public ClutterCleared(string definitionId) { DefinitionId = definitionId; }
+    }
+
     public readonly struct QuestsChanged { }
 
     /// <summary>Kort meddelande till spelaren, t.ex. "Inte tillräckligt med mynt".</summary>

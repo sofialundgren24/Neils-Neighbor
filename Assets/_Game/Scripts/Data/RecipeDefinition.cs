@@ -11,6 +11,6 @@ namespace NG.Data
         public ResourceAmount output;
         [Min(1)] public int durationSec = 60;
         [Min(0)] public int xpReward = 5;
-        [Min(1)] public int unlockLevel = 1;
+        [Min(0)] public int unlockLevel = 1;
     }
 }

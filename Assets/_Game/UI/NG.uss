@@ -144,3 +144,16 @@
 .day-box { width: 74px; height: 92px; margin: 3px; border-radius: 12px; background-color: #FFFFFF; border-width: 2px; border-color: #E9D3B4; -unity-text-align: middle-center; font-size: 13px; color: #5A3E2B; white-space: normal; }
 .day-today { background-color: #FFC94A; border-color: #D9A22A; }
 .day-done { opacity: 0.45; }
+
+/* ---------- Profil, charm, villkor, karaktärsval ---------- */
+.avatar {
+    width: 36px; height: 36px; border-radius: 18px; margin-right: 8px;
+    background-color: #6EB5FF; color: #FFFFFF; font-size: 18px; -unity-font-style: bold; -unity-text-align: middle-center;
+}
+.avatar-sofia { background-color: #FF8FB8; }
+.charm-dot { width: 22px; height: 22px; border-radius: 11px; background-color: #FF8FB8; margin-right: 6px; border-width: 2px; border-color: #D9628C; }
+.dim-soft { background-color: rgba(40, 40, 40, 0.55); }
+.check { margin: 8px 0; }
+.check Label { font-size: 16px; color: #5A3E2B; white-space: normal; }
+.character-card { align-items: center; margin: 6px; }
+.character-card .portrait { margin-right: 0; margin-bottom: 8px; }

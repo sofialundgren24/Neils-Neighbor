@@ -31,19 +31,21 @@ namespace NG.Data
     {
         public List<LevelRow> rows = new List<LevelRow>();
 
-        public int MaxLevel => rows.Count;
+        public int MaxLevel => rows.Count == 0 ? 0 : rows[rows.Count - 1].level;
 
+        /// <summary>Raden för en nivå. Tabellen får börja på nivå 0 (tutorialen).</summary>
         public LevelRow Get(int level)
         {
-            if (level < 1 || level > rows.Count) return null;
-            return rows[level - 1];
+            foreach (var r in rows)
+                if (r.level == level) return r;
+            return null;
         }
 
         /// <summary>XP till nästa nivå; faller tillbaka på formeln bortom tabellen så att spelet aldrig tar slut.</summary>
         public int XpToNext(int level)
         {
             var row = Get(level);
-            return row != null && row.xpToNext > 0 ? row.xpToNext : XpFormula.XpToNext(level);
+            return row != null && row.xpToNext > 0 ? row.xpToNext : XpFormula.XpToNext(System.Math.Max(1, level));
         }
     }
 }

@@ -1,7 +1,7 @@
-# Områden på kartan (celler à 0,5 m, kartan är 96 x 96). Startområdet ska ha level 1 och coins 0.
+# Områden på kartan (celler à 0,5 m, kartan är 96 x 96). Startområdet (Lindgatan) har level 0 och coins 0.
 id,name,x,y,w,h,level,coins
-start,Startgatan,16,20,64,48,1,0
-north,Bakgårdarna,16,68,64,28,4,500
-south,Ängen,16,0,64,20,8,1500
-west,Skogsbrynet,0,0,16,96,12,4000
-east,Strandvägen,80,0,16,96,16,8000
+start,Lindgatan,16,20,64,48,0,0
+north,Bakgårdarna,16,68,64,28,3,400
+south,Parkstråket,16,0,64,20,4,600
+west,Skogsbrynet,0,0,16,96,6,1500
+east,Sjövägen,80,0,16,96,8,3000

@@ -53,6 +53,11 @@ namespace NG.EditorTools
                 case "fence": BuildFence(model, w, d, h, spec.color); break;
                 case "ground": Prim(PrimitiveType.Cube, model, "Tile", new Vector3(0, h * 0.5f, 0), new Vector3(w, h, d), spec.color); break;
                 case "water": BuildWater(model, w, d, h, spec.color); break;
+                case "clutter": BuildClutter(model, w, d, h, spec.color, spec.id); break;
+                case "community":
+                    if (h >= 3f) BuildProduction(model, w, d, h, spec.color);
+                    else BuildPlayground(model, w, d, h, spec.color);
+                    break;
                 default: BuildDecor(model, w, d, h, spec.color); break;
             }
 
@@ -228,6 +233,37 @@ namespace NG.EditorTools
         {
             Prim(PrimitiveType.Cube, model, "Rim", new Vector3(0, 0.06f, 0), new Vector3(w, 0.12f, d), NGEditorPaths.Hex("#B9B4A8"));
             Prim(PrimitiveType.Cube, model, "Water", new Vector3(0, 0.07f, 0), new Vector3(w * 0.85f, 0.13f, d * 0.85f), color);
+        }
+
+        static void BuildClutter(Transform model, float w, float d, float h, Color color, string id)
+        {
+            if (id.Contains("grass"))
+            {
+                // Torr gräsplätt: platt brun ruta med några torra tuvor.
+                Prim(PrimitiveType.Cube, model, "Patch", new Vector3(0, 0.02f, 0), new Vector3(w * 0.95f, 0.04f, d * 0.95f), color);
+                for (int i = 0; i < 3; i++)
+                    Prim(PrimitiveType.Sphere, model, "Tuft", new Vector3((i - 1) * w * 0.28f, 0.06f, (i % 2 - 0.5f) * d * 0.3f),
+                        new Vector3(0.18f, 0.1f, 0.18f), Color.Lerp(color, Color.yellow, 0.25f));
+                return;
+            }
+            // Ogräs: spretiga tuvor.
+            for (int i = 0; i < 4; i++)
+            {
+                float a = i * 90f * Mathf.Deg2Rad;
+                Prim(PrimitiveType.Cube, model, "Leaf", new Vector3(Mathf.Cos(a) * 0.06f, h * 0.45f, Mathf.Sin(a) * 0.06f),
+                    new Vector3(0.05f, h * 0.9f, 0.12f), color, new Vector3(0, i * 45f, (i % 2 == 0 ? 20 : -20)));
+            }
+            Prim(PrimitiveType.Sphere, model, "Root", new Vector3(0, 0.04f, 0), new Vector3(0.25f, 0.08f, 0.25f), Soil);
+        }
+
+        static void BuildPlayground(Transform model, float w, float d, float h, Color color)
+        {
+            // Lekredskap: ram av stolpar + färgad del (gungsäte/rutschkana/sandlådekant).
+            Prim(PrimitiveType.Cube, model, "Base", new Vector3(0, 0.05f, 0), new Vector3(w * 0.9f, 0.1f, d * 0.9f), NGEditorPaths.Hex("#E8D6A8"));
+            foreach (float sx in new[] { -1f, 1f })
+                Prim(PrimitiveType.Cylinder, model, "Post", new Vector3(sx * w * 0.4f, h * 0.5f, 0), new Vector3(0.1f, h * 0.5f, 0.1f), Wood);
+            Prim(PrimitiveType.Cube, model, "Beam", new Vector3(0, h, 0), new Vector3(w * 0.85f, 0.1f, 0.1f), Wood);
+            Prim(PrimitiveType.Cube, model, "Play", new Vector3(0, h * 0.35f, 0), new Vector3(w * 0.4f, 0.12f, d * 0.4f), color);
         }
 
         static void BuildDecor(Transform model, float w, float d, float h, Color color)

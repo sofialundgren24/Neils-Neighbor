@@ -44,7 +44,7 @@ Material:
     - _WindSpeed: 1.6
     - _WindStrength: 0.06
     m_Colors:
-    - _BaseColor: {r: 0.29803923, g: 0.7607843, b: 0.18039216, a: 1}
+    - _BaseColor: {r: 0.4862745, g: 0.76862746, b: 0.3372549, a: 1}
     - _DirtColor: {r: 0.43, g: 0.41, b: 0.37, a: 1}
     - _PaintColor: {r: 1, g: 1, b: 1, a: 0}
     - _RimColor: {r: 1, g: 0.97, b: 0.9, a: 1}

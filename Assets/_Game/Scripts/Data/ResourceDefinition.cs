@@ -8,7 +8,7 @@ namespace NG.Data
     {
         [Min(1)] public int sellPrice = 1;
         [Tooltip("Från denna nivå kan varan dyka upp i beställningar.")]
-        [Min(1)] public int unlockLevel = 1;
+        [Min(0)] public int unlockLevel = 1;
         [Tooltip("Färg på platshållarikonen tills en riktig ikon finns.")]
         public Color color = Color.white;
     }

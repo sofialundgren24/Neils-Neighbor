@@ -20,6 +20,7 @@ namespace NG.Game
     ///   Orders       beställningstavlan
     ///   Quests       grannarnas uppdrag (och tutorialen)
     ///   Daily        daglig belöning
+    ///   Community    kvartersbyggnader som ger intäkter (lekpark, skola)
     ///
     /// Ren C# utan MonoBehaviour, så logiken kan testas utan scen. GameBootstrap skapar den och anropar Tick().
     /// Varje tjänst ligger i en egen fil i samma mapp (t.ex. QuestService.cs, DailyRewardService.cs).
@@ -40,6 +41,7 @@ namespace NG.Game
         public ProductionService Production { get; }
         public OrderService Orders { get; }
         public QuestService Quests { get; }
+        public CommunityService Community { get; }
         public DailyRewardService Daily { get; }
 
         public GameSession(ContentDatabase content, GameConfig config, PlayerState state)
@@ -57,6 +59,7 @@ namespace NG.Game
             Production = new ProductionService(this);
             Orders = new OrderService(this);
             Quests = new QuestService(this);
+            Community = new CommunityService(this);
             Daily = new DailyRewardService(this);
         }
 
@@ -74,7 +77,7 @@ namespace NG.Game
 
             State.wallet[CurrencyType.Coins] = Config.startCoins;
             State.wallet[CurrencyType.Gems] = Config.startGems;
-            foreach (var e in Config.expansions.Where(e => e.requiredLevel <= 1 && e.coinCost == 0))
+            foreach (var e in Config.expansions.Where(e => e.requiredLevel <= State.level && e.coinCost == 0))
                 State.unlockedExpansions.Add(e.id);
 
             World.RebuildGrid();
@@ -96,6 +99,19 @@ namespace NG.Game
         }
 
         public static void Message(string text) => EventBus.Publish(new GameMessage(text));
+
+        /// <summary>Spelarens namn (Neil eller Sofia).</summary>
+        public string PlayerName => State.character == "neil" ? "Neil" : State.character == "sofia" ? "Sofia" : "granne";
+
+        /// <summary>Byter {namn} i grannarnas repliker mot spelarens namn.</summary>
+        public string Personalize(string text) => text?.Replace("{namn}", PlayerName);
+
+        public bool NeedsTerms => State.termsAcceptedVersion < Config.termsVersion;
+        public bool NeedsCharacter => string.IsNullOrEmpty(State.character);
+
+        public void AcceptTerms() => State.termsAcceptedVersion = Config.termsVersion;
+
+        public void ChooseCharacter(string id) => State.character = id;
     }
 
     /// <summary>Svar från en handling: lyckades den, och annars varför inte (visas för spelaren).</summary>
