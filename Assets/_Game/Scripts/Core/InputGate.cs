@@ -31,9 +31,13 @@ namespace NG.Core
         public static void AddGuiRect(Rect guiRect) =>
             Building.Add(new Rect(guiRect.x, Screen.height - guiRect.yMax, guiRect.width, guiRect.height));
 
+        /// <summary>UI Toolkit-gränssnittet (GameUI) svarar på om en skärmpunkt träffar UI.</summary>
+        public static System.Func<Vector2, bool> UiHitTest;
+
         public static bool IsOverUi(Vector2 screenPos)
         {
             if (ModalOpen) return true;
+            if (UiHitTest != null && UiHitTest(screenPos)) return true;
             foreach (var r in UiRects)
                 if (r.Contains(screenPos)) return true;
             return false;
@@ -46,6 +50,7 @@ namespace NG.Core
             Building.Clear();
             WorldDragCaptured = false;
             ModalOpen = false;
+            UiHitTest = null;
         }
     }
 }

@@ -1,0 +1,146 @@
+/*
+ * Neighborhood Garden – UI-stil.
+ * Allt utseende i spelets UI styrs härifrån: färger, rundning, storlekar, typsnitt.
+ * Byt färgerna nedan (eller lägg till bakgrundsbilder med background-image) för att ge UI:t den slutliga looken.
+ * Koden (GameUI.cs) sätter bara klassnamn, så den behöver inte ändras.
+ *
+ * Färger:
+ *   kräm       #FFF8EC   paneler
+ *   brun text  #5A3E2B
+ *   grön       #6CC24A   bekräfta/hämta
+ *   guld       #FFC94A   mynt/belöning
+ *   blå        #6EC6FF   XP
+ *   lila       #B57BFF   diamanter
+ */
+
+.root { flex-grow: 1; }
+
+/* ---------- Paneler ---------- */
+.panel {
+    background-color: rgba(255, 248, 236, 0.96);
+    border-radius: 18px;
+    border-width: 3px;
+    border-color: #E9D3B4;
+    padding: 10px 12px;
+    color: #5A3E2B;
+}
+.card {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    border-width: 2px;
+    border-color: #F0E0C8;
+    padding: 8px 10px;
+    margin-bottom: 8px;
+}
+
+/* ---------- Text ---------- */
+.title { font-size: 26px; -unity-font-style: bold; color: #5A3E2B; margin-bottom: 4px; }
+.subtitle { font-size: 19px; -unity-font-style: bold; color: #5A3E2B; }
+.text { font-size: 17px; color: #5A3E2B; white-space: normal; }
+.small { font-size: 14px; color: #8A6E58; white-space: normal; }
+.warn { font-size: 14px; color: #D2553F; white-space: normal; }
+.neighbor-name { font-size: 14px; -unity-font-style: bold; }
+
+/* ---------- Knappar ---------- */
+.btn {
+    background-color: #FFE7B8;
+    border-radius: 12px;
+    border-width: 0;
+    border-bottom-width: 4px;
+    border-color: #D9B57A;
+    color: #5A3E2B;
+    font-size: 16px;
+    -unity-font-style: bold;
+    padding: 6px 12px;
+    margin: 3px;
+    min-height: 40px;
+    white-space: normal;
+    transition-duration: 0.08s;
+}
+.btn:hover { background-color: #FFF0CF; }
+.btn:active { scale: 0.95 0.95; }
+.btn:disabled { opacity: 0.45; }
+.btn-primary { background-color: #6CC24A; border-color: #4A9A2E; color: #FFFFFF; }
+.btn-primary:hover { background-color: #7FD35B; }
+.btn-gold { background-color: #FFC94A; border-color: #D9A22A; color: #5A3E2B; }
+.btn-gold:hover { background-color: #FFD66E; }
+.btn-gem { background-color: #B57BFF; border-color: #8A52D6; color: #FFFFFF; }
+.btn-big { font-size: 24px; min-height: 60px; border-radius: 16px; }
+.btn-close { width: 40px; min-width: 40px; background-color: #F3B0A0; border-color: #CF8573; color: #FFFFFF; }
+
+/* ---------- Toppfält ---------- */
+.topbar {
+    position: absolute; left: 10px; right: 10px; top: 8px;
+    flex-direction: row; align-items: center;
+}
+.chip {
+    flex-direction: row; align-items: center;
+    background-color: rgba(255, 248, 236, 0.96);
+    border-radius: 22px; border-width: 3px; border-color: #E9D3B4;
+    padding: 4px 14px; margin-right: 8px; min-height: 44px;
+}
+.chip-label { font-size: 19px; -unity-font-style: bold; color: #5A3E2B; }
+.level-badge {
+    width: 42px; height: 42px; border-radius: 21px;
+    background-color: #6EC6FF; margin-right: 8px;
+    -unity-text-align: middle-center; font-size: 20px; -unity-font-style: bold; color: #FFFFFF;
+}
+.coin-dot { width: 22px; height: 22px; border-radius: 11px; background-color: #FFC94A; margin-right: 6px; border-width: 2px; border-color: #D9A22A; }
+.gem-dot { width: 22px; height: 22px; border-radius: 6px; background-color: #B57BFF; margin-right: 6px; rotate: 45deg; border-width: 2px; border-color: #8A52D6; }
+.spacer { flex-grow: 1; }
+
+/* ---------- Mätare ---------- */
+.bar { height: 14px; border-radius: 7px; background-color: #E9D3B4; overflow: hidden; flex-grow: 1; }
+.bar-fill { height: 100%; border-radius: 7px; background-color: #6CC24A; }
+.bar-xp { width: 150px; flex-grow: 0; }
+.bar-xp > .bar-fill { background-color: #6EC6FF; }
+
+/* ---------- Layout ---------- */
+.quest-panel { position: absolute; left: 10px; top: 66px; width: 300px; max-height: 70%; }
+.selection-panel { position: absolute; right: 10px; top: 66px; width: 340px; max-height: 80%; }
+.build-button { position: absolute; left: 12px; bottom: 12px; width: 150px; }
+.placing-bar { position: absolute; bottom: 12px; left: 25%; right: 25%; }
+.window { position: absolute; left: 15%; right: 15%; top: 70px; bottom: 90px; }
+.row { flex-direction: row; align-items: center; }
+.wrap { flex-direction: row; flex-wrap: wrap; }
+.grow { flex-grow: 1; }
+
+/* ---------- Butik ---------- */
+.tab { min-height: 36px; font-size: 15px; background-color: #F3E3C7; }
+.tab-active { background-color: #FFC94A; }
+.shop-item { width: 150px; height: 110px; -unity-text-align: middle-center; font-size: 15px; }
+.swatch { width: 44px; height: 40px; border-radius: 10px; margin: 3px; border-width: 3px; border-color: #FFFFFF; }
+
+/* ---------- Bubblor över objekt ---------- */
+.bubble {
+    position: absolute;
+    background-color: rgba(255, 252, 244, 0.95);
+    border-radius: 14px; border-width: 2px; border-color: #E9D3B4;
+    padding: 3px 10px; font-size: 14px; color: #5A3E2B; -unity-font-style: bold;
+    min-height: 0; margin: 0;
+}
+.bubble-action { background-color: #6CC24A; border-color: #4A9A2E; color: #FFFFFF; font-size: 16px; padding: 5px 12px; }
+.pointer {
+    position: absolute;
+    background-color: #FFC94A; border-radius: 16px; border-width: 3px; border-color: #D9A22A;
+    padding: 4px 14px; font-size: 20px; -unity-font-style: bold; color: #5A3E2B;
+}
+
+/* ---------- Meddelanden ---------- */
+.toasts { position: absolute; top: 70px; left: 0; right: 0; align-items: center; }
+.toast {
+    background-color: rgba(90, 62, 43, 0.92); color: #FFFFFF;
+    border-radius: 14px; padding: 6px 16px; margin-bottom: 4px; font-size: 16px;
+}
+
+/* ---------- Dialogrutor ---------- */
+.dim { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.4); justify-content: center; align-items: center; }
+.modal { width: 600px; max-width: 92%; }
+.dialog { position: absolute; bottom: 20px; left: 50%; translate: -50% 0; width: 640px; max-width: 94%; flex-direction: row; }
+.portrait {
+    width: 120px; height: 140px; border-radius: 16px; margin-right: 14px;
+    -unity-text-align: middle-center; font-size: 60px; -unity-font-style: bold; color: #FFFFFF;
+}
+.day-box { width: 74px; height: 92px; margin: 3px; border-radius: 12px; background-color: #FFFFFF; border-width: 2px; border-color: #E9D3B4; -unity-text-align: middle-center; font-size: 13px; color: #5A3E2B; white-space: normal; }
+.day-today { background-color: #FFC94A; border-color: #D9A22A; }
+.day-done { opacity: 0.45; }

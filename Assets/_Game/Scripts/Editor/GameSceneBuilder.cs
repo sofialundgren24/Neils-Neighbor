@@ -10,6 +10,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 namespace NG.EditorTools
 {
@@ -21,6 +22,28 @@ namespace NG.EditorTools
     public static class GameSceneBuilder
     {
         const string ScenePath = NGEditorPaths.Scenes + "/Game.unity";
+        const string UiFolder = NGEditorPaths.GameRoot + "/UI";
+
+        /// <summary>PanelSettings för UI:t: skalar efter höjden 720 så att det ser likadant ut på telefon och dator.</summary>
+        static PanelSettings EnsurePanelSettings()
+        {
+            string path = UiFolder + "/NG_PanelSettings.asset";
+            var ps = AssetDatabase.LoadAssetAtPath<PanelSettings>(path);
+            if (ps == null)
+            {
+                NGEditorPaths.EnsureFolder(UiFolder);
+                ps = ScriptableObject.CreateInstance<PanelSettings>();
+                AssetDatabase.CreateAsset(ps, path);
+            }
+            ps.themeStyleSheet = AssetDatabase.LoadAssetAtPath<ThemeStyleSheet>(UiFolder + "/NGTheme.tss");
+            ps.scaleMode = PanelScaleMode.ScaleWithScreenSize;
+            ps.referenceResolution = new Vector2Int(1280, 720);
+            ps.screenMatchMode = PanelScreenMatchMode.MatchWidthOrHeight;
+            ps.match = 1f;
+            EditorUtility.SetDirty(ps);
+            AssetDatabase.SaveAssets();
+            return ps;
+        }
 
         /// <summary>Allt i rätt ordning. Kör efter att ha ändrat CSV-filerna eller lagt till modeller.</summary>
         [MenuItem("NG/Setup/Build Game (Everything)", priority = -10)]
@@ -97,6 +120,15 @@ namespace NG.EditorTools
             var world = game.AddComponent<WorldView>();
             var interaction = game.AddComponent<WorldInteraction>();
             var hud = game.AddComponent<GameHud>();
+            hud.enabled = false; // reserv: slå på den och stäng av GameUI om det nya UI:t krånglar
+
+            // UI Toolkit: UIDocument + PanelSettings (skalar efter 1280 x 720) + stilfilen NG.uss.
+            var doc = game.AddComponent<UIDocument>();
+            doc.panelSettings = EnsurePanelSettings();
+            var ui = game.AddComponent<GameUI>();
+            var uiSo = new SerializedObject(ui);
+            uiSo.FindProperty("styleSheet").objectReferenceValue = AssetDatabase.LoadAssetAtPath<StyleSheet>(UiFolder + "/NG.uss");
+            uiSo.ApplyModifiedPropertiesWithoutUndo();
             world.lockedAreaMaterial = PlaceholderBuilder.MaterialFor(NGEditorPaths.Hex("#9AA894"));
             interaction.indicatorMaterial = PlaceholderBuilder.MaterialFor(Color.white);
 
@@ -104,6 +136,7 @@ namespace NG.EditorTools
             so.FindProperty("worldView").objectReferenceValue = world;
             so.FindProperty("interaction").objectReferenceValue = interaction;
             so.FindProperty("hud").objectReferenceValue = hud;
+            so.FindProperty("ui").objectReferenceValue = ui;
             so.FindProperty("cameraController").objectReferenceValue = camController;
             so.ApplyModifiedPropertiesWithoutUndo();
 

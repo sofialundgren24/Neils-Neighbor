@@ -52,7 +52,8 @@ Assets/_Game/
                GameBootstrap (startar allt, sparar), DeviceTier (grafiknivå efter enhet)
     World/     Det man ser: WorldView (skapar/uppdaterar objekt i scenen), WorldInteraction (tryck, byggläge,
                rutnät), PlaceableView (varianter, grå→färg, målarfärg), PlotGrid (rutnätet)
-    UI/        GameHud: PLATSHÅLLAR-UI (ska bytas mot riktigt UI, anropar samma metoder i Game/)
+    UI/        GameUI: spelets UI i UI Toolkit. Utseendet styrs av Assets/_Game/UI/NG.uss (färger, rundning,
+               storlekar). GameHud: gamla IMGUI-UI:t, avstängt reserv.
     Camera/    IsoCameraController
     Core/      EventBus + GameEvents (logik → vy), TimeService (tid och snabbspolning), InputGate (UI vs värld)
     Editor/    NG-menyerna: ContentImporter (CSV → innehåll), PlaceholderBuilder, NGAssetImporter (modeller),
@@ -87,5 +88,6 @@ börja i `Scripts/World` eller shadern.
 - [x] Datastyrt innehåll för 20+ nivåer (64 objekt, 17 varor, 9 recept)
 - [x] Grafiknivåer för svaga/starka enheter
 - [ ] Riktiga modeller (se `content.csv`, en rad per modell)
-- [ ] Riktigt UI (ersätter `GameHud`)
+- [x] UI i UI Toolkit med stilfil (`NG.uss`), väntar på slutlig grafik
+- [x] Grannar, uppdrag, tutorial, daglig gåva
 - [ ] Ljud, tutorial, butik/monetisering (IAP 5), molnsparning

@@ -23,6 +23,9 @@ namespace NG.Game
     {
         [SerializeField] WorldView worldView;
         [SerializeField] WorldInteraction interaction;
+        [Tooltip("Spelets UI (UI Toolkit).")]
+        [SerializeField] GameUI ui;
+        [Tooltip("Gamla platshållar-UI:t (IMGUI). Används bara om GameUI är avstängt.")]
         [SerializeField] GameHud hud;
         [SerializeField] IsoCameraController cameraController;
         [SerializeField] float tickInterval = 0.25f;
@@ -59,7 +62,8 @@ namespace NG.Game
                 SetupCamera(config);
                 worldView.Bind(Session);
                 interaction.Bind(Session, worldView);
-                hud.Bind(Session, interaction, worldView);
+                if (ui != null && ui.isActiveAndEnabled) ui.Bind(Session, interaction, worldView);
+                else if (hud != null) { hud.enabled = true; hud.Bind(Session, interaction, worldView); }
                 _nextSave = Time.unscaledTime + autosaveInterval;
                 Debug.Log($"[Game] Startat. Nivå {state.level}, {state.objects.Count} objekt på kartan.");
             }
