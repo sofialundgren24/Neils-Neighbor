@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab9f018e4c219549b2e39eb7cd268a2, type: 3}
+  m_Name: DEF_House_Cottage
+  m_EditorClassIdentifier: Assembly-CSharp::NG.Data.RenovatableDefinition
+  id: house_cottage
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  icon: {fileID: 0}
+  category: 0
+  prefab:
+    m_AssetGUID: 3a0ddb9deeda33b4d99a5f3d1c5e83bd
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  footprint: {x: 10, y: 11}
+  unlockLevel: 1
+  cost: []
+  materials: []
+  buildTimeSec: 0
+  xpReward: 5
+  beautyScore: 1
+  styleTags: 0
+  premium: 0
+  decayedVariant: Phase0_Decayed
+  phases:
+  - variantName: Phase1_Repaired
+    durationSec: 120
+    cost:
+      currency: 0
+      amount: 0
+    materials: []
+    xpReward: 10
+  - variantName: Phase2_Painted
+    durationSec: 120
+    cost:
+      currency: 0
+      amount: 0
+    materials: []
+    xpReward: 10
+  - variantName: Phase3_Decorated
+    durationSec: 120
+    cost:
+      currency: 0
+      amount: 0
+    materials: []
+    xpReward: 10
+  paintSchemes: []
+  references:
+    version: 2
+    RefIds: []

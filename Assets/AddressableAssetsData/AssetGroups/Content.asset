@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Content
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Content
+  m_GUID: b4d5d34ad08459445b4b68ad6e4db668
+  m_SerializeEntries:
+  - m_GUID: 0542e5978b1c1fa42a32c775de818c3e
+    m_Address: def/house_cottage
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4c77dc06358a5a34ebd42436d858c7f9
+    m_Address: def/tree_blossom_pink
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6efde1c73205a4d4e9c4fea7b1ce0e0c
+    m_Address: def/flower_rose_pink
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 700b64d92e3acda4bbeb4a43adff33ff
+    m_Address: def/flower_tulip_yellow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d6f37c3cf516edd4d9e483de241c2e7a
+    m_Address: def/flower_lavender_purple
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 82c187fa37c97f44d84dbffa52098be4, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 0263d5ac4de52bc4784bc3f1dff9a3db, type: 2}
+    - {fileID: 11400000, guid: 8cfda4da0137cb8469d06ef18eb955f3, type: 2}
