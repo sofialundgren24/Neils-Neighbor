@@ -35,7 +35,7 @@ MonoBehaviour:
   unlockLevel: 1
   cost:
   - currency: 0
-    amount: 1
+    amount: 2
   materials: []
   buildTimeSec: 0
   xpReward: 0

@@ -250,13 +250,15 @@ namespace NG.Game
         public Result ClearClutter(PlacedObjectState o)
         {
             if (o == null || !(Def(o) is ClutterDefinition def)) return Result.Fail("Inget att rensa här.");
+            var pos = CellToWorld(def, o.x, o.y, o.rotation);
             _grid.Free(o.x, o.y, def.footprint, o.rotation);
             _s.State.objects.Remove(o);
             _byId.Remove(o.instanceId);
             EventBus.Publish(new ObjectRemoved(o.instanceId));
             if (def.clearCoins > 0) _s.Wallet.Add(CurrencyType.Coins, def.clearCoins);
             _s.Progression.AddXp(def.clearXp);
-            EventBus.Publish(new ClutterCleared(def.Id));
+            EventBus.Publish(new ClutterCleared(def.Id, pos, def.action == ClutterAction.Water));
+            if (def.clearXp > 0) EventBus.Publish(new FloatingText(pos + Vector3.up * 0.6f, $"+{def.clearXp} XP"));
             return Result.Success;
         }
 

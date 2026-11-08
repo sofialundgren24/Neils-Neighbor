@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74b12aeef9328e140bcfdfe54d8c8579, type: 3}
+  m_Name: Q_Garden1
+  m_EditorClassIdentifier: Assembly-CSharp::NG.Data.QuestDefinition
+  id: garden1
+  fallbackName: "Fika i tr\xE4dg\xE5rden"
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  icon: {fileID: 0}
+  neighbor: {fileID: 11400000, guid: e4d2cdf99b6391e4daacfe9b53981cfb, type: 2}
+  order: 15
+  unlockLevel: 1
+  requiresQuest: villa
+  intro: "En tr\xE4dg\xE5rd beh\xF6ver en plats att sitta. St\xE4ll ut ett caf\xE9bord och en b\xE4nk."
+  outro: "Kom \xF6ver p\xE5 kaffe n\xE4r du vill!"
+  objectives:
+  - type: 1
+    targetId: decor_cafe_table
+    amount: 1
+  - type: 1
+    targetId: decor_bench_wood
+    amount: 1
+  rewardCoins: 60
+  rewardGems: 0
+  rewardXp: 15
+  focus: 
+  references:
+    version: 2
+    RefIds: []

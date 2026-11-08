@@ -32,7 +32,7 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   footprint: {x: 4, y: 4}
-  unlockLevel: 1
+  unlockLevel: 0
   cost:
   - currency: 0
     amount: 5

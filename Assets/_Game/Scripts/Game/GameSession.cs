@@ -100,6 +100,13 @@ namespace NG.Game
 
         public static void Message(string text) => EventBus.Publish(new GameMessage(text));
 
+        /// <summary>Punkt ovanför ett objekt, för flygande text och effekter.</summary>
+        public UnityEngine.Vector3 TopOf(PlacedObjectState o) =>
+            World.CellToWorld(World.Def(o), o.x, o.y, o.rotation) + UnityEngine.Vector3.up * 1.2f;
+
+        /// <summary>Flygande text ovanför ett objekt ("+2 XP").</summary>
+        public void Float(PlacedObjectState o, string text) => EventBus.Publish(new FloatingText(TopOf(o), text));
+
         /// <summary>Spelarens namn (Neil eller Sofia).</summary>
         public string PlayerName => State.character == "neil" ? "Neil" : State.character == "sofia" ? "Sofia" : "granne";
 

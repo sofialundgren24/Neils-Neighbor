@@ -30,6 +30,7 @@ namespace NG.Game
             _s.Progression.AddXp(def.incomeXp);
             o.income = Timers.StartNow(def.incomeIntervalSec);
             EventBus.Publish(new ObjectChanged(o.instanceId, false));
+            _s.Float(o, $"+{def.incomeCoins} mynt");
             return Result.Success;
         }
 

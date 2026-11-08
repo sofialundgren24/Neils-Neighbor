@@ -262,6 +262,7 @@ namespace NG.World
                 if (wo != null)
                 {
                     Select(wo.InstanceId);
+                    if (_world.TryGetView(wo.InstanceId, out var view)) view.Bounce();
                     return;
                 }
             }

@@ -24,9 +24,9 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   icon: {fileID: 0}
-  house: {fileID: 11400000, guid: 25141a3b736df7b45a8ce548b974a678, type: 2}
-  color: {r: 0.84313726, g: 0.6509804, b: 1, a: 1}
-  bio: "Tystl\xE5ten snickare som bygger allt sj\xE4lv. Bor l\xE4ngst bort p\xE5 gatan."
+  house: {fileID: 11400000, guid: 49c7eb2f9cbf8dd46a04a96936f0db20, type: 2}
+  color: {r: 1, g: 0.8862745, b: 0.47843137, a: 1}
+  bio: "Tystl\xE5ten snickare l\xE4ngst bort p\xE5 gatan. S\xE4ger inte mycket, men ser allt."
   references:
     version: 2
     RefIds: []

@@ -32,10 +32,10 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   footprint: {x: 1, y: 1}
-  unlockLevel: 5
+  unlockLevel: 1
   cost:
   - currency: 0
-    amount: 15
+    amount: 12
   materials: []
   buildTimeSec: 0
   xpReward: 1
@@ -46,7 +46,7 @@ MonoBehaviour:
   premium: 0
   growTimeSec: 90
   harvest:
-    resource: {fileID: 11400000, guid: 9ef6a08567d45f144b9daf474687a68c, type: 2}
+    resource: {fileID: 11400000, guid: c36377560033f6f4e9b70621b4456800, type: 2}
     amount: 1
   seasons: 15
   references:

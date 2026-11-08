@@ -62,6 +62,7 @@ namespace NG.Game
                 SetupCamera(config);
                 worldView.Bind(Session);
                 interaction.Bind(Session, worldView);
+                if (TryGetComponent<Juice>(out var juice)) juice.Bind(Session, worldView);
                 if (ui != null && ui.isActiveAndEnabled) ui.Bind(Session, interaction, worldView);
                 else if (hud != null) { hud.enabled = true; hud.Bind(Session, interaction, worldView); }
                 _nextSave = Time.unscaledTime + autosaveInterval;

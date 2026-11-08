@@ -119,8 +119,9 @@ namespace NG.World
         public Coroutine AnimateDecay(float target)
         {
             if (_colorLocked) return null;
-            StopAllCoroutines();
-            return StartCoroutine(AnimateDecayRoutine(Mathf.Clamp01(target), false));
+            StopDecay();
+            _decayRoutine = StartCoroutine(AnimateDecayRoutine(Mathf.Clamp01(target), false));
+            return _decayRoutine;
         }
 
         /// <summary>
@@ -131,10 +132,11 @@ namespace NG.World
         public void CompleteRenovation(bool animate = true)
         {
             if (_colorLocked) return;
-            StopAllCoroutines();
+            StopDecay();
             if (animate && isActiveAndEnabled)
             {
-                StartCoroutine(AnimateDecayRoutine(0f, true));
+                _decayRoutine = StartCoroutine(AnimateDecayRoutine(0f, true));
+                Bounce(0.18f);
             }
             else
             {
@@ -147,10 +149,75 @@ namespace NG.World
         /// <summary>Bara för utveckling och tester: gör objektet grått och olåst igen.</summary>
         public void ResetToDecayedForDebug(float value = 1f)
         {
-            StopAllCoroutines();
+            StopDecay();
             _colorLocked = false;
             decay = Mathf.Clamp01(value);
             Apply();
+        }
+
+        Coroutine _decayRoutine;
+        Coroutine _scaleRoutine;
+        Vector3 _baseScale = Vector3.one;
+        bool _hasBaseScale;
+
+        void StopDecay()
+        {
+            if (_decayRoutine != null) StopCoroutine(_decayRoutine);
+            _decayRoutine = null;
+        }
+
+        /// <summary>"Studs" när man trycker på objektet: tryck ihop och fjädra tillbaka (squash and stretch).</summary>
+        public void Bounce(float strength = 0.12f)
+        {
+            if (!isActiveAndEnabled) return;
+            RememberScale();
+            if (_scaleRoutine != null) StopCoroutine(_scaleRoutine);
+            _scaleRoutine = StartCoroutine(BounceRoutine(strength));
+        }
+
+        /// <summary>Poppar upp från ingenting när objektet just placerats.</summary>
+        public void PopIn()
+        {
+            if (!isActiveAndEnabled) return;
+            RememberScale();
+            if (_scaleRoutine != null) StopCoroutine(_scaleRoutine);
+            _scaleRoutine = StartCoroutine(PopInRoutine());
+        }
+
+        void RememberScale()
+        {
+            if (_hasBaseScale) return;
+            _baseScale = transform.localScale;
+            _hasBaseScale = true;
+        }
+
+        IEnumerator BounceRoutine(float strength)
+        {
+            float t = 0f;
+            while (t < 1f)
+            {
+                t += Time.unscaledDeltaTime / 0.35f;
+                // Dämpad svängning: först ihop (lägre/bredare), sedan sträck (högre/smalare).
+                float wave = Mathf.Sin(Mathf.Clamp01(t) * Mathf.PI * 2.5f) * (1f - Mathf.Clamp01(t)) * strength;
+                transform.localScale = Vector3.Scale(_baseScale, new Vector3(1f + wave, 1f - wave, 1f + wave));
+                yield return null;
+            }
+            transform.localScale = _baseScale;
+        }
+
+        IEnumerator PopInRoutine()
+        {
+            float t = 0f;
+            while (t < 1f)
+            {
+                t += Time.unscaledDeltaTime / 0.35f;
+                float x = Mathf.Clamp01(t);
+                // Ease-out-back: växer lite förbi full storlek och landar.
+                float s = 1f + 2.2f * Mathf.Pow(x - 1f, 3f) + 1.2f * Mathf.Pow(x - 1f, 2f);
+                transform.localScale = _baseScale * Mathf.Max(0f, s);
+                yield return null;
+            }
+            transform.localScale = _baseScale;
         }
 
         IEnumerator AnimateDecayRoutine(float target, bool lockWhenDone)

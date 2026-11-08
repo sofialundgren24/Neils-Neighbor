@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DEF_Path_Stepping
   m_EditorClassIdentifier: Assembly-CSharp::NG.Data.PlaceableDefinition
   id: path_stepping
-  fallbackName: Trampstenar
+  fallbackName: "Stegstenar i gr\xE4set"
   displayName:
     m_TableReference:
       m_TableCollectionName: 
@@ -35,13 +35,13 @@ MonoBehaviour:
   unlockLevel: 3
   cost:
   - currency: 0
-    amount: 3
+    amount: 4
   materials: []
   buildTimeSec: 0
   xpReward: 0
   inShop: 1
   maxCount: 0
-  beautyScore: 1
+  beautyScore: 2
   styleTags: 0
   premium: 0
   references:

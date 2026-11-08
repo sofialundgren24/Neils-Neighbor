@@ -52,7 +52,12 @@ namespace NG.UI
         VisualElement _root;
 
         // Lager och delar
-        VisualElement _questPanel, _selectionPanel, _placingBar, _windowLayer, _modalLayer, _toastLayer, _bubbleLayer;
+        VisualElement _questPanel, _selectionPanel, _placingBar, _windowLayer, _modalLayer, _toastLayer, _bubbleLayer, _bottomBar, _floatLayer;
+        Button _paintButton;
+        Label _paintBanner;
+        bool _paintMode;
+        bool _storageSellTab;
+        readonly List<(Label label, Vector3 world, float start)> _floats = new List<(Label, Vector3, float)>();
         Button _buildButton, _ordersButton, _storageButton;
         Label _pointer;
 
@@ -117,8 +122,26 @@ namespace NG.UI
             BuildTopBar();
             _questPanel = Panel("quest-panel");
             _selectionPanel = Panel("selection-panel");
-            _buildButton = Btn("Bygg", () => Toggle(Window.Shop), "btn", "btn-gold", "btn-big", "build-button");
-            _root.Add(_buildButton);
+            _bottomBar = new VisualElement { pickingMode = PickingMode.Ignore };
+            _bottomBar.AddToClassList("bottom-bar");
+            _root.Add(_bottomBar);
+            _buildButton = Btn("Bygg", () => { _paintMode = false; Toggle(Window.Shop); }, "btn", "btn-gold", "btn-big");
+            _bottomBar.Add(_buildButton);
+            _paintButton = Btn("Måla", () => { _paintMode = !_paintMode; _ia.ClearSelection(); }, "btn", "btn-big", "btn-paint");
+            _bottomBar.Add(_paintButton);
+            var boardButton = Btn("Tavlan", () => Toggle(Window.Orders), "btn", "btn-big");
+            _bottomBar.Add(boardButton);
+            _bottomBar.Add(Btn("Foto", TakePhoto, "btn", "btn-big"));
+            _topBinder.Add(() =>
+            {
+                boardButton.style.display = _s.Orders.IsUnlocked ? DisplayStyle.Flex : DisplayStyle.None;
+                _paintButton.EnableInClassList("tab-active", _paintMode);
+                _paintButton.text = _paintMode ? "Klar" : "Måla";
+            });
+            _paintBanner = Text("Färgläge: tryck på ett färdigrenoverat hus för att byta fasad.", "toast");
+            _paintBanner.AddToClassList("paint-banner");
+            _paintBanner.pickingMode = PickingMode.Ignore;
+            _root.Add(_paintBanner);
             _placingBar = Panel("placing-bar");
             _windowLayer = Layer("windows");
             _toastLayer = Layer("toasts");
@@ -138,6 +161,8 @@ namespace NG.UI
             Sub<ExpansionUnlocked>(_ => _dirtySelection = true);
             Sub<LevelUp>(e => { _levelUps.Enqueue(e.NewLevel); _dirtyModal = true; _dirtyWindow = true; });
             Sub<GameMessage>(e => Toast(e.Text));
+            Sub<FloatingText>(e => Float(e.Position, e.Text));
+            _floatLayer = Layer("floats");
 
             _dirtyQuests = _dirtySelection = _dirtyWindow = _dirtyModal = true;
         }
@@ -173,7 +198,8 @@ namespace NG.UI
             if (_dirtyModal || modalKey != _shownModalKey) { _dirtyModal = false; RebuildModal(modalKey); }
 
             _questPanel.style.display = !placing && _window == Window.None && _s.Quests.Active.Count > 0 ? DisplayStyle.Flex : DisplayStyle.None;
-            _buildButton.style.display = placing ? DisplayStyle.None : DisplayStyle.Flex;
+            _bottomBar.style.display = placing ? DisplayStyle.None : DisplayStyle.Flex;
+            _paintBanner.style.display = _paintMode && !placing ? DisplayStyle.Flex : DisplayStyle.None;
             _placingBar.style.display = placing ? DisplayStyle.Flex : DisplayStyle.None;
             InputGate.ModalOpen = modalKey != null;
 
@@ -187,6 +213,7 @@ namespace NG.UI
             UpdateBubbles();
             UpdatePointer();
             UpdateToasts();
+            UpdateFloats();
         }
 
         bool IsOverUi(Vector2 screenPos)
@@ -632,9 +659,37 @@ namespace NG.UI
 
         void BuildStorage(VisualElement w)
         {
-            WindowHeader(w, "Lager");
+            WindowHeader(w, "Förrådet");
+            var tabs = Row();
+            var t1 = Btn("Lager", () => { _storageSellTab = false; _dirtyWindow = true; }, "btn", "tab", "grow");
+            var t2 = Btn("Sälj", () => { _storageSellTab = true; _dirtyWindow = true; }, "btn", "tab", "grow");
+            (_storageSellTab ? t2 : t1).AddToClassList("tab-active");
+            tabs.Add(t1);
+            tabs.Add(t2);
+            w.Add(tabs);
+
+            var capacity = Row();
+            var capText = Text("", "text");
+            capText.AddToClassList("grow");
+            capacity.Add(capText);
+            var upgrade = Btn("", () => Report(_s.Inventory.UpgradeStorage()), "btn", "btn-gold");
+            capacity.Add(upgrade);
+            w.Add(capacity);
+            w.Add(ProgressBar(() => (float)_s.Inventory.Total / Mathf.Max(1, _s.Inventory.Capacity), _windowBinder));
+            _windowBinder.Add(() =>
+            {
+                capText.text = $"{_s.Inventory.Total} / {_s.Inventory.Capacity} platser";
+                upgrade.text = $"Bygg ut (+{_s.Config.storagePerUpgrade}) · {_s.Inventory.UpgradeCost} mynt";
+                upgrade.SetEnabled(_s.Wallet.CanAfford(CurrencyType.Coins, _s.Inventory.UpgradeCost));
+            });
+
             var items = _s.Inventory.All.Where(kv => kv.Value > 0).OrderBy(kv => _s.Inventory.NameOf(kv.Key)).ToList();
-            if (items.Count == 0) w.Add(Text("Tomt. Odla och skörda för att fylla lagret.", "small"));
+            if (items.Count == 0) w.Add(Text("Tomt. Odla och skörda för att fylla förrådet.", "small"));
+            if (_storageSellTab)
+            {
+                BuildSellList(w, items);
+                return;
+            }
             var scroll = new ScrollView();
             scroll.AddToClassList("grow");
             var grid = new VisualElement();
@@ -655,6 +710,28 @@ namespace NG.UI
                 card.Add(Text(_s.Inventory.NameOf(kv.Key), "subtitle"));
                 card.Add(Text($"{kv.Value} st", "text"));
                 grid.Add(card);
+            }
+        }
+
+        /// <summary>Sälj-fliken: sälj varor ur förrådet för mynt.</summary>
+        void BuildSellList(VisualElement w, List<KeyValuePair<string, int>> items)
+        {
+            var scroll = new ScrollView();
+            scroll.AddToClassList("grow");
+            w.Add(scroll);
+            foreach (var kv in items)
+            {
+                string id = kv.Key;
+                int price = _s.Inventory.PriceOf(id);
+                var row = Row();
+                row.AddToClassList("card");
+                var name = Text($"{_s.Inventory.NameOf(id)}  ×{kv.Value}", "subtitle");
+                name.AddToClassList("grow");
+                row.Add(name);
+                row.Add(Text($"{price} mynt/st", "small"));
+                row.Add(Btn("Sälj 1", () => Report(_s.Inventory.Sell(id, 1)), "btn"));
+                row.Add(Btn($"Sälj alla ({price * kv.Value})", () => Report(_s.Inventory.Sell(id, int.MaxValue)), "btn", "btn-gold"));
+                scroll.Add(row);
             }
         }
 
@@ -900,7 +977,13 @@ namespace NG.UI
                     string text = null;
                     Action action = null;
                     var obj = o;
-                    if (o.build != null) text = $"Bygger {Fmt.Duration(Timers.Remaining(o.build))}";
+                    if (_paintMode)
+                    {
+                        if (o.renovation == null || !o.renovation.complete) continue;
+                        text = "Måla";
+                        action = () => _ia.Select(obj.instanceId);
+                    }
+                    else if (o.build != null) text = $"Bygger {Fmt.Duration(Timers.Remaining(o.build))}";
                     else if (o.renovation?.active != null) text = $"Renoverar {Fmt.Duration(Timers.Remaining(o.renovation.active))}";
                     else if (_s.Production.ReadyCount(o) > 0) { text = $"Hämta ({_s.Production.ReadyCount(o)})"; action = () => Report(_s.Production.Collect(obj)); }
                     else if (_s.Growth.CanHarvest(o)) { text = "Skörda"; action = () => Report(_s.Growth.Harvest(obj)); }
@@ -951,7 +1034,7 @@ namespace NG.UI
             else if (focus == "ui:storage") { anchor = new Vector2(_storageButton.worldBound.center.x, _storageButton.worldBound.yMax); below = true; }
             else
             {
-                var o = _s.World.Objects.FirstOrDefault(x => x.definitionId == focus);
+                var o = NearestOnScreen(focus);
                 if (o == null || _ia.SelectedId == o.instanceId || _cam == null || _root.panel == null) return;
                 if (!_world.TryGetTop(o.instanceId, out var top)) return;
                 var world = top + Vector3.up * 1.3f;
@@ -963,6 +1046,81 @@ namespace NG.UI
             _pointer.style.left = anchor.x;
             _pointer.style.top = anchor.y + (below ? 8 + bob : -8 + bob);
             _pointer.style.translate = new Translate(Length.Percent(-50), Length.Percent(below ? 0 : -100));
+        }
+
+        /// <summary>"+2 XP" som flyger upp och tonar bort där något hände i världen.</summary>
+        void Float(Vector3 world, string text)
+        {
+            if (_floatLayer == null) return;
+            var l = Text(text, "float-text");
+            l.pickingMode = PickingMode.Ignore;
+            _floatLayer.Add(l);
+            _floats.Add((l, world, Time.unscaledTime));
+        }
+
+        void UpdateFloats()
+        {
+            const float duration = 1.1f;
+            var panel = _root.panel;
+            for (int i = _floats.Count - 1; i >= 0; i--)
+            {
+                var f = _floats[i];
+                float t = (Time.unscaledTime - f.start) / duration;
+                if (t >= 1f || panel == null || _cam == null)
+                {
+                    f.label.RemoveFromHierarchy();
+                    _floats.RemoveAt(i);
+                    continue;
+                }
+                var pos = RuntimePanelUtils.CameraTransformWorldToPanel(panel, f.world, _cam);
+                f.label.style.left = pos.x;
+                f.label.style.top = pos.y - 60f * t;
+                f.label.style.opacity = t < 0.7f ? 1f : 1f - (t - 0.7f) / 0.3f;
+                f.label.style.translate = new Translate(Length.Percent(-50), Length.Percent(-100));
+            }
+        }
+
+        // ---------- Foto ----------
+
+        /// <summary>Tar en bild av gatan utan UI och sparar den. (Dela till galleriet kräver ett mobilplugin senare.)</summary>
+        void TakePhoto()
+        {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            Toast("Foto stöds inte i webbversionen än.");
+#else
+            StartCoroutine(PhotoRoutine());
+#endif
+        }
+
+        System.Collections.IEnumerator PhotoRoutine()
+        {
+            _root.style.visibility = Visibility.Hidden;
+            yield return new WaitForEndOfFrame();
+            var tex = ScreenCapture.CaptureScreenshotAsTexture();
+            _root.style.visibility = Visibility.Visible;
+            string file = System.IO.Path.Combine(Application.persistentDataPath, $"Lindgatan_{DateTime.Now:yyyyMMdd_HHmmss}.png");
+            System.IO.File.WriteAllBytes(file, tex.EncodeToPNG());
+            Destroy(tex);
+            Toast("Bild sparad!");
+            Debug.Log($"[Foto] {file}");
+        }
+
+        /// <summary>Det objekt av en viss sort som ligger närmast mitten av skärmen (så pekaren syns).</summary>
+        PlacedObjectState NearestOnScreen(string definitionId)
+        {
+            if (_cam == null) return null;
+            var center = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
+            PlacedObjectState best = null;
+            float bestDist = float.MaxValue;
+            foreach (var x in _s.World.Objects)
+            {
+                if (x.definitionId != definitionId) continue;
+                var sp = _cam.WorldToScreenPoint(_s.TopOf(x));
+                if (sp.z < 0) continue;
+                float dist = ((Vector2)sp - center).sqrMagnitude;
+                if (dist < bestDist) { bestDist = dist; best = x; }
+            }
+            return best;
         }
 
         void Toast(string text)

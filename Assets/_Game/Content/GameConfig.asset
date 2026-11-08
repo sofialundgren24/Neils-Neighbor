@@ -32,328 +32,662 @@ MonoBehaviour:
   - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
     cell: {x: 16, y: 36}
     rotation: 0
-    decayed: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 16, y: 40}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 16, y: 35}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
   - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
     cell: {x: 20, y: 36}
     rotation: 0
-    decayed: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 20, y: 40}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 20, y: 35}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
   - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
     cell: {x: 24, y: 36}
     rotation: 0
-    decayed: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 24, y: 40}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 24, y: 35}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
   - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
     cell: {x: 28, y: 36}
     rotation: 0
-    decayed: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 28, y: 40}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 28, y: 35}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
   - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
     cell: {x: 32, y: 36}
     rotation: 0
-    decayed: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 32, y: 40}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 32, y: 35}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
   - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
     cell: {x: 36, y: 36}
     rotation: 0
-    decayed: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 36, y: 40}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 36, y: 35}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
   - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
     cell: {x: 40, y: 36}
     rotation: 0
-    decayed: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 40, y: 40}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 40, y: 35}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
   - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
     cell: {x: 44, y: 36}
     rotation: 0
-    decayed: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 44, y: 40}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 44, y: 35}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
   - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
     cell: {x: 48, y: 36}
     rotation: 0
-    decayed: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 48, y: 40}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 48, y: 35}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
   - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
     cell: {x: 52, y: 36}
     rotation: 0
-    decayed: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 52, y: 40}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 52, y: 35}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
   - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
     cell: {x: 56, y: 36}
     rotation: 0
-    decayed: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 56, y: 40}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 56, y: 35}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
   - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
     cell: {x: 60, y: 36}
     rotation: 0
-    decayed: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 60, y: 40}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 60, y: 35}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
   - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
     cell: {x: 64, y: 36}
     rotation: 0
-    decayed: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 64, y: 40}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 64, y: 35}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
   - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
     cell: {x: 68, y: 36}
     rotation: 0
-    decayed: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 68, y: 40}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 68, y: 35}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
   - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
     cell: {x: 72, y: 36}
     rotation: 0
-    decayed: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 72, y: 40}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 72, y: 35}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
   - definition: {fileID: 11400000, guid: 219e3ac50e275714ea132e1f0461bb6a, type: 2}
     cell: {x: 76, y: 36}
     rotation: 0
-    decayed: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 76, y: 40}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: eb3ee5c5c68ec414cbbecd4092b0ce07, type: 2}
+    cell: {x: 76, y: 35}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: 99211ad27e10af0499c1584f74676876, type: 2}
+    cell: {x: 20, y: 34}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: 99211ad27e10af0499c1584f74676876, type: 2}
+    cell: {x: 36, y: 34}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: 99211ad27e10af0499c1584f74676876, type: 2}
+    cell: {x: 52, y: 34}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: 99211ad27e10af0499c1584f74676876, type: 2}
+    cell: {x: 68, y: 34}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: 6e0797be4dd82044695521202d335434, type: 2}
+    cell: {x: 24, y: 24}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
+  - definition: {fileID: 11400000, guid: 6e0797be4dd82044695521202d335434, type: 2}
+    cell: {x: 56, y: 24}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 1
   - definition: {fileID: 11400000, guid: 0542e5978b1c1fa42a32c775de818c3e, type: 2}
     cell: {x: 18, y: 44}
     rotation: 0
     decayed: 1
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 1b1b045b7f82cf440a4a9740a113bca1, type: 2}
+    cell: {x: 18, y: 41}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 1b1b045b7f82cf440a4a9740a113bca1, type: 2}
+    cell: {x: 24, y: 41}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 0
   - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
-    cell: {x: 18, y: 40}
+    cell: {x: 18, y: 42}
     rotation: 0
     decayed: 1
-  - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
-    cell: {x: 26, y: 40}
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 6efde1c73205a4d4e9c4fea7b1ce0e0c, type: 2}
+    cell: {x: 27, y: 43}
     rotation: 0
     decayed: 1
-  - definition: {fileID: 11400000, guid: da9a991dfce60bb40afe877d7ddcad8d, type: 2}
-    cell: {x: 22, y: 40}
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 1c7a659d704b54b4f9e583b837174a59, type: 2}
+    cell: {x: 29, y: 45}
+    rotation: 1
+    decayed: 1
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 4a8f2489b74d9784e880d89c081a9a87, type: 2}
+    cell: {x: 21, y: 57}
     rotation: 0
     decayed: 1
-  - definition: {fileID: 11400000, guid: da9a991dfce60bb40afe877d7ddcad8d, type: 2}
-    cell: {x: 22, y: 42}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 3ce813b3a3fd5e7498725fd547239e8f, type: 2}
-    cell: {x: 25, y: 41}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 10bbf151e0590b84394e47b117e8ab99, type: 2}
-    cell: {x: 18, y: 43}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 10bbf151e0590b84394e47b117e8ab99, type: 2}
-    cell: {x: 24, y: 43}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 700b64d92e3acda4bbeb4a43adff33ff, type: 2}
-    cell: {x: 20, y: 41}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 700b64d92e3acda4bbeb4a43adff33ff, type: 2}
-    cell: {x: 21, y: 41}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 6e0797be4dd82044695521202d335434, type: 2}
-    cell: {x: 21, y: 56}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 68b1369e1ad803a44a3e26875f08817b, type: 2}
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: baa4f04d9f2a8dc4a94f7615e779c972, type: 2}
     cell: {x: 31, y: 44}
     rotation: 0
     decayed: 1
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: d5d0e4daa20941542b6a5006b3779525, type: 2}
+    cell: {x: 31, y: 41}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: d5d0e4daa20941542b6a5006b3779525, type: 2}
+    cell: {x: 37, y: 41}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 0
   - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
-    cell: {x: 31, y: 40}
+    cell: {x: 31, y: 42}
     rotation: 0
     decayed: 1
-  - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
-    cell: {x: 39, y: 40}
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 6efde1c73205a4d4e9c4fea7b1ce0e0c, type: 2}
+    cell: {x: 40, y: 43}
     rotation: 0
     decayed: 1
-  - definition: {fileID: 11400000, guid: da9a991dfce60bb40afe877d7ddcad8d, type: 2}
-    cell: {x: 35, y: 40}
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 1c7a659d704b54b4f9e583b837174a59, type: 2}
+    cell: {x: 42, y: 45}
+    rotation: 1
+    decayed: 1
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 51617fb933c8cb14590433cfb9c9617e, type: 2}
+    cell: {x: 34, y: 57}
     rotation: 0
     decayed: 1
-  - definition: {fileID: 11400000, guid: da9a991dfce60bb40afe877d7ddcad8d, type: 2}
-    cell: {x: 35, y: 42}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 3ce813b3a3fd5e7498725fd547239e8f, type: 2}
-    cell: {x: 38, y: 41}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 10bbf151e0590b84394e47b117e8ab99, type: 2}
-    cell: {x: 31, y: 43}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 10bbf151e0590b84394e47b117e8ab99, type: 2}
-    cell: {x: 37, y: 43}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 700b64d92e3acda4bbeb4a43adff33ff, type: 2}
-    cell: {x: 33, y: 41}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 700b64d92e3acda4bbeb4a43adff33ff, type: 2}
-    cell: {x: 34, y: 41}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: c889840c8539d584481a98977af64de3, type: 2}
-    cell: {x: 29, y: 41}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
-    cell: {x: 28, y: 46}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 4a8f2489b74d9784e880d89c081a9a87, type: 2}
-    cell: {x: 34, y: 56}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 49c7eb2f9cbf8dd46a04a96936f0db20, type: 2}
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 08293802eaf79d94c81c0ba444efdfd2, type: 2}
     cell: {x: 44, y: 44}
     rotation: 0
     decayed: 1
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 1b1b045b7f82cf440a4a9740a113bca1, type: 2}
+    cell: {x: 44, y: 41}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 1b1b045b7f82cf440a4a9740a113bca1, type: 2}
+    cell: {x: 50, y: 41}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 0
   - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
-    cell: {x: 44, y: 40}
+    cell: {x: 44, y: 42}
     rotation: 0
     decayed: 1
-  - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
-    cell: {x: 52, y: 40}
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 6efde1c73205a4d4e9c4fea7b1ce0e0c, type: 2}
+    cell: {x: 53, y: 43}
     rotation: 0
     decayed: 1
-  - definition: {fileID: 11400000, guid: da9a991dfce60bb40afe877d7ddcad8d, type: 2}
-    cell: {x: 48, y: 40}
-    rotation: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 1c7a659d704b54b4f9e583b837174a59, type: 2}
+    cell: {x: 55, y: 45}
+    rotation: 1
     decayed: 1
-  - definition: {fileID: 11400000, guid: da9a991dfce60bb40afe877d7ddcad8d, type: 2}
-    cell: {x: 48, y: 42}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 3ce813b3a3fd5e7498725fd547239e8f, type: 2}
-    cell: {x: 51, y: 41}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 10bbf151e0590b84394e47b117e8ab99, type: 2}
-    cell: {x: 44, y: 43}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 10bbf151e0590b84394e47b117e8ab99, type: 2}
-    cell: {x: 50, y: 43}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 700b64d92e3acda4bbeb4a43adff33ff, type: 2}
-    cell: {x: 46, y: 41}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 700b64d92e3acda4bbeb4a43adff33ff, type: 2}
-    cell: {x: 47, y: 41}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: c889840c8539d584481a98977af64de3, type: 2}
-    cell: {x: 42, y: 41}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
-    cell: {x: 41, y: 46}
-    rotation: 0
-    decayed: 1
+    restoreWithStreet: 0
   - definition: {fileID: 11400000, guid: 6e0797be4dd82044695521202d335434, type: 2}
-    cell: {x: 47, y: 56}
+    cell: {x: 47, y: 57}
     rotation: 0
     decayed: 1
-  - definition: {fileID: 11400000, guid: 6ccf57f8d81b67346bea538d741e68cf, type: 2}
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: df46013113122e14ba720ba9b497a1a9, type: 2}
     cell: {x: 57, y: 44}
     rotation: 0
     decayed: 1
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: d5d0e4daa20941542b6a5006b3779525, type: 2}
+    cell: {x: 57, y: 41}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: d5d0e4daa20941542b6a5006b3779525, type: 2}
+    cell: {x: 63, y: 41}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 0
   - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
-    cell: {x: 57, y: 40}
+    cell: {x: 57, y: 42}
     rotation: 0
     decayed: 1
-  - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
-    cell: {x: 65, y: 40}
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 6efde1c73205a4d4e9c4fea7b1ce0e0c, type: 2}
+    cell: {x: 66, y: 43}
     rotation: 0
     decayed: 1
-  - definition: {fileID: 11400000, guid: da9a991dfce60bb40afe877d7ddcad8d, type: 2}
-    cell: {x: 61, y: 40}
-    rotation: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 1c7a659d704b54b4f9e583b837174a59, type: 2}
+    cell: {x: 68, y: 45}
+    rotation: 1
     decayed: 1
-  - definition: {fileID: 11400000, guid: da9a991dfce60bb40afe877d7ddcad8d, type: 2}
-    cell: {x: 61, y: 42}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 3ce813b3a3fd5e7498725fd547239e8f, type: 2}
-    cell: {x: 64, y: 41}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 10bbf151e0590b84394e47b117e8ab99, type: 2}
-    cell: {x: 57, y: 43}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 10bbf151e0590b84394e47b117e8ab99, type: 2}
-    cell: {x: 63, y: 43}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 700b64d92e3acda4bbeb4a43adff33ff, type: 2}
-    cell: {x: 59, y: 41}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 700b64d92e3acda4bbeb4a43adff33ff, type: 2}
-    cell: {x: 60, y: 41}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: c889840c8539d584481a98977af64de3, type: 2}
-    cell: {x: 55, y: 41}
-    rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
-    cell: {x: 54, y: 46}
-    rotation: 0
-    decayed: 1
+    restoreWithStreet: 0
   - definition: {fileID: 11400000, guid: 4a8f2489b74d9784e880d89c081a9a87, type: 2}
-    cell: {x: 60, y: 56}
+    cell: {x: 60, y: 57}
     rotation: 0
     decayed: 1
-  - definition: {fileID: 11400000, guid: 25141a3b736df7b45a8ce548b974a678, type: 2}
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 49c7eb2f9cbf8dd46a04a96936f0db20, type: 2}
     cell: {x: 70, y: 44}
     rotation: 0
     decayed: 1
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 1b1b045b7f82cf440a4a9740a113bca1, type: 2}
+    cell: {x: 70, y: 41}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 1b1b045b7f82cf440a4a9740a113bca1, type: 2}
+    cell: {x: 76, y: 41}
+    rotation: 0
+    decayed: 1
+    restoreWithStreet: 0
   - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
-    cell: {x: 70, y: 40}
+    cell: {x: 70, y: 42}
     rotation: 0
     decayed: 1
-  - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
-    cell: {x: 78, y: 40}
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 6efde1c73205a4d4e9c4fea7b1ce0e0c, type: 2}
+    cell: {x: 79, y: 43}
     rotation: 0
     decayed: 1
-  - definition: {fileID: 11400000, guid: da9a991dfce60bb40afe877d7ddcad8d, type: 2}
-    cell: {x: 74, y: 40}
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 51617fb933c8cb14590433cfb9c9617e, type: 2}
+    cell: {x: 73, y: 57}
     rotation: 0
     decayed: 1
-  - definition: {fileID: 11400000, guid: da9a991dfce60bb40afe877d7ddcad8d, type: 2}
-    cell: {x: 74, y: 42}
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 36, y: 41}
     rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 3ce813b3a3fd5e7498725fd547239e8f, type: 2}
-    cell: {x: 77, y: 41}
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 29, y: 56}
     rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 10bbf151e0590b84394e47b117e8ab99, type: 2}
-    cell: {x: 70, y: 43}
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 21, y: 20}
     rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 10bbf151e0590b84394e47b117e8ab99, type: 2}
-    cell: {x: 76, y: 43}
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: b218aa3726436bc49a48f394bd0cbf13, type: 2}
+    cell: {x: 41, y: 20}
     rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 700b64d92e3acda4bbeb4a43adff33ff, type: 2}
-    cell: {x: 72, y: 41}
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: b218aa3726436bc49a48f394bd0cbf13, type: 2}
+    cell: {x: 34, y: 42}
     rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 700b64d92e3acda4bbeb4a43adff33ff, type: 2}
-    cell: {x: 73, y: 41}
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: b218aa3726436bc49a48f394bd0cbf13, type: 2}
+    cell: {x: 51, y: 21}
     rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: c889840c8539d584481a98977af64de3, type: 2}
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 28, y: 28}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 19, y: 27}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 65, y: 62}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 35, y: 25}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 54, y: 56}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 20, y: 64}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 38, y: 62}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 21, y: 31}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: b218aa3726436bc49a48f394bd0cbf13, type: 2}
+    cell: {x: 62, y: 30}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: b218aa3726436bc49a48f394bd0cbf13, type: 2}
+    cell: {x: 68, y: 59}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 31, y: 61}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: b218aa3726436bc49a48f394bd0cbf13, type: 2}
+    cell: {x: 71, y: 59}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 59, y: 42}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: b218aa3726436bc49a48f394bd0cbf13, type: 2}
+    cell: {x: 30, y: 58}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 27, y: 42}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 48, y: 30}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 73, y: 63}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 22, y: 42}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 22, y: 22}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 23, y: 62}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 46, y: 43}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 76, y: 22}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: b218aa3726436bc49a48f394bd0cbf13, type: 2}
+    cell: {x: 32, y: 60}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 50, y: 25}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: b218aa3726436bc49a48f394bd0cbf13, type: 2}
+    cell: {x: 30, y: 63}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: b218aa3726436bc49a48f394bd0cbf13, type: 2}
+    cell: {x: 77, y: 32}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 77, y: 42}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: b218aa3726436bc49a48f394bd0cbf13, type: 2}
+    cell: {x: 55, y: 62}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: b218aa3726436bc49a48f394bd0cbf13, type: 2}
+    cell: {x: 21, y: 26}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: 9637f9c9bf65600449170a0fab4ee75b, type: 2}
+    cell: {x: 46, y: 32}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: b218aa3726436bc49a48f394bd0cbf13, type: 2}
+    cell: {x: 67, y: 61}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: b218aa3726436bc49a48f394bd0cbf13, type: 2}
+    cell: {x: 67, y: 29}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: b218aa3726436bc49a48f394bd0cbf13, type: 2}
+    cell: {x: 67, y: 21}
+    rotation: 0
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: b218aa3726436bc49a48f394bd0cbf13, type: 2}
     cell: {x: 68, y: 41}
     rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: c686e766510f2634aa79323da8a0ca1d, type: 2}
-    cell: {x: 67, y: 46}
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: b218aa3726436bc49a48f394bd0cbf13, type: 2}
+    cell: {x: 34, y: 32}
     rotation: 0
-    decayed: 1
-  - definition: {fileID: 11400000, guid: 6e0797be4dd82044695521202d335434, type: 2}
-    cell: {x: 73, y: 56}
+    decayed: 0
+    restoreWithStreet: 0
+  - definition: {fileID: 11400000, guid: b218aa3726436bc49a48f394bd0cbf13, type: 2}
+    cell: {x: 36, y: 42}
     rotation: 0
-    decayed: 1
+    decayed: 0
+    restoreWithStreet: 0
   expansions:
   - id: start
-    name: Startgatan
+    name: Lindgatan
     area:
       x: 16
       y: 20
       width: 64
       height: 48
-    requiredLevel: 1
+    requiredLevel: 0
     coinCost: 0
   - id: north
     name: "Bakg\xE5rdarna"
@@ -362,17 +696,17 @@ MonoBehaviour:
       y: 68
       width: 64
       height: 28
-    requiredLevel: 4
-    coinCost: 500
+    requiredLevel: 3
+    coinCost: 400
   - id: south
-    name: "\xC4ngen"
+    name: "Parkstr\xE5ket"
     area:
       x: 16
       y: 0
       width: 64
       height: 20
-    requiredLevel: 8
-    coinCost: 1500
+    requiredLevel: 4
+    coinCost: 600
   - id: west
     name: Skogsbrynet
     area:
@@ -380,22 +714,26 @@ MonoBehaviour:
       y: 0
       width: 16
       height: 96
-    requiredLevel: 12
-    coinCost: 4000
+    requiredLevel: 6
+    coinCost: 1500
   - id: east
-    name: "Strandv\xE4gen"
+    name: "Sj\xF6v\xE4gen"
     area:
       x: 80
       y: 0
       width: 16
       height: 96
-    requiredLevel: 16
-    coinCost: 8000
+    requiredLevel: 8
+    coinCost: 3000
   restoreRadius: 7
+  ordersUnlockLevel: 1
   orderSlots: 3
   orderRefillSec: 30
   orderRewardMultiplier: 1.5
   sellRefund: 0.25
+  termsVersion: 1
+  termsUrl: https://example.com/terms
+  privacyUrl: https://example.com/privacy
   maxActiveQuests: 3
   dailyCoins: 320000004b0000006400000096000000c8000000fa0000002c010000i
   dailyGems: 0000000000000000010000000000000002000000000000000a000000i

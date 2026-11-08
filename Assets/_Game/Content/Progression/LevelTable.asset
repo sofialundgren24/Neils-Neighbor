@@ -13,153 +13,158 @@ MonoBehaviour:
   m_Name: LevelTable
   m_EditorClassIdentifier: Assembly-CSharp::NG.Data.LevelTable
   rows:
+  - level: 0
+    xpToNext: 50
+    coinReward: 0
+    gemReward: 0
+    unlockIds: []
   - level: 1
-    xpToNext: 75
+    xpToNext: 100
     coinReward: 80
     gemReward: 2
     unlockIds: []
   - level: 2
-    xpToNext: 196
+    xpToNext: 150
     coinReward: 110
     gemReward: 2
     unlockIds: []
   - level: 3
-    xpToNext: 349
+    xpToNext: 250
     coinReward: 140
     gemReward: 2
     unlockIds: []
   - level: 4
-    xpToNext: 529
+    xpToNext: 350
     coinReward: 170
     gemReward: 2
     unlockIds: []
   - level: 5
-    xpToNext: 731
+    xpToNext: 402
     coinReward: 200
     gemReward: 5
     unlockIds: []
   - level: 6
-    xpToNext: 954
+    xpToNext: 525
     coinReward: 230
     gemReward: 2
     unlockIds: []
   - level: 7
-    xpToNext: 1196
+    xpToNext: 658
     coinReward: 260
     gemReward: 2
     unlockIds: []
   - level: 8
-    xpToNext: 1455
+    xpToNext: 800
     coinReward: 290
     gemReward: 2
     unlockIds: []
   - level: 9
-    xpToNext: 1732
+    xpToNext: 952
     coinReward: 320
     gemReward: 2
     unlockIds: []
   - level: 10
-    xpToNext: 2024
+    xpToNext: 1113
     coinReward: 350
     gemReward: 5
     unlockIds: []
   - level: 11
-    xpToNext: 2331
+    xpToNext: 1282
     coinReward: 380
     gemReward: 2
     unlockIds: []
   - level: 12
-    xpToNext: 2653
+    xpToNext: 1459
     coinReward: 410
     gemReward: 2
     unlockIds: []
   - level: 13
-    xpToNext: 2989
+    xpToNext: 1644
     coinReward: 440
     gemReward: 2
     unlockIds: []
   - level: 14
-    xpToNext: 3339
+    xpToNext: 1836
     coinReward: 470
     gemReward: 2
     unlockIds: []
   - level: 15
-    xpToNext: 3701
+    xpToNext: 2036
     coinReward: 500
     gemReward: 5
     unlockIds: []
   - level: 16
-    xpToNext: 4076
+    xpToNext: 2242
     coinReward: 530
     gemReward: 2
     unlockIds: []
   - level: 17
-    xpToNext: 4463
+    xpToNext: 2455
     coinReward: 560
     gemReward: 2
     unlockIds: []
   - level: 18
-    xpToNext: 4862
+    xpToNext: 2674
     coinReward: 590
     gemReward: 2
     unlockIds: []
   - level: 19
-    xpToNext: 5273
+    xpToNext: 2900
     coinReward: 620
     gemReward: 2
     unlockIds: []
   - level: 20
-    xpToNext: 5695
+    xpToNext: 3132
     coinReward: 650
     gemReward: 5
     unlockIds: []
   - level: 21
-    xpToNext: 6128
+    xpToNext: 3370
     coinReward: 680
     gemReward: 2
     unlockIds: []
   - level: 22
-    xpToNext: 6572
+    xpToNext: 3614
     coinReward: 710
     gemReward: 2
     unlockIds: []
   - level: 23
-    xpToNext: 7026
+    xpToNext: 3864
     coinReward: 740
     gemReward: 2
     unlockIds: []
   - level: 24
-    xpToNext: 7491
+    xpToNext: 4120
     coinReward: 770
     gemReward: 2
     unlockIds: []
   - level: 25
-    xpToNext: 7966
+    xpToNext: 4382
     coinReward: 800
     gemReward: 5
     unlockIds: []
   - level: 26
-    xpToNext: 8452
+    xpToNext: 4648
     coinReward: 830
     gemReward: 2
     unlockIds: []
   - level: 27
-    xpToNext: 8946
+    xpToNext: 4921
     coinReward: 860
     gemReward: 2
     unlockIds: []
   - level: 28
-    xpToNext: 9451
+    xpToNext: 5198
     coinReward: 890
     gemReward: 2
     unlockIds: []
   - level: 29
-    xpToNext: 9965
+    xpToNext: 5481
     coinReward: 920
     gemReward: 2
     unlockIds: []
   - level: 30
-    xpToNext: 10489
+    xpToNext: 5769
     coinReward: 950
     gemReward: 5
     unlockIds: []

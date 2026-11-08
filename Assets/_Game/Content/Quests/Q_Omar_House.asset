@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Q_Omar_House
   m_EditorClassIdentifier: Assembly-CSharp::NG.Data.QuestDefinition
   id: omar_house
-  fallbackName: Omars radhus
+  fallbackName: "Tv\xE5v\xE5ningshuset"
   displayName:
     m_TableReference:
       m_TableCollectionName: 
@@ -25,19 +25,19 @@ MonoBehaviour:
     m_LocalVariables: []
   icon: {fileID: 0}
   neighbor: {fileID: 11400000, guid: f997a5f9da509f342bf4ef02370f01d3, type: 2}
-  order: 13
+  order: 32
   unlockLevel: 3
-  requiresQuest: omar_bread
-  intro: "Mitt radhus \xE4r i s\xE4mre skick \xE4n Gretas stuga... Hj\xE4lper du mig med det ocks\xE5?"
-  outro: "Jag k\xE4nner inte igen det! Tack, granne."
+  requiresQuest: omar_hello
+  intro: "Och mitt Tv\xE5v\xE5ningshus... det \xE4r gr\xE5tt fr\xE5n k\xE4llare till vind."
+  outro: "Tv\xE5 v\xE5ningar i full f\xE4rg. Jag \xE4r m\xE5ll\xF6s."
   objectives:
   - type: 0
-    targetId: house_townhouse
+    targetId: house_twostory
     amount: 3
-  rewardCoins: 200
-  rewardGems: 5
+  rewardCoins: 250
+  rewardGems: 8
   rewardXp: 60
-  focus: house_townhouse
+  focus: house_twostory
   references:
     version: 2
     RefIds: []

@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8427f50057d1aa14583bef28f6426d4a, type: 3}
+  m_Name: DEF_Play_Slide
+  m_EditorClassIdentifier: Assembly-CSharp::NG.Data.CommunityDefinition
+  id: play_slide
+  fallbackName: "Rutschkana & kl\xE4tterst\xE4llning"
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  icon: {fileID: 0}
+  category: 9
+  prefab:
+    m_AssetGUID: b7b41de2aee00144581bee18943a583f
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  footprint: {x: 6, y: 6}
+  unlockLevel: 5
+  cost:
+  - currency: 0
+    amount: 500
+  materials: []
+  buildTimeSec: 150
+  xpReward: 40
+  inShop: 1
+  maxCount: 0
+  beautyScore: 12
+  styleTags: 0
+  premium: 0
+  incomeCoins: 35
+  incomeXp: 8
+  incomeIntervalSec: 300
+  references:
+    version: 2
+    RefIds: []

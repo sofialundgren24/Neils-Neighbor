@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74b12aeef9328e140bcfdfe54d8c8579, type: 3}
+  m_Name: Q_Omar_Paths
+  m_EditorClassIdentifier: Assembly-CSharp::NG.Data.QuestDefinition
+  id: omar_paths
+  fallbackName: Stegstenar
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  icon: {fileID: 0}
+  neighbor: {fileID: 11400000, guid: f997a5f9da509f342bf4ef02370f01d3, type: 2}
+  order: 33
+  unlockLevel: 3
+  requiresQuest: omar_house
+  intro: "L\xE4gg stegstenar i gr\xE4set s\xE5 slipper man trampa i rabatterna."
+  outro: "Mycket b\xE4ttre. Rabatterna tackar dig."
+  objectives:
+  - type: 1
+    targetId: path_stepping
+    amount: 4
+  rewardCoins: 50
+  rewardGems: 0
+  rewardXp: 15
+  focus: 
+  references:
+    version: 2
+    RefIds: []

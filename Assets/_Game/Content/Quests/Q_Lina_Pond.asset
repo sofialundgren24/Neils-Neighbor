@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74b12aeef9328e140bcfdfe54d8c8579, type: 3}
+  m_Name: Q_Lina_Pond
+  m_EditorClassIdentifier: Assembly-CSharp::NG.Data.QuestDefinition
+  id: lina_pond
+  fallbackName: "N\xE4ckrosdammen"
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  icon: {fileID: 0}
+  neighbor: {fileID: 11400000, guid: 4343d945ef39b2f40b0a2630ea5d7c4a, type: 2}
+  order: 42
+  unlockLevel: 4
+  requiresQuest: lina_hello
+  intro: "En damm med n\xE4ckrosor skulle g\xF6ra tr\xE4dg\xE5rden magisk."
+  outro: Fiskarna har redan flyttat in.
+  objectives:
+  - type: 1
+    targetId: water_pond
+    amount: 1
+  rewardCoins: 120
+  rewardGems: 0
+  rewardXp: 30
+  focus: 
+  references:
+    version: 2
+    RefIds: []

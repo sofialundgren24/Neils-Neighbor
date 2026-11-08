@@ -78,7 +78,7 @@ namespace NG.World
         void OnPlaced(ObjectPlaced e)
         {
             var o = _s.World.Get(e.InstanceId);
-            if (o != null) Spawn(o);
+            if (o != null) Spawn(o, popIn: true);
         }
 
         void OnMoved(ObjectMoved e)
@@ -131,7 +131,7 @@ namespace NG.World
 
         // ---------- Skapa och uppdatera ----------
 
-        void Spawn(PlacedObjectState o)
+        void Spawn(PlacedObjectState o, bool popIn = false)
         {
             var def = _s.World.Def(o);
             if (def == null) return;
@@ -141,7 +141,7 @@ namespace NG.World
             if (def.prefab == null || !def.prefab.RuntimeKeyIsValid())
             {
                 Debug.LogWarning($"[WorldView] {def.Id} saknar prefab. Visar en grå kub.");
-                Attach(o, CreateFallback(def, pos, rot));
+                Attach(o, CreateFallback(def, pos, rot), popIn);
                 return;
             }
 
@@ -162,11 +162,11 @@ namespace NG.World
                     return;
                 }
                 var state = _s.World.Get(id);
-                if (state != null) Attach(state, h.Result);
+                if (state != null) Attach(state, h.Result, popIn);
             };
         }
 
-        void Attach(PlacedObjectState o, GameObject go)
+        void Attach(PlacedObjectState o, GameObject go, bool popIn = false)
         {
             // Inte "??": Unitys GetComponent kan ge ett falskt null-objekt i editorn.
             if (!go.TryGetComponent<PlaceableView>(out var view)) view = go.AddComponent<PlaceableView>();
@@ -174,6 +174,7 @@ namespace NG.World
             wo.InstanceId = o.instanceId;
             _views[o.instanceId] = view;
             Refresh(o, false);
+            if (popIn) view.PopIn();
         }
 
         GameObject CreateFallback(PlaceableDefinition def, Vector3 pos, Quaternion rot)

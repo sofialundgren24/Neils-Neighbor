@@ -24,8 +24,8 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   icon: {fileID: 0}
-  sellPrice: 8
-  unlockLevel: 7
+  sellPrice: 5
+  unlockLevel: 2
   color: {r: 0.9098039, g: 0.25882354, b: 0.22745098, a: 1}
   references:
     version: 2

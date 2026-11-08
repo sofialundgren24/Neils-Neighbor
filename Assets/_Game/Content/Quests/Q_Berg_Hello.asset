@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Q_Berg_Hello
   m_EditorClassIdentifier: Assembly-CSharp::NG.Data.QuestDefinition
   id: berg_hello
-  fallbackName: Familjen Bergs villa
+  fallbackName: Familjen Berg
   displayName:
     m_TableReference:
       m_TableCollectionName: 
@@ -25,19 +25,19 @@ MonoBehaviour:
     m_LocalVariables: []
   icon: {fileID: 0}
   neighbor: {fileID: 11400000, guid: befc20b5250e08d43b3c628dcbb71523, type: 2}
-  order: 40
-  unlockLevel: 10
-  requiresQuest: lina_house
-  intro: "Hej hej! Vi har tre barn och ett hus som faller is\xE4r. Kan du hj\xE4lpa oss?"
+  order: 20
+  unlockLevel: 2
+  requiresQuest: villa
+  intro: "Hej granne! Vi \xE4r familjen Berg i Klassiska f\xF6rortshuset. V\xE5rt hus beh\xF6ver verkligen k\xE4rlek... Hj\xE4lper du oss?"
   outro: "Barnen springer runt och skriker av gl\xE4dje. Tack!"
   objectives:
   - type: 0
-    targetId: house_villa
+    targetId: house_classic
     amount: 3
-  rewardCoins: 600
-  rewardGems: 10
-  rewardXp: 150
-  focus: house_villa
+  rewardCoins: 150
+  rewardGems: 5
+  rewardXp: 40
+  focus: house_classic
   references:
     version: 2
     RefIds: []

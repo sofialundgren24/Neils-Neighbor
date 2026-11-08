@@ -24,6 +24,32 @@ namespace NG.EditorTools
         const string ScenePath = NGEditorPaths.Scenes + "/Game.unity";
         const string UiFolder = NGEditorPaths.GameRoot + "/UI";
 
+        /// <summary>Mjukt, genomskinligt partikelmaterial (URP Particles/Unlit) för alla effekter.</summary>
+        static Material EnsureParticleMaterial()
+        {
+            string path = NGEditorPaths.Materials + "/M_Particles.mat";
+            var mat = AssetDatabase.LoadAssetAtPath<Material>(path);
+            if (mat != null) return mat;
+            var shader = Shader.Find("Universal Render Pipeline/Particles/Unlit");
+            if (shader == null)
+            {
+                Debug.LogWarning("[NG Setup] Hittar inte URP:s partikelshader. Effekterna stängs av.");
+                return null;
+            }
+            mat = new Material(shader);
+            mat.SetTexture("_BaseMap", AssetDatabase.GetBuiltinExtraResource<Texture2D>("Default-Particle.psd"));
+            mat.SetFloat("_Surface", 1f);
+            mat.SetFloat("_Blend", 0f);
+            mat.SetFloat("_SrcBlend", (float)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            mat.SetFloat("_DstBlend", (float)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            mat.SetFloat("_ZWrite", 0f);
+            mat.SetOverrideTag("RenderType", "Transparent");
+            mat.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
+            mat.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+            AssetDatabase.CreateAsset(mat, path);
+            return mat;
+        }
+
         /// <summary>PanelSettings för UI:t: skalar efter höjden 720 så att det ser likadant ut på telefon och dator.</summary>
         static PanelSettings EnsurePanelSettings()
         {
@@ -123,6 +149,8 @@ namespace NG.EditorTools
             var bootstrap = game.AddComponent<GameBootstrap>();
             var world = game.AddComponent<WorldView>();
             var interaction = game.AddComponent<WorldInteraction>();
+            var juice = game.AddComponent<Juice>();
+            juice.particleMaterial = EnsureParticleMaterial();
             var hud = game.AddComponent<GameHud>();
             hud.enabled = false; // reserv: slå på den och stäng av GameUI om det nya UI:t krånglar
 

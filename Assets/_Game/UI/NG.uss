@@ -157,3 +157,13 @@
 .check Label { font-size: 16px; color: #5A3E2B; white-space: normal; }
 .character-card { align-items: center; margin: 6px; }
 .character-card .portrait { margin-right: 0; margin-bottom: 8px; }
+
+/* ---------- Bottenfält, färgläge, flygande text ---------- */
+.bottom-bar { position: absolute; left: 12px; bottom: 12px; flex-direction: row; align-items: flex-end; }
+.bottom-bar > .btn { width: 120px; margin-right: 8px; }
+.btn-paint { background-color: #FFB3C8; border-color: #D9628C; }
+.paint-banner { position: absolute; bottom: 92px; left: 50%; translate: -50% 0; }
+.float-text {
+    position: absolute; font-size: 22px; -unity-font-style: bold; color: #FFFFFF;
+    -unity-text-outline-width: 1.5px; -unity-text-outline-color: #5A3E2B;
+}

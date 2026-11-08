@@ -34,6 +34,9 @@ namespace NG.State
         /// <summary>Resurs-id -> antal i lagret.</summary>
         public Dictionary<string, int> storage = new Dictionary<string, int>();
 
+        /// <summary>Hur många gånger förrådet har byggts ut.</summary>
+        public int storageLevel;
+
         /// <summary>Allt som står på kartan.</summary>
         public List<PlacedObjectState> objects = new List<PlacedObjectState>();
 

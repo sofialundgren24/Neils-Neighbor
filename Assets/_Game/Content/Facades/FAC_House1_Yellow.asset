@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2633656f2ba79649bc7ce5bd8c5cbea, type: 3}
+  m_Name: FAC_House1_Yellow
+  m_EditorClassIdentifier: Assembly-CSharp::NG.Data.FacadeDefinition
+  id: house1_yellow
+  fallbackName: "M\xE5lade tr\xE4paneler (gul)"
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  icon: {fileID: 0}
+  house: {fileID: 11400000, guid: 0542e5978b1c1fa42a32c775de818c3e, type: 2}
+  color: {r: 1, g: 0.8862745, b: 0.47843137, a: 1}
+  unlockLevel: 1
+  coinCost: 0
+  references:
+    version: 2
+    RefIds: []

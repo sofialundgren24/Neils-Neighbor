@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d4b29b497b6d14ea09a9c0d9b49f31, type: 3}
+  m_Name: DEF_Stone_Round
+  m_EditorClassIdentifier: Assembly-CSharp::NG.Data.PlaceableDefinition
+  id: stone_round
+  fallbackName: "Rund tr\xE4dg\xE5rdssten"
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  icon: {fileID: 0}
+  category: 5
+  prefab:
+    m_AssetGUID: 38615e8e62d85c84688be4dab958ff77
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  footprint: {x: 1, y: 1}
+  unlockLevel: 0
+  cost:
+  - currency: 0
+    amount: 5
+  materials: []
+  buildTimeSec: 0
+  xpReward: 1
+  inShop: 1
+  maxCount: 0
+  beautyScore: 1
+  styleTags: 0
+  premium: 0
+  references:
+    version: 2
+    RefIds: []

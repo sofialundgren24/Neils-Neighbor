@@ -67,6 +67,10 @@ namespace NG.Game
         public Result Collect(PlacedObjectState o)
         {
             if (ReadyCount(o) == 0) return Result.Fail("Inget att hämta.");
+            int incoming = 0;
+            foreach (var id in o.production.ready) incoming += Recipe(id)?.output.amount ?? 0;
+            if (!_s.Inventory.HasRoom(incoming))
+                return Result.Fail("Förrådet är fullt. Sälj varor eller bygg ut förrådet.");
             foreach (var id in o.production.ready)
             {
                 var r = Recipe(id);
@@ -75,6 +79,7 @@ namespace NG.Game
                 EventBus.Publish(new ItemsProduced(r.output.resource.Id, r.output.amount));
                 _s.Progression.AddXp(r.xpReward);
             }
+            _s.Float(o, $"+{o.production.ready.Count} klara");
             o.production.ready.Clear();
             EventBus.Publish(new ObjectChanged(o.instanceId, false));
             return Result.Success;

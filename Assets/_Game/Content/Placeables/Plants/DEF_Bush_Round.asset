@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DEF_Bush_Round
   m_EditorClassIdentifier: Assembly-CSharp::NG.Data.PlantDefinition
   id: bush_round
-  fallbackName: Rund buske
+  fallbackName: Rund formklippt buske
   displayName:
     m_TableReference:
       m_TableCollectionName: 
@@ -32,10 +32,10 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   footprint: {x: 2, y: 2}
-  unlockLevel: 1
+  unlockLevel: 0
   cost:
   - currency: 0
-    amount: 20
+    amount: 15
   materials: []
   buildTimeSec: 0
   xpReward: 1

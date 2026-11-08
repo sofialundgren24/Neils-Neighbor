@@ -39,6 +39,13 @@ namespace NG.Data
         [Header("Försäljning")]
         [Range(0f, 1f)] public float sellRefund = 0.25f;
 
+        [Header("Förråd")]
+        [Tooltip("Hur många varor som får plats från start.")]
+        [Min(1)] public int storageBaseCapacity = 50;
+        [Min(1)] public int storagePerUpgrade = 25;
+        [Tooltip("Pris i mynt för första utbyggnaden. Varje ny utbyggnad kostar lika mycket till.")]
+        [Min(0)] public int storageUpgradeCost = 200;
+
         [Header("Villkor (första start)")]
         [Tooltip("Höj när villkoren ändras, så får spelaren godkänna igen.")]
         [Min(1)] public int termsVersion = 1;

@@ -39,8 +39,11 @@ namespace NG.Game
         {
             if (!CanHarvest(o)) return Result.Fail("Inte redo att skördas än.");
             var def = Def(o);
+            if (!_s.Inventory.HasRoom(def.harvest.amount))
+                return Result.Fail("Förrådet är fullt. Sälj varor eller bygg ut förrådet.");
             _s.Inventory.Add(def.harvest.resource.Id, def.harvest.amount);
             EventBus.Publish(new ItemsHarvested(def.harvest.resource.Id, def.harvest.amount));
+            _s.Float(o, $"+{def.harvest.amount} {def.harvest.resource.DisplayName}");
             _s.Progression.AddXp(def.harvest.amount);
             o.growth = Timers.StartNow(def.growTimeSec);
             _lastStage[o.instanceId] = 0;

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DEF_House_Cottage
   m_EditorClassIdentifier: Assembly-CSharp::NG.Data.RenovatableDefinition
   id: house_cottage
-  fallbackName: Stugan
+  fallbackName: Lilla villan
   displayName:
     m_TableReference:
       m_TableCollectionName: 
@@ -32,7 +32,7 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   footprint: {x: 10, y: 11}
-  unlockLevel: 1
+  unlockLevel: 0
   cost: []
   materials: []
   buildTimeSec: 0
@@ -45,26 +45,26 @@ MonoBehaviour:
   decayedVariant: Phase0_Decayed
   phases:
   - variantName: Phase1_Repaired
-    durationSec: 30
+    durationSec: 20
     cost:
       currency: 0
-      amount: 50
+      amount: 20
     materials: []
-    xpReward: 15
+    xpReward: 8
   - variantName: Phase2_Painted
-    durationSec: 120
+    durationSec: 45
     cost:
       currency: 0
-      amount: 120
+      amount: 40
     materials: []
-    xpReward: 25
+    xpReward: 12
   - variantName: Phase3_Decorated
-    durationSec: 300
+    durationSec: 90
     cost:
       currency: 0
-      amount: 250
+      amount: 60
     materials: []
-    xpReward: 50
+    xpReward: 20
   paintSchemes: []
   references:
     version: 2

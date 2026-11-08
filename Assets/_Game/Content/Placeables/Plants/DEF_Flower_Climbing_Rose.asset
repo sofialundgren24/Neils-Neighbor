@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75b9aeb768288ff4d8a25fa7813af048, type: 3}
+  m_Name: DEF_Flower_Climbing_Rose
+  m_EditorClassIdentifier: Assembly-CSharp::NG.Data.PlantDefinition
+  id: flower_climbing_rose
+  fallbackName: "Kl\xE4tterros"
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  icon: {fileID: 0}
+  category: 1
+  prefab:
+    m_AssetGUID: 7a02f2c44edabc647a18f77acc20f989
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  footprint: {x: 1, y: 1}
+  unlockLevel: 3
+  cost:
+  - currency: 0
+    amount: 22
+  materials: []
+  buildTimeSec: 0
+  xpReward: 2
+  inShop: 1
+  maxCount: 0
+  beautyScore: 4
+  styleTags: 0
+  premium: 0
+  growTimeSec: 150
+  harvest:
+    resource: {fileID: 11400000, guid: e001bfc18a8998848af0615742f052ea, type: 2}
+    amount: 2
+  seasons: 15
+  references:
+    version: 2
+    RefIds: []

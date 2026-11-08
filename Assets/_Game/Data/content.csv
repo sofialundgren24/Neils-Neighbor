@@ -12,8 +12,8 @@ house_twostory,house,Tvåvåningshuset,3,0,0,0,0,12,10,10,6.0,#C9B8F0,0,phases=1
 house_corner,house,Hörnhuset,4,0,0,0,0,12,10,10,5.0,#B9F0B0,0,phases=180/600/1500;phase_coins=400/700/1100;phase_xp=50/90/150
 house_bungalow,house,Bungalowen,5,0,0,0,0,14,10,10,3.8,#FFE27A,0,phases=300/900/2400;phase_coins=600/1000/1600;phase_xp=80/140/220
 # ---------- Nivå 0: skräp, gatan och startsortimentet ----------
-clutter_weed,clutter,Ogräs,0,0,0,0,0,0,1,1,0.35,#6E8B3D,0,action=clear;xp=2
-clutter_dry_grass,clutter,Torr gräsplätt,0,0,0,0,0,0,2,2,0.04,#B59A62,0,action=water;xp=2
+clutter_weed,clutter,Ogräs,0,0,0,0,0,0,1,1,0.6,#5E7A2E,0,action=clear;xp=2
+clutter_dry_grass,clutter,Torr gräsplätt,0,0,0,0,0,0,3,3,0.04,#9C7340,0,action=water;xp=2
 road_asphalt,ground,Gata,0,5,0,0,0,0,4,4,0.03,#8C8C94,1,
 sidewalk,ground,Trottoar,0,3,0,0,0,0,4,1,0.06,#D6D2C8,1,
 tree_birch,tree,Björk,0,40,0,0,4,5,4,4,4.5,#9ED36B,1,grow=120

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DEF_Flower_Peony
   m_EditorClassIdentifier: Assembly-CSharp::NG.Data.PlantDefinition
   id: flower_peony
-  fallbackName: Pion
+  fallbackName: Pionrabatt
   displayName:
     m_TableReference:
       m_TableCollectionName: 
@@ -32,22 +32,22 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   footprint: {x: 1, y: 1}
-  unlockLevel: 11
+  unlockLevel: 5
   cost:
   - currency: 0
-    amount: 25
+    amount: 28
   materials: []
   buildTimeSec: 0
   xpReward: 2
   inShop: 1
   maxCount: 0
-  beautyScore: 4
+  beautyScore: 5
   styleTags: 0
   premium: 0
-  growTimeSec: 150
+  growTimeSec: 240
   harvest:
-    resource: {fileID: 11400000, guid: 9ef6a08567d45f144b9daf474687a68c, type: 2}
-    amount: 2
+    resource: {fileID: 11400000, guid: a1c9d44d55be6fa489f7d957d1ea7b6f, type: 2}
+    amount: 1
   seasons: 15
   references:
     version: 2

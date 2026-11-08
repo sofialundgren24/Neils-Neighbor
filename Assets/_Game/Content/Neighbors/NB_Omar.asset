@@ -24,9 +24,9 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   icon: {fileID: 0}
-  house: {fileID: 11400000, guid: 68b1369e1ad803a44a3e26875f08817b, type: 2}
-  color: {r: 0.9607843, g: 0.7176471, b: 0.64705884, a: 1}
-  bio: "Bagare som dr\xF6mmer om att \xF6ppna gatans f\xF6rsta aff\xE4r igen."
+  house: {fileID: 11400000, guid: 08293802eaf79d94c81c0ba444efdfd2, type: 2}
+  color: {r: 0.7882353, g: 0.72156864, b: 0.9411765, a: 1}
+  bio: "Driftig granne i Tv\xE5v\xE5ningshuset som dr\xF6mmer om att gatan ska f\xE5 en egen aff\xE4r igen."
   references:
     version: 2
     RefIds: []

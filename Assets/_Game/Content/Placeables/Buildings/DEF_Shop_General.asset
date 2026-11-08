@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fb9faa0c8ec7e24d8a73fc85d792b93, type: 3}
+  m_Name: DEF_Shop_General
+  m_EditorClassIdentifier: Assembly-CSharp::NG.Data.ProductionDefinition
+  id: shop_general
+  fallbackName: "Kvartersaff\xE4ren"
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  icon: {fileID: 0}
+  category: 8
+  prefab:
+    m_AssetGUID: 113c81edcba82994f94c209cad7bc114
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  footprint: {x: 10, y: 8}
+  unlockLevel: 3
+  cost:
+  - currency: 0
+    amount: 400
+  materials: []
+  buildTimeSec: 120
+  xpReward: 40
+  inShop: 1
+  maxCount: 1
+  beautyScore: 8
+  styleTags: 0
+  premium: 0
+  recipes:
+  - {fileID: 11400000, guid: b74d4b0f9e47ff04a8764437530607f4, type: 2}
+  - {fileID: 11400000, guid: 57fdd7160b25c1440be2dcf8d8c013e4, type: 2}
+  - {fileID: 11400000, guid: 514ad1bfa9514394e83d220f1ab38b31, type: 2}
+  - {fileID: 11400000, guid: 40ad2296dd0fce1449e7999be03c8895, type: 2}
+  queueSize: 3
+  references:
+    version: 2
+    RefIds: []

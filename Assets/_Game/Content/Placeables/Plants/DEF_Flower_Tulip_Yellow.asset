@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DEF_Flower_Tulip_Yellow
   m_EditorClassIdentifier: Assembly-CSharp::NG.Data.PlantDefinition
   id: flower_tulip_yellow
-  fallbackName: Gul tulpan
+  fallbackName: Tulpanrabatt
   displayName:
     m_TableReference:
       m_TableCollectionName: 
@@ -35,18 +35,18 @@ MonoBehaviour:
   unlockLevel: 1
   cost:
   - currency: 0
-    amount: 8
+    amount: 10
   materials: []
   buildTimeSec: 0
   xpReward: 1
   inShop: 1
   maxCount: 0
-  beautyScore: 2
+  beautyScore: 3
   styleTags: 0
   premium: 0
-  growTimeSec: 45
+  growTimeSec: 60
   harvest:
-    resource: {fileID: 11400000, guid: 9ef6a08567d45f144b9daf474687a68c, type: 2}
+    resource: {fileID: 11400000, guid: f9fdec3581059914cb042d8a5c0783ea, type: 2}
     amount: 1
   seasons: 15
   references:

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DEF_Decor_Birdbath
   m_EditorClassIdentifier: Assembly-CSharp::NG.Data.PlaceableDefinition
   id: decor_birdbath
-  fallbackName: "F\xE5gelbad"
+  fallbackName: "F\xE5gelbad i sten"
   displayName:
     m_TableReference:
       m_TableCollectionName: 
@@ -32,16 +32,16 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   footprint: {x: 2, y: 2}
-  unlockLevel: 4
+  unlockLevel: 2
   cost:
   - currency: 0
-    amount: 60
+    amount: 50
   materials: []
   buildTimeSec: 0
-  xpReward: 2
+  xpReward: 3
   inShop: 1
   maxCount: 0
-  beautyScore: 3
+  beautyScore: 5
   styleTags: 0
   premium: 0
   references:

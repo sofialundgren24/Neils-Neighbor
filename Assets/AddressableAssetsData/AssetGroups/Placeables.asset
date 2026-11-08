@@ -15,32 +15,32 @@ MonoBehaviour:
   m_GroupName: Placeables
   m_GUID: eed49103ffce6a743b8ab8fd7f840dc5
   m_SerializeEntries:
+  - m_GUID: 03c03df3632e82848b170ec5cad40f05
+    m_Address: placeable/tree_maple
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - placeables
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 03f969a43395a3645839cb873b172d47
     m_Address: placeable/path_gravel
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0561c4272825b444cbcdf9ad3c040737
-    m_Address: placeable/road_curb
+  - m_GUID: 113c81edcba82994f94c209cad7bc114
+    m_Address: placeable/shop_general
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0e4b47ae813b998418fb561fdc88a8d3
-    m_Address: placeable/house_villa
+  - m_GUID: 125faadcd44e5d4499c7badc355ad673
+    m_Address: placeable/clutter_dry_grass
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1ae2a7e2b7d2e9349a7d18419d0b30e2
-    m_Address: placeable/decor_swing
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - placeables
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1bd1f58b895e2f447902fda59e5e2aa8
-    m_Address: placeable/flower_daisy
+  - m_GUID: 1556d920ac31f5d4f8b83c65ffd635a9
+    m_Address: placeable/water_pond
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
@@ -51,32 +51,32 @@ MonoBehaviour:
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 26e59117fa9f3b44f93a4d5838b9256a
+    m_Address: placeable/hedge_topiary
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - placeables
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 26e6ec62dfcd42f41a9d7c43688573b7
     m_Address: placeable/decor_birdbath
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 280c5e93823b2a649a640e21f6f87872
-    m_Address: placeable/tree_pine
+  - m_GUID: 2ec753ad2e0130a4283f06e53a366d51
+    m_Address: placeable/decor_pampas
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2f5d7bd10e2fde24ea6e81bb9f73c792
-    m_Address: placeable/ground_soil
+  - m_GUID: 351f792a927e44c4898524786c544aad
+    m_Address: placeable/decor_lamp_classic
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 31386da6ea99e0e4488ebfb12d5638e9
-    m_Address: placeable/decor_lamp
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - placeables
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 38b0ca5d282adaa4993b3fc4e7c3ba5e
-    m_Address: placeable/decor_lamp_garden
+  - m_GUID: 38615e8e62d85c84688be4dab958ff77
+    m_Address: placeable/stone_round
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
@@ -93,8 +93,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 43e7c915010d1d2459c29f0eddaf5d99
-    m_Address: placeable/path_stone
+  - m_GUID: 44e85fb8e3bb51844b5b22ba8c7bc981
+    m_Address: placeable/play_sandbox
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
@@ -105,14 +105,14 @@ MonoBehaviour:
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4923fafa934f6c3449fdcdb534dcddc0
-    m_Address: placeable/bush_hydrangea
+  - m_GUID: 4a86a36c9b859aa40823508677eaca52
+    m_Address: placeable/flower_dahlia
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4b658bb6009c019478ed52f01b4a4db7
-    m_Address: placeable/decor_pot
+  - m_GUID: 4b663ef875bfdfd40b1c64663ef9aee6
+    m_Address: placeable/tree_plum
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
@@ -123,50 +123,26 @@ MonoBehaviour:
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4ccc9ecb4259a134ca8133c2fa9f3919
+    m_Address: placeable/hedge_berry
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - placeables
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 545091f8719aa45489ea0affa65a5ae9
     m_Address: placeable/flower_tulip_yellow
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 546bddf9cac7acf44b97d92445ba8a17
-    m_Address: placeable/decor_parasol
+  - m_GUID: 58187f3d03e47a44b907d3172792245c
+    m_Address: placeable/hedge_wild
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 552eda8137b45b34b8a17e7c827de769
-    m_Address: placeable/fence_white_picket
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - placeables
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 57521d66ca2092645a08229e60579fc5
-    m_Address: placeable/decor_fountain
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - placeables
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 66abbebf5273168428fb70535eddfaf5
-    m_Address: placeable/decor_wheelbarrow
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - placeables
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6c2070735f1e33b498f9ca2a67888ae0
-    m_Address: placeable/production_store
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - placeables
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6cd220af5726422499280702b6e87714
-    m_Address: placeable/decor_gnome
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - placeables
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6cedc8f62b4c69443af44e82c6f2d08c
-    m_Address: placeable/decor_well
+  - m_GUID: 5b11965aaecfffa43a72a651ca1c6d48
+    m_Address: placeable/decor_hanging_pot
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
@@ -177,14 +153,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6f058ee42946db245b22325b75f5f6ad
-    m_Address: placeable/decor_gazebo
+  - m_GUID: 6f2e95ff4f7766144bb210be01146ddc
+    m_Address: placeable/path_cobble
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6f2e95ff4f7766144bb210be01146ddc
-    m_Address: placeable/path_cobble
+  - m_GUID: 7036f2f5c36889d43850c20a8829e63b
+    m_Address: placeable/fence_rustic
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - placeables
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 72a29b739e1f0544f9ac634dd31d3e42
+    m_Address: placeable/decor_wisteria_arch
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
@@ -195,38 +177,38 @@ MonoBehaviour:
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 757e7d016735f4447897dfdfeff2cde0
-    m_Address: placeable/crop_corn
+  - m_GUID: 7705e3bcd679b4c48817152edd80d10b
+    m_Address: placeable/decor_cafe_table
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 75d75d54dc9ad1941abcfd6232444970
-    m_Address: placeable/ground_flowerbed
+  - m_GUID: 7865d3a008a60b44e914bc937eefdd1c
+    m_Address: placeable/bush_boxwood
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 763fac840eaa9d24195c6b3fbef446ff
-    m_Address: placeable/crop_pumpkin
+  - m_GUID: 7a02f2c44edabc647a18f77acc20f989
+    m_Address: placeable/flower_climbing_rose
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 79d9eeb1cc10c75448a02ee239956a56
-    m_Address: placeable/decor_gate
+  - m_GUID: 7a49834e17f7f8c40b82e6c797029042
+    m_Address: placeable/path_pattern
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7a8295402ae88e348a900175b4de9063
-    m_Address: placeable/path_wood
+  - m_GUID: 887cb79c3a2671543a045cff806fefda
+    m_Address: placeable/bush_lilac
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9e14d9e94208f4c4bb46c4cafa188586
-    m_Address: placeable/path_brick
+  - m_GUID: 9767b0e3ba823d34f90e9e178f33adf1
+    m_Address: placeable/fence_low_gate
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
@@ -237,32 +219,50 @@ MonoBehaviour:
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a6bd7f5e9af49784bb077c4e155fcd4e
-    m_Address: placeable/house_cabin
+  - m_GUID: a3c96dca783ff0a48b2e359edfec2cab
+    m_Address: placeable/decor_bench_wood
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: afa4436758f46f9459911267edef3e3e
-    m_Address: placeable/ground_sand
+  - m_GUID: a46c463d2605e6b42b6a3593626c7da5
+    m_Address: placeable/house_twostory
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b1ba201152b6db344b5ad53b16721326
-    m_Address: placeable/crop_wheat
+  - m_GUID: aeedd32bf1567c2498fc459f2153ba30
+    m_Address: placeable/fence_chainlink
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b55972a878a233446866a4c08c2a60ac
-    m_Address: placeable/crop_strawberry
+  - m_GUID: af17379d60f0418468e7803964b61f93
+    m_Address: placeable/house_corner
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b7e6a09b6ff77784dbf8efa141b6c1f5
-    m_Address: placeable/hedge_box
+  - m_GUID: b7b41de2aee00144581bee18943a583f
+    m_Address: placeable/play_slide
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - placeables
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b800ec6fe375be841b8771b8e9489846
+    m_Address: placeable/flower_hydrangea
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - placeables
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b9066fef1d480d24cb0559d0f293c690
+    m_Address: placeable/shop_flower
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - placeables
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b95eb4514fd0fc04eb3224604539f23d
+    m_Address: placeable/tree_willow
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
@@ -273,8 +273,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: bd4686a32c2d6934d80cf75d26992438
-    m_Address: placeable/decor_rose_arch
+  - m_GUID: c1098ed3cc72abb45b091b3cc5683a60
+    m_Address: placeable/bush_currant
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
@@ -291,38 +291,56 @@ MonoBehaviour:
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c44639b23a6e0d24da47150f09786b1a
-    m_Address: placeable/decor_picnic_table
+  - m_GUID: c63a133089113df4c92302e7e7cde0d3
+    m_Address: placeable/decor_swing_tree
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c9cb657e636ac514390f91f1eac7dd10
-    m_Address: placeable/decor_statue
+  - m_GUID: d3b0a11e08805674c9f57d5a280968ef
+    m_Address: placeable/community_school
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d5f8c502644f881468bd7dbce2fcab9e
-    m_Address: placeable/decor_sign
+  - m_GUID: d6b6bd5da10ac9c489815011c1ed3732
+    m_Address: placeable/water_fountain
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d861caf0782a45143a20889c8dcae74e
-    m_Address: placeable/decor_bench
+  - m_GUID: d7bd78a1777fbcf408116c3b4a85f616
+    m_Address: placeable/fence_iron
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d8d626a4badbb3445b528494658a28b3
-    m_Address: placeable/crop_tomato
+  - m_GUID: d9bb2ec65ce29374fafa403523deed25
+    m_Address: placeable/play_swing_set
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: dd18d5f7b90c6f345b1d2a4f36e57222
-    m_Address: placeable/crop_carrot
+  - m_GUID: daa36b18db7bbb14f869f7ad18ed2d29
+    m_Address: placeable/flower_dandelion
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - placeables
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dde189c30f63a594585a0a344276efab
+    m_Address: placeable/tree_magnolia
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - placeables
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: deacef1cd283a9647b72ec5dd7fd3150
+    m_Address: placeable/fence_white
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - placeables
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: defa27235719c9e49a2831a0310fd51f
+    m_Address: placeable/decor_mailbox_post
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
@@ -333,38 +351,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: edb9a93a4816b2e4284ab07419b312ca
-    m_Address: placeable/decor_birdhouse
+  - m_GUID: e61e027347ca8b74c9b0bfc9d0c2ddfb
+    m_Address: placeable/decor_bbq
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: edd173572620f284d85a319545e31beb
-    m_Address: placeable/decor_mailbox
+  - m_GUID: e7e88e5a944d3a6449d7a6d647a581e3
+    m_Address: placeable/fence_stone_iron
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ee3ca676eb717ef43a9870c8f7a89b62
-    m_Address: placeable/fence_wood
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - placeables
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ef5dfbf3e250b2948827830b5eb77561
-    m_Address: placeable/decor_pergola
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - placeables
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f28e6e3950146894baa7275e8cf1cbe5
-    m_Address: placeable/house_townhouse
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - placeables
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f3e29ee0fef565c44b93d011031b7341
-    m_Address: placeable/fence_stone_low
+  - m_GUID: e8be55d62f3f4f7408631edc171a51e1
+    m_Address: placeable/path_curb
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
@@ -375,26 +375,26 @@ MonoBehaviour:
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f6d39f8217ad89a43a683bd7d60683b0
-    m_Address: placeable/production_garden_center
+  - m_GUID: f53163dd67b11fa46bb863064b44c510
+    m_Address: placeable/decor_solar_light
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fbf796953c189ed48931c95ad3993248
-    m_Address: placeable/decor_planter
+  - m_GUID: fce38003a273249479169dc3501cfa34
+    m_Address: placeable/clutter_weed
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fdb786aaca356e549948dc34d492b25a
-    m_Address: placeable/pond_small
+  - m_GUID: fd5eaad4bb2beb940bccb4897ba4aafc
+    m_Address: placeable/house_classic
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ff5c3cb748e012c47b71700341852a88
-    m_Address: placeable/decor_barrel_flowers
+  - m_GUID: feb49a13036a3394eb66d5827fa5a8dc
+    m_Address: placeable/sidewalk
     m_ReadOnly: 0
     m_SerializedLabels:
     - placeables

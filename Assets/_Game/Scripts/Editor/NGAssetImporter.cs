@@ -318,6 +318,9 @@ namespace NG.EditorTools
 
             var view = root.AddComponent<PlaceableView>();
             view.definitionId = id;
+            // Delar som heter Swing_*, Spin_*, Bob_* eller Sway_* rör sig; träd och växter vajar.
+            var motion = root.AddComponent<ProceduralMotion>();
+            motion.swayWhole = NGEditorPaths.IsFoliage(category);
 
             var prefab = PrefabUtility.SaveAsPrefabAsset(root, prefabPath);
             Object.DestroyImmediate(root);

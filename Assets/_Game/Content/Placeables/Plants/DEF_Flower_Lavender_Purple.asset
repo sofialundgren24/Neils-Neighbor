@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DEF_Flower_Lavender_Purple
   m_EditorClassIdentifier: Assembly-CSharp::NG.Data.PlantDefinition
   id: flower_lavender_purple
-  fallbackName: Lavendel
+  fallbackName: Lavendelrabatt
   displayName:
     m_TableReference:
       m_TableCollectionName: 
@@ -35,7 +35,7 @@ MonoBehaviour:
   unlockLevel: 2
   cost:
   - currency: 0
-    amount: 12
+    amount: 14
   materials: []
   buildTimeSec: 0
   xpReward: 1
@@ -44,9 +44,9 @@ MonoBehaviour:
   beautyScore: 3
   styleTags: 0
   premium: 0
-  growTimeSec: 60
+  growTimeSec: 90
   harvest:
-    resource: {fileID: 11400000, guid: 9ef6a08567d45f144b9daf474687a68c, type: 2}
+    resource: {fileID: 11400000, guid: 7fd969749a143be40b029dff78ea289b, type: 2}
     amount: 1
   seasons: 15
   references:

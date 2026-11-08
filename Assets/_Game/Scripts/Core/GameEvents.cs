@@ -96,7 +96,22 @@ namespace NG.Core
     public readonly struct ClutterCleared
     {
         public readonly string DefinitionId;
-        public ClutterCleared(string definitionId) { DefinitionId = definitionId; }
+        public readonly UnityEngine.Vector3 Position;
+        public readonly bool Watered;
+        public ClutterCleared(string definitionId, UnityEngine.Vector3 position, bool watered)
+        {
+            DefinitionId = definitionId;
+            Position = position;
+            Watered = watered;
+        }
+    }
+
+    /// <summary>Text som flyger upp från ett ställe i världen, t.ex. "+2 XP" eller "+3 Tulpan".</summary>
+    public readonly struct FloatingText
+    {
+        public readonly UnityEngine.Vector3 Position;
+        public readonly string Text;
+        public FloatingText(UnityEngine.Vector3 position, string text) { Position = position; Text = text; }
     }
 
     public readonly struct QuestsChanged { }

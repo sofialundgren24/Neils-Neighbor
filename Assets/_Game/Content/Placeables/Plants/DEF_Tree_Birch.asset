@@ -32,19 +32,19 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   footprint: {x: 4, y: 4}
-  unlockLevel: 9
+  unlockLevel: 0
   cost:
   - currency: 0
-    amount: 120
+    amount: 40
   materials: []
   buildTimeSec: 0
-  xpReward: 6
+  xpReward: 4
   inShop: 1
   maxCount: 0
-  beautyScore: 7
+  beautyScore: 5
   styleTags: 0
   premium: 0
-  growTimeSec: 300
+  growTimeSec: 120
   harvest:
     resource: {fileID: 0}
     amount: 0

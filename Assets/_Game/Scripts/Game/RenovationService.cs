@@ -174,7 +174,11 @@ namespace NG.Game
             o.renovation.active = null;
             o.renovation.phase++;
             if (def != null && o.renovation.phase - 1 < def.phases.Length)
-                _s.Progression.AddXp(def.phases[o.renovation.phase - 1].xpReward);
+            {
+                int xp = def.phases[o.renovation.phase - 1].xpReward;
+                _s.Progression.AddXp(xp);
+                _s.Float(o, $"+{xp} XP");
+            }
 
             if (def == null || o.renovation.phase >= def.phases.Length)
             {

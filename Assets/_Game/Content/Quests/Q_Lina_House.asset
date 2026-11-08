@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Q_Lina_House
   m_EditorClassIdentifier: Assembly-CSharp::NG.Data.QuestDefinition
   id: lina_house
-  fallbackName: Linas bungalow
+  fallbackName: "H\xF6rnhuset"
   displayName:
     m_TableReference:
       m_TableCollectionName: 
@@ -25,19 +25,19 @@ MonoBehaviour:
     m_LocalVariables: []
   icon: {fileID: 0}
   neighbor: {fileID: 11400000, guid: 4343d945ef39b2f40b0a2630ea5d7c4a, type: 2}
-  order: 31
-  unlockLevel: 6
+  order: 41
+  unlockLevel: 4
   requiresQuest: lina_hello
-  intro: "Min bungalow \xE4r helt gr\xE5. Den f\xF6rtj\xE4nar gult, solgult!"
-  outro: "Den lyser ju! Precis som jag dr\xF6mde."
+  intro: "Mitt H\xF6rnhus dr\xF6mmer om vita New England-paneler. Hj\xE4lper du mig?"
+  outro: "Det \xE4r som ett vykort fr\xE5n Maine!"
   objectives:
   - type: 0
-    targetId: house_bungalow
+    targetId: house_corner
     amount: 3
   rewardCoins: 350
-  rewardGems: 8
-  rewardXp: 90
-  focus: house_bungalow
+  rewardGems: 10
+  rewardXp: 80
+  focus: house_corner
   references:
     version: 2
     RefIds: []

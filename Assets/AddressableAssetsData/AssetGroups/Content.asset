@@ -15,14 +15,14 @@ MonoBehaviour:
   m_GroupName: Content
   m_GUID: b4d5d34ad08459445b4b68ad6e4db668
   m_SerializeEntries:
-  - m_GUID: 003c2b346b015bb4b8b6bb9bcaf37b22
-    m_Address: def/ground_flowerbed
+  - m_GUID: 02398f701bfe0ae49b6c6128ee5509b3
+    m_Address: res/plum
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0171a269fda02264894278bf5f0ffa77
-    m_Address: quest/greta_paint
+  - m_GUID: 02e5009e1d649c64286037b5b42461f7
+    m_Address: def/bush_boxwood
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -33,38 +33,116 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0683c284a618d8148af50a0f01d875a8
-    m_Address: res/bread
+  - m_GUID: 08293802eaf79d94c81c0ba444efdfd2
+    m_Address: def/house_twostory
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0bd69cb029497174db571156969867b5
-    m_Address: quest/greta_finish
+  - m_GUID: 08c8ac7f88920944799d19e7abb260df
+    m_Address: def/flower_climbing_rose
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 10bbf151e0590b84394e47b117e8ab99
-    m_Address: def/fence_white_picket
+  - m_GUID: 099feab2354bc044ea2c1111bbf36df8
+    m_Address: def/shop_general
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 199aa54eb77ce684386dd89efce0ab9a
-    m_Address: def/crop_corn
+  - m_GUID: 0ac3047c0b9429140b42d6103d224468
+    m_Address: res/bouquet_rose_circle
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1c00cf67d03964e4c8ca40fcafaff010
-    m_Address: recipe/juice
+  - m_GUID: 0bf1b892d88b9714b8758c0e4e7dceda
+    m_Address: res/apple_juice
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1f55b8f1f1b188f49bee71ee75ec6da2
-    m_Address: def/fence_stone_low
+  - m_GUID: 0c845f328b9c758478aaf8ba640507f4
+    m_Address: def/decor_bbq
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0e08593942d42cc4a9805960e98a4b74
+    m_Address: def/flower_dahlia
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0fa31e18ba4e7c3409fd8ca9b609503a
+    m_Address: quest/omar_juice
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 10551690f9abd154282efbb484620155
+    m_Address: def/bush_lilac
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 139c7ced70a07074cae6bd13fd7fe569
+    m_Address: def/decor_hanging_pot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 13a51332f7314854bb002f5bf2fbd300
+    m_Address: quest/wisteria
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 15a5f766fd1ff1c47b3fe92cae498b84
+    m_Address: def/decor_swing_tree
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1609afafa695dfd47a2ec3a6e828ffa7
+    m_Address: res/plum_jam
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1718ea95ff331c246a9b3acde6785068
+    m_Address: facade/house2_brick_red
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 19073bce949257f48b3e05ad3fec274f
+    m_Address: res/currant_cordial
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1b1b045b7f82cf440a4a9740a113bca1
+    m_Address: def/fence_white
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1c2c01ce6edda6845b76281e00344fd9
+    m_Address: def/bush_currant
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1c7a659d704b54b4f9e583b837174a59
+    m_Address: def/hedge_wild
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2178e4368f55bd447a93ba09fb8b0675
+    m_Address: def/decor_bench_wood
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -75,32 +153,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 22511cb28021ab14fada765fbb1ee301
-    m_Address: def/pond_small
+  - m_GUID: 24a58faf8ae647c428158a64af47cacc
+    m_Address: quest/apples
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 23ee586775a99a24c8a1bb713a560c49
-    m_Address: def/production_store
+  - m_GUID: 280f82981581967459feda3d2666e379
+    m_Address: def/play_sandbox
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 25141a3b736df7b45a8ce548b974a678
-    m_Address: def/house_cabin
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - content
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 295ef80425474474db623dd485f4f383
-    m_Address: def/decor_planter
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - content
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2b707176e981b374ba88ffddf192c12b
-    m_Address: quest/omar_store
+  - m_GUID: 2e38eab3bc7d126498de15de253f372a
+    m_Address: def/tree_magnolia
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -111,8 +177,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 313648169b7eae34e8ca2d3700375188
-    m_Address: def/ground_soil
+  - m_GUID: 307cd8562fba4df4db0191e1e5036286
+    m_Address: def/hedge_berry
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -123,14 +189,14 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 31da3b731b08c43478170f07b88ad273
-    m_Address: quest/greta_seeds
+  - m_GUID: 323b91c564dd23b428a7a23e6a98076b
+    m_Address: res/wildflower
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 31f8ada171cf3c44982dc9693dd18723
-    m_Address: def/decor_statue
+  - m_GUID: 326d0d630c312714291a78d8517d2cc2
+    m_Address: def/flower_dandelion
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -141,32 +207,56 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 35a2f3a85a248d94f8bb6440cc45b2ae
-    m_Address: def/decor_picnic_table
+  - m_GUID: 386aebc8cd193b44fa9f271fba382165
+    m_Address: def/stone_round
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 36d98f39f7dbfe54582d421d977740ad
-    m_Address: def/decor_wheelbarrow
+  - m_GUID: 3988d13e92484bc4a8617d1e28678f01
+    m_Address: quest/bouquet
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 378649865dafcc046a17002e359dc198
-    m_Address: def/tree_pine
+  - m_GUID: 3b659c3131a724245a8aab7a8442e280
+    m_Address: facade/house4_new_england
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 38b406f0c3e84594eb84d889618e4f4b
-    m_Address: def/crop_strawberry
+  - m_GUID: 3b81a1590b5965c40a6792d87a8b6db7
+    m_Address: def/water_pond
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3ce813b3a3fd5e7498725fd547239e8f
-    m_Address: def/decor_mailbox
+  - m_GUID: 3c7750580e63bd5418bfd9fa963cecbb
+    m_Address: facade/house1_yellow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3f1f55c96b6e6ad49b0a489fa2b79bf0
+    m_Address: res/currant
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 40ad2296dd0fce1449e7999be03c8895
+    m_Address: recipe/make_picnic_basket
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 41e6767209966d74589bfe785b9e4b95
+    m_Address: quest/berg_lights
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4318b8f64177e154d8cda42d700cd25a
+    m_Address: res/lilac
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -177,20 +267,14 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 45128c7ccd6b0b148bd84847704bfaf9
-    m_Address: res/wheat
+  - m_GUID: 464cfe23bde120f429b2ca6c352bce43
+    m_Address: def/play_slide
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4805758ea2580d345bcc1da4f4d837c8
-    m_Address: quest/greta_flowers
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - content
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 48494ac7b6b5fdf45bfd730ceb77c056
-    m_Address: recipe/bread
+  - m_GUID: 46c87859cd250f0488feecb653e848e4
+    m_Address: res/bouquet_tulip
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -207,14 +291,32 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4ac8667e32451c140ac5f3087ecb5db3
+    m_Address: quest/tidy
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4c77dc06358a5a34ebd42436d858c7f9
     m_Address: def/tree_blossom_pink
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4de2bcbe79a00764aa332c50d78a5e12
-    m_Address: recipe/salad
+  - m_GUID: 4d726df142b146940af244fd1e6c5c5d
+    m_Address: quest/board
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4fba6c1293e29c147bed5ea5c4691e50
+    m_Address: quest/summer
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 514ad1bfa9514394e83d220f1ab38b31
+    m_Address: recipe/make_plum_jam
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -225,44 +327,50 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 52b84b80903d46c4abe68c45eb7a0262
-    m_Address: def/crop_tomato
+  - m_GUID: 51617fb933c8cb14590433cfb9c9617e
+    m_Address: def/tree_maple
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 55cc538b278240445ba89453b7c481c9
-    m_Address: def/decor_pergola
+  - m_GUID: 531d2e419495da747b8f9e09a47ec38e
+    m_Address: quest/school
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 604c0a3822ed9cf48a2e813f360cac47
-    m_Address: res/pie
+  - m_GUID: 57fdd7160b25c1440be2dcf8d8c013e4
+    m_Address: recipe/make_currant_cordial
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6076c1e4e5e16364c918b70c2e1df94f
-    m_Address: def/flower_daisy
+  - m_GUID: 59c723879d8261142848ccfdf3ab826e
+    m_Address: res/hydrangea
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 631cbed5a9e2d014694b7f43ae43c50d
-    m_Address: def/crop_pumpkin
+  - m_GUID: 5a4757786e48a844e9d5bc8e61363d70
+    m_Address: res/bouquet_peony
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 63dd091521ea1f74caecf3d457ca2d83
-    m_Address: def/decor_well
+  - m_GUID: 5b0a544c656619c41a3caeb4592ce19e
+    m_Address: facade/house1_light_blue
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 65d82190a93f798489018993ce00656f
-    m_Address: def/crop_wheat
+  - m_GUID: 5e994e349913b784c98beed3ec69b841
+    m_Address: def/hedge_topiary
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 634f5879281183041831f9f42d48c78f
+    m_Address: recipe/make_bouquet_tulip
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -273,26 +381,14 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6886d0ebc45f88441bc5621d3c880652
-    m_Address: res/juice
+  - m_GUID: 6bd4841b76a3297409dbcbdabd6a4464
+    m_Address: quest/lina_pond
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 68b1369e1ad803a44a3e26875f08817b
-    m_Address: def/house_townhouse
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - content
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6c82f568edc770646a425f53b48fe508
-    m_Address: def/decor_lamp_garden
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - content
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6ccf57f8d81b67346bea538d741e68cf
-    m_Address: def/house_villa
+  - m_GUID: 6d4b8d67ebc92f049a10020b49d42a6d
+    m_Address: def/play_swing_set
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -309,68 +405,38 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6f5114699ef06a64f82a26e753f6c022
-    m_Address: recipe/jam
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - content
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 700b64d92e3acda4bbeb4a43adff33ff
     m_Address: def/flower_tulip_yellow
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 70ee2552f0f3a3e46b0c40acec5106d3
-    m_Address: def/decor_barrel_flowers
+  - m_GUID: 7908cc8dda4a6bb44b3afd07a5945c54
+    m_Address: def/tree_willow
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 710a162a909513f4a9a243e4701036b1
-    m_Address: def/decor_parasol
+  - m_GUID: 7a007c056d635ef40ac3b09d5c733e33
+    m_Address: def/decor_mailbox_post
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 72ee1c85e55df6e42a852af86b1a8ad3
-    m_Address: def/fence_wood
+  - m_GUID: 7fd969749a143be40b029dff78ea289b
+    m_Address: res/lavender
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7c38fa6d1a45dd44fa3fc5c555c5e40f
-    m_Address: recipe/wreath
+  - m_GUID: 82fad4051f49ff74184395d0fb354e54
+    m_Address: def/fence_rustic
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7ea48b1900764474daee2f58adc2fef2
-    m_Address: res/pumpkin
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - content
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 81e2ca5f4814c4d4bacf35ef43a113b6
-    m_Address: def/crop_carrot
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - content
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 84b0d258e9d768a4fba609ada91ebc82
-    m_Address: def/hedge_box
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - content
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 875a03be71184ed40b2d86580273e3b7
-    m_Address: recipe/pie
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - content
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 880bbcd903a977b4db68f44943c6de67
-    m_Address: quest/gata_orders
+  - m_GUID: 88ae90029e264dd4e89b1aa7dbd62e37
+    m_Address: def/fence_low_gate
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -381,44 +447,32 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8d1f66177dfa01c4dbc0ee601eba9546
-    m_Address: quest/berg_play
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - content
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8ddeca9238b305149a432ecaa2224a3f
     m_Address: def/tree_apple
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8f9909797eefc7e419b3c16ab08de7e0
-    m_Address: def/decor_swing
+  - m_GUID: 90195844a1502ab4e8e1ca955fd9477f
+    m_Address: recipe/make_bouquet_wild
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8fcdb800ae3691644a18ec35072813d4
-    m_Address: def/decor_birdhouse
+  - m_GUID: 92dd2de6871dae64c8f663ea993cfa32
+    m_Address: def/path_curb
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 939fec734008af74abaf2f4ce4c14f22
-    m_Address: def/path_brick
+  - m_GUID: 9637f9c9bf65600449170a0fab4ee75b
+    m_Address: def/clutter_weed
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 964a2dcd6ea1e7e4e90893f76bffa6ca
-    m_Address: def/production_garden_center
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - content
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 99dcbd2c447284648b4fa016ed0f33c8
-    m_Address: def/path_wood
+  - m_GUID: 99211ad27e10af0499c1584f74676876
+    m_Address: def/decor_lamp_classic
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -429,14 +483,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9d3adad866e1d2543a73579fd6bf7de5
-    m_Address: quest/lina_garden
+  - m_GUID: 9d4b16a89ff07f84daec8115e4fb3f1e
+    m_Address: quest/garden1
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9ef6a08567d45f144b9daf474687a68c
-    m_Address: res/flowers
+  - m_GUID: 9e44cbdfa8cec7c41a7f66f1c2c63e03
+    m_Address: quest/arrive
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9ed06f6686020e147afba7972501422c
+    m_Address: quest/water
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -447,44 +507,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a0369f859981e044f93a069cfa845d71
-    m_Address: def/decor_gnome
+  - m_GUID: a1c9d44d55be6fa489f7d957d1ea7b6f
+    m_Address: res/peony
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a1501fb8d27523e4291faeaf3deaa0de
-    m_Address: res/carrot
+  - m_GUID: a4a811d031693fd43a3bb660165a61e3
+    m_Address: def/decor_solar_light
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a548270345922fb46b6560fca0a7444e
-    m_Address: def/road_curb
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - content
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a90481ef7db28784485ef7fdf1f370ea
-    m_Address: def/decor_gate
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - content
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: aa54c4824bded644fa0e126e9d412451
-    m_Address: quest/omar_carrots
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - content
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: aeaa0837686c73c429388e4d9ad7bcf6
-    m_Address: recipe/popcorn
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - content
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: aeb08afd6e542f447b0a5fef23773a92
-    m_Address: res/fertilizer
+  - m_GUID: abee20d7ec0ff694ab74938ba8394377
+    m_Address: res/arrangement_summer
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -495,50 +531,68 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b072da3e3bb0a2440a27259b1f6944da
-    m_Address: def/bush_hydrangea
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - content
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b0cb75b573927ee4b83500cbc803a044
     m_Address: res/bouquet
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b1d1b38a06e124749ba7ea1c962353a3
-    m_Address: res/corn
+  - m_GUID: b1a2f68c9ccde7c449dd9672f70d8a90
+    m_Address: def/water_fountain
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b7cbb8dabcd72994aa90120e0acab086
-    m_Address: quest/greta_harvest
+  - m_GUID: b218aa3726436bc49a48f394bd0cbf13
+    m_Address: def/clutter_dry_grass
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b80669efc218abe4d8d2357c58972f01
-    m_Address: res/strawberry
+  - m_GUID: b2fc7c4e0b911014c970cae8faac63f3
+    m_Address: quest/villa
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b8ec537b234568f4c923a2d9497cd644
-    m_Address: def/ground_sand
+  - m_GUID: b66875e8c30d7f5418a7e2a8e5d27c6d
+    m_Address: recipe/make_wreath_lilac
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b94793f295f3a7746ba434e5e762a6a1
-    m_Address: quest/street_complete
+  - m_GUID: b74d4b0f9e47ff04a8764437530607f4
+    m_Address: recipe/make_apple_juice
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ba2430ef3fb57d241bf8c50b9b9923ae
-    m_Address: def/decor_rose_arch
+  - m_GUID: b91cec672de703448bc4f8edc5434959
+    m_Address: res/dahlia
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: baa4f04d9f2a8dc4a94f7615e779c972
+    m_Address: def/house_classic
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bb7677e5a12184f4b92e2f514b4f8d09
+    m_Address: facade/house3_modern_dark
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: be0857febde95254f9a4b2ce0b95b5c7
+    m_Address: def/decor_wisteria_arch
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: be3007c2da0f74541998986a72d5e712
+    m_Address: facade/house5_manor
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -549,14 +603,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: bf198223a69d4d14e99e28886e2953e9
-    m_Address: res/wreath
+  - m_GUID: c36377560033f6f4e9b70621b4456800
+    m_Address: res/sunflower
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c38ea9a9c7fef5e4991c6492f2918c59
-    m_Address: res/tomato
+  - m_GUID: c442e56c5b828434bb3caf7bb6469203
+    m_Address: res/picnic_basket
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c4a0cd6e342f8fa438c9983be8deb10e
+    m_Address: quest/omar_paths
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -567,26 +627,26 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c7bbdeb4cecd6c14cbefd562c5ef90e5
-    m_Address: def/decor_fountain
+  - m_GUID: cb6106782b407d54692681eb662d096c
+    m_Address: def/shop_flower
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c889840c8539d584481a98977af64de3
-    m_Address: def/decor_lamp
+  - m_GUID: cc16b1ee440012149adb75108f426003
+    m_Address: def/fence_iron
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ca60f1a0d8c70c34ba9411efb5f51ebe
-    m_Address: quest/greta_order
+  - m_GUID: cf5a373c8ea777f4aa680664e25ad46a
+    m_Address: quest/street
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: cf6735ff9de0f2d42826b54d67c6a334
-    m_Address: quest/greta_welcome
+  - m_GUID: d0a189fd7c2d37047a2405c92edb5864
+    m_Address: recipe/make_bouquet_peony
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -597,26 +657,44 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d5a87444ef1b8d048b6384d5eafa4a9b
+    m_Address: quest/tulips
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d5d0e4daa20941542b6a5006b3779525
+    m_Address: def/fence_chainlink
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d6f37c3cf516edd4d9e483de241c2e7a
     m_Address: def/flower_lavender_purple
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d7fdfa31fcf2f474585d375727a44412
-    m_Address: res/popcorn
+  - m_GUID: d7f98cc1f8860224ba63ae793047c527
+    m_Address: quest/flowershop
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: da8cad96dec5e8749a6c9c4e3ebe9f15
-    m_Address: neighbor/greta
+  - m_GUID: d93e5b1dde515334cbde60b2ce6b718b
+    m_Address: quest/rose_circle
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: da9a991dfce60bb40afe877d7ddcad8d
-    m_Address: def/path_stone
+  - m_GUID: dbc5fc2643178134bb750f75b762c80b
+    m_Address: def/flower_hydrangea
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd722ee7a9cc3334f9de1fe866644ff3
+    m_Address: def/community_school
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -627,20 +705,50 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: de1b2e3373ba87444948a0826aace337
+    m_Address: res/wreath_lilac
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: df46013113122e14ba720ba9b497a1a9
+    m_Address: def/house_corner
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: df557243c7c419f409583b82231d41ae
+    m_Address: def/decor_pampas
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dfa40fb37f1e887409c8ff4fcc74f889
+    m_Address: recipe/make_arrangement_summer
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e001bfc18a8998848af0615742f052ea
+    m_Address: res/rose
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e0b5a183d474be046b65806809c4fd1d
     m_Address: def/flower_peony
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e0f623b9c9780594e8207b34a2132e5b
-    m_Address: def/decor_sign
+  - m_GUID: e4d2cdf99b6391e4daacfe9b53981cfb
+    m_Address: neighbor/nora
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e1435ef63d6b25542bf79075ba141760
-    m_Address: res/salad
+  - m_GUID: e4f2a8d7c4cfb014abcfc9a1a1c0cad7
+    m_Address: def/decor_cafe_table
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -651,14 +759,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e56b2ef7d51edb14c8ed31383b2909da
-    m_Address: def/decor_bench
+  - m_GUID: e5e8598ae988dd546b86cda23b06d5ff
+    m_Address: recipe/make_bouquet_rose_circle
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e5e8807f77bf72b489eb21139745c802
-    m_Address: def/decor_gazebo
+  - m_GUID: e7fef26fd7408f2419a23aa717ee0c09
+    m_Address: def/path_pattern
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eb3ee5c5c68ec414cbbecd4092b0ce07
+    m_Address: def/sidewalk
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -669,26 +783,32 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ec93436bda4c9f241b912284287e8a87
+    m_Address: res/bouquet_wild
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ed26b74b66c9c3a4b947c29945729880
+    m_Address: def/fence_stone_iron
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ef7bd16a4465d6e4fbac0d0fcd12ed37
     m_Address: neighbor/sven
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f2745664aa61821478ffb9c57420ea40
-    m_Address: res/jam
+  - m_GUID: f79cff6950720644f901c795a24c6853
+    m_Address: facade/house3_modern_light
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f3f64d483c046c74891dbd13a3915ad1
-    m_Address: recipe/fertilizer
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - content
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f71882abf762ccb4996dd0553071c987
-    m_Address: quest/omar_bread
+  - m_GUID: f946e5ebc7e2a684f9b160397123d39e
+    m_Address: def/tree_plum
     m_ReadOnly: 0
     m_SerializedLabels:
     - content
@@ -699,8 +819,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - content
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fbd55f2276139b743b5afdf89ba263eb
-    m_Address: def/decor_pot
+  - m_GUID: f9f3fc65078eb404588bedd4ce1c0d09
+    m_Address: quest/omar_hello
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f9fdec3581059914cb042d8a5c0783ea
+    m_Address: res/tulip
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - content
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fd0a72179275d2a4fa9ffe49d64c7e74
+    m_Address: facade/house2_brick_grey
     m_ReadOnly: 0
     m_SerializedLabels:
     - content

@@ -134,3 +134,34 @@ Det som spelar störst roll och som du styr som modellerare:
 5. **Inga genomskinliga ytor** om det inte behövs (glas kan vara en ljusblå, ogenomskinlig färg).
 
 Mät på riktigt: Debug-knappen i spelet visar FPS och vilken grafiknivå som valts.
+
+## Rörelse och "reaktioner"
+
+Du behöver inte animera i Blender för det mesta. Spelet sköter det i kod:
+
+| Det här | Görs av spelet automatiskt |
+| --- | --- |
+| Studs när man trycker på något | Ja (squash and stretch) |
+| Poppar upp när något placeras | Ja |
+| Snurrar bort med damm/vattenstänk när ogräs rensas | Ja |
+| Färgvåg + glitter när ett hus blir klart | Ja |
+| Träd, buskar och blommor vajar i vinden | Ja |
+
+**Rörliga delar:** döp en del (ett objekt i Blender) med ett prefix, så rör den sig i spelet:
+
+| Prefix | Rörelse | Exempel | Var origo ska sitta |
+| --- | --- | --- | --- |
+| `Swing_` | Pendlar fram och tillbaka | gungsäte, hängande skylt, grind | i upphängningen/gångjärnet |
+| `Spin_` | Snurrar runt uppåtaxeln | väderflöjel, fontänens skål | i mitten |
+| `Bob_` | Guppar upp och ner | fågel, näckros | var som helst |
+| `Sway_` | Vajar svagt | flagga, tvättlina, hög blomma | där den sitter fast |
+
+Exempel: gungställningen har ett objekt `Swing_Seat` (rep + säte) med origo uppe i bommen.
+
+**Riktiga animationer** (grannarna som går, en dörr som öppnas, en hund som viftar på svansen) görs i Blender:
+1. Rigga med *Rigify* (människor) eller några enkla ben (djur, dörrar).
+2. Animera i *Action Editor*. Ett klipp per rörelse: `Idle`, `Walk`, `Wave`, `Happy`.
+3. Döp filen med `_Anim`, t.ex. `SM_Neighbor_Nora_Anim.fbx`, och exportera med *Bake Animation* påslaget.
+4. Säg till, så kopplar jag in klippen så att grannarna vinkar när ett uppdrag blir klart, och liknande.
+
+För människofigurer går det också att använda färdiga gratisanimationer från Mixamo på en egen modell.

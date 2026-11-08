@@ -74,6 +74,8 @@ namespace NG.EditorTools
             var view = root.AddComponent<PlaceableView>();
             view.definitionId = spec.id;
             root.AddComponent<PlaceholderMarker>();
+            var motion = root.AddComponent<ProceduralMotion>();
+            motion.swayWhole = spec.type == "tree" || spec.type == "bush" || spec.type == "flower";
 
             var prefab = PrefabUtility.SaveAsPrefabAsset(root, prefabPath);
             Object.DestroyImmediate(root);
@@ -233,6 +235,15 @@ namespace NG.EditorTools
         {
             Prim(PrimitiveType.Cube, model, "Rim", new Vector3(0, 0.06f, 0), new Vector3(w, 0.12f, d), NGEditorPaths.Hex("#B9B4A8"));
             Prim(PrimitiveType.Cube, model, "Water", new Vector3(0, 0.07f, 0), new Vector3(w * 0.85f, 0.13f, d * 0.85f), color);
+            if (h > 1f)
+            {
+                // Springbrunn: pelare med en snurrande skål överst.
+                Prim(PrimitiveType.Cylinder, model, "Pillar", new Vector3(0, h * 0.4f, 0), new Vector3(0.3f, h * 0.4f, 0.3f), NGEditorPaths.Hex("#E6E6E6"));
+                var spin = Group(model, "Spin_Top");
+                spin.localPosition = new Vector3(0, h * 0.8f, 0);
+                Prim(PrimitiveType.Cylinder, spin, "Bowl", Vector3.zero, new Vector3(1.2f, 0.08f, 1.2f), NGEditorPaths.Hex("#E6E6E6"));
+                Prim(PrimitiveType.Cube, spin, "Spray", new Vector3(0.35f, 0.15f, 0), new Vector3(0.12f, 0.3f, 0.12f), color);
+            }
         }
 
         static void BuildClutter(Transform model, float w, float d, float h, Color color, string id)
@@ -263,7 +274,11 @@ namespace NG.EditorTools
             foreach (float sx in new[] { -1f, 1f })
                 Prim(PrimitiveType.Cylinder, model, "Post", new Vector3(sx * w * 0.4f, h * 0.5f, 0), new Vector3(0.1f, h * 0.5f, 0.1f), Wood);
             Prim(PrimitiveType.Cube, model, "Beam", new Vector3(0, h, 0), new Vector3(w * 0.85f, 0.1f, 0.1f), Wood);
-            Prim(PrimitiveType.Cube, model, "Play", new Vector3(0, h * 0.35f, 0), new Vector3(w * 0.4f, 0.12f, d * 0.4f), color);
+            var swing = Group(model, "Swing_Seat");
+            swing.localPosition = new Vector3(0, h, 0);
+            foreach (float sx in new[] { -1f, 1f })
+                Prim(PrimitiveType.Cube, swing, "Rope", new Vector3(sx * w * 0.15f, -h * 0.32f, 0), new Vector3(0.03f, h * 0.64f, 0.03f), Color.white);
+            Prim(PrimitiveType.Cube, swing, "Seat", new Vector3(0, -h * 0.65f, 0), new Vector3(w * 0.4f, 0.1f, d * 0.3f), color);
         }
 
         static void BuildDecor(Transform model, float w, float d, float h, Color color)

@@ -13,6 +13,50 @@ namespace NG.Game
 
         public IReadOnlyDictionary<string, int> All => _s.State.storage;
 
+        // ---------- Förrådets storlek ----------
+
+        public int Capacity => _s.Config.storageBaseCapacity + _s.State.storageLevel * _s.Config.storagePerUpgrade;
+
+        public int Total
+        {
+            get
+            {
+                int sum = 0;
+                foreach (var kv in _s.State.storage) sum += kv.Value;
+                return sum;
+            }
+        }
+
+        public bool HasRoom(int amount) => Total + amount <= Capacity;
+
+        public int UpgradeCost => _s.Config.storageUpgradeCost * (_s.State.storageLevel + 1);
+
+        public Result UpgradeStorage()
+        {
+            if (!_s.Wallet.TrySpend(CurrencyType.Coins, UpgradeCost)) return Result.Fail("Inte tillräckligt med mynt.");
+            _s.State.storageLevel++;
+            EventBus.Publish(new InventoryChanged(null, 0));
+            GameSession.Message($"Förrådet rymmer nu {Capacity} varor.");
+            return Result.Success;
+        }
+
+        // ---------- Sälja ----------
+
+        public int PriceOf(string resourceId) =>
+            _s.Content.TryGet<ResourceDefinition>(resourceId, out var r) ? r.sellPrice : 0;
+
+        /// <summary>Säljer varor ur förrådet för mynt (grundpriset i resources.csv).</summary>
+        public Result Sell(string resourceId, int amount)
+        {
+            amount = System.Math.Min(amount, Count(resourceId));
+            if (amount <= 0) return Result.Fail("Du har inga sådana varor.");
+            int coins = PriceOf(resourceId) * amount;
+            Add(resourceId, -amount);
+            _s.Wallet.Add(CurrencyType.Coins, coins);
+            GameSession.Message($"Sålde {amount} {NameOf(resourceId)} för {coins} mynt.");
+            return Result.Success;
+        }
+
         public int Count(string resourceId) =>
             resourceId != null && _s.State.storage.TryGetValue(resourceId, out var n) ? n : 0;
 

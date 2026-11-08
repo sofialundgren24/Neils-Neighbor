@@ -24,9 +24,9 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   icon: {fileID: 0}
-  house: {fileID: 11400000, guid: 6ccf57f8d81b67346bea538d741e68cf, type: 2}
-  color: {r: 0.7254902, g: 0.9411765, b: 0.6901961, a: 1}
-  bio: "En st\xF6kig och glad barnfamilj som beh\xF6ver en riktig tr\xE4dg\xE5rd att leka i."
+  house: {fileID: 11400000, guid: baa4f04d9f2a8dc4a94f7615e779c972, type: 2}
+  color: {r: 0.9607843, g: 0.7176471, b: 0.64705884, a: 1}
+  bio: "En glad och st\xF6kig barnfamilj i Klassiska f\xF6rortshuset. Barnen vill ha n\xE5got att leka med."
   references:
     version: 2
     RefIds: []

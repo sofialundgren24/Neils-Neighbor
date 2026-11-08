@@ -32,39 +32,39 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   footprint: {x: 10, y: 10}
-  unlockLevel: 6
+  unlockLevel: 5
   cost: []
   materials: []
   buildTimeSec: 0
   xpReward: 0
   inShop: 0
   maxCount: 0
-  beautyScore: 10
+  beautyScore: 14
   styleTags: 0
   premium: 0
   decayedVariant: Phase0_Decayed
   phases:
   - variantName: Phase1_Repaired
-    durationSec: 120
+    durationSec: 300
     cost:
       currency: 0
-      amount: 400
+      amount: 600
     materials: []
-    xpReward: 50
+    xpReward: 80
   - variantName: Phase2_Painted
-    durationSec: 600
+    durationSec: 900
     cost:
       currency: 0
-      amount: 800
+      amount: 1000
     materials: []
-    xpReward: 90
+    xpReward: 140
   - variantName: Phase3_Decorated
-    durationSec: 1800
+    durationSec: 2400
     cost:
       currency: 0
-      amount: 1500
+      amount: 1600
     materials: []
-    xpReward: 160
+    xpReward: 220
   paintSchemes: []
   references:
     version: 2

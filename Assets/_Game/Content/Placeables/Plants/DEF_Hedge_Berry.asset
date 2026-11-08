@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75b9aeb768288ff4d8a25fa7813af048, type: 3}
+  m_Name: DEF_Hedge_Berry
+  m_EditorClassIdentifier: Assembly-CSharp::NG.Data.PlantDefinition
+  id: hedge_berry
+  fallbackName: "H\xE4ck med r\xF6da b\xE4r"
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  icon: {fileID: 0}
+  category: 3
+  prefab:
+    m_AssetGUID: 4ccc9ecb4259a134ca8133c2fa9f3919
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  footprint: {x: 4, y: 1}
+  unlockLevel: 3
+  cost:
+  - currency: 0
+    amount: 45
+  materials: []
+  buildTimeSec: 0
+  xpReward: 2
+  inShop: 1
+  maxCount: 0
+  beautyScore: 3
+  styleTags: 0
+  premium: 0
+  growTimeSec: 150
+  harvest:
+    resource: {fileID: 0}
+    amount: 0
+  seasons: 15
+  references:
+    version: 2
+    RefIds: []

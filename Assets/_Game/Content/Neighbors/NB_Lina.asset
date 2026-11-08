@@ -24,9 +24,9 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   icon: {fileID: 0}
-  house: {fileID: 11400000, guid: 49c7eb2f9cbf8dd46a04a96936f0db20, type: 2}
-  color: {r: 1, g: 0.8862745, b: 0.47843137, a: 1}
-  bio: "Konstn\xE4r och blomster\xE4lskare. Vill m\xE5la hela gatan i pastell."
+  house: {fileID: 11400000, guid: df46013113122e14ba720ba9b497a1a9, type: 2}
+  color: {r: 0.7254902, g: 0.9411765, b: 0.6901961, a: 1}
+  bio: "Konstn\xE4r i H\xF6rnhuset. Vill ha vatten, ljus och stilfulla New England-detaljer."
   references:
     version: 2
     RefIds: []

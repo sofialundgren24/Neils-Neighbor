@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Q_Lina_Hello
   m_EditorClassIdentifier: Assembly-CSharp::NG.Data.QuestDefinition
   id: lina_hello
-  fallbackName: Blomsterbutiken
+  fallbackName: Kvarterets lekpark
   displayName:
     m_TableReference:
       m_TableCollectionName: 
@@ -25,18 +25,18 @@ MonoBehaviour:
     m_LocalVariables: []
   icon: {fileID: 0}
   neighbor: {fileID: 11400000, guid: 4343d945ef39b2f40b0a2630ea5d7c4a, type: 2}
-  order: 30
-  unlockLevel: 5
+  order: 40
+  unlockLevel: 4
   requiresQuest: omar_house
-  intro: "Hej! Lina heter jag. Jag vill g\xF6ra buketter av gatans blommor. Bygg en tr\xE4dg\xE5rdsbutik?"
-  outro: "\xC4ntligen! Nu kan vi g\xF6ra n\xE5got vackert."
+  intro: "Hej! Lina fr\xE5n H\xF6rnhuset. Barnen p\xE5 gatan har ingenstans att leka. Kan vi bygga en lekpark?"
+  outro: "H\xF6r du skratten? Det \xE4r ljudet av en levande gata."
   objectives:
   - type: 1
-    targetId: production_garden_center
+    targetId: play_swing_set
     amount: 1
-  - type: 3
-    targetId: bouquet
-    amount: 2
+  - type: 1
+    targetId: play_sandbox
+    amount: 1
   rewardCoins: 150
   rewardGems: 0
   rewardXp: 40
