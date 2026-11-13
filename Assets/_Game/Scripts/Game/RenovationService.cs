@@ -188,6 +188,7 @@ namespace NG.Game
                 if (AllHousesComplete()) RestoreStreet();
                 EventBus.Publish(new ObjectChanged(o.instanceId, true));
                 EventBus.Publish(new RenovationCompleted(o.instanceId));
+                Analytics.Event("house_renovated", "house", o.definitionId, "level", _s.Progression.Level);
                 GameSession.Message($"{def?.DisplayName ?? "Huset"} är färdigrenoverat!");
             }
             else

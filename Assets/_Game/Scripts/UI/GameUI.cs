@@ -24,7 +24,7 @@ namespace NG.UI
     [RequireComponent(typeof(UIDocument))]
     public class GameUI : MonoBehaviour
     {
-        enum Window { None, Shop, Storage, Orders, Debug }
+        enum Window { None, Shop, Storage, Orders, Debug, Settings }
 
         static readonly (string label, PlaceableCategory[] cats)[] ShopTabs =
         {
@@ -45,6 +45,11 @@ namespace NG.UI
         [SerializeField] StyleSheet styleSheet;
 
         GameSession _s;
+        VisualElement _docRoot;
+        Rect _appliedSafeArea;
+        Vector2Int _appliedScreen;
+        string _welcomeText;
+        bool _confirmDelete;
         WorldInteraction _ia;
         WorldView _world;
         GameBootstrap _boot;
@@ -112,11 +117,16 @@ namespace NG.UI
             _cam = Camera.main;
 
             var doc = GetComponent<UIDocument>();
-            _root = doc.rootVisualElement;
-            _root.Clear();
-            if (styleSheet != null) _root.styleSheets.Add(styleSheet);
+            _docRoot = doc.rootVisualElement;
+            _docRoot.Clear();
+            if (styleSheet != null) _docRoot.styleSheets.Add(styleSheet);
+            _docRoot.pickingMode = PickingMode.Ignore;
+            // Allt UI ligger i "safe area": undviker notch, kamerahål och rundade hörn på telefoner.
+            _root = new VisualElement { name = "safe-area", pickingMode = PickingMode.Ignore };
             _root.AddToClassList("root");
-            _root.pickingMode = PickingMode.Ignore;
+            _root.style.position = Position.Absolute;
+            _docRoot.Add(_root);
+            _welcomeText = BuildWelcomeSummary();
 
             _bubbleLayer = Layer("bubbles");
             BuildTopBar();
@@ -185,6 +195,9 @@ namespace NG.UI
         {
             if (_s == null) return;
             if (_cam == null) _cam = Camera.main;
+            ApplySafeArea();
+            var keyboard = UnityEngine.InputSystem.Keyboard.current;
+            if (keyboard != null && keyboard.escapeKey.wasPressedThisFrame) HandleBack();
 
             bool placing = _ia.CurrentMode == WorldInteraction.Mode.Placing;
             if (_ia.SelectedId != _shownSelectionId || _ia.SelectedExpansion != _shownExpansion || _ia.CurrentMode != _shownMode)
@@ -218,10 +231,63 @@ namespace NG.UI
 
         bool IsOverUi(Vector2 screenPos)
         {
-            if (_root?.panel == null) return false;
-            var panelPos = RuntimePanelUtils.ScreenToPanel(_root.panel, new Vector2(screenPos.x, Screen.height - screenPos.y));
-            var picked = _root.panel.Pick(panelPos);
-            return picked != null && picked != _root;
+            if (_docRoot?.panel == null) return false;
+            var panelPos = RuntimePanelUtils.ScreenToPanel(_docRoot.panel, new Vector2(screenPos.x, Screen.height - screenPos.y));
+            var picked = _docRoot.panel.Pick(panelPos);
+            return picked != null && picked != _root && picked != _docRoot;
+        }
+
+        void ApplySafeArea()
+        {
+            var panel = _docRoot?.panel;
+            if (panel == null) return;
+            var sa = Screen.safeArea;
+            var screen = new Vector2Int(Screen.width, Screen.height);
+            if (sa == _appliedSafeArea && screen == _appliedScreen) return;
+            _appliedSafeArea = sa;
+            _appliedScreen = screen;
+            var topLeft = RuntimePanelUtils.ScreenToPanel(panel, new Vector2(sa.xMin, Screen.height - sa.yMax));
+            var bottomRight = RuntimePanelUtils.ScreenToPanel(panel, new Vector2(sa.xMax, Screen.height - sa.yMin));
+            var full = RuntimePanelUtils.ScreenToPanel(panel, new Vector2(Screen.width, Screen.height));
+            _root.style.left = topLeft.x;
+            _root.style.top = topLeft.y;
+            _root.style.right = Mathf.Max(0f, full.x - bottomRight.x);
+            _root.style.bottom = Mathf.Max(0f, full.y - bottomRight.y);
+        }
+
+        /// <summary>Androids bakåtknapp (och Esc på dator): stäng det som är öppet, ett steg i taget.</summary>
+        void HandleBack()
+        {
+            if (_shownModalKey == "daily") { _showDaily = false; _dirtyModal = true; return; }
+            if (_shownModalKey == "welcome") { _welcomeText = null; _dirtyModal = true; return; }
+            if (_shownModalKey != null) return; // villkor, karaktärsval och nivå upp måste besvaras
+            if (_window != Window.None) { _window = Window.None; _dirtyWindow = true; return; }
+            if (_ia.CurrentMode == WorldInteraction.Mode.Placing) { _ia.CancelPlacing(); return; }
+            if (_paintMode) { _paintMode = false; return; }
+            _ia.ClearSelection();
+        }
+
+        /// <summary>Vad som hänt medan spelaren var borta (minst 5 minuter). Null = visa ingen ruta.</summary>
+        string BuildWelcomeSummary()
+        {
+            if (_s.NeedsTerms || _s.NeedsCharacter || _s.State.savedAtUnix <= 0) return null;
+            long away = TimeService.UnixNow - _s.State.savedAtUnix;
+            if (away < 300) return null;
+            int harvest = 0, ready = 0, income = 0;
+            foreach (var o in _s.World.Objects)
+            {
+                if (_s.Growth.CanHarvest(o)) harvest++;
+                ready += _s.Production.ReadyCount(o);
+                if (_s.Community.CanCollect(o)) income++;
+            }
+            var lines = new List<string>();
+            if (harvest > 0) lines.Add($"• {harvest} växter är redo att skördas");
+            if (ready > 0) lines.Add($"• {ready} varor är klara i affärerna");
+            if (income > 0) lines.Add($"• {income} kvartersbyggnader har intäkter att hämta");
+            if (_s.Orders.IsUnlocked && _s.Orders.Orders.Count > 0) lines.Add($"• {_s.Orders.Orders.Count} grannar väntar på Grannskapstavlan");
+            if (_s.Daily.CanClaim) lines.Add("• Dagens gåva väntar");
+            if (lines.Count == 0) return null;
+            return $"Du var borta i {Fmt.Duration(away)}. Under tiden:\n" + string.Join("\n", lines);
         }
 
         // ---------- Toppfält ----------
@@ -296,7 +362,7 @@ namespace NG.UI
                 _ordersButton.text = $"Grannskapstavlan ({_s.Orders.Orders.Count})";
                 _ordersButton.style.display = _s.Orders.IsUnlocked ? DisplayStyle.Flex : DisplayStyle.None;
             });
-            bar.Add(Btn("Debug", () => Toggle(Window.Debug), "btn"));
+            bar.Add(Btn("Meny", () => Toggle(Window.Settings), "btn"));
         }
 
         void Toggle(Window w)
@@ -606,6 +672,7 @@ namespace NG.UI
                 case Window.Storage: BuildStorage(w); break;
                 case Window.Orders: BuildOrders(w); break;
                 case Window.Debug: BuildDebug(w); break;
+                case Window.Settings: BuildSettings(w); break;
             }
         }
 
@@ -781,6 +848,58 @@ namespace NG.UI
             }
         }
 
+        void BuildSettings(VisualElement w)
+        {
+            WindowHeader(w, "Inställningar");
+            var scroll = new ScrollView();
+            scroll.AddToClassList("grow");
+            w.Add(scroll);
+
+            scroll.Add(Text("Grafik", "subtitle"));
+            var gfx = Row();
+            var current = DeviceTier.Override;
+            void Choice(string label, DeviceTier.Tier? tier)
+            {
+                var b = Btn(label, () =>
+                {
+                    DeviceTier.Override = tier;
+                    DeviceTier.ApplySaved(_cam);
+                    _dirtyWindow = true;
+                }, "btn", "tab", "grow");
+                if (current == tier) b.AddToClassList("tab-active");
+                gfx.Add(b);
+            }
+            Choice("Automatisk", null);
+            Choice("Låg", DeviceTier.Tier.Low);
+            Choice("Mellan", DeviceTier.Tier.Medium);
+            Choice("Hög", DeviceTier.Tier.High);
+            scroll.Add(gfx);
+            scroll.Add(Text("Låg sparar batteri och gör spelet smidigare på äldre telefoner.", "small"));
+
+            scroll.Add(Text("Språk", "subtitle"));
+            scroll.Add(Text("Svenska (engelska kommer snart)", "text"));
+
+            scroll.Add(Text("Konto och data", "subtitle"));
+            var links = Row();
+            links.Add(Btn("Användarvillkor", () => Application.OpenURL(_s.Config.termsUrl), "btn", "grow"));
+            links.Add(Btn("Integritetspolicy", () => Application.OpenURL(_s.Config.privacyUrl), "btn", "grow"));
+            scroll.Add(links);
+            var delete = Btn(_confirmDelete ? "Tryck igen för att radera ALLT" : "Radera min data och börja om", () =>
+            {
+                if (!_confirmDelete) { _confirmDelete = true; _dirtyWindow = true; return; }
+                Analytics.Event("data_deleted");
+                if (_boot != null) _boot.ResetSaveAndReload();
+            }, "btn", "btn-close");
+            delete.style.width = StyleKeyword.Auto;
+            scroll.Add(delete);
+            scroll.Add(Text("Raderar sparfilen på den här enheten. (När inloggning finns raderas även molnkontot.)", "small"));
+
+            if (Application.isEditor || Debug.isDebugBuild)
+                scroll.Add(Btn("Utvecklarverktyg (Debug)", () => { _window = Window.Debug; _dirtyWindow = true; }, "btn"));
+
+            scroll.Add(Text($"Neil's Neighbor {Application.version} · {Application.platform}", "small"));
+        }
+
         void BuildDebug(VisualElement w)
         {
             WindowHeader(w, "Debug");
@@ -812,6 +931,7 @@ namespace NG.UI
         {
             if (_s.NeedsTerms) return "terms";
             if (_s.NeedsCharacter) return "character";
+            if (_welcomeText != null) return "welcome";
             if (_levelUps.Count > 0) return "level:" + _levelUps.Peek();
             var intro = _s.Quests.NextUnseenIntro();
             if (intro != null) return "intro:" + intro.questId;
@@ -830,6 +950,7 @@ namespace NG.UI
             else if (key.StartsWith("level:")) BuildLevelUp(_levelUps.Peek());
             else if (key.StartsWith("intro:")) BuildIntro(_s.Quests.NextUnseenIntro());
             else if (key == "daily") BuildDaily();
+            else if (key == "welcome") BuildWelcome();
         }
 
         VisualElement Dim()
@@ -934,6 +1055,15 @@ namespace NG.UI
             col.Add(Text(_s.Personalize(def.intro), "text"));
             col.Add(Btn("Okej!", () => { _s.Quests.MarkIntroSeen(q); _dirtyModal = true; }, "btn", "btn-primary", "btn-big"));
             box.Add(col);
+        }
+
+        void BuildWelcome()
+        {
+            var dim = Dim();
+            var m = Panel("modal", dim);
+            m.Add(Text($"Välkommen tillbaka, {_s.PlayerName}!", "title"));
+            m.Add(Text(_welcomeText, "text"));
+            m.Add(Btn("Till gatan!", () => { _welcomeText = null; _dirtyModal = true; }, "btn", "btn-primary", "btn-big"));
         }
 
         void BuildDaily()

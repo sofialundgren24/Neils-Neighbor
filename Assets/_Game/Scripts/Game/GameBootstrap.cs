@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using NG.CameraControl;
+using NG.Core;
 using NG.Data;
 using NG.State;
 using NG.UI;
@@ -43,7 +44,7 @@ namespace NG.Game
             try
             {
                 var cam = Camera.main;
-                DeviceTier.Apply(DeviceTier.Detect(), cam);
+                DeviceTier.ApplySaved(cam);
 
                 _content = new ContentDatabase();
                 await _content.LoadAsync();
@@ -56,7 +57,9 @@ namespace NG.Game
 
                 var state = SaveService.Load();
                 Session = new GameSession(_content, config, state);
+                bool newPlayer = !state.initialized;
                 Session.StartNewGameIfNeeded();
+                NG.Core.Analytics.Event("session_start", "new_player", newPlayer, "level", state.level);
                 Session.Tick();
 
                 SetupCamera(config);

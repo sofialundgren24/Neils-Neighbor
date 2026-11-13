@@ -17,6 +17,26 @@ namespace NG.Game
 
         public static Tier Current { get; private set; } = Tier.High;
 
+        const string PrefKey = "ng_graphics";
+
+        /// <summary>Spelarens val i Inställningar: null = automatiskt efter enheten.</summary>
+        public static Tier? Override
+        {
+            get
+            {
+                int v = PlayerPrefs.GetInt(PrefKey, -1);
+                return v < 0 ? (Tier?)null : (Tier)v;
+            }
+            set
+            {
+                PlayerPrefs.SetInt(PrefKey, value.HasValue ? (int)value.Value : -1);
+                PlayerPrefs.Save();
+            }
+        }
+
+        /// <summary>Använder spelarens val om det finns, annars automatiskt.</summary>
+        public static void ApplySaved(Camera camera) => Apply(Override ?? Detect(), camera);
+
         public static Tier Detect()
         {
             if (!Application.isMobilePlatform)

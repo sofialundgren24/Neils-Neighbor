@@ -99,6 +99,7 @@ namespace NG.Game
             if (_s.Progression.Level < e.requiredLevel) return Result.Fail($"Kräver nivå {e.requiredLevel}.");
             if (!_s.Wallet.TrySpend(CurrencyType.Coins, e.coinCost)) return Result.Fail("Inte tillräckligt med mynt.");
             _s.State.unlockedExpansions.Add(e.id);
+            Analytics.Event("expansion_unlocked", "area", e.id);
             EventBus.Publish(new ExpansionUnlocked(e.id));
             return Result.Success;
         }
@@ -146,6 +147,7 @@ namespace NG.Game
             _s.Inventory.TryRemove(def.materials);
 
             var o = CreateState(def, x, y, rotation, decayed: false);
+            Analytics.Event("place", "item", def.Id, "level", _s.Progression.Level);
             if (def.buildTimeSec > 0) o.build = Timers.StartNow(def.buildTimeSec);
             else
             {

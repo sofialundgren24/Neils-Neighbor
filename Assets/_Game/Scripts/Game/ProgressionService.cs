@@ -39,6 +39,7 @@ namespace NG.Game
                     _s.Wallet.Add(CurrencyType.Gems, row.gemReward);
                 }
                 EventBus.Publish(new LevelUp(_s.State.level));
+                Analytics.Event("level_up", "level", _s.State.level);
             }
             EventBus.Publish(new XpChanged(_s.State.xp, _s.State.level));
         }

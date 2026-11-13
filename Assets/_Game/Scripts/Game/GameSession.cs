@@ -116,9 +116,17 @@ namespace NG.Game
         public bool NeedsTerms => State.termsAcceptedVersion < Config.termsVersion;
         public bool NeedsCharacter => string.IsNullOrEmpty(State.character);
 
-        public void AcceptTerms() => State.termsAcceptedVersion = Config.termsVersion;
+        public void AcceptTerms()
+        {
+            State.termsAcceptedVersion = Config.termsVersion;
+            Analytics.Event("terms_accepted", "version", Config.termsVersion);
+        }
 
-        public void ChooseCharacter(string id) => State.character = id;
+        public void ChooseCharacter(string id)
+        {
+            State.character = id;
+            Analytics.Event("character_chosen", "character", id);
+        }
     }
 
     /// <summary>Svar från en handling: lyckades den, och annars varför inte (visas för spelaren).</summary>

@@ -131,6 +131,7 @@ namespace NG.Game
             var def = Def(q);
             _s.State.quests.Remove(q);
             _s.State.completedQuests.Add(q.questId);
+            Analytics.Event("quest_complete", "quest", q.questId, "level", _s.Progression.Level);
             if (def.rewardCoins > 0) _s.Wallet.Add(CurrencyType.Coins, def.rewardCoins);
             if (def.rewardGems > 0) _s.Wallet.Add(CurrencyType.Gems, def.rewardGems);
             _s.Progression.AddXp(def.rewardXp);

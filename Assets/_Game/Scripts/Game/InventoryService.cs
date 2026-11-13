@@ -35,6 +35,7 @@ namespace NG.Game
         {
             if (!_s.Wallet.TrySpend(CurrencyType.Coins, UpgradeCost)) return Result.Fail("Inte tillräckligt med mynt.");
             _s.State.storageLevel++;
+            Analytics.Event("storage_upgrade", "level", _s.State.storageLevel);
             EventBus.Publish(new InventoryChanged(null, 0));
             GameSession.Message($"Förrådet rymmer nu {Capacity} varor.");
             return Result.Success;
@@ -53,6 +54,7 @@ namespace NG.Game
             int coins = PriceOf(resourceId) * amount;
             Add(resourceId, -amount);
             _s.Wallet.Add(CurrencyType.Coins, coins);
+            Analytics.Event("sell", "item", resourceId, "amount", amount);
             GameSession.Message($"Sålde {amount} {NameOf(resourceId)} för {coins} mynt.");
             return Result.Success;
         }
