@@ -95,9 +95,9 @@ namespace NG.Game
 
         public Result UnlockExpansion(MapExpansion e)
         {
-            if (e == null || IsExpansionUnlocked(e)) return Result.Fail("Området är redan upplåst.");
-            if (_s.Progression.Level < e.requiredLevel) return Result.Fail($"Kräver nivå {e.requiredLevel}.");
-            if (!_s.Wallet.TrySpend(CurrencyType.Coins, e.coinCost)) return Result.Fail("Inte tillräckligt med mynt.");
+            if (e == null || IsExpansionUnlocked(e)) return Result.Fail(Loc.T("Området är redan upplåst."));
+            if (_s.Progression.Level < e.requiredLevel) return Result.Fail(Loc.F("Kräver nivå {0}.", e.requiredLevel));
+            if (!_s.Wallet.TrySpend(CurrencyType.Coins, e.coinCost)) return Result.Fail(Loc.T("Inte tillräckligt med mynt."));
             _s.State.unlockedExpansions.Add(e.id);
             Analytics.Event("expansion_unlocked", "area", e.id);
             EventBus.Publish(new ExpansionUnlocked(e.id));
@@ -112,7 +112,7 @@ namespace NG.Game
             reason = null;
             if (!_grid.IsFree(x, y, def.footprint, rotation, ignoreInstanceId))
             {
-                reason = "Platsen är upptagen.";
+                reason = Loc.T("Platsen är upptagen.");
                 return false;
             }
             var size = PlotGrid.Rotated(def.footprint, rotation);
@@ -120,7 +120,7 @@ namespace NG.Game
                 for (int j = y; j < y + size.y; j++)
                     if (!IsCellUnlocked(i, j))
                     {
-                        reason = "Området är inte upplåst än.";
+                        reason = Loc.T("Området är inte upplåst än.");
                         return false;
                     }
             return true;
@@ -130,11 +130,11 @@ namespace NG.Game
         public bool CanBuy(PlaceableDefinition def, out string reason)
         {
             reason = null;
-            if (def == null) { reason = "Okänt objekt."; return false; }
-            if (!_s.Progression.IsUnlocked(def)) { reason = $"Kräver nivå {def.unlockLevel}."; return false; }
-            if (def.maxCount > 0 && CountOf(def) >= def.maxCount) { reason = "Du har redan max antal."; return false; }
-            if (!_s.Wallet.CanAfford(def.cost)) { reason = "Inte tillräckligt med mynt."; return false; }
-            if (!_s.Inventory.Has(def.materials)) { reason = $"Behöver {InventoryService.Format(def.materials)}."; return false; }
+            if (def == null) { reason = Loc.T("Okänt objekt."); return false; }
+            if (!_s.Progression.IsUnlocked(def)) { reason = Loc.F("Kräver nivå {0}.", def.unlockLevel); return false; }
+            if (def.maxCount > 0 && CountOf(def) >= def.maxCount) { reason = Loc.T("Du har redan max antal."); return false; }
+            if (!_s.Wallet.CanAfford(def.cost)) { reason = Loc.T("Inte tillräckligt med mynt."); return false; }
+            if (!_s.Inventory.Has(def.materials)) { reason = Loc.F("Behöver {0}.", InventoryService.Format(def.materials)); return false; }
             return true;
         }
 
@@ -207,7 +207,7 @@ namespace NG.Game
         public Result Move(PlacedObjectState o, int x, int y, int rotation)
         {
             var def = Def(o);
-            if (def == null) return Result.Fail("Okänt objekt.");
+            if (def == null) return Result.Fail(Loc.T("Okänt objekt."));
             if (!IsSpotFree(def, x, y, rotation, o.instanceId, out var reason)) return Result.Fail(reason);
             _grid.Free(o.x, o.y, def.footprint, o.rotation);
             o.x = x;
@@ -234,7 +234,7 @@ namespace NG.Game
 
         public Result Sell(PlacedObjectState o)
         {
-            if (!CanSell(o)) return Result.Fail("Det här går inte att sälja.");
+            if (!CanSell(o)) return Result.Fail(Loc.T("Det här går inte att sälja."));
             var def = Def(o);
             _s.Wallet.Add(CurrencyType.Coins, SellValue(o));
             _grid.Free(o.x, o.y, def.footprint, o.rotation);
@@ -251,7 +251,7 @@ namespace NG.Game
         /// <summary>Rensar ogräs eller vattnar torrt gräs: objektet försvinner för gott och ger XP.</summary>
         public Result ClearClutter(PlacedObjectState o)
         {
-            if (o == null || !(Def(o) is ClutterDefinition def)) return Result.Fail("Inget att rensa här.");
+            if (o == null || !(Def(o) is ClutterDefinition def)) return Result.Fail(Loc.T("Inget att rensa här."));
             var pos = CellToWorld(def, o.x, o.y, o.rotation);
             _grid.Free(o.x, o.y, def.footprint, o.rotation);
             _s.State.objects.Remove(o);
@@ -260,7 +260,7 @@ namespace NG.Game
             if (def.clearCoins > 0) _s.Wallet.Add(CurrencyType.Coins, def.clearCoins);
             _s.Progression.AddXp(def.clearXp);
             EventBus.Publish(new ClutterCleared(def.Id, pos, def.action == ClutterAction.Water));
-            if (def.clearXp > 0) EventBus.Publish(new FloatingText(pos + Vector3.up * 0.6f, $"+{def.clearXp} XP"));
+            if (def.clearXp > 0) EventBus.Publish(new FloatingText(pos + Vector3.up * 0.6f, Loc.F("+{0} XP", def.clearXp)));
             return Result.Success;
         }
 
@@ -291,9 +291,9 @@ namespace NG.Game
 
         public Result SpeedUpBuild(PlacedObjectState o)
         {
-            if (o.build == null) return Result.Fail("Bygget är redan klart.");
+            if (o.build == null) return Result.Fail(Loc.T("Bygget är redan klart."));
             int gems = TimeService.SpeedUpGemCost(Timers.Remaining(o.build));
-            if (!_s.Wallet.TrySpend(CurrencyType.Gems, gems)) return Result.Fail("Inte tillräckligt med diamanter.");
+            if (!_s.Wallet.TrySpend(CurrencyType.Gems, gems)) return Result.Fail(Loc.T("Inte tillräckligt med diamanter."));
             Timers.Finish(o.build);
             Tick();
             return Result.Success;

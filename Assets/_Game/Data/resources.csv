@@ -1,27 +1,27 @@
 # Varor i lagret. unlock = nivå då varan kan dyka upp på Grannskapstavlan. price = grundvärde (styr belöningen).
-id,name,unlock,price,color
+id,name,unlock,price,color,name_en
 # Skörd från trädgårdarna
-rose,Ros,0,3,#FF7FB0
-wildflower,Ängsblomma,0,2,#FFE04D
-tulip,Tulpan,1,4,#FF4D4D
-sunflower,Solros,1,5,#FFC93C
-lilac,Syren,1,6,#B58CE0
-lavender,Lavendel,2,6,#A77BFF
-apple,Äpple,2,5,#E8423A
-hydrangea,Hortensia,3,8,#7FA8FF
-dahlia,Dahlia,4,9,#FF9A1F
-plum,Plommon,4,8,#7A4A9E
-currant,Vinbär,4,7,#D0283C
-peony,Pion,5,12,#FFB3C8
+rose,Ros,0,3,#FF7FB0,Rose
+wildflower,Ängsblomma,0,2,#FFE04D,Wildflower
+tulip,Tulpan,1,4,#FF4D4D,Tulip
+sunflower,Solros,1,5,#FFC93C,Sunflower
+lilac,Syren,1,6,#B58CE0,Lilac
+lavender,Lavendel,2,6,#A77BFF,Lavender
+apple,Äpple,2,5,#E8423A,Apple
+hydrangea,Hortensia,3,8,#7FA8FF,Hydrangea
+dahlia,Dahlia,4,9,#FF9A1F,Dahlia
+plum,Plommon,4,8,#7A4A9E,Plum
+currant,Vinbär,4,7,#D0283C,Currant
+peony,Pion,5,12,#FFB3C8,Peony
 # Blomsteraffären
-bouquet_wild,Ängsbukett,1,12,#FFF0A0
-bouquet_tulip,Tulpanbukett,1,18,#FF7070
-bouquet_rose_circle,Rosencirkel-bukett,2,30,#FF9FC4
-wreath_lilac,Syrenkrans,3,40,#C9A6F0
-arrangement_summer,Sommararrangemang,4,70,#FFB347
-bouquet_peony,Pionbukett,5,80,#FFC4D6
+bouquet_wild,Ängsbukett,1,12,#FFF0A0,Wildflower bouquet
+bouquet_tulip,Tulpanbukett,1,18,#FF7070,Tulip bouquet
+bouquet_rose_circle,Rosencirkel-bukett,2,30,#FF9FC4,Rose circle bouquet
+wreath_lilac,Syrenkrans,3,40,#C9A6F0,Lilac wreath
+arrangement_summer,Sommararrangemang,4,70,#FFB347,Summer arrangement
+bouquet_peony,Pionbukett,5,80,#FFC4D6,Peony bouquet
 # Kvartersaffären
-apple_juice,Äppelmust,3,25,#F7C04A
-currant_cordial,Vinbärssaft,4,32,#C2185B
-plum_jam,Plommonsylt,4,36,#6A2C7A
-picnic_basket,Picknickkorg,5,120,#C89B5E
+apple_juice,Äppelmust,3,25,#F7C04A,Apple juice
+currant_cordial,Vinbärssaft,4,32,#C2185B,Currant cordial
+plum_jam,Plommonsylt,4,36,#6A2C7A,Plum jam
+picnic_basket,Picknickkorg,5,120,#C89B5E,Picnic basket

@@ -1,12 +1,12 @@
 # Recept. building = id på produktionsbyggnaden i content.csv. inputs: vara:antal separerade med /.
-id,name,building,unlock,inputs,output,sec,xp
-make_bouquet_wild,Ängsbukett,shop_flower,1,wildflower:3,bouquet_wild:1,45,3
-make_bouquet_tulip,Tulpanbukett,shop_flower,1,tulip:3,bouquet_tulip:1,60,4
-make_bouquet_rose_circle,Rosencirkel-bukett,shop_flower,2,rose:3/lavender:1,bouquet_rose_circle:1,120,7
-make_wreath_lilac,Syrenkrans,shop_flower,3,lilac:3/wildflower:2,wreath_lilac:1,180,9
-make_arrangement_summer,Sommararrangemang,shop_flower,4,sunflower:2/dahlia:2/hydrangea:1,arrangement_summer:1,240,14
-make_bouquet_peony,Pionbukett,shop_flower,5,peony:3/rose:2,bouquet_peony:1,300,16
-make_apple_juice,Äppelmust,shop_general,3,apple:3,apple_juice:1,120,6
-make_currant_cordial,Vinbärssaft,shop_general,4,currant:3,currant_cordial:1,150,8
-make_plum_jam,Plommonsylt,shop_general,4,plum:3,plum_jam:1,180,9
-make_picnic_basket,Picknickkorg,shop_general,5,apple_juice:1/currant_cordial:1/plum_jam:1,picnic_basket:1,300,20
+id,name,building,unlock,inputs,output,sec,xp,name_en
+make_bouquet_wild,Ängsbukett,shop_flower,1,wildflower:3,bouquet_wild:1,45,3,Wildflower bouquet
+make_bouquet_tulip,Tulpanbukett,shop_flower,1,tulip:3,bouquet_tulip:1,60,4,Tulip bouquet
+make_bouquet_rose_circle,Rosencirkel-bukett,shop_flower,2,rose:3/lavender:1,bouquet_rose_circle:1,120,7,Rose circle bouquet
+make_wreath_lilac,Syrenkrans,shop_flower,3,lilac:3/wildflower:2,wreath_lilac:1,180,9,Lilac wreath
+make_arrangement_summer,Sommararrangemang,shop_flower,4,sunflower:2/dahlia:2/hydrangea:1,arrangement_summer:1,240,14,Summer arrangement
+make_bouquet_peony,Pionbukett,shop_flower,5,peony:3/rose:2,bouquet_peony:1,300,16,Peony bouquet
+make_apple_juice,Äppelmust,shop_general,3,apple:3,apple_juice:1,120,6,Apple juice
+make_currant_cordial,Vinbärssaft,shop_general,4,currant:3,currant_cordial:1,150,8,Currant cordial
+make_plum_jam,Plommonsylt,shop_general,4,plum:3,plum_jam:1,180,9,Plum jam
+make_picnic_basket,Picknickkorg,shop_general,5,apple_juice:1/currant_cordial:1/plum_jam:1,picnic_basket:1,300,20,Picnic basket

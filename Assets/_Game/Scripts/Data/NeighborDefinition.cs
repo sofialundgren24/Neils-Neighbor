@@ -11,5 +11,8 @@ namespace NG.Data
         [Tooltip("Färg på porträttet tills riktiga porträtt finns.")]
         public Color color = Color.white;
         [TextArea] public string bio;
+        [TextArea] public string bioEn;
+
+        public string Bio => NG.Core.Loc.Pick(bio, bioEn);
     }
 }

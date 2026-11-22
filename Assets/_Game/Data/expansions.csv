@@ -1,7 +1,7 @@
 # Områden på kartan (celler à 0,5 m, kartan är 96 x 96). Startområdet (Lindgatan) har level 0 och coins 0.
-id,name,x,y,w,h,level,coins
-start,Lindgatan,16,20,64,48,0,0
-north,Bakgårdarna,16,68,64,28,3,400
-south,Parkstråket,16,0,64,20,4,600
-west,Skogsbrynet,0,0,16,96,6,1500
-east,Sjövägen,80,0,16,96,8,3000
+id,name,x,y,w,h,level,coins,name_en
+start,Lindgatan,16,20,64,48,0,0,Linden Lane
+north,Bakgårdarna,16,68,64,28,3,400,The Backyards
+south,Parkstråket,16,0,64,20,4,600,Park Walk
+west,Skogsbrynet,0,0,16,96,6,1500,Forest Edge
+east,Sjövägen,80,0,16,96,8,3000,Lake Road

@@ -45,7 +45,7 @@ namespace NG.Game
 
         /// <summary>Uppdraget vars introduktion inte har visats än (för dialogrutan).</summary>
         public QuestProgress NextUnseenIntro() =>
-            Active.FirstOrDefault(q => !q.introSeen && !string.IsNullOrEmpty(Def(q)?.intro));
+            Active.FirstOrDefault(q => !q.introSeen && !string.IsNullOrEmpty(Def(q)?.Intro));
 
         public void MarkIntroSeen(QuestProgress q)
         {
@@ -100,18 +100,18 @@ namespace NG.Game
             string target = NameOf(o.targetId);
             string text = o.type switch
             {
-                ObjectiveType.Renovate => $"Renovera {target} (fas {o.amount})",
-                ObjectiveType.Own => $"Bygg {target}",
-                ObjectiveType.Harvest => o.targetId == "*" ? "Skörda" : $"Skörda {target}",
-                ObjectiveType.Produce => $"Tillverka {target}",
-                ObjectiveType.Deliver => "Leverera beställningar",
-                ObjectiveType.ReachLevel => $"Nå nivå {o.amount}",
-                ObjectiveType.Collect => $"Samla {target}",
-                ObjectiveType.Clear => o.targetId == "*" ? "Städa tomterna" : ClearVerb(o.targetId) + " " + target.ToLowerInvariant(),
+                ObjectiveType.Renovate => Loc.F("Renovera {0} (fas {1})", target, o.amount),
+                ObjectiveType.Own => Loc.F("Bygg {0}", target),
+                ObjectiveType.Harvest => o.targetId == "*" ? Loc.T("Skörda") : Loc.F("Skörda {0}", target),
+                ObjectiveType.Produce => Loc.F("Tillverka {0}", target),
+                ObjectiveType.Deliver => Loc.T("Leverera beställningar"),
+                ObjectiveType.ReachLevel => Loc.F("Nå nivå {0}", o.amount),
+                ObjectiveType.Collect => Loc.F("Samla {0}", target),
+                ObjectiveType.Clear => o.targetId == "*" ? Loc.T("Städa tomterna") : ClearVerb(o.targetId) + " " + target.ToLowerInvariant(),
                 _ => o.type.ToString()
             };
             return o.type == ObjectiveType.ReachLevel || o.type == ObjectiveType.Renovate
-                ? $"{text}{(Progress(q, index) >= o.amount ? "  (klart)" : "")}"
+                ? $"{text}{(Progress(q, index) >= o.amount ? Loc.T("  (klart)") : "")}"
                 : $"{text}  {Progress(q, index)}/{o.amount}";
         }
 
@@ -127,7 +127,7 @@ namespace NG.Game
 
         public Result Claim(QuestProgress q)
         {
-            if (!IsComplete(q)) return Result.Fail("Uppdraget är inte klart än.");
+            if (!IsComplete(q)) return Result.Fail(Loc.T("Uppdraget är inte klart än."));
             var def = Def(q);
             _s.State.quests.Remove(q);
             _s.State.completedQuests.Add(q.questId);
@@ -136,8 +136,8 @@ namespace NG.Game
             if (def.rewardGems > 0) _s.Wallet.Add(CurrencyType.Gems, def.rewardGems);
             _s.Progression.AddXp(def.rewardXp);
             EventBus.Publish(new QuestsChanged());
-            if (!string.IsNullOrEmpty(def.outro))
-                GameSession.Message($"{def.neighbor?.DisplayName ?? "Grannen"}: {_s.Personalize(def.outro)}");
+            if (!string.IsNullOrEmpty(def.Outro))
+                GameSession.Message($"{def.neighbor?.DisplayName ?? Loc.T("Grannen")}: {_s.Personalize(def.Outro)}");
             Activate();
             return Result.Success;
         }
@@ -192,6 +192,6 @@ namespace NG.Game
         void OnCleared(ClutterCleared e) => Count(ObjectiveType.Clear, e.DefinitionId, 1);
 
         string ClearVerb(string defId) =>
-            _s.Content.TryGet<ClutterDefinition>(defId, out var c) && c.action == ClutterAction.Water ? "Vattna" : "Rensa";
+            _s.Content.TryGet<ClutterDefinition>(defId, out var c) && c.action == ClutterAction.Water ? Loc.T("Vattna") : Loc.T("Rensa");
     }
 }

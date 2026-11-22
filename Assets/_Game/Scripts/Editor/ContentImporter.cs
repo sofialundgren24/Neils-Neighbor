@@ -36,10 +36,11 @@ namespace NG.EditorTools
             var neighbors = ImportNeighbors(placeables);
             int quests = ImportQuests(neighbors, placeables, resources);
             int facades = ImportFacades(placeables);
+            int texts = ImportTranslations();
             Prune();
             AssetDatabase.SaveAssets();
             Debug.Log($"[NG Content] Klart: {resources.Count} varor, {placeables.Count} objekt, {recipes.Count} recept, " +
-                      $"{neighbors.Count} grannar, {quests} uppdrag, {facades} fasader.");
+                      $"{neighbors.Count} grannar, {quests} uppdrag, {facades} fasader, {texts} översättningar.");
         }
 
         // ---------- Fasader ----------
@@ -58,9 +59,23 @@ namespace NG.EditorTools
                 def.unlockLevel = Int(row, "unlock", 1);
                 def.color = NGEditorPaths.Hex(row["color"]);
                 def.coinCost = Int(row, "coins", 0);
+                English(def, row);
                 Register(def, $"facade/{id}");
             }
             return rows.Count;
+        }
+
+        // ---------- Översättningar ----------
+
+        static int ImportTranslations()
+        {
+            var table = LoadOrCreate<TranslationTable>($"{NGEditorPaths.GameRoot}/Content/TranslationTable.asset", typeof(TranslationTable));
+            table.EditorSetId("translations");
+            table.entries.Clear();
+            foreach (var row in ReadCsv("translations.csv"))
+                table.entries.Add(new TranslationTable.Entry { sv = row["sv"].Replace("\\n", "\n"), en = row["en"].Replace("\\n", "\n") });
+            Register(table, "config/translations");
+            return table.entries.Count;
         }
 
         // ---------- Städning ----------
@@ -75,6 +90,7 @@ namespace NG.EditorTools
             foreach (var file in new[] { "content.csv", "resources.csv", "recipes.csv", "neighbors.csv", "quests.csv", "facades.csv" })
                 foreach (var row in ReadCsv(file)) wanted.Add(row["id"]);
             wanted.Add("game_config");
+            wanted.Add("translations");
 
             int removed = 0;
             foreach (var guid in AssetDatabase.FindAssets("t:DefinitionBase", new[] { NGEditorPaths.GameRoot + "/Content" }))
@@ -114,6 +130,8 @@ namespace NG.EditorTools
                 if (def.house == null) Debug.LogWarning($"[NG Content] neighbors.csv: {id} bor i okänt hus '{row["house"]}'.");
                 def.color = NGEditorPaths.Hex(row["color"]);
                 def.bio = row["bio"];
+                def.bioEn = row.TryGetValue("bio_en", out var bioEn) ? bioEn : "";
+                English(def, row);
                 Register(def, $"neighbor/{id}");
                 result[id] = def;
             }
@@ -140,6 +158,9 @@ namespace NG.EditorTools
                     Debug.LogWarning($"[NG Content] quests.csv: {id} kräver okänt uppdrag '{def.requiresQuest}'.");
                 def.intro = row["intro"];
                 def.outro = row["outro"];
+                def.introEn = row.TryGetValue("intro_en", out var introEn) ? introEn : "";
+                def.outroEn = row.TryGetValue("outro_en", out var outroEn) ? outroEn : "";
+                English(def, row, "title_en");
                 def.rewardCoins = Int(row, "coins", 0);
                 def.rewardGems = Int(row, "gems", 0);
                 def.rewardXp = Int(row, "xp", 0);
@@ -197,6 +218,7 @@ namespace NG.EditorTools
                 def.unlockLevel = Int(row, "unlock", 1);
                 def.sellPrice = Int(row, "price", 1);
                 def.color = NGEditorPaths.Hex(row["color"]);
+                English(def, row);
                 Register(def, $"res/{id}");
                 result[id] = def;
             }
@@ -222,6 +244,7 @@ namespace NG.EditorTools
                 var def = LoadOrCreate<PlaceableDefinition>(defPath, ClassFor(type));
                 def.EditorSetId(id);
                 def.fallbackName = row["name"];
+                English(def, row);
                 def.category = category;
                 def.unlockLevel = Int(row, "unlock", 1);
                 def.cost = Costs(Int(row, "coins", 0), Int(row, "gems", 0));
@@ -321,6 +344,7 @@ namespace NG.EditorTools
                 def.output = Amount(row["output"], resources);
                 def.durationSec = Int(row, "sec", 60);
                 def.xpReward = Int(row, "xp", 1);
+                English(def, row);
                 Register(def, $"recipe/{id}");
                 result[id] = (def, row["building"]);
             }
@@ -377,6 +401,7 @@ namespace NG.EditorTools
                 {
                     id = row["id"],
                     name = row["name"],
+                    nameEn = row.TryGetValue("name_en", out var expEn) ? expEn : "",
                     area = new RectInt(Int(row, "x", 0), Int(row, "y", 0), Int(row, "w", 1), Int(row, "h", 1)),
                     requiredLevel = Int(row, "level", 1),
                     coinCost = Int(row, "coins", 0)
@@ -438,6 +463,12 @@ namespace NG.EditorTools
             var created = (T)ScriptableObject.CreateInstance(exactType);
             AssetDatabase.CreateAsset(created, path);
             return created;
+        }
+
+        /// <summary>Sätter det engelska namnet från kolumnen name_en (eller title_en för uppdrag).</summary>
+        static void English(DefinitionBase def, Dictionary<string, string> row, string column = "name_en")
+        {
+            def.fallbackNameEn = row.TryGetValue(column, out var en) ? en : "";
         }
 
         static void Register(ScriptableObject asset, string address)

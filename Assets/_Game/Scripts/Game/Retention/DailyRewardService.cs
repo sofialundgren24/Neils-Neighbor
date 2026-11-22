@@ -36,7 +36,7 @@ namespace NG.Game
 
         public Result Claim()
         {
-            if (!CanClaim) return Result.Fail("Du har redan hämtat dagens gåva.");
+            if (!CanClaim) return Result.Fail(Loc.T("Du har redan hämtat dagens gåva."));
             int day = NextDay;
             _s.Wallet.Add(CurrencyType.Coins, CoinsFor(day));
             _s.Wallet.Add(CurrencyType.Gems, GemsFor(day));

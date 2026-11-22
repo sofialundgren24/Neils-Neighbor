@@ -134,7 +134,7 @@ namespace NG.World
             if (MovingId != null)
             {
                 var o = _s.World.Get(MovingId);
-                result = o != null ? _s.World.Move(o, _cell.x, _cell.y, _rotation) : Result.Fail("Objektet finns inte längre.");
+                result = o != null ? _s.World.Move(o, _cell.x, _cell.y, _rotation) : Result.Fail(Loc.T("Objektet finns inte längre."));
                 if (result.Ok)
                 {
                     string moved = MovingId;

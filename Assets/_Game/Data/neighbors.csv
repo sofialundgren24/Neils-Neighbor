@@ -1,7 +1,7 @@
 # Grannarna på Lindgatan. house = id på huset de bor i (content.csv). color = porträttfärg tills riktiga porträtt finns.
-id,name,house,color,bio
-nora,Nora,house_cottage,#9FD3F5,"Bor i Lilla villan sedan femtio år. Minns hur vacker gatan var och vet allt om blommor."
-familjen_berg,Familjen Berg,house_classic,#F5B7A5,"En glad och stökig barnfamilj i Klassiska förortshuset. Barnen vill ha något att leka med."
-omar,Omar,house_twostory,#C9B8F0,"Driftig granne i Tvåvåningshuset som drömmer om att gatan ska få en egen affär igen."
-lina,Lina,house_corner,#B9F0B0,"Konstnär i Hörnhuset. Vill ha vatten, ljus och stilfulla New England-detaljer."
-sven,Sven,house_bungalow,#FFE27A,"Tystlåten snickare längst bort på gatan. Säger inte mycket, men ser allt."
+id,name,house,color,bio,name_en,bio_en
+nora,Nora,house_cottage,#9FD3F5,Bor i Lilla villan sedan femtio år. Minns hur vacker gatan var och vet allt om blommor.,Nora,Has lived in the Little Cottage for fifty years. Remembers how lovely the street was and knows everything about flowers.
+familjen_berg,Familjen Berg,house_classic,#F5B7A5,En glad och stökig barnfamilj i Klassiska förortshuset. Barnen vill ha något att leka med.,The Berg Family,"A happy, noisy family in the Classic Suburban House. The kids want something to play with."
+omar,Omar,house_twostory,#C9B8F0,Driftig granne i Tvåvåningshuset som drömmer om att gatan ska få en egen affär igen.,Omar,Go-getter neighbor in the Two-Story House who dreams of the street having its own shop again.
+lina,Lina,house_corner,#B9F0B0,"Konstnär i Hörnhuset. Vill ha vatten, ljus och stilfulla New England-detaljer.",Lina,"Artist in the Corner House. Loves water, light and stylish New England details."
+sven,Sven,house_bungalow,#FFE27A,"Tystlåten snickare längst bort på gatan. Säger inte mycket, men ser allt.",Sven,"A quiet carpenter at the far end of the street. Doesn't say much, but sees everything."

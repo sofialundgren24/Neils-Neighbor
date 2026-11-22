@@ -26,7 +26,7 @@ namespace NG.Game
 
         public Result Fulfil(OrderState order)
         {
-            if (!CanFulfil(order)) return Result.Fail("Du har inte alla varor än.");
+            if (!CanFulfil(order)) return Result.Fail(Loc.T("Du har inte alla varor än."));
             foreach (var i in order.items) _s.Inventory.Add(i.resourceId, -i.amount);
             _s.Wallet.Add(CurrencyType.Coins, order.coins);
             _s.Progression.AddXp(order.xp);

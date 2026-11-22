@@ -28,12 +28,12 @@ namespace NG.UI
 
         static readonly (string label, PlaceableCategory[] cats)[] ShopTabs =
         {
-            ("Kvarter", new[] { PlaceableCategory.Production, PlaceableCategory.Community, PlaceableCategory.House }),
-            ("Blommor", new[] { PlaceableCategory.Plant }),
-            ("Träd & buskar", new[] { PlaceableCategory.Tree, PlaceableCategory.Hedge }),
-            ("Dekor", new[] { PlaceableCategory.Decor, PlaceableCategory.Water }),
-            ("Staket", new[] { PlaceableCategory.Fence }),
-            ("Mark & sten", new[] { PlaceableCategory.Path })
+            (Loc.T("Kvarter"), new[] { PlaceableCategory.Production, PlaceableCategory.Community, PlaceableCategory.House }),
+            (Loc.T("Blommor"), new[] { PlaceableCategory.Plant }),
+            (Loc.T("Träd & buskar"), new[] { PlaceableCategory.Tree, PlaceableCategory.Hedge }),
+            (Loc.T("Dekor"), new[] { PlaceableCategory.Decor, PlaceableCategory.Water }),
+            (Loc.T("Staket"), new[] { PlaceableCategory.Fence }),
+            (Loc.T("Mark & sten"), new[] { PlaceableCategory.Path })
         };
 
         static readonly Color[] PaintColors =
@@ -135,20 +135,20 @@ namespace NG.UI
             _bottomBar = new VisualElement { pickingMode = PickingMode.Ignore };
             _bottomBar.AddToClassList("bottom-bar");
             _root.Add(_bottomBar);
-            _buildButton = Btn("Bygg", () => { _paintMode = false; Toggle(Window.Shop); }, "btn", "btn-gold", "btn-big");
+            _buildButton = Btn(Loc.T("Bygg"), () => { _paintMode = false; Toggle(Window.Shop); }, "btn", "btn-gold", "btn-big");
             _bottomBar.Add(_buildButton);
-            _paintButton = Btn("Måla", () => { _paintMode = !_paintMode; _ia.ClearSelection(); }, "btn", "btn-big", "btn-paint");
+            _paintButton = Btn(Loc.T("Måla"), () => { _paintMode = !_paintMode; _ia.ClearSelection(); }, "btn", "btn-big", "btn-paint");
             _bottomBar.Add(_paintButton);
-            var boardButton = Btn("Tavlan", () => Toggle(Window.Orders), "btn", "btn-big");
+            var boardButton = Btn(Loc.T("Tavlan"), () => Toggle(Window.Orders), "btn", "btn-big");
             _bottomBar.Add(boardButton);
-            _bottomBar.Add(Btn("Foto", TakePhoto, "btn", "btn-big"));
+            _bottomBar.Add(Btn(Loc.T("Foto"), TakePhoto, "btn", "btn-big"));
             _topBinder.Add(() =>
             {
                 boardButton.style.display = _s.Orders.IsUnlocked ? DisplayStyle.Flex : DisplayStyle.None;
                 _paintButton.EnableInClassList("tab-active", _paintMode);
-                _paintButton.text = _paintMode ? "Klar" : "Måla";
+                _paintButton.text = _paintMode ? Loc.T("Klar") : Loc.T("Måla");
             });
-            _paintBanner = Text("Färgläge: tryck på ett färdigrenoverat hus för att byta fasad.", "toast");
+            _paintBanner = Text(Loc.T("Färgläge: tryck på ett färdigrenoverat hus för att byta fasad."), "toast");
             _paintBanner.AddToClassList("paint-banner");
             _paintBanner.pickingMode = PickingMode.Ignore;
             _root.Add(_paintBanner);
@@ -156,7 +156,7 @@ namespace NG.UI
             _windowLayer = Layer("windows");
             _toastLayer = Layer("toasts");
             _toastLayer.AddToClassList("toasts");
-            _pointer = new Label("Här!") { pickingMode = PickingMode.Ignore };
+            _pointer = new Label(Loc.T("Här!")) { pickingMode = PickingMode.Ignore };
             _pointer.AddToClassList("pointer");
             _root.Add(_pointer);
             _modalLayer = Layer("modals");
@@ -281,13 +281,13 @@ namespace NG.UI
                 if (_s.Community.CanCollect(o)) income++;
             }
             var lines = new List<string>();
-            if (harvest > 0) lines.Add($"• {harvest} växter är redo att skördas");
-            if (ready > 0) lines.Add($"• {ready} varor är klara i affärerna");
-            if (income > 0) lines.Add($"• {income} kvartersbyggnader har intäkter att hämta");
-            if (_s.Orders.IsUnlocked && _s.Orders.Orders.Count > 0) lines.Add($"• {_s.Orders.Orders.Count} grannar väntar på Grannskapstavlan");
-            if (_s.Daily.CanClaim) lines.Add("• Dagens gåva väntar");
+            if (harvest > 0) lines.Add(Loc.F("• {0} växter är redo att skördas", harvest));
+            if (ready > 0) lines.Add(Loc.F("• {0} varor är klara i affärerna", ready));
+            if (income > 0) lines.Add(Loc.F("• {0} kvartersbyggnader har intäkter att hämta", income));
+            if (_s.Orders.IsUnlocked && _s.Orders.Orders.Count > 0) lines.Add(Loc.F("• {0} grannar väntar på Grannskapstavlan", _s.Orders.Orders.Count));
+            if (_s.Daily.CanClaim) lines.Add(Loc.T("• Dagens gåva väntar"));
             if (lines.Count == 0) return null;
-            return $"Du var borta i {Fmt.Duration(away)}. Under tiden:\n" + string.Join("\n", lines);
+            return Loc.F("Du var borta i {0}. Under tiden:\n", Fmt.Duration(away)) + string.Join("\n", lines);
         }
 
         // ---------- Toppfält ----------
@@ -324,7 +324,7 @@ namespace NG.UI
             _topBinder.Add(() =>
             {
                 badge.text = _s.Progression.Level.ToString();
-                xpText.text = $"{_s.Progression.Xp} / {_s.Progression.XpToNext} XP";
+                xpText.text = Loc.F("{0} / {1} XP", _s.Progression.Xp, _s.Progression.XpToNext);
             });
 
             var coinChip = Chip(bar);
@@ -343,26 +343,26 @@ namespace NG.UI
             {
                 coins.text = _s.Wallet.Get(CurrencyType.Coins).ToString("N0");
                 gems.text = _s.Wallet.Get(CurrencyType.Gems).ToString("N0");
-                charm.text = $"Charm {_s.World.Charm}";
+                charm.text = Loc.F("Charm {0}", _s.World.Charm);
             });
 
             bar.Add(new VisualElement { pickingMode = PickingMode.Ignore, name = "spacer" });
             bar.Q("spacer").AddToClassList("spacer");
 
-            var daily = Btn("Dagens gåva", () => { _showDaily = true; _dirtyModal = true; }, "btn", "btn-gold");
+            var daily = Btn(Loc.T("Dagens gåva"), () => { _showDaily = true; _dirtyModal = true; }, "btn", "btn-gold");
             bar.Add(daily);
             _topBinder.Add(() => daily.style.display = _s.Daily.CanClaim ? DisplayStyle.Flex : DisplayStyle.None);
 
-            _storageButton = Btn("Lager", () => Toggle(Window.Storage), "btn");
+            _storageButton = Btn(Loc.T("Lager"), () => Toggle(Window.Storage), "btn");
             bar.Add(_storageButton);
-            _ordersButton = Btn("Grannskapstavlan", () => Toggle(Window.Orders), "btn");
+            _ordersButton = Btn(Loc.T("Grannskapstavlan"), () => Toggle(Window.Orders), "btn");
             bar.Add(_ordersButton);
             _topBinder.Add(() =>
             {
-                _ordersButton.text = $"Grannskapstavlan ({_s.Orders.Orders.Count})";
+                _ordersButton.text = Loc.F("Grannskapstavlan ({0})", _s.Orders.Orders.Count);
                 _ordersButton.style.display = _s.Orders.IsUnlocked ? DisplayStyle.Flex : DisplayStyle.None;
             });
-            bar.Add(Btn("Meny", () => Toggle(Window.Settings), "btn"));
+            bar.Add(Btn(Loc.T("Meny"), () => Toggle(Window.Settings), "btn"));
         }
 
         void Toggle(Window w)
@@ -398,8 +398,8 @@ namespace NG.UI
                     card.Add(line);
                     _questBinder.Add(() => line.text = "• " + _s.Quests.Describe(q, index));
                 }
-                string reward = $"{def.rewardCoins} mynt" + (def.rewardGems > 0 ? $", {def.rewardGems} diamanter" : "") + $", {def.rewardXp} XP";
-                var claim = Btn($"Hämta belöning\n{reward}", () => Report(_s.Quests.Claim(q)), "btn", "btn-primary");
+                string reward = Loc.F("{0} mynt", def.rewardCoins) + (def.rewardGems > 0 ? Loc.F(", {0} diamanter", def.rewardGems) : "") + Loc.F(", {0} XP", def.rewardXp);
+                var claim = Btn(Loc.F("Hämta belöning\n{0}", reward), () => Report(_s.Quests.Claim(q)), "btn", "btn-primary");
                 card.Add(claim);
                 _questBinder.Add(() => claim.style.display = _s.Quests.IsComplete(q) ? DisplayStyle.Flex : DisplayStyle.None);
                 scroll.Add(card);
@@ -437,7 +437,7 @@ namespace NG.UI
                 var t = Text("", "text");
                 p.Add(t);
                 p.Add(ProgressBar(() => Timers.Progress(o.build), b));
-                b.Add(() => t.text = $"Bygger ... {Fmt.Duration(Timers.Remaining(o.build))} kvar");
+                b.Add(() => t.text = Loc.F("Bygger ... {0} kvar", Fmt.Duration(Timers.Remaining(o.build))));
                 p.Add(SpeedUp(() => o.build != null ? TimeService.SpeedUpGemCost(Timers.Remaining(o.build)) : 0,
                     () => _s.World.SpeedUpBuild(o), b));
             }
@@ -445,13 +445,13 @@ namespace NG.UI
             else if (def is PlantDefinition plant) BuildPlantPanel(o, plant);
             else if (def is ProductionDefinition prod) BuildProductionPanel(o, prod);
             else if (def is CommunityDefinition community) BuildCommunityPanel(o, community);
-            else if (o.decayed) p.Add(Text("Grått och slitet. Renovera huset intill så får det tillbaka färgen.", "small"));
-            else p.Add(Text($"Skönhet +{def.beautyScore}", "small"));
+            else if (o.decayed) p.Add(Text(Loc.T("Grått och slitet. Renovera huset intill så får det tillbaka färgen."), "small"));
+            else p.Add(Text(Loc.F("Skönhet +{0}", def.beautyScore), "small"));
 
             var row = Row();
-            row.Add(Btn("Flytta", () => _ia.BeginMove(o.instanceId), "btn", "grow"));
+            row.Add(Btn(Loc.T("Flytta"), () => _ia.BeginMove(o.instanceId), "btn", "grow"));
             if (_s.World.CanSell(o))
-                row.Add(Btn($"Sälj (+{_s.World.SellValue(o)})", () => Report(_s.World.Sell(o)), "btn", "grow"));
+                row.Add(Btn(Loc.F("Sälj (+{0})", _s.World.SellValue(o)), () => Report(_s.World.Sell(o)), "btn", "grow"));
             p.Add(row);
         }
 
@@ -461,26 +461,26 @@ namespace NG.UI
             var b = _selectionBinder;
             var reno = _s.Renovation;
             var nb = _s.Content.AllOf<NeighborDefinition>().FirstOrDefault(n => n.house != null && n.house.Id == o.definitionId);
-            if (nb != null) p.Add(Text($"Här bor {nb.DisplayName}", "small"));
+            if (nb != null) p.Add(Text(Loc.F("Här bor {0}", nb.DisplayName), "small"));
 
             if (reno.IsComplete(o))
             {
-                p.Add(Text("Färdigrenoverat!", "subtitle"));
-                p.Add(Text("Fasad", "small"));
-                var original = Btn("Original", () => Report(reno.SetFacade(o, null)), "btn");
+                p.Add(Text(Loc.T("Färdigrenoverat!"), "subtitle"));
+                p.Add(Text(Loc.T("Fasad"), "small"));
+                var original = Btn(Loc.T("Original"), () => Report(reno.SetFacade(o, null)), "btn");
                 if (string.IsNullOrEmpty(o.renovation.facadeId)) original.AddToClassList("tab-active");
                 p.Add(original);
                 foreach (var f in reno.Facades(o).OrderBy(f => f.unlockLevel))
                 {
                     var facade = f;
                     bool unlocked = reno.IsFacadeUnlocked(facade);
-                    string facadeCost = facade.coinCost > 0 ? $" · {facade.coinCost} mynt" : "";
+                    string facadeCost = facade.coinCost > 0 ? Loc.F(" · {0} mynt", facade.coinCost) : "";
                     var row = Row();
                     var sw = new VisualElement();
                     sw.AddToClassList("swatch");
                     sw.style.backgroundColor = facade.color;
                     row.Add(sw);
-                    var btn = Btn(unlocked ? facade.DisplayName + facadeCost : $"{facade.DisplayName} – nivå {facade.unlockLevel}",
+                    var btn = Btn(unlocked ? facade.DisplayName + facadeCost : Loc.F("{0} – nivå {1}", facade.DisplayName, facade.unlockLevel),
                         () => Report(reno.SetFacade(o, facade)), "btn", "grow");
                     if (o.renovation.facadeId == facade.Id) btn.AddToClassList("tab-active");
                     btn.SetEnabled(unlocked);
@@ -490,24 +490,24 @@ namespace NG.UI
                 return;
             }
 
-            p.Add(Text($"Renovering: fas {o.renovation.phase} av {reno.PhaseCount(o)}", "subtitle"));
+            p.Add(Text(Loc.F("Renovering: fas {0} av {1}", o.renovation.phase, reno.PhaseCount(o)), "subtitle"));
             if (reno.IsInProgress(o))
             {
                 var t = Text("", "text");
                 p.Add(ProgressBar(() => o.renovation.active != null ? Timers.Progress(o.renovation.active) : 1f, b));
                 p.Add(t);
-                b.Add(() => t.text = o.renovation.active != null ? $"{Fmt.Duration(Timers.Remaining(o.renovation.active))} kvar" : "");
+                b.Add(() => t.text = o.renovation.active != null ? Loc.F("{0} kvar", Fmt.Duration(Timers.Remaining(o.renovation.active))) : "");
                 p.Add(SpeedUp(() => reno.SpeedUpCost(o), () => reno.SpeedUp(o), b));
                 return;
             }
 
             var next = reno.NextPhase(o);
             if (next == null) return;
-            p.Add(Text($"Nästa: {Fmt.PhaseName(next.variantName)}", "text"));
-            string cost = next.cost.amount > 0 ? $"{next.cost.amount} {WalletService.Name(next.cost.currency)}" : "Gratis";
+            p.Add(Text(Loc.F("Nästa: {0}", Fmt.PhaseName(next.variantName)), "text"));
+            string cost = next.cost.amount > 0 ? $"{next.cost.amount} {WalletService.Name(next.cost.currency)}" : Loc.T("Gratis");
             string mats = InventoryService.Format(next.materials);
-            p.Add(Text($"{cost}{(mats.Length > 0 ? ", " + mats : "")} · {Fmt.Duration(next.durationSec)} · +{next.xpReward} XP", "small"));
-            var go = Btn("Renovera", () => Report(reno.StartNext(o)), "btn", "btn-primary", "btn-big");
+            p.Add(Text(Loc.F("{0}{1} · {2} · +{3} XP", cost, (mats.Length > 0 ? ", " + mats : ""), Fmt.Duration(next.durationSec), next.xpReward), "small"));
+            var go = Btn(Loc.T("Renovera"), () => Report(reno.StartNext(o)), "btn", "btn-primary", "btn-big");
             p.Add(go);
             var why = Text("", "warn");
             p.Add(why);
@@ -526,7 +526,7 @@ namespace NG.UI
             var g = _s.Growth;
             if (o.decayed)
             {
-                p.Add(Text("Vissen. Renovera huset intill så kommer den tillbaka.", "small"));
+                p.Add(Text(Loc.T("Vissen. Renovera huset intill så kommer den tillbaka."), "small"));
                 return;
             }
             var status = Text("", "text");
@@ -538,14 +538,14 @@ namespace NG.UI
             Button harvest = null;
             if (plant.IsHarvestable)
             {
-                p.Add(Text($"Ger {plant.harvest.amount} {plant.harvest.resource.DisplayName}", "small"));
-                harvest = Btn("Skörda", () => Report(g.Harvest(o)), "btn", "btn-primary", "btn-big");
+                p.Add(Text(Loc.F("Ger {0} {1}", plant.harvest.amount, plant.harvest.resource.DisplayName), "small"));
+                harvest = Btn(Loc.T("Skörda"), () => Report(g.Harvest(o)), "btn", "btn-primary", "btn-big");
                 p.Add(harvest);
             }
             b.Add(() =>
             {
                 bool growing = g.IsGrowing(o);
-                status.text = growing ? $"Växer ... {Fmt.Duration(Timers.Remaining(o.growth))} kvar" : plant.IsHarvestable ? "Redo att skördas!" : "I full blom.";
+                status.text = growing ? Loc.F("Växer ... {0} kvar", Fmt.Duration(Timers.Remaining(o.growth))) : plant.IsHarvestable ? Loc.T("Redo att skördas!") : Loc.T("I full blom.");
                 bar.style.display = growing ? DisplayStyle.Flex : DisplayStyle.None;
                 speed.style.display = growing ? DisplayStyle.Flex : DisplayStyle.None;
                 if (harvest != null) harvest.SetEnabled(g.CanHarvest(o));
@@ -563,7 +563,7 @@ namespace NG.UI
             b.Add(() =>
             {
                 int n = prod.ReadyCount(o);
-                collect.text = $"Hämta {n} färdiga";
+                collect.text = Loc.F("Hämta {0} färdiga", n);
                 collect.style.display = n > 0 ? DisplayStyle.Flex : DisplayStyle.None;
             });
 
@@ -574,15 +574,15 @@ namespace NG.UI
             {
                 var names = o.production.queue.Select(id => prod.Recipe(id)?.DisplayName ?? id).ToList();
                 queue.text = names.Count == 0
-                    ? $"Kö 0/{def.queueSize}: inget pågår"
-                    : $"Kö {names.Count}/{def.queueSize}: {names[0]} ({Fmt.Duration(prod.CurrentRemaining(o))})" +
-                      (names.Count > 1 ? ", sedan " + string.Join(", ", names.Skip(1)) : "");
+                    ? Loc.F("Kö 0/{0}: inget pågår", def.queueSize)
+                    : Loc.F("Kö {0}/{1}: {2} ({3})", names.Count, def.queueSize, names[0], Fmt.Duration(prod.CurrentRemaining(o))) +
+                      (names.Count > 1 ? Loc.T(", sedan ") + string.Join(", ", names.Skip(1)) : "");
             });
             var speed = SpeedUp(() => prod.SpeedUpCost(o), () => prod.SpeedUp(o), b);
             p.Add(speed);
             b.Add(() => speed.style.display = prod.IsWorking(o) ? DisplayStyle.Flex : DisplayStyle.None);
 
-            p.Add(Text("Recept", "subtitle"));
+            p.Add(Text(Loc.T("Recept"), "subtitle"));
             var scroll = new ScrollView();
             scroll.style.maxHeight = 260;
             p.Add(scroll);
@@ -591,8 +591,8 @@ namespace NG.UI
                 var recipe = r;
                 bool unlocked = _s.Progression.IsUnlocked(recipe);
                 string text = unlocked
-                    ? $"{recipe.DisplayName}\n{InventoryService.Format(recipe.inputs)} · {Fmt.Duration(recipe.durationSec)}"
-                    : $"{recipe.DisplayName} – nivå {recipe.unlockLevel}";
+                    ? Loc.F("{0}\n{1} · {2}", recipe.DisplayName, InventoryService.Format(recipe.inputs), Fmt.Duration(recipe.durationSec))
+                    : Loc.F("{0} – nivå {1}", recipe.DisplayName, recipe.unlockLevel);
                 var btn = Btn(text, () => Report(prod.Enqueue(o, recipe)), "btn");
                 scroll.Add(btn);
                 b.Add(() => btn.SetEnabled(prod.CanEnqueue(o, recipe, out _)));
@@ -604,16 +604,16 @@ namespace NG.UI
             var p = _selectionPanel;
             var b = _selectionBinder;
             var c = _s.Community;
-            p.Add(Text($"Ger {def.incomeCoins} mynt och {def.incomeXp} XP var {Fmt.Duration(def.incomeIntervalSec)}", "small"));
+            p.Add(Text(Loc.F("Ger {0} mynt och {1} XP var {2}", def.incomeCoins, def.incomeXp, Fmt.Duration(def.incomeIntervalSec)), "small"));
             var status = Text("", "text");
             p.Add(status);
             p.Add(ProgressBar(() => o.income != null ? Timers.Progress(o.income) : 0f, b));
-            var collect = Btn("Hämta", () => Report(c.Collect(o)), "btn", "btn-primary", "btn-big");
+            var collect = Btn(Loc.T("Hämta"), () => Report(c.Collect(o)), "btn", "btn-primary", "btn-big");
             p.Add(collect);
             b.Add(() =>
             {
                 bool ready = c.CanCollect(o);
-                status.text = ready ? "Redo att hämta!" : $"Nästa om {Fmt.Duration(c.Remaining(o))}";
+                status.text = ready ? Loc.T("Redo att hämta!") : Loc.F("Nästa om {0}", Fmt.Duration(c.Remaining(o)));
                 collect.SetEnabled(ready);
             });
         }
@@ -621,9 +621,9 @@ namespace NG.UI
         void BuildExpansionPanel(MapExpansion e)
         {
             var p = _selectionPanel;
-            p.Add(Header(string.IsNullOrEmpty(e.name) ? "Nytt område" : e.name, () => _ia.ClearSelection()));
-            p.Add(Text($"Kräver nivå {e.requiredLevel} · {e.coinCost:N0} mynt", "text"));
-            var btn = Btn("Lås upp", () =>
+            p.Add(Header(string.IsNullOrEmpty(e.name) ? Loc.T("Nytt område") : e.DisplayName, () => _ia.ClearSelection()));
+            p.Add(Text(Loc.F("Kräver nivå {0} · {1:N0} mynt", e.requiredLevel, e.coinCost), "text"));
+            var btn = Btn(Loc.T("Lås upp"), () =>
             {
                 var r = _s.World.UnlockExpansion(e);
                 Report(r);
@@ -642,19 +642,19 @@ namespace NG.UI
             var def = _ia.PlacingDef;
             if (_ia.CurrentMode != WorldInteraction.Mode.Placing || def == null) return;
             bool moving = _ia.MovingId != null;
-            _placingBar.Add(Text(moving ? $"Flytta {def.DisplayName}" : $"{def.DisplayName} – {WalletService.Format(def.cost)}", "subtitle"));
+            _placingBar.Add(Text(moving ? Loc.F("Flytta {0}", def.DisplayName) : $"{def.DisplayName} – {WalletService.Format(def.cost)}", "subtitle"));
             var hint = Text("", "small");
             _placingBar.Add(hint);
             var row = Row();
-            var confirm = Btn("Bekräfta", () => _ia.Confirm(), "btn", "btn-primary", "grow");
+            var confirm = Btn(Loc.T("Bekräfta"), () => _ia.Confirm(), "btn", "btn-primary", "grow");
             row.Add(confirm);
-            row.Add(Btn("Rotera", () => _ia.Rotate(), "btn", "grow"));
-            row.Add(Btn("Klar", () => _ia.CancelPlacing(), "btn", "grow"));
+            row.Add(Btn(Loc.T("Rotera"), () => _ia.Rotate(), "btn", "grow"));
+            row.Add(Btn(Loc.T("Klar"), () => _ia.CancelPlacing(), "btn", "grow"));
             _placingBar.Add(row);
             _placingBinder.Add(() =>
             {
                 confirm.SetEnabled(_ia.PlacementValid);
-                hint.text = _ia.PlacementValid ? "Dra objektet eller tryck där det ska stå." : _ia.PlacementReason;
+                hint.text = _ia.PlacementValid ? Loc.T("Dra objektet eller tryck där det ska stå.") : _ia.PlacementReason;
             });
         }
 
@@ -685,7 +685,7 @@ namespace NG.UI
 
         void BuildShop(VisualElement w)
         {
-            WindowHeader(w, "Bygg");
+            WindowHeader(w, Loc.T("Bygg"));
             var tabs = Row();
             for (int i = 0; i < ShopTabs.Length; i++)
             {
@@ -712,7 +712,7 @@ namespace NG.UI
                 bool unlocked = _s.Progression.IsUnlocked(def);
                 string text = unlocked
                     ? $"<b>{def.DisplayName}</b>\n{WalletService.Format(def.cost)}" + (def.buildTimeSec > 0 ? $"\n{Fmt.Duration(def.buildTimeSec)}" : "")
-                    : $"<b>{def.DisplayName}</b>\nNivå {def.unlockLevel}";
+                    : Loc.F("<b>{0}</b>\nNivå {1}", def.DisplayName, def.unlockLevel);
                 var item = Btn(text, () =>
                 {
                     _window = Window.None;
@@ -726,10 +726,10 @@ namespace NG.UI
 
         void BuildStorage(VisualElement w)
         {
-            WindowHeader(w, "Förrådet");
+            WindowHeader(w, Loc.T("Förrådet"));
             var tabs = Row();
-            var t1 = Btn("Lager", () => { _storageSellTab = false; _dirtyWindow = true; }, "btn", "tab", "grow");
-            var t2 = Btn("Sälj", () => { _storageSellTab = true; _dirtyWindow = true; }, "btn", "tab", "grow");
+            var t1 = Btn(Loc.T("Lager"), () => { _storageSellTab = false; _dirtyWindow = true; }, "btn", "tab", "grow");
+            var t2 = Btn(Loc.T("Sälj"), () => { _storageSellTab = true; _dirtyWindow = true; }, "btn", "tab", "grow");
             (_storageSellTab ? t2 : t1).AddToClassList("tab-active");
             tabs.Add(t1);
             tabs.Add(t2);
@@ -745,13 +745,13 @@ namespace NG.UI
             w.Add(ProgressBar(() => (float)_s.Inventory.Total / Mathf.Max(1, _s.Inventory.Capacity), _windowBinder));
             _windowBinder.Add(() =>
             {
-                capText.text = $"{_s.Inventory.Total} / {_s.Inventory.Capacity} platser";
-                upgrade.text = $"Bygg ut (+{_s.Config.storagePerUpgrade}) · {_s.Inventory.UpgradeCost} mynt";
+                capText.text = Loc.F("{0} / {1} platser", _s.Inventory.Total, _s.Inventory.Capacity);
+                upgrade.text = Loc.F("Bygg ut (+{0}) · {1} mynt", _s.Config.storagePerUpgrade, _s.Inventory.UpgradeCost);
                 upgrade.SetEnabled(_s.Wallet.CanAfford(CurrencyType.Coins, _s.Inventory.UpgradeCost));
             });
 
             var items = _s.Inventory.All.Where(kv => kv.Value > 0).OrderBy(kv => _s.Inventory.NameOf(kv.Key)).ToList();
-            if (items.Count == 0) w.Add(Text("Tomt. Odla och skörda för att fylla förrådet.", "small"));
+            if (items.Count == 0) w.Add(Text(Loc.T("Tomt. Odla och skörda för att fylla förrådet."), "small"));
             if (_storageSellTab)
             {
                 BuildSellList(w, items);
@@ -775,7 +775,7 @@ namespace NG.UI
                     card.Add(dot);
                 }
                 card.Add(Text(_s.Inventory.NameOf(kv.Key), "subtitle"));
-                card.Add(Text($"{kv.Value} st", "text"));
+                card.Add(Text(Loc.F("{0} st", kv.Value), "text"));
                 grid.Add(card);
             }
         }
@@ -795,22 +795,22 @@ namespace NG.UI
                 var name = Text($"{_s.Inventory.NameOf(id)}  ×{kv.Value}", "subtitle");
                 name.AddToClassList("grow");
                 row.Add(name);
-                row.Add(Text($"{price} mynt/st", "small"));
-                row.Add(Btn("Sälj 1", () => Report(_s.Inventory.Sell(id, 1)), "btn"));
-                row.Add(Btn($"Sälj alla ({price * kv.Value})", () => Report(_s.Inventory.Sell(id, int.MaxValue)), "btn", "btn-gold"));
+                row.Add(Text(Loc.F("{0} mynt/st", price), "small"));
+                row.Add(Btn(Loc.T("Sälj 1"), () => Report(_s.Inventory.Sell(id, 1)), "btn"));
+                row.Add(Btn(Loc.F("Sälj alla ({0})", price * kv.Value), () => Report(_s.Inventory.Sell(id, int.MaxValue)), "btn", "btn-gold"));
                 scroll.Add(row);
             }
         }
 
         void BuildOrders(VisualElement w)
         {
-            WindowHeader(w, "Grannskapstavlan");
+            WindowHeader(w, Loc.T("Grannskapstavlan"));
             var b = _windowBinder;
             if (_s.Orders.Orders.Count == 0)
             {
                 var wait = Text("", "small");
                 w.Add(wait);
-                b.Add(() => wait.text = $"Nya beställningar kommer om {Fmt.Duration(Math.Max(0, _s.State.nextOrderUnix - TimeService.UnixNow))}.");
+                b.Add(() => wait.text = Loc.F("Nya beställningar kommer om {0}.", Fmt.Duration(Math.Max(0, _s.State.nextOrderUnix - TimeService.UnixNow))));
             }
             var scroll = new ScrollView();
             scroll.AddToClassList("grow");
@@ -822,7 +822,7 @@ namespace NG.UI
                 var nb = _s.Orders.Neighbor(o);
                 if (nb != null)
                 {
-                    var who = Text($"{nb.DisplayName} vill ha:", "subtitle");
+                    var who = Text(Loc.F("{0} vill ha:", nb.DisplayName), "subtitle");
                     who.style.color = Color.Lerp(nb.color, Color.black, 0.4f);
                     card.Add(who);
                 }
@@ -834,14 +834,14 @@ namespace NG.UI
                     b.Add(() =>
                     {
                         int have = _s.Inventory.Count(it.resourceId);
-                        line.text = $"{_s.Inventory.NameOf(it.resourceId)}  {have}/{it.amount}" + (have >= it.amount ? "  (klart)" : "");
+                        line.text = $"{_s.Inventory.NameOf(it.resourceId)}  {have}/{it.amount}" + (have >= it.amount ? Loc.T("  (klart)") : "");
                     });
                 }
-                card.Add(Text($"Belöning: {o.coins} mynt, {o.xp} XP", "small"));
+                card.Add(Text(Loc.F("Belöning: {0} mynt, {1} XP", o.coins, o.xp), "small"));
                 var row = Row();
-                var deliver = Btn("Leverera", () => Report(_s.Orders.Fulfil(o)), "btn", "btn-primary", "grow");
+                var deliver = Btn(Loc.T("Leverera"), () => Report(_s.Orders.Fulfil(o)), "btn", "btn-primary", "grow");
                 row.Add(deliver);
-                row.Add(Btn("Släng", () => _s.Orders.Discard(o), "btn"));
+                row.Add(Btn(Loc.T("Släng"), () => _s.Orders.Discard(o), "btn"));
                 card.Add(row);
                 b.Add(() => deliver.SetEnabled(_s.Orders.CanFulfil(o)));
                 scroll.Add(card);
@@ -850,12 +850,12 @@ namespace NG.UI
 
         void BuildSettings(VisualElement w)
         {
-            WindowHeader(w, "Inställningar");
+            WindowHeader(w, Loc.T("Inställningar"));
             var scroll = new ScrollView();
             scroll.AddToClassList("grow");
             w.Add(scroll);
 
-            scroll.Add(Text("Grafik", "subtitle"));
+            scroll.Add(Text(Loc.T("Grafik"), "subtitle"));
             var gfx = Row();
             var current = DeviceTier.Override;
             void Choice(string label, DeviceTier.Tier? tier)
@@ -869,22 +869,36 @@ namespace NG.UI
                 if (current == tier) b.AddToClassList("tab-active");
                 gfx.Add(b);
             }
-            Choice("Automatisk", null);
-            Choice("Låg", DeviceTier.Tier.Low);
-            Choice("Mellan", DeviceTier.Tier.Medium);
-            Choice("Hög", DeviceTier.Tier.High);
+            Choice(Loc.T("Automatisk"), null);
+            Choice(Loc.T("Låg"), DeviceTier.Tier.Low);
+            Choice(Loc.T("Mellan"), DeviceTier.Tier.Medium);
+            Choice(Loc.T("Hög"), DeviceTier.Tier.High);
             scroll.Add(gfx);
-            scroll.Add(Text("Låg sparar batteri och gör spelet smidigare på äldre telefoner.", "small"));
+            scroll.Add(Text(Loc.T("Låg sparar batteri och gör spelet smidigare på äldre telefoner."), "small"));
 
-            scroll.Add(Text("Språk", "subtitle"));
-            scroll.Add(Text("Svenska (engelska kommer snart)", "text"));
+            scroll.Add(Text(Loc.T("Språk"), "subtitle"));
+            var langs = Row();
+            void Lang(string label, Loc.Lang lang)
+            {
+                var b = Btn(label, () =>
+                {
+                    if (Loc.Current == lang) return;
+                    Loc.Set(lang);
+                    if (_boot != null) _boot.Reload(); // bygger om allt UI på det nya språket
+                }, "btn", "tab", "grow");
+                if (Loc.Current == lang) b.AddToClassList("tab-active");
+                langs.Add(b);
+            }
+            Lang("Svenska", Loc.Lang.Sv);
+            Lang("English", Loc.Lang.En);
+            scroll.Add(langs);
 
-            scroll.Add(Text("Konto och data", "subtitle"));
+            scroll.Add(Text(Loc.T("Konto och data"), "subtitle"));
             var links = Row();
-            links.Add(Btn("Användarvillkor", () => Application.OpenURL(_s.Config.termsUrl), "btn", "grow"));
-            links.Add(Btn("Integritetspolicy", () => Application.OpenURL(_s.Config.privacyUrl), "btn", "grow"));
+            links.Add(Btn(Loc.T("Användarvillkor"), () => Application.OpenURL(_s.Config.termsUrl), "btn", "grow"));
+            links.Add(Btn(Loc.T("Integritetspolicy"), () => Application.OpenURL(_s.Config.privacyUrl), "btn", "grow"));
             scroll.Add(links);
-            var delete = Btn(_confirmDelete ? "Tryck igen för att radera ALLT" : "Radera min data och börja om", () =>
+            var delete = Btn(_confirmDelete ? Loc.T("Tryck igen för att radera ALLT") : Loc.T("Radera min data och börja om"), () =>
             {
                 if (!_confirmDelete) { _confirmDelete = true; _dirtyWindow = true; return; }
                 Analytics.Event("data_deleted");
@@ -892,37 +906,37 @@ namespace NG.UI
             }, "btn", "btn-close");
             delete.style.width = StyleKeyword.Auto;
             scroll.Add(delete);
-            scroll.Add(Text("Raderar sparfilen på den här enheten. (När inloggning finns raderas även molnkontot.)", "small"));
+            scroll.Add(Text(Loc.T("Raderar sparfilen på den här enheten. (När inloggning finns raderas även molnkontot.)"), "small"));
 
             if (Application.isEditor || Debug.isDebugBuild)
-                scroll.Add(Btn("Utvecklarverktyg (Debug)", () => { _window = Window.Debug; _dirtyWindow = true; }, "btn"));
+                scroll.Add(Btn(Loc.T("Utvecklarverktyg (Debug)"), () => { _window = Window.Debug; _dirtyWindow = true; }, "btn"));
 
-            scroll.Add(Text($"Neil's Neighbor {Application.version} · {Application.platform}", "small"));
+            scroll.Add(Text(Loc.F("Neil's Neighbor {0} · {1}", Application.version, Application.platform), "small"));
         }
 
         void BuildDebug(VisualElement w)
         {
-            WindowHeader(w, "Debug");
+            WindowHeader(w, Loc.T("Debug"));
             var grid = new VisualElement();
             grid.AddToClassList("wrap");
             w.Add(grid);
-            grid.Add(Btn("+1 000 mynt", () => _s.Wallet.Add(CurrencyType.Coins, 1000), "btn"));
-            grid.Add(Btn("+100 diamanter", () => _s.Wallet.Add(CurrencyType.Gems, 100), "btn"));
-            grid.Add(Btn("+250 XP", () => _s.Progression.AddXp(250), "btn"));
-            grid.Add(Btn("+10 av varje vara", () =>
+            grid.Add(Btn(Loc.T("+1 000 mynt"), () => _s.Wallet.Add(CurrencyType.Coins, 1000), "btn"));
+            grid.Add(Btn(Loc.T("+100 diamanter"), () => _s.Wallet.Add(CurrencyType.Gems, 100), "btn"));
+            grid.Add(Btn(Loc.T("+250 XP"), () => _s.Progression.AddXp(250), "btn"));
+            grid.Add(Btn(Loc.T("+10 av varje vara"), () =>
             {
                 foreach (var res in _s.Content.AllOf<ResourceDefinition>()) _s.Inventory.Add(res.Id, 10);
             }, "btn"));
-            grid.Add(Btn("Spola fram 10 min", () => { TimeService.DebugSkip(TimeSpan.FromMinutes(10)); _s.Tick(); }, "btn"));
-            grid.Add(Btn("Spola fram 1 h", () => { TimeService.DebugSkip(TimeSpan.FromHours(1)); _s.Tick(); }, "btn"));
-            grid.Add(Btn("Klara alla uppdrag", () =>
+            grid.Add(Btn(Loc.T("Spola fram 10 min"), () => { TimeService.DebugSkip(TimeSpan.FromMinutes(10)); _s.Tick(); }, "btn"));
+            grid.Add(Btn(Loc.T("Spola fram 1 h"), () => { TimeService.DebugSkip(TimeSpan.FromHours(1)); _s.Tick(); }, "btn"));
+            grid.Add(Btn(Loc.T("Klara alla uppdrag"), () =>
             {
                 foreach (var q in _s.Quests.Active.ToList()) if (_s.Quests.IsComplete(q)) _s.Quests.Claim(q);
             }, "btn"));
             var fps = Text("", "small");
             w.Add(fps);
-            _windowBinder.Add(() => fps.text = $"Grafiknivå: {DeviceTier.Current} · {1f / Mathf.Max(0.0001f, Time.smoothDeltaTime):0} FPS");
-            w.Add(Btn("Ny sparfil (börja om)", () => { if (_boot != null) _boot.ResetSaveAndReload(); }, "btn", "btn-close"));
+            _windowBinder.Add(() => fps.text = Loc.F("Grafiknivå: {0} · {1:0} FPS", DeviceTier.Current, 1f / Mathf.Max(0.0001f, Time.smoothDeltaTime)));
+            w.Add(Btn(Loc.T("Ny sparfil (börja om)"), () => { if (_boot != null) _boot.ResetSaveAndReload(); }, "btn", "btn-close"));
         }
 
         // ---------- Dialogrutor ----------
@@ -967,16 +981,16 @@ namespace NG.UI
             var dim = Dim();
             dim.AddToClassList("dim-soft");
             var m = Panel("modal", dim);
-            m.Add(Text("Välkommen till Neil's Neighbor!", "title"));
-            m.Add(Text("Innan vi startar renoveringen av grannskapet behöver du godkänna våra användarvillkor och vår integritetspolicy.", "text"));
+            m.Add(Text(Loc.T("Välkommen till Neil's Neighbor!"), "title"));
+            m.Add(Text(Loc.T("Innan vi startar renoveringen av grannskapet behöver du godkänna våra användarvillkor och vår integritetspolicy."), "text"));
             var links = Row();
-            links.Add(Btn("Läs villkoren", () => Application.OpenURL(_s.Config.termsUrl), "btn", "grow"));
-            links.Add(Btn("Integritetspolicy", () => Application.OpenURL(_s.Config.privacyUrl), "btn", "grow"));
+            links.Add(Btn(Loc.T("Läs villkoren"), () => Application.OpenURL(_s.Config.termsUrl), "btn", "grow"));
+            links.Add(Btn(Loc.T("Integritetspolicy"), () => Application.OpenURL(_s.Config.privacyUrl), "btn", "grow"));
             m.Add(links);
-            var accept = new Toggle("Jag är över 13 år och godkänner användarvillkoren.");
+            var accept = new Toggle(Loc.T("Jag är över 13 år och godkänner användarvillkoren."));
             accept.AddToClassList("check");
             m.Add(accept);
-            var start = Btn("Börja spela!", () =>
+            var start = Btn(Loc.T("Börja spela!"), () =>
             {
                 if (!accept.value) return;
                 _s.AcceptTerms();
@@ -992,11 +1006,11 @@ namespace NG.UI
             var dim = Dim();
             dim.AddToClassList("dim-soft");
             var m = Panel("modal", dim);
-            m.Add(Text("Vem flyttar in på Lindgatan?", "title"));
-            m.Add(Text("Välj din karaktär. Du kan inte byta senare.", "small"));
+            m.Add(Text(Loc.T("Vem flyttar in på Lindgatan?"), "title"));
+            m.Add(Text(Loc.T("Välj din karaktär. Du kan inte byta senare."), "small"));
             var row = Row();
-            row.Add(CharacterCard("neil", "Neil", "Händig och nyfiken. Har drömt om ett eget hus med veranda.", new Color(0.43f, 0.71f, 1f)));
-            row.Add(CharacterCard("sofia", "Sofia", "Kreativ och full av idéer. Ser skönheten i varje grått hus.", new Color(1f, 0.56f, 0.72f)));
+            row.Add(CharacterCard("neil", "Neil", Loc.T("Händig och nyfiken. Har drömt om ett eget hus med veranda."), new Color(0.43f, 0.71f, 1f)));
+            row.Add(CharacterCard("sofia", "Sofia", Loc.T("Kreativ och full av idéer. Ser skönheten i varje grått hus."), new Color(1f, 0.56f, 0.72f)));
             m.Add(row);
         }
 
@@ -1011,7 +1025,7 @@ namespace NG.UI
             card.Add(portrait);
             card.Add(Text(name, "title"));
             card.Add(Text(bio, "small"));
-            card.Add(Btn($"Spela som {name}", () =>
+            card.Add(Btn(Loc.F("Spela som {0}", name), () =>
             {
                 _s.ChooseCharacter(id);
                 _boot?.Save();
@@ -1025,16 +1039,16 @@ namespace NG.UI
         {
             var dim = Dim();
             var m = Panel("modal", dim);
-            m.Add(Text($"Nivå {level}!", "title"));
+            m.Add(Text(Loc.F("Nivå {0}!", level), "title"));
             var row = _s.Progression.RewardsFor(level);
-            if (row != null) m.Add(Text($"Belöning: {row.coinReward} mynt, {row.gemReward} diamanter", "text"));
+            if (row != null) m.Add(Text(Loc.F("Belöning: {0} mynt, {1} diamanter", row.coinReward, row.gemReward), "text"));
             var unlocks = _s.Progression.UnlockNamesAt(level).Take(10).ToList();
             if (unlocks.Count > 0)
             {
-                m.Add(Text("Nytt:", "subtitle"));
+                m.Add(Text(Loc.T("Nytt:"), "subtitle"));
                 foreach (var n in unlocks) m.Add(Text("• " + n, "small"));
             }
-            m.Add(Btn("Toppen!", () => { _levelUps.Dequeue(); _dirtyModal = true; }, "btn", "btn-primary", "btn-big"));
+            m.Add(Btn(Loc.T("Toppen!"), () => { _levelUps.Dequeue(); _dirtyModal = true; }, "btn", "btn-primary", "btn-big"));
         }
 
         void BuildIntro(QuestProgress q)
@@ -1050,10 +1064,10 @@ namespace NG.UI
             box.Add(portrait);
             var col = new VisualElement();
             col.AddToClassList("grow");
-            col.Add(Text(nb != null ? nb.DisplayName : "Granne", "title"));
+            col.Add(Text(nb != null ? nb.DisplayName : Loc.T("Granne"), "title"));
             col.Add(Text(def.DisplayName, "subtitle"));
-            col.Add(Text(_s.Personalize(def.intro), "text"));
-            col.Add(Btn("Okej!", () => { _s.Quests.MarkIntroSeen(q); _dirtyModal = true; }, "btn", "btn-primary", "btn-big"));
+            col.Add(Text(_s.Personalize(def.Intro), "text"));
+            col.Add(Btn(Loc.T("Okej!"), () => { _s.Quests.MarkIntroSeen(q); _dirtyModal = true; }, "btn", "btn-primary", "btn-big"));
             box.Add(col);
         }
 
@@ -1061,34 +1075,34 @@ namespace NG.UI
         {
             var dim = Dim();
             var m = Panel("modal", dim);
-            m.Add(Text($"Välkommen tillbaka, {_s.PlayerName}!", "title"));
+            m.Add(Text(Loc.F("Välkommen tillbaka, {0}!", _s.PlayerName), "title"));
             m.Add(Text(_welcomeText, "text"));
-            m.Add(Btn("Till gatan!", () => { _welcomeText = null; _dirtyModal = true; }, "btn", "btn-primary", "btn-big"));
+            m.Add(Btn(Loc.T("Till gatan!"), () => { _welcomeText = null; _dirtyModal = true; }, "btn", "btn-primary", "btn-big"));
         }
 
         void BuildDaily()
         {
             var dim = Dim();
             var m = Panel("modal", dim);
-            m.Add(Text("Dagens gåva", "title"));
+            m.Add(Text(Loc.T("Dagens gåva"), "title"));
             var days = new VisualElement();
             days.AddToClassList("wrap");
             int today = _s.Daily.NextDay;
             for (int day = 1; day <= 7; day++)
             {
-                string gems = _s.Daily.GemsFor(day) > 0 ? $"\n+{_s.Daily.GemsFor(day)} dia" : "";
-                var box = new Label($"Dag {day}\n{_s.Daily.CoinsFor(day)} mynt{gems}");
+                string gems = _s.Daily.GemsFor(day) > 0 ? Loc.F("\n+{0} dia", _s.Daily.GemsFor(day)) : "";
+                var box = new Label(Loc.F("Dag {0}\n{1} mynt{2}", day, _s.Daily.CoinsFor(day), gems));
                 box.AddToClassList("day-box");
                 if (day == today) box.AddToClassList("day-today");
                 else if (day < today) box.AddToClassList("day-done");
                 days.Add(box);
             }
             m.Add(days);
-            m.Add(Text("Kom tillbaka varje dag för större gåvor. Missar du en dag börjar det om.", "small"));
+            m.Add(Text(Loc.T("Kom tillbaka varje dag för större gåvor. Missar du en dag börjar det om."), "small"));
             var row = Row();
-            var claim = Btn("Hämta", () => { Report(_s.Daily.Claim()); _showDaily = false; _dirtyModal = true; }, "btn", "btn-primary", "btn-big", "grow");
+            var claim = Btn(Loc.T("Hämta"), () => { Report(_s.Daily.Claim()); _showDaily = false; _dirtyModal = true; }, "btn", "btn-primary", "btn-big", "grow");
             row.Add(claim);
-            row.Add(Btn("Senare", () => { _showDaily = false; _dirtyModal = true; }, "btn"));
+            row.Add(Btn(Loc.T("Senare"), () => { _showDaily = false; _dirtyModal = true; }, "btn"));
             m.Add(row);
             _modalBinder.Add(() => claim.SetEnabled(_s.Daily.CanClaim));
         }
@@ -1110,16 +1124,16 @@ namespace NG.UI
                     if (_paintMode)
                     {
                         if (o.renovation == null || !o.renovation.complete) continue;
-                        text = "Måla";
+                        text = Loc.T("Måla");
                         action = () => _ia.Select(obj.instanceId);
                     }
-                    else if (o.build != null) text = $"Bygger {Fmt.Duration(Timers.Remaining(o.build))}";
-                    else if (o.renovation?.active != null) text = $"Renoverar {Fmt.Duration(Timers.Remaining(o.renovation.active))}";
-                    else if (_s.Production.ReadyCount(o) > 0) { text = $"Hämta ({_s.Production.ReadyCount(o)})"; action = () => Report(_s.Production.Collect(obj)); }
-                    else if (_s.Growth.CanHarvest(o)) { text = "Skörda"; action = () => Report(_s.Growth.Harvest(obj)); }
-                    else if (_s.Community.CanCollect(o)) { text = "Hämta"; action = () => Report(_s.Community.Collect(obj)); }
+                    else if (o.build != null) text = Loc.F("Bygger {0}", Fmt.Duration(Timers.Remaining(o.build)));
+                    else if (o.renovation?.active != null) text = Loc.F("Renoverar {0}", Fmt.Duration(Timers.Remaining(o.renovation.active)));
+                    else if (_s.Production.ReadyCount(o) > 0) { text = Loc.F("Hämta ({0})", _s.Production.ReadyCount(o)); action = () => Report(_s.Production.Collect(obj)); }
+                    else if (_s.Growth.CanHarvest(o)) { text = Loc.T("Skörda"); action = () => Report(_s.Growth.Harvest(obj)); }
+                    else if (_s.Community.CanCollect(o)) { text = Loc.T("Hämta"); action = () => Report(_s.Community.Collect(obj)); }
                     else if (_s.Production.IsWorking(o)) text = Fmt.Duration(_s.Production.CurrentRemaining(o));
-                    else if (_s.Renovation.CanStartNext(o, out _)) { text = "Renovera!"; action = () => _ia.Select(obj.instanceId); }
+                    else if (_s.Renovation.CanStartNext(o, out _)) { text = Loc.T("Renovera!"); action = () => _ia.Select(obj.instanceId); }
                     if (text == null || !_world.TryGetTop(o.instanceId, out var top)) continue;
                     var world = top + Vector3.up * 0.3f;
                     if (_cam.WorldToScreenPoint(world).z < 0) continue;
@@ -1216,7 +1230,7 @@ namespace NG.UI
         void TakePhoto()
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
-            Toast("Foto stöds inte i webbversionen än.");
+            Toast(Loc.T("Foto stöds inte i webbversionen än."));
 #else
             StartCoroutine(PhotoRoutine());
 #endif
@@ -1231,7 +1245,7 @@ namespace NG.UI
             string file = System.IO.Path.Combine(Application.persistentDataPath, $"Lindgatan_{DateTime.Now:yyyyMMdd_HHmmss}.png");
             System.IO.File.WriteAllBytes(file, tex.EncodeToPNG());
             Destroy(tex);
-            Toast("Bild sparad!");
+            Toast(Loc.T("Bild sparad!"));
             Debug.Log($"[Foto] {file}");
         }
 
@@ -1368,7 +1382,7 @@ namespace NG.UI
             binder.Add(() =>
             {
                 int g = gems();
-                b.text = g <= 0 ? "Gör klart (gratis)" : $"Snabba på ({g} diamanter)";
+                b.text = g <= 0 ? Loc.T("Gör klart (gratis)") : Loc.F("Snabba på ({0} diamanter)", g);
             });
             return b;
         }

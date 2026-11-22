@@ -51,14 +51,14 @@ namespace NG.Game
         public IEnumerable<string> UnlockNamesAt(int level)
         {
             foreach (var p in _s.Content.AllOf<PlaceableDefinition>().Where(p => p.unlockLevel == level).OrderBy(p => p.category))
-                yield return p is RenovatableDefinition ? $"Renovera: {p.DisplayName}" : p.DisplayName;
+                yield return p is RenovatableDefinition ? Loc.F("Renovera: {0}", p.DisplayName) : p.DisplayName;
             foreach (var r in _s.Content.AllOf<RecipeDefinition>().Where(r => r.unlockLevel == level))
-                yield return $"Recept: {r.DisplayName}";
+                yield return Loc.F("Recept: {0}", r.DisplayName);
             foreach (var f in _s.Content.AllOf<FacadeDefinition>().Where(f => f.unlockLevel == level))
                 yield return $"{f.house?.DisplayName}: {f.DisplayName}";
             foreach (var e in _s.Config.expansions.Where(e => e.requiredLevel == level && e.requiredLevel > 0))
-                yield return $"Nytt område: {e.name}";
-            if (level == _s.Config.ordersUnlockLevel) yield return "Grannskapstavlan";
+                yield return Loc.F("Nytt område: {0}", e.DisplayName);
+            if (level == _s.Config.ordersUnlockLevel) yield return Loc.T("Grannskapstavlan");
         }
     }
 }

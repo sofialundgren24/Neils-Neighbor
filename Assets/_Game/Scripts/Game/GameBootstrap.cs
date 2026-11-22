@@ -48,6 +48,8 @@ namespace NG.Game
 
                 _content = new ContentDatabase();
                 await _content.LoadAsync();
+                var translations = _content.AllOf<TranslationTable>().FirstOrDefault();
+                if (translations != null) Loc.Load(translations.Pairs());
                 var config = _content.AllOf<GameConfig>().FirstOrDefault();
                 if (config == null)
                 {
@@ -131,6 +133,16 @@ namespace NG.Game
         }
 
         /// <summary>Debug: radera sparfilen och starta om scenen.</summary>
+        /// <summary>Sparar och startar om scenen (t.ex. efter byte av språk).</summary>
+        public void Reload()
+        {
+            Save();
+            _skipSave = true;
+            Session?.Dispose();
+            Session = null;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
         public void ResetSaveAndReload()
         {
             _skipSave = true;

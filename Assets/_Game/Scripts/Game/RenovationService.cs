@@ -60,10 +60,10 @@ namespace NG.Game
             reason = null;
             var def = Def(o);
             var next = NextPhase(o);
-            if (def == null || next == null) { reason = IsInProgress(o) ? "Renovering pågår redan." : "Huset är redan klart."; return false; }
-            if (_s.Progression.Level < def.unlockLevel) { reason = $"Kräver nivå {def.unlockLevel}."; return false; }
-            if (_s.Wallet.Get(next.cost.currency) < next.cost.amount) { reason = $"Behöver {next.cost.amount} {WalletService.Name(next.cost.currency)}."; return false; }
-            if (!_s.Inventory.Has(next.materials)) { reason = $"Behöver {InventoryService.Format(next.materials)}."; return false; }
+            if (def == null || next == null) { reason = IsInProgress(o) ? Loc.T("Renovering pågår redan.") : Loc.T("Huset är redan klart."); return false; }
+            if (_s.Progression.Level < def.unlockLevel) { reason = Loc.F("Kräver nivå {0}.", def.unlockLevel); return false; }
+            if (_s.Wallet.Get(next.cost.currency) < next.cost.amount) { reason = Loc.F("Behöver {0} {1}.", next.cost.amount, WalletService.Name(next.cost.currency)); return false; }
+            if (!_s.Inventory.Has(next.materials)) { reason = Loc.F("Behöver {0}.", InventoryService.Format(next.materials)); return false; }
             return true;
         }
 
@@ -84,8 +84,8 @@ namespace NG.Game
 
         public Result SpeedUp(PlacedObjectState o)
         {
-            if (!IsInProgress(o)) return Result.Fail("Ingen renovering pågår.");
-            if (!_s.Wallet.TrySpend(CurrencyType.Gems, SpeedUpCost(o))) return Result.Fail("Inte tillräckligt med diamanter.");
+            if (!IsInProgress(o)) return Result.Fail(Loc.T("Ingen renovering pågår."));
+            if (!_s.Wallet.TrySpend(CurrencyType.Gems, SpeedUpCost(o))) return Result.Fail(Loc.T("Inte tillräckligt med diamanter."));
             Timers.Finish(o.renovation.active);
             Tick();
             return Result.Success;
@@ -117,7 +117,7 @@ namespace NG.Game
                 EventBus.Publish(new ObjectChanged(o.instanceId, true));
                 any = true;
             }
-            if (any) GameSession.Message("Hela gatan lyser i färg! Lindgatan är tillbaka.");
+            if (any) GameSession.Message(Loc.T("Hela gatan lyser i färg! Lindgatan är tillbaka."));
         }
 
         // ---------- Fasader ----------
@@ -133,7 +133,7 @@ namespace NG.Game
 
         public Result SetFacade(PlacedObjectState o, FacadeDefinition f)
         {
-            if (!IsComplete(o) || o.renovation == null) return Result.Fail("Renovera klart huset först.");
+            if (!IsComplete(o) || o.renovation == null) return Result.Fail(Loc.T("Renovera klart huset först."));
             if (f == null)
             {
                 o.renovation.facadeId = null;
@@ -141,9 +141,9 @@ namespace NG.Game
                 EventBus.Publish(new ObjectChanged(o.instanceId, false));
                 return Result.Success;
             }
-            if (!IsFacadeUnlocked(f)) return Result.Fail($"Låses upp på nivå {f.unlockLevel}.");
+            if (!IsFacadeUnlocked(f)) return Result.Fail(Loc.F("Låses upp på nivå {0}.", f.unlockLevel));
             if (o.renovation.facadeId == f.Id) return Result.Success;
-            if (!_s.Wallet.TrySpend(CurrencyType.Coins, f.coinCost)) return Result.Fail("Inte tillräckligt med mynt.");
+            if (!_s.Wallet.TrySpend(CurrencyType.Coins, f.coinCost)) return Result.Fail(Loc.T("Inte tillräckligt med mynt."));
             o.renovation.facadeId = f.Id;
             o.renovation.paintHex = ColorUtility.ToHtmlStringRGB(f.color);
             EventBus.Publish(new ObjectChanged(o.instanceId, true));
@@ -153,7 +153,7 @@ namespace NG.Game
         /// <summary>Målarfärg på ett färdigt hus. Null = originalfärgen.</summary>
         public Result SetPaint(PlacedObjectState o, Color? color)
         {
-            if (!IsComplete(o) || o.renovation == null) return Result.Fail("Renovera klart huset först.");
+            if (!IsComplete(o) || o.renovation == null) return Result.Fail(Loc.T("Renovera klart huset först."));
             o.renovation.paintHex = color.HasValue ? ColorUtility.ToHtmlStringRGB(color.Value) : null;
             EventBus.Publish(new ObjectChanged(o.instanceId, false));
             return Result.Success;
@@ -177,7 +177,7 @@ namespace NG.Game
             {
                 int xp = def.phases[o.renovation.phase - 1].xpReward;
                 _s.Progression.AddXp(xp);
-                _s.Float(o, $"+{xp} XP");
+                _s.Float(o, Loc.F("+{0} XP", xp));
             }
 
             if (def == null || o.renovation.phase >= def.phases.Length)
@@ -189,7 +189,7 @@ namespace NG.Game
                 EventBus.Publish(new ObjectChanged(o.instanceId, true));
                 EventBus.Publish(new RenovationCompleted(o.instanceId));
                 Analytics.Event("house_renovated", "house", o.definitionId, "level", _s.Progression.Level);
-                GameSession.Message($"{def?.DisplayName ?? "Huset"} är färdigrenoverat!");
+                GameSession.Message(Loc.F("{0} är färdigrenoverat!", def?.DisplayName ?? "Huset"));
             }
             else
             {

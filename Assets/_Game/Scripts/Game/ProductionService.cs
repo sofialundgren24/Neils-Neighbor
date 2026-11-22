@@ -31,11 +31,11 @@ namespace NG.Game
         {
             reason = null;
             var def = Def(o);
-            if (def == null || o.production == null) { reason = "Ingen produktion här."; return false; }
-            if (o.build != null) { reason = "Byggnaden är inte klar än."; return false; }
-            if (!_s.Progression.IsUnlocked(r)) { reason = $"Kräver nivå {r.unlockLevel}."; return false; }
-            if (o.production.queue.Count >= def.queueSize) { reason = "Kön är full."; return false; }
-            if (!_s.Inventory.Has(r.inputs)) { reason = $"Behöver {InventoryService.Format(r.inputs)}."; return false; }
+            if (def == null || o.production == null) { reason = Loc.T("Ingen produktion här."); return false; }
+            if (o.build != null) { reason = Loc.T("Byggnaden är inte klar än."); return false; }
+            if (!_s.Progression.IsUnlocked(r)) { reason = Loc.F("Kräver nivå {0}.", r.unlockLevel); return false; }
+            if (o.production.queue.Count >= def.queueSize) { reason = Loc.T("Kön är full."); return false; }
+            if (!_s.Inventory.Has(r.inputs)) { reason = Loc.F("Behöver {0}.", InventoryService.Format(r.inputs)); return false; }
             return true;
         }
 
@@ -66,11 +66,11 @@ namespace NG.Game
 
         public Result Collect(PlacedObjectState o)
         {
-            if (ReadyCount(o) == 0) return Result.Fail("Inget att hämta.");
+            if (ReadyCount(o) == 0) return Result.Fail(Loc.T("Inget att hämta."));
             int incoming = 0;
             foreach (var id in o.production.ready) incoming += Recipe(id)?.output.amount ?? 0;
             if (!_s.Inventory.HasRoom(incoming))
-                return Result.Fail("Förrådet är fullt. Sälj varor eller bygg ut förrådet.");
+                return Result.Fail(Loc.T("Förrådet är fullt. Sälj varor eller bygg ut förrådet."));
             foreach (var id in o.production.ready)
             {
                 var r = Recipe(id);
@@ -79,7 +79,7 @@ namespace NG.Game
                 EventBus.Publish(new ItemsProduced(r.output.resource.Id, r.output.amount));
                 _s.Progression.AddXp(r.xpReward);
             }
-            _s.Float(o, $"+{o.production.ready.Count} klara");
+            _s.Float(o, Loc.F("+{0} klara", o.production.ready.Count));
             o.production.ready.Clear();
             EventBus.Publish(new ObjectChanged(o.instanceId, false));
             return Result.Success;
@@ -89,8 +89,8 @@ namespace NG.Game
 
         public Result SpeedUp(PlacedObjectState o)
         {
-            if (!IsWorking(o)) return Result.Fail("Inget pågår.");
-            if (!_s.Wallet.TrySpend(CurrencyType.Gems, SpeedUpCost(o))) return Result.Fail("Inte tillräckligt med diamanter.");
+            if (!IsWorking(o)) return Result.Fail(Loc.T("Inget pågår."));
+            if (!_s.Wallet.TrySpend(CurrencyType.Gems, SpeedUpCost(o))) return Result.Fail(Loc.T("Inte tillräckligt med diamanter."));
             var r = Recipe(o.production.queue[0]);
             o.production.currentStartUnix = TimeService.UnixNow - (r?.durationSec ?? 0);
             Tick();

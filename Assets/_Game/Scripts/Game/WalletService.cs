@@ -49,8 +49,8 @@ namespace NG.Game
 
         public static string Name(CurrencyType c) => c switch
         {
-            CurrencyType.Coins => "mynt",
-            CurrencyType.Gems => "diamanter",
+            CurrencyType.Coins => Loc.T("mynt"),
+            CurrencyType.Gems => Loc.T("diamanter"),
             _ => c.ToString()
         };
 
@@ -65,7 +65,7 @@ namespace NG.Game
                     if (sb.Length > 0) sb.Append(" + ");
                     sb.Append(c.amount).Append(' ').Append(Name(c.currency));
                 }
-            return sb.Length == 0 ? "Gratis" : sb.ToString();
+            return sb.Length == 0 ? Loc.T("Gratis") : sb.ToString();
         }
     }
 }

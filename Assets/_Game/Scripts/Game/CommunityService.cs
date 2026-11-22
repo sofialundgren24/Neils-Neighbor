@@ -24,13 +24,13 @@ namespace NG.Game
 
         public Result Collect(PlacedObjectState o)
         {
-            if (!CanCollect(o)) return Result.Fail("Inte redo än.");
+            if (!CanCollect(o)) return Result.Fail(Loc.T("Inte redo än."));
             var def = Def(o);
             _s.Wallet.Add(CurrencyType.Coins, def.incomeCoins);
             _s.Progression.AddXp(def.incomeXp);
             o.income = Timers.StartNow(def.incomeIntervalSec);
             EventBus.Publish(new ObjectChanged(o.instanceId, false));
-            _s.Float(o, $"+{def.incomeCoins} mynt");
+            _s.Float(o, Loc.F("+{0} mynt", def.incomeCoins));
             return Result.Success;
         }
 

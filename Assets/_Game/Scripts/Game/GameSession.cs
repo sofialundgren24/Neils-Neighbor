@@ -108,7 +108,7 @@ namespace NG.Game
         public void Float(PlacedObjectState o, string text) => EventBus.Publish(new FloatingText(TopOf(o), text));
 
         /// <summary>Spelarens namn (Neil eller Sofia).</summary>
-        public string PlayerName => State.character == "neil" ? "Neil" : State.character == "sofia" ? "Sofia" : "granne";
+        public string PlayerName => State.character == "neil" ? "Neil" : State.character == "sofia" ? "Sofia" : Loc.T("granne");
 
         /// <summary>Byter {namn} i grannarnas repliker mot spelarens namn.</summary>
         public string Personalize(string text) => text?.Replace("{namn}", PlayerName);

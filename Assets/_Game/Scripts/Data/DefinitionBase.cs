@@ -13,13 +13,23 @@ namespace NG.Data
         [Tooltip("Namn som visas tills översättningar finns. Fylls från CSV-filerna i Assets/_Game/Data.")]
         public string fallbackName;
 
+        [Tooltip("Engelskt namn (kolumnen name_en i CSV-filerna).")]
+        public string fallbackNameEn;
+
         public LocalizedString displayName;
         public Sprite icon;
 
         public string Id => id;
 
         /// <summary>Namn att visa i UI. Byts mot displayName när lokaliseringen kopplas in.</summary>
-        public string DisplayName => string.IsNullOrEmpty(fallbackName) ? name : fallbackName;
+        public string DisplayName
+        {
+            get
+            {
+                string sv = string.IsNullOrEmpty(fallbackName) ? name : fallbackName;
+                return NG.Core.Loc.Pick(sv, fallbackNameEn);
+            }
+        }
 
 #if UNITY_EDITOR
         public void EditorSetId(string newId) => id = newId;

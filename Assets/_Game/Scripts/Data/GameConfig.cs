@@ -80,6 +80,8 @@ namespace NG.Data
     {
         public string id;
         public string name;
+        public string nameEn;
+        public string DisplayName => NG.Core.Loc.Pick(name, nameEn);
         [Tooltip("Område i celler: x, y, bredd, höjd.")]
         public RectInt area;
         [Min(0)] public int requiredLevel = 1;

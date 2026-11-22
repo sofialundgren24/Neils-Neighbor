@@ -37,10 +37,10 @@ namespace NG.Game
 
         public Result Harvest(PlacedObjectState o)
         {
-            if (!CanHarvest(o)) return Result.Fail("Inte redo att skördas än.");
+            if (!CanHarvest(o)) return Result.Fail(Loc.T("Inte redo att skördas än."));
             var def = Def(o);
             if (!_s.Inventory.HasRoom(def.harvest.amount))
-                return Result.Fail("Förrådet är fullt. Sälj varor eller bygg ut förrådet.");
+                return Result.Fail(Loc.T("Förrådet är fullt. Sälj varor eller bygg ut förrådet."));
             _s.Inventory.Add(def.harvest.resource.Id, def.harvest.amount);
             EventBus.Publish(new ItemsHarvested(def.harvest.resource.Id, def.harvest.amount));
             _s.Float(o, $"+{def.harvest.amount} {def.harvest.resource.DisplayName}");
@@ -56,8 +56,8 @@ namespace NG.Game
 
         public Result SpeedUp(PlacedObjectState o)
         {
-            if (!IsGrowing(o)) return Result.Fail("Växten är redan fullvuxen.");
-            if (!_s.Wallet.TrySpend(CurrencyType.Gems, SpeedUpCost(o))) return Result.Fail("Inte tillräckligt med diamanter.");
+            if (!IsGrowing(o)) return Result.Fail(Loc.T("Växten är redan fullvuxen."));
+            if (!_s.Wallet.TrySpend(CurrencyType.Gems, SpeedUpCost(o))) return Result.Fail(Loc.T("Inte tillräckligt med diamanter."));
             Timers.Finish(o.growth);
             Tick();
             return Result.Success;

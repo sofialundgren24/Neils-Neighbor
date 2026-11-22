@@ -1,0 +1,219 @@
+# Översättningar av texterna i koden. sv = exakt som i koden (Loc.T/Loc.F), en = engelska.
+# {0}, {1} ... är värden som fylls i (siffror, namn). \n = ny rad. Saknade rader visas på svenska.
+# Ny text i koden? Kör: python Tools/loc/loc_convert.py table
+sv,en
+Kvarter,Neighborhood
+Blommor,Flowers
+Träd & buskar,Trees & shrubs
+Dekor,Decor
+Staket,Fences
+Mark & sten,Paths & stones
+Bygg,Build
+Måla,Paint
+Tavlan,Board
+Foto,Photo
+Klar,Done
+Färgläge: tryck på ett färdigrenoverat hus för att byta fasad.,Paint mode: tap a fully renovated house to change its facade.
+Här!,Here!
+• {0} växter är redo att skördas,• {0} plants are ready to harvest
+• {0} varor är klara i affärerna,• {0} goods are ready in the shops
+• {0} kvartersbyggnader har intäkter att hämta,• {0} community buildings have income to collect
+• {0} grannar väntar på Grannskapstavlan,• {0} neighbors are waiting on the Neighborhood Board
+• Dagens gåva väntar,• Today's gift is waiting
+Du var borta i {0}. Under tiden:\n,You were away for {0}. Meanwhile:\n
+{0} / {1} XP,{0} / {1} XP
+Charm {0},Charm {0}
+Dagens gåva,Daily gift
+Lager,Storage
+Grannskapstavlan,Neighborhood Board
+Grannskapstavlan ({0}),Neighborhood Board ({0})
+Meny,Menu
+{0} mynt,{0} coins
+", {0} diamanter",", {0} gems"
+", {0} XP",", {0} XP"
+Hämta belöning\n{0},Claim reward\n{0}
+Bygger ... {0} kvar,Building ... {0} left
+Grått och slitet. Renovera huset intill så får det tillbaka färgen.,Grey and worn. Renovate the house next to it to bring its color back.
+Skönhet +{0},Charm +{0}
+Flytta,Move
+Sälj (+{0}),Sell (+{0})
+Här bor {0},{0} lives here
+Färdigrenoverat!,Fully renovated!
+Fasad,Facade
+Original,Original
+ · {0} mynt, · {0} coins
+{0} – nivå {1},{0} – level {1}
+Renovering: fas {0} av {1},Renovation: phase {0} of {1}
+{0} kvar,{0} left
+Nästa: {0},Next: {0}
+Gratis,Free
+{0}{1} · {2} · +{3} XP,{0}{1} · {2} · +{3} XP
+Renovera,Renovate
+Vissen. Renovera huset intill så kommer den tillbaka.,Withered. Renovate the house next to it and it will come back.
+Ger {0} {1},Gives {0} {1}
+Skörda,Harvest
+Växer ... {0} kvar,Growing ... {0} left
+Redo att skördas!,Ready to harvest!
+I full blom.,In full bloom.
+Hämta {0} färdiga,Collect {0} finished
+Kö 0/{0}: inget pågår,Queue 0/{0}: nothing in progress
+Kö {0}/{1}: {2} ({3}),Queue {0}/{1}: {2} ({3})
+", sedan ",", then "
+Recept,Recipes
+{0}\n{1} · {2},{0}\n{1} · {2}
+Ger {0} mynt och {1} XP var {2},Gives {0} coins and {1} XP every {2}
+Hämta,Collect
+Redo att hämta!,Ready to collect!
+Nästa om {0},Next in {0}
+Nytt område,New area
+Kräver nivå {0} · {1:N0} mynt,Requires level {0} · {1:N0} coins
+Lås upp,Unlock
+Flytta {0},Move {0}
+Bekräfta,Confirm
+Rotera,Rotate
+Dra objektet eller tryck där det ska stå.,Drag the object or tap where it should go.
+<b>{0}</b>\nNivå {1},<b>{0}</b>\nLevel {1}
+Förrådet,Storage
+Sälj,Sell
+{0} / {1} platser,{0} / {1} slots
+Bygg ut (+{0}) · {1} mynt,Expand (+{0}) · {1} coins
+Tomt. Odla och skörda för att fylla förrådet.,Empty. Grow and harvest to fill your storage.
+{0} st,{0} pcs
+{0} mynt/st,{0} coins each
+Sälj 1,Sell 1
+Sälj alla ({0}),Sell all ({0})
+Nya beställningar kommer om {0}.,New orders arrive in {0}.
+{0} vill ha:,{0} would like:
+  (klart),  (done)
+"Belöning: {0} mynt, {1} XP","Reward: {0} coins, {1} XP"
+Leverera,Deliver
+Släng,Discard
+Inställningar,Settings
+Grafik,Graphics
+Automatisk,Automatic
+Låg,Low
+Mellan,Medium
+Hög,High
+Låg sparar batteri och gör spelet smidigare på äldre telefoner.,Low saves battery and makes the game smoother on older phones.
+Språk,Language
+Konto och data,Account and data
+Användarvillkor,Terms of Service
+Integritetspolicy,Privacy Policy
+Tryck igen för att radera ALLT,Tap again to delete EVERYTHING
+Radera min data och börja om,Delete my data and start over
+Raderar sparfilen på den här enheten. (När inloggning finns raderas även molnkontot.),"Deletes the save on this device. (Once sign-in exists, the cloud account is deleted too.)"
+Utvecklarverktyg (Debug),Developer tools (Debug)
+Neil's Neighbor {0} · {1},Neil's Neighbor {0} · {1}
+Debug,Debug
++1 000 mynt,"+1,000 coins"
++100 diamanter,+100 gems
++250 XP,+250 XP
++10 av varje vara,+10 of every item
+Spola fram 10 min,Skip ahead 10 min
+Spola fram 1 h,Skip ahead 1 h
+Klara alla uppdrag,Complete all quests
+Grafiknivå: {0} · {1:0} FPS,Graphics: {0} · {1:0} FPS
+Ny sparfil (börja om),New save (start over)
+Välkommen till Neil's Neighbor!,Welcome to Neil's Neighbor!
+Innan vi startar renoveringen av grannskapet behöver du godkänna våra användarvillkor och vår integritetspolicy.,"Before we start renovating the neighborhood, please accept our Terms of Service and Privacy Policy."
+Läs villkoren,Read the terms
+Jag är över 13 år och godkänner användarvillkoren.,I am over 13 and accept the Terms of Service.
+Börja spela!,Start playing!
+Vem flyttar in på Lindgatan?,Who is moving to Linden Lane?
+Välj din karaktär. Du kan inte byta senare.,Choose your character. You can't change later.
+Händig och nyfiken. Har drömt om ett eget hus med veranda.,Handy and curious. Has always dreamed of a house with a porch.
+Kreativ och full av idéer. Ser skönheten i varje grått hus.,Creative and full of ideas. Sees the beauty in every grey house.
+Spela som {0},Play as {0}
+Nivå {0}!,Level {0}!
+"Belöning: {0} mynt, {1} diamanter","Reward: {0} coins, {1} gems"
+Nytt:,New:
+Toppen!,Great!
+Granne,Neighbor
+Okej!,Okay!
+"Välkommen tillbaka, {0}!","Welcome back, {0}!"
+Till gatan!,To the street!
+\n+{0} dia,\n+{0} gems
+Dag {0}\n{1} mynt{2},Day {0}\n{1} coins{2}
+Kom tillbaka varje dag för större gåvor. Missar du en dag börjar det om.,Come back every day for bigger gifts. Miss a day and it starts over.
+Senare,Later
+Bygger {0},Building {0}
+Renoverar {0},Renovating {0}
+Hämta ({0}),Collect ({0})
+Renovera!,Renovate!
+Foto stöds inte i webbversionen än.,Photos aren't supported in the web version yet.
+Bild sparad!,Photo saved!
+Gör klart (gratis),Finish now (free)
+Snabba på ({0} diamanter),Speed up ({0} gems)
+Byggnader,Buildings
+Växter,Plants
+Mark,Paths
+Laddar ...,Loading ...
+Nivå {0},Level {0}
+Beställningar ({0}),Orders ({0})
+Hämta belöning ({0}),Claim reward ({0})
+Målarfärg:,Paint:
+Originalfärg,Original color
+Kostar {0}{1} · {2} · +{3} XP,Costs {0}{1} · {2} · +{3} XP
+Växer ...,Growing ...
+Kö {0}/{1},Queue {0}/{1}
+Tomt. Odla och skörda för att fylla lagret.,Empty. Grow and harvest to fill your storage.
+Beställningar,Orders
+{0} h {1:00} min,{0} h {1:00} min
+Laga,Repair
+Dekorera,Decorate
+mynt,coins
+diamanter,gems
+Inte tillräckligt med mynt.,Not enough coins.
+Förrådet rymmer nu {0} varor.,Storage now holds {0} items.
+Du har inga sådana varor.,You don't have any of those.
+Sålde {0} {1} för {2} mynt.,Sold {0} {1} for {2} coins.
+Renovera: {0},Renovate: {0}
+Recept: {0},Recipe: {0}
+Nytt område: {0},New area: {0}
+Området är redan upplåst.,That area is already unlocked.
+Kräver nivå {0}.,Requires level {0}.
+Platsen är upptagen.,That spot is taken.
+Området är inte upplåst än.,That area isn't unlocked yet.
+Okänt objekt.,Unknown object.
+Du har redan max antal.,You already have the maximum.
+Behöver {0}.,Needs {0}.
+Det här går inte att sälja.,This can't be sold.
+Inget att rensa här.,Nothing to clear here.
++{0} XP,+{0} XP
+Bygget är redan klart.,Construction is already done.
+Inte tillräckligt med diamanter.,Not enough gems.
+Renovering pågår redan.,A renovation is already in progress.
+Huset är redan klart.,The house is already finished.
+Behöver {0} {1}.,Needs {0} {1}.
+Ingen renovering pågår.,No renovation in progress.
+Hela gatan lyser i färg! Lindgatan är tillbaka.,The whole street is glowing with color! Linden Lane is back.
+Renovera klart huset först.,Finish renovating the house first.
+Låses upp på nivå {0}.,Unlocks at level {0}.
+{0} är färdigrenoverat!,{0} is fully renovated!
+Inte redo att skördas än.,Not ready to harvest yet.
+Förrådet är fullt. Sälj varor eller bygg ut förrådet.,Storage is full. Sell items or expand your storage.
+Växten är redan fullvuxen.,The plant is already fully grown.
+Ingen produktion här.,No production here.
+Byggnaden är inte klar än.,The building isn't finished yet.
+Kön är full.,The queue is full.
+Inget att hämta.,Nothing to collect.
++{0} klara,+{0} done
+Inget pågår.,Nothing in progress.
+Du har inte alla varor än.,You don't have all the items yet.
+Inte redo än.,Not ready yet.
++{0} mynt,+{0} coins
+granne,neighbor
+Renovera {0} (fas {1}),Renovate {0} (phase {1})
+Bygg {0},Build {0}
+Skörda {0},Harvest {0}
+Tillverka {0},Make {0}
+Leverera beställningar,Deliver orders
+Nå nivå {0},Reach level {0}
+Samla {0},Collect {0}
+Städa tomterna,Tidy up the yards
+Uppdraget är inte klart än.,The quest isn't finished yet.
+Grannen,The neighbor
+Vattna,Water
+Rensa,Clear
+Du har redan hämtat dagens gåva.,You've already collected today's gift.
+Objektet finns inte längre.,That object no longer exists.

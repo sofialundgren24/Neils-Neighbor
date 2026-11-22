@@ -33,11 +33,11 @@ namespace NG.Game
 
         public Result UpgradeStorage()
         {
-            if (!_s.Wallet.TrySpend(CurrencyType.Coins, UpgradeCost)) return Result.Fail("Inte tillräckligt med mynt.");
+            if (!_s.Wallet.TrySpend(CurrencyType.Coins, UpgradeCost)) return Result.Fail(Loc.T("Inte tillräckligt med mynt."));
             _s.State.storageLevel++;
             Analytics.Event("storage_upgrade", "level", _s.State.storageLevel);
             EventBus.Publish(new InventoryChanged(null, 0));
-            GameSession.Message($"Förrådet rymmer nu {Capacity} varor.");
+            GameSession.Message(Loc.F("Förrådet rymmer nu {0} varor.", Capacity));
             return Result.Success;
         }
 
@@ -50,12 +50,12 @@ namespace NG.Game
         public Result Sell(string resourceId, int amount)
         {
             amount = System.Math.Min(amount, Count(resourceId));
-            if (amount <= 0) return Result.Fail("Du har inga sådana varor.");
+            if (amount <= 0) return Result.Fail(Loc.T("Du har inga sådana varor."));
             int coins = PriceOf(resourceId) * amount;
             Add(resourceId, -amount);
             _s.Wallet.Add(CurrencyType.Coins, coins);
             Analytics.Event("sell", "item", resourceId, "amount", amount);
-            GameSession.Message($"Sålde {amount} {NameOf(resourceId)} för {coins} mynt.");
+            GameSession.Message(Loc.F("Sålde {0} {1} för {2} mynt.", amount, NameOf(resourceId), coins));
             return Result.Success;
         }
 

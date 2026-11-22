@@ -24,12 +24,12 @@ namespace NG.UI
 
         static readonly (string label, PlaceableCategory[] cats)[] ShopTabs =
         {
-            ("Byggnader", new[] { PlaceableCategory.Production, PlaceableCategory.House }),
-            ("Växter", new[] { PlaceableCategory.Plant }),
-            ("Träd & buskar", new[] { PlaceableCategory.Tree, PlaceableCategory.Hedge }),
-            ("Dekor", new[] { PlaceableCategory.Decor, PlaceableCategory.Water }),
-            ("Staket", new[] { PlaceableCategory.Fence }),
-            ("Mark", new[] { PlaceableCategory.Path })
+            (Loc.T("Byggnader"), new[] { PlaceableCategory.Production, PlaceableCategory.House }),
+            (Loc.T("Växter"), new[] { PlaceableCategory.Plant }),
+            (Loc.T("Träd & buskar"), new[] { PlaceableCategory.Tree, PlaceableCategory.Hedge }),
+            (Loc.T("Dekor"), new[] { PlaceableCategory.Decor, PlaceableCategory.Water }),
+            (Loc.T("Staket"), new[] { PlaceableCategory.Fence }),
+            (Loc.T("Mark"), new[] { PlaceableCategory.Path })
         };
 
         static readonly Color[] PaintColors =
@@ -104,7 +104,7 @@ namespace NG.UI
 
             if (_s == null)
             {
-                GUI.Label(new Rect(w * 0.5f - 150, h * 0.5f - 20, 300, 40), "Laddar ...", _title);
+                GUI.Label(new Rect(w * 0.5f - 150, h * 0.5f - 20, 300, 40), Loc.T("Laddar ..."), _title);
                 if (repaint) InputGate.EndUiFrame();
                 return;
             }
@@ -159,25 +159,25 @@ namespace NG.UI
             var bar = new Rect(8, 8, w - 16, 52);
             Panel(bar);
             var p = _s.Progression;
-            GUI.Label(new Rect(20, 12, 90, 44), $"Nivå {p.Level}", _title);
+            GUI.Label(new Rect(20, 12, 90, 44), Loc.F("Nivå {0}", p.Level), _title);
             var xpRect = new Rect(110, 24, 180, 20);
             DrawBar(xpRect, p.LevelProgress, new Color(0.45f, 0.8f, 1f));
-            GUI.Label(xpRect, $"{p.Xp} / {p.XpToNext} XP", _small);
+            GUI.Label(xpRect, Loc.F("{0} / {1} XP", p.Xp, p.XpToNext), _small);
 
             GUI.Label(new Rect(310, 12, 160, 44), $"Mynt: {_s.Wallet.Get(CurrencyType.Coins):N0}", _label);
             GUI.Label(new Rect(470, 12, 170, 44), $"Diamanter: {_s.Wallet.Get(CurrencyType.Gems):N0}", _label);
 
             float x = w - 16;
-            x -= 90; if (GUI.Button(new Rect(x, 14, 82, 40), "Debug", _button)) Toggle(Window.Debug);
+            x -= 90; if (GUI.Button(new Rect(x, 14, 82, 40), Loc.T("Debug"), _button)) Toggle(Window.Debug);
             x -= 150; _ordersRect = new Rect(x, 14, 142, 40);
-            if (GUI.Button(_ordersRect, $"Beställningar ({_s.Orders.Orders.Count})", _button)) Toggle(Window.Orders);
+            if (GUI.Button(_ordersRect, Loc.F("Beställningar ({0})", _s.Orders.Orders.Count), _button)) Toggle(Window.Orders);
             x -= 90; _storageRect = new Rect(x, 14, 82, 40);
-            if (GUI.Button(_storageRect, "Lager", _button)) Toggle(Window.Storage);
+            if (GUI.Button(_storageRect, Loc.T("Lager"), _button)) Toggle(Window.Storage);
             if (_s.Daily.CanClaim)
             {
                 x -= 110;
                 GUI.backgroundColor = new Color(1f, 0.85f, 0.3f);
-                if (GUI.Button(new Rect(x, 14, 102, 40), "Dagens gåva", _button)) _showDaily = true;
+                if (GUI.Button(new Rect(x, 14, 102, 40), Loc.T("Dagens gåva"), _button)) _showDaily = true;
                 GUI.backgroundColor = Color.white;
             }
         }
@@ -210,9 +210,9 @@ namespace NG.UI
                     GUILayout.Label("• " + _s.Quests.Describe(q, i), _small);
                 if (_s.Quests.IsComplete(q))
                 {
-                    string reward = $"{def.rewardCoins} mynt" + (def.rewardGems > 0 ? $", {def.rewardGems} diamanter" : "") + $", {def.rewardXp} XP";
+                    string reward = Loc.F("{0} mynt", def.rewardCoins) + (def.rewardGems > 0 ? Loc.F(", {0} diamanter", def.rewardGems) : "") + Loc.F(", {0} XP", def.rewardXp);
                     GUI.backgroundColor = new Color(0.6f, 1f, 0.6f);
-                    if (GUILayout.Button($"Hämta belöning ({reward})", _button)) Report(_s.Quests.Claim(q));
+                    if (GUILayout.Button(Loc.F("Hämta belöning ({0})", reward), _button)) Report(_s.Quests.Claim(q));
                     GUI.backgroundColor = Color.white;
                 }
                 GUILayout.EndVertical();
@@ -247,7 +247,7 @@ namespace NG.UI
             var r = new Rect(target.center.x - size.x * 0.5f, target.y - size.y - 6, size.x, size.y);
             if (r.y < 4) r.y = target.yMax + 6; // knappar i toppfältet: peka underifrån
             GUI.backgroundColor = new Color(1f, 0.85f, 0.3f);
-            GUI.Label(r, "Här!", _bubble);
+            GUI.Label(r, Loc.T("Här!"), _bubble);
             GUI.backgroundColor = Color.white;
         }
 
@@ -271,11 +271,11 @@ namespace NG.UI
             GUI.Label(portrait, nb != null && nb.DisplayName.Length > 0 ? nb.DisplayName.Substring(0, 1) : "?", _portrait);
 
             GUILayout.BeginArea(new Rect(r.x + 140, r.y + 14, r.width - 156, r.height - 28));
-            GUILayout.Label(nb != null ? nb.DisplayName : "Granne", _title);
+            GUILayout.Label(nb != null ? nb.DisplayName : Loc.T("Granne"), _title);
             GUILayout.Label($"<b>{def.DisplayName}</b>", _label);
             GUILayout.Label(def.intro, _label);
             GUILayout.FlexibleSpace();
-            if (GUILayout.Button("Okej!", _bigButton, GUILayout.Height(48))) _s.Quests.MarkIntroSeen(q);
+            if (GUILayout.Button(Loc.T("Okej!"), _bigButton, GUILayout.Height(48))) _s.Quests.MarkIntroSeen(q);
             GUILayout.EndArea();
         }
 
@@ -290,24 +290,24 @@ namespace NG.UI
             var r = CenterRect(w, h, 620, 300);
             GUI.Box(r, GUIContent.none, _box);
             GUILayout.BeginArea(new Rect(r.x + 16, r.y + 12, r.width - 32, r.height - 24));
-            GUILayout.Label("Dagens gåva", _title);
+            GUILayout.Label(Loc.T("Dagens gåva"), _title);
             int today = _s.Daily.NextDay;
             GUILayout.BeginHorizontal();
             for (int day = 1; day <= 7; day++)
             {
                 GUI.color = day == today ? new Color(1f, 0.85f, 0.3f) : day < today ? new Color(0.6f, 0.6f, 0.6f) : Color.white;
-                string gems = _s.Daily.GemsFor(day) > 0 ? $"\n+{_s.Daily.GemsFor(day)} dia" : "";
-                GUILayout.Box($"Dag {day}\n{_s.Daily.CoinsFor(day)} mynt{gems}", _button, GUILayout.Width(76), GUILayout.Height(90));
+                string gems = _s.Daily.GemsFor(day) > 0 ? Loc.F("\n+{0} dia", _s.Daily.GemsFor(day)) : "";
+                GUILayout.Box(Loc.F("Dag {0}\n{1} mynt{2}", day, _s.Daily.CoinsFor(day), gems), _button, GUILayout.Width(76), GUILayout.Height(90));
             }
             GUI.color = Color.white;
             GUILayout.EndHorizontal();
-            GUILayout.Label("Kom tillbaka varje dag för större gåvor. Missar du en dag börjar det om.", _small);
+            GUILayout.Label(Loc.T("Kom tillbaka varje dag för större gåvor. Missar du en dag börjar det om."), _small);
             GUILayout.FlexibleSpace();
             GUILayout.BeginHorizontal();
             GUI.enabled = _s.Daily.CanClaim;
-            if (GUILayout.Button("Hämta", _bigButton, GUILayout.Height(48))) { Report(_s.Daily.Claim()); _showDaily = false; }
+            if (GUILayout.Button(Loc.T("Hämta"), _bigButton, GUILayout.Height(48))) { Report(_s.Daily.Claim()); _showDaily = false; }
             GUI.enabled = true;
-            if (GUILayout.Button("Senare", _button, GUILayout.Width(120), GUILayout.Height(48))) _showDaily = false;
+            if (GUILayout.Button(Loc.T("Senare"), _button, GUILayout.Width(120), GUILayout.Height(48))) _showDaily = false;
             GUILayout.EndHorizontal();
             GUILayout.EndArea();
         }
@@ -319,7 +319,7 @@ namespace NG.UI
             var r = new Rect(12, h - 84, 150, 72);
             _buildRect = r;
             Block(r);
-            if (GUI.Button(r, "Bygg", _bigButton)) Toggle(Window.Shop);
+            if (GUI.Button(r, Loc.T("Bygg"), _bigButton)) Toggle(Window.Shop);
         }
 
         // ---------- Byggmeny ----------
@@ -328,7 +328,7 @@ namespace NG.UI
         {
             var r = new Rect(12, h - 470, Mathf.Min(720, w - 24), 376);
             Panel(r);
-            GUI.Label(new Rect(r.x + 14, r.y + 6, 300, 30), "Bygg", _title);
+            GUI.Label(new Rect(r.x + 14, r.y + 6, 300, 30), Loc.T("Bygg"), _title);
             if (GUI.Button(new Rect(r.xMax - 46, r.y + 8, 36, 30), "X", _button)) _window = Window.None;
 
             float tabW = (r.width - 28) / ShopTabs.Length;
@@ -360,7 +360,7 @@ namespace NG.UI
                 bool canBuy = _s.World.CanBuy(d, out var reason);
                 string text = unlocked
                     ? $"<b>{d.DisplayName}</b>\n{WalletService.Format(d.cost)}" + (d.buildTimeSec > 0 ? $"\n{Fmt.Duration(d.buildTimeSec)}" : "")
-                    : $"<b>{d.DisplayName}</b>\nNivå {d.unlockLevel}";
+                    : Loc.F("<b>{0}</b>\nNivå {1}", d.DisplayName, d.unlockLevel);
                 GUI.enabled = canBuy;
                 if (GUI.Button(ir, text, _button))
                 {
@@ -377,17 +377,17 @@ namespace NG.UI
             var def = _interaction.PlacingDef;
             var r = new Rect(w * 0.5f - 300, h - 120, 600, 108);
             Panel(r);
-            string what = _interaction.MovingId != null ? $"Flytta {def.DisplayName}" : $"{def.DisplayName} – {WalletService.Format(def.cost)}";
+            string what = _interaction.MovingId != null ? Loc.F("Flytta {0}", def.DisplayName) : $"{def.DisplayName} – {WalletService.Format(def.cost)}";
             GUI.Label(new Rect(r.x + 14, r.y + 6, r.width - 28, 28), what, _label);
-            string hint = _interaction.PlacementValid ? "Dra objektet eller tryck där det ska stå." : _interaction.PlacementReason;
+            string hint = _interaction.PlacementValid ? Loc.T("Dra objektet eller tryck där det ska stå.") : _interaction.PlacementReason;
             GUI.Label(new Rect(r.x + 14, r.y + 32, r.width - 28, 24), hint, _small);
 
             float bw = (r.width - 40) / 3f;
             GUI.enabled = _interaction.PlacementValid;
-            if (GUI.Button(new Rect(r.x + 10, r.y + 58, bw, 42), "Bekräfta", _button)) _interaction.Confirm();
+            if (GUI.Button(new Rect(r.x + 10, r.y + 58, bw, 42), Loc.T("Bekräfta"), _button)) _interaction.Confirm();
             GUI.enabled = true;
-            if (GUI.Button(new Rect(r.x + 20 + bw, r.y + 58, bw, 42), "Rotera", _button)) _interaction.Rotate();
-            if (GUI.Button(new Rect(r.x + 30 + bw * 2, r.y + 58, bw, 42), "Klar", _button)) _interaction.CancelPlacing();
+            if (GUI.Button(new Rect(r.x + 20 + bw, r.y + 58, bw, 42), Loc.T("Rotera"), _button)) _interaction.Rotate();
+            if (GUI.Button(new Rect(r.x + 30 + bw * 2, r.y + 58, bw, 42), Loc.T("Klar"), _button)) _interaction.CancelPlacing();
         }
 
         // ---------- Markerat objekt ----------
@@ -408,19 +408,19 @@ namespace NG.UI
 
             if (o.build != null)
             {
-                GUILayout.Label($"Bygger ... {Fmt.Duration(Timers.Remaining(o.build))} kvar", _label);
+                GUILayout.Label(Loc.F("Bygger ... {0} kvar", Fmt.Duration(Timers.Remaining(o.build))), _label);
                 SpeedUpButton(TimeService.SpeedUpGemCost(Timers.Remaining(o.build)), () => _s.World.SpeedUpBuild(o));
             }
             else if (_s.Renovation.IsRenovatable(o)) DrawHouse(o);
             else if (def is PlantDefinition plant) DrawPlant(o, plant);
             else if (def is ProductionDefinition) DrawProduction(o);
-            else if (o.decayed) GUILayout.Label("Grått och slitet. Renovera huset intill så får det tillbaka färgen.", _small);
-            else GUILayout.Label($"Skönhet +{def.beautyScore}", _small);
+            else if (o.decayed) GUILayout.Label(Loc.T("Grått och slitet. Renovera huset intill så får det tillbaka färgen."), _small);
+            else GUILayout.Label(Loc.F("Skönhet +{0}", def.beautyScore), _small);
 
             GUILayout.FlexibleSpace();
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Flytta", _button)) _interaction.BeginMove(o.instanceId);
-            if (_s.World.CanSell(o) && GUILayout.Button($"Sälj (+{_s.World.SellValue(o)})", _button)) Report(_s.World.Sell(o));
+            if (GUILayout.Button(Loc.T("Flytta"), _button)) _interaction.BeginMove(o.instanceId);
+            if (_s.World.CanSell(o) && GUILayout.Button(Loc.F("Sälj (+{0})", _s.World.SellValue(o)), _button)) Report(_s.World.Sell(o));
             GUILayout.EndHorizontal();
             GUILayout.EndArea();
         }
@@ -431,8 +431,8 @@ namespace NG.UI
             int total = reno.PhaseCount(o);
             if (reno.IsComplete(o))
             {
-                GUILayout.Label("Färdigrenoverat!", _label);
-                GUILayout.Label("Målarfärg:", _small);
+                GUILayout.Label(Loc.T("Färdigrenoverat!"), _label);
+                GUILayout.Label(Loc.T("Målarfärg:"), _small);
                 GUILayout.BeginHorizontal();
                 foreach (var c in PaintColors)
                 {
@@ -441,11 +441,11 @@ namespace NG.UI
                 }
                 GUI.backgroundColor = Color.white;
                 GUILayout.EndHorizontal();
-                if (GUILayout.Button("Originalfärg", _button)) Report(reno.SetPaint(o, null));
+                if (GUILayout.Button(Loc.T("Originalfärg"), _button)) Report(reno.SetPaint(o, null));
                 return;
             }
 
-            GUILayout.Label($"Renovering: fas {o.renovation.phase} av {total}", _label);
+            GUILayout.Label(Loc.F("Renovering: fas {0} av {1}", o.renovation.phase, total), _label);
             if (reno.IsInProgress(o))
             {
                 DrawBarLayout(Timers.Progress(o.renovation.active));
@@ -456,13 +456,13 @@ namespace NG.UI
 
             var next = reno.NextPhase(o);
             if (next == null) return;
-            GUILayout.Label($"Nästa: {Fmt.PhaseName(next.variantName)}", _small);
-            string cost = next.cost.amount > 0 ? $"{next.cost.amount} {WalletService.Name(next.cost.currency)}" : "Gratis";
+            GUILayout.Label(Loc.F("Nästa: {0}", Fmt.PhaseName(next.variantName)), _small);
+            string cost = next.cost.amount > 0 ? $"{next.cost.amount} {WalletService.Name(next.cost.currency)}" : Loc.T("Gratis");
             string mats = InventoryService.Format(next.materials);
-            GUILayout.Label($"Kostar {cost}{(mats.Length > 0 ? ", " + mats : "")} · {Fmt.Duration(next.durationSec)} · +{next.xpReward} XP", _small);
+            GUILayout.Label(Loc.F("Kostar {0}{1} · {2} · +{3} XP", cost, (mats.Length > 0 ? ", " + mats : ""), Fmt.Duration(next.durationSec), next.xpReward), _small);
             bool can = reno.CanStartNext(o, out var why);
             GUI.enabled = can;
-            if (GUILayout.Button("Renovera", _bigButton, GUILayout.Height(54))) Report(reno.StartNext(o));
+            if (GUILayout.Button(Loc.T("Renovera"), _bigButton, GUILayout.Height(54))) Report(reno.StartNext(o));
             GUI.enabled = true;
             if (!can) GUILayout.Label(why, _small);
         }
@@ -470,10 +470,10 @@ namespace NG.UI
         void DrawPlant(PlacedObjectState o, PlantDefinition plant)
         {
             var g = _s.Growth;
-            if (o.decayed) { GUILayout.Label("Vissen. Renovera huset intill så kommer den tillbaka.", _small); return; }
+            if (o.decayed) { GUILayout.Label(Loc.T("Vissen. Renovera huset intill så kommer den tillbaka."), _small); return; }
             if (g.IsGrowing(o))
             {
-                GUILayout.Label("Växer ...", _label);
+                GUILayout.Label(Loc.T("Växer ..."), _label);
                 DrawBarLayout(Timers.Progress(o.growth));
                 GUILayout.Label($"{Fmt.Duration(Timers.Remaining(o.growth))} kvar", _small);
                 SpeedUpButton(g.SpeedUpCost(o), () => g.SpeedUp(o));
@@ -481,19 +481,19 @@ namespace NG.UI
             else if (plant.IsHarvestable)
             {
                 GUILayout.Label($"Ger {plant.harvest.amount} {plant.harvest.resource.DisplayName}", _small);
-                if (GUILayout.Button("Skörda", _bigButton, GUILayout.Height(54))) Report(g.Harvest(o));
+                if (GUILayout.Button(Loc.T("Skörda"), _bigButton, GUILayout.Height(54))) Report(g.Harvest(o));
             }
-            else GUILayout.Label("I full blom.", _label);
+            else GUILayout.Label(Loc.T("I full blom."), _label);
         }
 
         void DrawProduction(PlacedObjectState o)
         {
             var p = _s.Production;
             var def = p.Def(o);
-            if (p.ReadyCount(o) > 0 && GUILayout.Button($"Hämta {p.ReadyCount(o)} färdiga", _bigButton, GUILayout.Height(48)))
+            if (p.ReadyCount(o) > 0 && GUILayout.Button(Loc.F("Hämta {0} färdiga", p.ReadyCount(o)), _bigButton, GUILayout.Height(48)))
                 Report(p.Collect(o));
 
-            GUILayout.Label($"Kö {o.production.queue.Count}/{def.queueSize}", _small);
+            GUILayout.Label(Loc.F("Kö {0}/{1}", o.production.queue.Count, def.queueSize), _small);
             for (int i = 0; i < o.production.queue.Count; i++)
             {
                 var r = p.Recipe(o.production.queue[i]);
@@ -509,7 +509,7 @@ namespace NG.UI
                 bool can = p.CanEnqueue(o, r, out _);
                 string text = unlocked
                     ? $"{r.DisplayName}  ({InventoryService.Format(r.inputs)}) · {Fmt.Duration(r.durationSec)}"
-                    : $"{r.DisplayName} – nivå {r.unlockLevel}";
+                    : Loc.F("{0} – nivå {1}", r.DisplayName, r.unlockLevel);
                 GUI.enabled = can;
                 if (GUILayout.Button(text, _button)) Report(p.Enqueue(o, r));
                 GUI.enabled = true;
@@ -518,7 +518,7 @@ namespace NG.UI
 
         void SpeedUpButton(int gems, Func<Result> action)
         {
-            string text = gems <= 0 ? "Gör klart (gratis)" : $"Snabba på ({gems} diamanter)";
+            string text = gems <= 0 ? Loc.T("Gör klart (gratis)") : Loc.F("Snabba på ({0} diamanter)", gems);
             if (GUILayout.Button(text, _button)) Report(action());
         }
 
@@ -528,12 +528,12 @@ namespace NG.UI
             Panel(r);
             GUILayout.BeginArea(new Rect(r.x + 12, r.y + 8, r.width - 24, r.height - 16));
             GUILayout.BeginHorizontal();
-            GUILayout.Label(string.IsNullOrEmpty(e.name) ? "Nytt område" : e.name, _title);
+            GUILayout.Label(string.IsNullOrEmpty(e.name) ? Loc.T("Nytt område") : e.DisplayName, _title);
             if (GUILayout.Button("X", _button, GUILayout.Width(36))) _interaction.ClearSelection();
             GUILayout.EndHorizontal();
-            GUILayout.Label($"Kräver nivå {e.requiredLevel} · {e.coinCost:N0} mynt", _label);
+            GUILayout.Label(Loc.F("Kräver nivå {0} · {1:N0} mynt", e.requiredLevel, e.coinCost), _label);
             GUI.enabled = _s.Progression.Level >= e.requiredLevel && _s.Wallet.CanAfford(CurrencyType.Coins, e.coinCost);
-            if (GUILayout.Button("Lås upp", _bigButton, GUILayout.Height(54)))
+            if (GUILayout.Button(Loc.T("Lås upp"), _bigButton, GUILayout.Height(54)))
             {
                 var res = _s.World.UnlockExpansion(e);
                 Report(res);
@@ -556,10 +556,10 @@ namespace NG.UI
 
                 if (o.build != null) text = $"Bygger {Fmt.Duration(Timers.Remaining(o.build))}";
                 else if (o.renovation?.active != null) text = $"Renoverar {Fmt.Duration(Timers.Remaining(o.renovation.active))}";
-                else if (_s.Production.ReadyCount(o) > 0) { text = $"Hämta ({_s.Production.ReadyCount(o)})"; action = () => Report(_s.Production.Collect(o)); }
-                else if (_s.Growth.CanHarvest(o)) { text = "Skörda"; action = () => Report(_s.Growth.Harvest(o)); }
+                else if (_s.Production.ReadyCount(o) > 0) { text = Loc.F("Hämta ({0})", _s.Production.ReadyCount(o)); action = () => Report(_s.Production.Collect(o)); }
+                else if (_s.Growth.CanHarvest(o)) { text = Loc.T("Skörda"); action = () => Report(_s.Growth.Harvest(o)); }
                 else if (_s.Production.IsWorking(o)) text = Fmt.Duration(_s.Production.CurrentRemaining(o));
-                else if (_s.Renovation.CanStartNext(o, out _)) { text = "Renovera!"; action = () => _interaction.Select(o.instanceId); }
+                else if (_s.Renovation.CanStartNext(o, out _)) { text = Loc.T("Renovera!"); action = () => _interaction.Select(o.instanceId); }
                 if (text == null || !_world.TryGetTop(o.instanceId, out var top)) continue;
 
                 var sp = _cam.WorldToScreenPoint(top + Vector3.up * 0.3f);
@@ -583,9 +583,9 @@ namespace NG.UI
             var r = CenterRect(w, h, 420, 460);
             Panel(r);
             GUILayout.BeginArea(new Rect(r.x + 14, r.y + 8, r.width - 28, r.height - 16));
-            Header("Lager");
+            Header(Loc.T("Lager"));
             var items = _s.Inventory.All.Where(kv => kv.Value > 0).OrderBy(kv => _s.Inventory.NameOf(kv.Key)).ToList();
-            if (items.Count == 0) GUILayout.Label("Tomt. Odla och skörda för att fylla lagret.", _small);
+            if (items.Count == 0) GUILayout.Label(Loc.T("Tomt. Odla och skörda för att fylla lagret."), _small);
             _scroll = GUILayout.BeginScrollView(_scroll);
             foreach (var kv in items)
                 GUILayout.Label($"{_s.Inventory.NameOf(kv.Key)}:  {kv.Value}", _label);
@@ -598,9 +598,9 @@ namespace NG.UI
             var r = CenterRect(w, h, 520, 480);
             Panel(r);
             GUILayout.BeginArea(new Rect(r.x + 14, r.y + 8, r.width - 28, r.height - 16));
-            Header("Beställningar");
+            Header(Loc.T("Beställningar"));
             if (_s.Orders.Orders.Count == 0)
-                GUILayout.Label($"Nya beställningar kommer om {Fmt.Duration(Math.Max(0, _s.State.nextOrderUnix - TimeService.UnixNow))}.", _small);
+                GUILayout.Label(Loc.F("Nya beställningar kommer om {0}.", Fmt.Duration(Math.Max(0, _s.State.nextOrderUnix - TimeService.UnixNow))), _small);
             foreach (var order in _s.Orders.Orders.ToList())
             {
                 GUILayout.BeginVertical(_box);
@@ -611,12 +611,12 @@ namespace NG.UI
                     GUILayout.Label($"{_s.Inventory.NameOf(item.resourceId)}  {have}/{item.amount}", _label);
                 }
                 GUI.color = Color.white;
-                GUILayout.Label($"Belöning: {order.coins} mynt, {order.xp} XP", _small);
+                GUILayout.Label(Loc.F("Belöning: {0} mynt, {1} XP", order.coins, order.xp), _small);
                 GUILayout.BeginHorizontal();
                 GUI.enabled = _s.Orders.CanFulfil(order);
-                if (GUILayout.Button("Leverera", _button)) Report(_s.Orders.Fulfil(order));
+                if (GUILayout.Button(Loc.T("Leverera"), _button)) Report(_s.Orders.Fulfil(order));
                 GUI.enabled = true;
-                if (GUILayout.Button("Släng", _button, GUILayout.Width(90))) _s.Orders.Discard(order);
+                if (GUILayout.Button(Loc.T("Släng"), _button, GUILayout.Width(90))) _s.Orders.Discard(order);
                 GUILayout.EndHorizontal();
                 GUILayout.EndVertical();
             }
@@ -628,18 +628,18 @@ namespace NG.UI
             var r = CenterRect(w, h, 360, 430);
             Panel(r);
             GUILayout.BeginArea(new Rect(r.x + 14, r.y + 8, r.width - 28, r.height - 16));
-            Header("Debug");
-            if (GUILayout.Button("+1 000 mynt", _button)) _s.Wallet.Add(CurrencyType.Coins, 1000);
-            if (GUILayout.Button("+100 diamanter", _button)) _s.Wallet.Add(CurrencyType.Gems, 100);
-            if (GUILayout.Button("+250 XP", _button)) _s.Progression.AddXp(250);
-            if (GUILayout.Button("+10 av varje vara", _button))
+            Header(Loc.T("Debug"));
+            if (GUILayout.Button(Loc.T("+1 000 mynt"), _button)) _s.Wallet.Add(CurrencyType.Coins, 1000);
+            if (GUILayout.Button(Loc.T("+100 diamanter"), _button)) _s.Wallet.Add(CurrencyType.Gems, 100);
+            if (GUILayout.Button(Loc.T("+250 XP"), _button)) _s.Progression.AddXp(250);
+            if (GUILayout.Button(Loc.T("+10 av varje vara"), _button))
                 foreach (var res in _s.Content.AllOf<ResourceDefinition>()) _s.Inventory.Add(res.Id, 10);
-            if (GUILayout.Button("Spola fram 10 min", _button)) { TimeService.DebugSkip(TimeSpan.FromMinutes(10)); _s.Tick(); }
-            if (GUILayout.Button("Spola fram 1 h", _button)) { TimeService.DebugSkip(TimeSpan.FromHours(1)); _s.Tick(); }
+            if (GUILayout.Button(Loc.T("Spola fram 10 min"), _button)) { TimeService.DebugSkip(TimeSpan.FromMinutes(10)); _s.Tick(); }
+            if (GUILayout.Button(Loc.T("Spola fram 1 h"), _button)) { TimeService.DebugSkip(TimeSpan.FromHours(1)); _s.Tick(); }
             GUILayout.Space(8);
-            GUILayout.Label($"Grafiknivå: {DeviceTier.Current} · {1f / Mathf.Max(0.0001f, Time.smoothDeltaTime):0} FPS", _small);
+            GUILayout.Label(Loc.F("Grafiknivå: {0} · {1:0} FPS", DeviceTier.Current, 1f / Mathf.Max(0.0001f, Time.smoothDeltaTime)), _small);
             GUILayout.Space(8);
-            if (GUILayout.Button("Ny sparfil (börja om)", _button) && _bootstrap != null) _bootstrap.ResetSaveAndReload();
+            if (GUILayout.Button(Loc.T("Ny sparfil (börja om)"), _button) && _bootstrap != null) _bootstrap.ResetSaveAndReload();
             GUILayout.EndArea();
         }
 
@@ -655,14 +655,14 @@ namespace NG.UI
             var r = CenterRect(w, h, 440, 420);
             GUI.Box(r, GUIContent.none, _box);
             GUILayout.BeginArea(new Rect(r.x + 16, r.y + 12, r.width - 32, r.height - 24));
-            GUILayout.Label($"Nivå {level}!", _title);
+            GUILayout.Label(Loc.F("Nivå {0}!", level), _title);
             var row = _s.Progression.RewardsFor(level);
-            if (row != null) GUILayout.Label($"Belöning: {row.coinReward} mynt, {row.gemReward} diamanter", _label);
+            if (row != null) GUILayout.Label(Loc.F("Belöning: {0} mynt, {1} diamanter", row.coinReward, row.gemReward), _label);
             GUILayout.Space(6);
-            GUILayout.Label("Nytt:", _label);
+            GUILayout.Label(Loc.T("Nytt:"), _label);
             foreach (var n in _s.Progression.UnlockNamesAt(level).Take(10)) GUILayout.Label("• " + n, _small);
             GUILayout.FlexibleSpace();
-            if (GUILayout.Button("Toppen!", _bigButton, GUILayout.Height(52))) _levelUps.Dequeue();
+            if (GUILayout.Button(Loc.T("Toppen!"), _bigButton, GUILayout.Height(52))) _levelUps.Dequeue();
             GUILayout.EndArea();
         }
 
@@ -749,15 +749,15 @@ namespace NG.UI
         public static string Duration(double seconds)
         {
             int s = Mathf.Max(0, Mathf.CeilToInt((float)seconds));
-            if (s >= 3600) return $"{s / 3600} h {s % 3600 / 60:00} min";
+            if (s >= 3600) return Loc.F("{0} h {1:00} min", s / 3600, s % 3600 / 60);
             return $"{s / 60}:{s % 60:00}";
         }
 
         public static string PhaseName(string variant) => variant switch
         {
-            "Phase1_Repaired" => "Laga",
-            "Phase2_Painted" => "Måla",
-            "Phase3_Decorated" => "Dekorera",
+            "Phase1_Repaired" => Loc.T("Laga"),
+            "Phase2_Painted" => Loc.T("Måla"),
+            "Phase3_Decorated" => Loc.T("Dekorera"),
             _ => variant
         };
     }

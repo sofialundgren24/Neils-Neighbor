@@ -52,6 +52,12 @@ namespace NG.Data
 
         [TextArea] public string intro;
         [TextArea] public string outro;
+        [TextArea] public string introEn;
+        [TextArea] public string outroEn;
+
+        /// <summary>Grannens replik på spelarens språk.</summary>
+        public string Intro => NG.Core.Loc.Pick(intro, introEn);
+        public string Outro => NG.Core.Loc.Pick(outro, outroEn);
 
         public QuestObjective[] objectives = Array.Empty<QuestObjective>();
 
