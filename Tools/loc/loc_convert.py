@@ -21,7 +21,7 @@ FILES = [
     "Game/WalletService.cs", "Game/InventoryService.cs", "Game/ProgressionService.cs", "Game/WorldService.cs",
     "Game/RenovationService.cs", "Game/GrowthService.cs", "Game/ProductionService.cs", "Game/OrderService.cs",
     "Game/CommunityService.cs", "Game/DailyRewardService.cs", "Game/GameSession.cs",
-    "Game/Retention/QuestService.cs", "Game/Retention/DailyRewardService.cs",
+    "Game/Retention/QuestService.cs", "Game/Retention/DailyRewardService.cs", "Game/NotificationPlanner.cs",
     "World/WorldInteraction.cs",
 ]
 

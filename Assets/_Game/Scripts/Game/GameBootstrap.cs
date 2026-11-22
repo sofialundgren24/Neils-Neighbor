@@ -63,6 +63,7 @@ namespace NG.Game
                 Session.StartNewGameIfNeeded();
                 NG.Core.Analytics.Event("session_start", "new_player", newPlayer, "level", state.level);
                 Session.Tick();
+                NotificationPlanner.OnResume();
 
                 SetupCamera(config);
                 worldView.Bind(Session);
@@ -108,14 +109,29 @@ namespace NG.Game
                 _nextSave = Time.unscaledTime + autosaveInterval;
                 Save();
             }
+            // Fråga om lov att visa notiser en gång, efter tutorialen.
+            if (NotificationPlanner.ShouldAskPermission(Session))
+            {
+                NotificationPlanner.MarkAsked();
+                StartCoroutine(NG.Notifications.LocalNotifications.RequestPermission());
+            }
         }
 
         void OnApplicationPause(bool paused)
         {
-            if (paused) Save();
+            if (paused)
+            {
+                Save();
+                NotificationPlanner.OnPause(Session);
+            }
+            else NotificationPlanner.OnResume();
         }
 
-        void OnApplicationQuit() => Save();
+        void OnApplicationQuit()
+        {
+            Save();
+            NotificationPlanner.OnPause(Session);
+        }
 
         void OnDestroy()
         {

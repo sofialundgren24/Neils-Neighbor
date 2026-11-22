@@ -51,7 +51,8 @@ Status: [x] klart · [~] påbörjat · [ ] kvar
 - [ ] C Remote config (ändra priser/tider utan ny version)
 
 ## 6. Notiser
-- [ ] C Lokala notiser: "Dina tulpaner är klara", "Dagens gåva väntar" (paketet Mobile Notifications)
+- [x] C Lokala notiser: skörd, varor, renovering, bygge, lekpark, dagens gåva, "grannarna saknar dig" (av/på i Inställningar, inga notiser 22–08)
+- [ ] B Testa notiserna på riktig Android-telefon och iPhone
 
 ## 7. Köp i spelet
 - [ ] S Bestäm vad som säljs (diamantpaket, startpaket, kosmetika) och priser
@@ -69,7 +70,8 @@ Status: [x] klart · [~] påbörjat · [ ] kvar
 ## 9. Kvalitet
 - [ ] C Automatiska tester för spellogiken (XP, renovering, beställningar, sparning)
 - [ ] C Prestandatest på svag Android (mål 30 fps), minne, laddtid
-- [ ] C Svenska + engelska (alla texter via översättningstabell)
+- [x] C Svenska + engelska (alla texter via översättningstabell, språkval i Inställningar)
+- [ ] S Läs igenom de engelska texterna (translations.csv + kolumnerna *_en)
 - [ ] C Tillgänglighet: textstorlek
 - [ ] B Speltest med 5–10 personer, justera tutorialen
 

@@ -1,0 +1,23 @@
+{
+    "name": "NG.Notifications",
+    "rootNamespace": "NG.Notifications",
+    "references": [
+        "Unity.Notifications.Android",
+        "Unity.Notifications.iOS"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.mobile.notifications",
+            "expression": "2.0.0",
+            "define": "NG_NOTIFICATIONS"
+        }
+    ],
+    "noEngineReferences": false
+}

@@ -893,6 +893,16 @@ namespace NG.UI
             Lang("English", Loc.Lang.En);
             scroll.Add(langs);
 
+            scroll.Add(Text(Loc.T("Notiser"), "subtitle"));
+            var notif = Row();
+            var on = Btn(Loc.T("På"), () => { NotificationPlanner.Enabled = true; _dirtyWindow = true; }, "btn", "tab", "grow");
+            var off = Btn(Loc.T("Av"), () => { NotificationPlanner.Enabled = false; _dirtyWindow = true; }, "btn", "tab", "grow");
+            (NotificationPlanner.Enabled ? on : off).AddToClassList("tab-active");
+            notif.Add(on);
+            notif.Add(off);
+            scroll.Add(notif);
+            scroll.Add(Text(Loc.T("Påminnelser när blommor, varor och renoveringar är klara."), "small"));
+
             scroll.Add(Text(Loc.T("Konto och data"), "subtitle"));
             var links = Row();
             links.Add(Btn(Loc.T("Användarvillkor"), () => Application.OpenURL(_s.Config.termsUrl), "btn", "grow"));
